@@ -47,7 +47,7 @@ namespace Webzine.WebApplication.Areas.Titres.Controllers
             /// <summary>
             /// Retour de la vue avec le modèle de vue contenant les titres générés
             /// <summary>
-            return View(titreModel);
+            return this.View(titreModel);
         }
     }
 }
