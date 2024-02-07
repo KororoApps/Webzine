@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webzine.WebApplication", "Webzine.WebApplication.csproj", "{29102386-9E22-413B-A604-AAE8B9DFE11B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.WebApplication", "Webzine.WebApplication.csproj", "{29102386-9E22-413B-A604-AAE8B9DFE11B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BF92263C-E2B8-4F4E-90CB-169C306D1145} = {BF92263C-E2B8-4F4E-90CB-169C306D1145}
+		{DE824208-BCCD-4FFE-BEDF-EA70A1274F88} = {DE824208-BCCD-4FFE-BEDF-EA70A1274F88}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webzine.Documentation", "..\Webzine.Documentation\Webzine.Documentation.csproj", "{DE824208-BCCD-4FFE-BEDF-EA70A1274F88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Documentation", "..\Webzine.Documentation\Webzine.Documentation.csproj", "{DE824208-BCCD-4FFE-BEDF-EA70A1274F88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webzine.Entity.Tests", "..\Webzine.Entity.Tests\Webzine.Entity.Tests.csproj", "{90AC8AA8-F6F3-40EE-9FF1-7B7BBED6FFEC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webzine.Entity", "..\Webzine.Entity\Webzine.Entity.csproj", "{BF92263C-E2B8-4F4E-90CB-169C306D1145}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Entity", "..\Webzine.Entity\Webzine.Entity.csproj", "{BF92263C-E2B8-4F4E-90CB-169C306D1145}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +27,6 @@ Global
 		{DE824208-BCCD-4FFE-BEDF-EA70A1274F88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE824208-BCCD-4FFE-BEDF-EA70A1274F88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE824208-BCCD-4FFE-BEDF-EA70A1274F88}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90AC8AA8-F6F3-40EE-9FF1-7B7BBED6FFEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90AC8AA8-F6F3-40EE-9FF1-7B7BBED6FFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90AC8AA8-F6F3-40EE-9FF1-7B7BBED6FFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90AC8AA8-F6F3-40EE-9FF1-7B7BBED6FFEC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BF92263C-E2B8-4F4E-90CB-169C306D1145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BF92263C-E2B8-4F4E-90CB-169C306D1145}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF92263C-E2B8-4F4E-90CB-169C306D1145}.Release|Any CPU.ActiveCfg = Release|Any CPU

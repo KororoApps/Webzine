@@ -10,14 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bogus" Version="35.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Artistes\Controllers\" />
-    <Folder Include="Areas\Artistes\ViewModels\" />
-    <Folder Include="Areas\Artistes\Views\Artiste\" />
     <Folder Include="Areas\Commentaires\Controllers\" />
     <Folder Include="Areas\Commentaires\ViewModels\" />
     <Folder Include="Areas\Commentaires\Views\Commentaire\" />
@@ -32,6 +30,10 @@
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\" />
     <Folder Include="wwwroot\favicon.ico\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Webzine.Entity\Webzine.Entity.csproj" />
   </ItemGroup>
 
 </Project>

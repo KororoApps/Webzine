@@ -1,6 +1,7 @@
 // <copyright file="Program.cs" company="Diiage 2026">
 // Copyright (c) Diiage 2026. All rights reserved.
 // </copyright>
+using Bogus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,3 +37,4 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.Run();
+
