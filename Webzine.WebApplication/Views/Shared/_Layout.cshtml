@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @* Ex 6.4 : Afficher le titre de la page en cours *@
+</head>
+<body>
+    @RenderBody()
+    @* Ex 6.2 : Ajouter la ligne permettant de définir la position dans le layout où sera affiché le contenu de la page. *@
+    @* Ex 8.1 : Ajouter les liens menant vers les pages Index, Groupe, Details, CreerPersonnage et ListeEquipementsDisponibles *@
+    <ul>
+        <li><a asp-action="CreerPersonnage" asp-controller="Personnage" asp-area="">Creer Personnage</a></li>
+        <li><a asp-action="Index" asp-controller="Personnage">Personnage</a></li>
+        <li><a asp-action="Index" asp-controller="Personnage">Equipement</a></li>
+    </ul>
+</body>
+</html>
