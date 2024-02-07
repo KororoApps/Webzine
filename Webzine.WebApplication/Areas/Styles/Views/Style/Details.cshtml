@@ -1,0 +1,9 @@
+﻿@model Webzine.WebApplication.Areas.Styles.ViewModels.StyleModel
+
+<h2>Liste de styles</h2>
+@*Boucle à travers chaque style dans la liste Styles du modèle*@
+@foreach (var style in Model.Styles)
+{
+    @*Affichage des détails de chaque Style*@
+    <p>Libellé : @style.Libelle</p>
+}
