@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bogus" Version="35.4.0" />
+    <PackageReference Include="Bogus.Tools.Analyzer" Version="35.4.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
   </ItemGroup>
@@ -24,14 +29,15 @@
     <Folder Include="Areas\Styles\Controllers\" />
     <Folder Include="Areas\Styles\ViewControllers\" />
     <Folder Include="Areas\Styles\Views\Style\" />
-    <Folder Include="Areas\Titres\Controllers\" />
-    <Folder Include="Areas\Titres\ViewModels\" />
-    <Folder Include="Areas\Titres\Views\Titre\" />
     <Folder Include="wwwroot\data\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\" />
     <Folder Include="wwwroot\favicon.ico\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Webzine.Entity\Webzine.Entity.csproj" />
   </ItemGroup>
 
 </Project>
