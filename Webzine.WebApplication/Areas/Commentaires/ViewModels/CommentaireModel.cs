@@ -1,5 +1,5 @@
 ﻿using Webzine.Entity;
-namespace Webzine.WebApplication.Areas.Titres.ViewModels
+namespace Webzine.WebApplication.Areas.Commentaires.ViewModels
 {
     public class CommentaireModel
     {

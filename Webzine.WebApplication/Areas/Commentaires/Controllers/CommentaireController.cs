@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Bogus;
 
-namespace Webzine.WebApplication.Areas.Titres.Controllers
+namespace Webzine.WebApplication.Areas.Commentaires.Controllers
 {
     using Webzine.Entity;
-    using Webzine.WebApplication.Areas.Titres.ViewModels;
+    using Webzine.WebApplication.Areas.Commentaires.ViewModels;
 
     [Area("Commentaires")]
     public class CommentaireController : Controller
@@ -35,7 +35,7 @@ namespace Webzine.WebApplication.Areas.Titres.Controllers
             /// <summary>
             /// Retour de la vue avec le modèle de vue contenant les commentaires générés
             /// <summary>
-            return View(commentaireModel);
+            return this.View(commentaireModel);
         }
     }
 }
