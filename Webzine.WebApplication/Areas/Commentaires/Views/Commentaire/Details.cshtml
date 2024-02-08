@@ -1,0 +1,11 @@
+﻿@model Webzine.WebApplication.Areas.Commentaires.ViewModels.CommentaireModel
+
+<h2>Details des commentaires</h2>
+@*Boucle à travers chaque commentaire dans la liste Commentaires du modèle*@
+@foreach (var commentaire in Model.Commentaires)
+{
+    @*Affichage des détails de chaque commentaire*@
+    <p>Pseudo : @commentaire.Pseudo</p>
+    <p>Contenu : @commentaire.Contenu</p>
+    <p>Date de création : @commentaire.DateDeCreation</p>
+}
