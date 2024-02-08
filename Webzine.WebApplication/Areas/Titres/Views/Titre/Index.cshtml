@@ -59,7 +59,32 @@
             </form>
         </div>
 
-        
+        @*Détails des commentairess*@
+        <div class="mt-5">
+            <h3>Commentaires</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card border border-0 w-50">
+                        <div class="card-body">
+                            <div class="row">
+                                
+                                <div class="col-md-10">
+                                    @foreach (var commentaire in Model.Titre.Commentaires.OrderByDescending(c => c.DateCreation))
+                                    {
+                                        <div class="col-md-2">
+                                            <img src="/images/avatar.png" alt="Image du créateur" class="img-fluid rounded-circle">
+                                        </div>
+                                        <h5 class="card-title">@commentaire.Auteur <span class="text-secondary">le @commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm")</span></h5>
+                                    <p class="card-text">@commentaire.Contenu</p>
+                                }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
        
 
    
