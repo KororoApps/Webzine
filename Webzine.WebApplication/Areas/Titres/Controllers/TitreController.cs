@@ -10,7 +10,7 @@ namespace Webzine.WebApplication.Areas.Titres.Controllers
     [Area("Titres")]
     public class TitreController : Controller
     {
-        public IActionResult Liste()
+        public IActionResult Liste() 
         {
             /// <summary>
             /// Configuration du générateur de fausses données pour la classe Titre
