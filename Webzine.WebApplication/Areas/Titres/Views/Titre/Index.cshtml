@@ -9,7 +9,27 @@
 <div class="container">
         @*Affichage du nom de l'artiste et du titre*@
         <h3><span class="text-primary">@Model.Titre.Artiste.Nom</span> - @Model.Titre.Libelle</h3>
-        
+        @*Date de création de l'article, Nb de like, Styles, Like, Edition*@
+        <div class="d-inline-flex p-1">
+            <i class="fa-solid fa-calendar"></i>
+            <p class="me-4">Le @Model.Titre.DateCreation.ToString("dd/MM/yyyy HH:mm")</p>
+            <i class="fa-solid fa-heart"></i>
+            <p>@Model.Titre.NbLikes</p>
+            <i class="fa-solid fa-tags"></i>
+            @foreach(var style in Model.Titre.Styles)
+            {
+                <p>@style.Libelle</p>
+            }            
+            <button type="button" class="btn btn-outline-primary">
+                <i class="fa-solid fa-thumbs-up" style="color: #4995d0;"></i>
+                like
+            </button>            
+            <i class="fa-sharp fa-solid fa-pen-to-square"></i>
+            <p>Editer</p>
+        </div>
+
+       
+
        
 
    
