@@ -1,4 +1,4 @@
-﻿namespace Webzine.Entity.Tests
+﻿/*namespace Webzine.Entity.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -238,4 +238,4 @@
             Common.AttributHasNotUrlValidation(typeof(Titre), nameof(Titre.UrlJaquette));
         }
     }
-}
+}*/

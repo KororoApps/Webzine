@@ -8,21 +8,18 @@ namespace Webzine.WebApplication.Areas.Artistes.Controllers
     [Area("Artistes")]
     public class ArtisteController: Controller
     {
-        public IActionResult Liste()
+        public IActionResult Index(string nomArtiste)
         {
             // Créez un générateur Bogus pour les artistes musicaux
             var artisteFaker = new Faker<Artiste>()
                 .RuleFor(a => a.Id, (f, u) => f.UniqueIndex + 1)
-                .RuleFor(a => a.Nom, (f, u) => f.Name.FullName())
+                .RuleFor(a => a.Nom, nomArtiste)
                 .RuleFor(a => a.Biographie, (f, u) => f.Lorem.Paragraph());
 
             // Générez une liste de 10 artistes fictifs
-            var artistes = artisteFaker.Generate(10);
+            var artiste = artisteFaker.Generate();
 
-            var artisteModel = new ListeArtistesModel
-            {
-                Artistes = artistes,
-            };
+            var artisteModel = new ArtisteModel { Artiste = artiste };
 
             return this.View(artisteModel);
         }

@@ -5,6 +5,7 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.WebApplication", "Webzine.WebApplication.csproj", "{29102386-9E22-413B-A604-AAE8B9DFE11B}"
 	ProjectSection(ProjectDependencies) = postProject
+		{072724D1-0845-4520-BBD3-4BCB7EF746FF} = {072724D1-0845-4520-BBD3-4BCB7EF746FF}
 		{BF92263C-E2B8-4F4E-90CB-169C306D1145} = {BF92263C-E2B8-4F4E-90CB-169C306D1145}
 		{DE824208-BCCD-4FFE-BEDF-EA70A1274F88} = {DE824208-BCCD-4FFE-BEDF-EA70A1274F88}
 	EndProjectSection
@@ -14,6 +15,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Entity", "..\Webzine.Entity\Webzine.Entity.csproj", "{BF92263C-E2B8-4F4E-90CB-169C306D1145}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Entity.Tests", "..\Webzine.Entity.Tests\Webzine.Entity.Tests.csproj", "{072724D1-0845-4520-BBD3-4BCB7EF746FF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BF92263C-E2B8-4F4E-90CB-169C306D1145} = {BF92263C-E2B8-4F4E-90CB-169C306D1145}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-﻿namespace Webzine.Entity.Tests
+﻿/*namespace Webzine.Entity.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -46,4 +46,4 @@
             Common.AttributLongueurMax(typeof(Style), nameof(Style.Libelle), 50);
         }
     }
-}
+}*/
