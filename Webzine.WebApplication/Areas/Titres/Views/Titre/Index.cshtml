@@ -43,7 +43,23 @@
             <iframe width="560" height="315" src="https://www.youtube.com/embed/U9OQAySv184?si=H4HRfSLHIEpucdGl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
-       
+        @*Formulaire pour émettre un commentaire*@
+        <div class="mt-5">
+            <h3>Donne ton avis sur le titre</h3>
+            <form>
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">Nom *</label>
+                    <input placeholder="Votre nom (exemple : Emmanuel)" type="text" id="nameInput" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="commentsInput" class="form-label">Commentaire *</label>
+    <textarea placeholder="Votre commentaire..." class="form-control" id="commentsInput" rows="10" cols="10" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+
+        
        
 
    
