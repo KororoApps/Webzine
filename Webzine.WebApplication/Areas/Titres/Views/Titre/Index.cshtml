@@ -1,0 +1,23 @@
+﻿@model Webzine.WebApplication.Areas.Titres.ViewModels.TitreModel
+
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["nomOnglet"] = "Chronique du titre";
+}
+
+@{
+<div class="container">
+        @*Affichage du nom de l'artiste et du titre*@
+        <h3><span class="text-primary">@Model.Titre.Artiste.Nom</span> - @Model.Titre.Libelle</h3>
+        
+       
+
+   
+
+</div>
+}
+
+
+
+
+
