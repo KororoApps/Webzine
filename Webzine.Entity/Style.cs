@@ -7,9 +7,12 @@
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int IdStyle { get; set; }
 
+        [Display(Name = "Libellé")]
         [Required]
+        [MinLength(2)]
+        [MaxLength(50)]
         public string Libelle { get; set; }
     }
 }

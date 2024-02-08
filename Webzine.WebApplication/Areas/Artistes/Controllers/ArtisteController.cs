@@ -12,7 +12,7 @@ namespace Webzine.WebApplication.Areas.Artistes.Controllers
         {
             // Créez un générateur Bogus pour les artistes musicaux
             var artisteFaker = new Faker<Artiste>()
-                .RuleFor(a => a.Id, (f, u) => f.UniqueIndex + 1)
+                .RuleFor(a => a.IdArtiste, (f, u) => f.UniqueIndex + 1)
                 .RuleFor(a => a.Nom, (f, u) => f.Name.FullName())
                 .RuleFor(a => a.Biographie, (f, u) => f.Lorem.Paragraph());
 

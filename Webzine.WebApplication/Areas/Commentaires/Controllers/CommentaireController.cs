@@ -15,10 +15,10 @@ namespace Webzine.WebApplication.Areas.Commentaires.Controllers
             /// Configuration du générateur de fausses données pour la classe Commentaire
             /// <summary>
             var commentaireFaker = new Faker<Commentaire>()
-                .RuleFor(p => p.Id, f => f.IndexFaker)
-                .RuleFor(p => p.Pseudo, f => f.Internet.UserName())
+                .RuleFor(p => p.IdCommentaire, f => f.IndexFaker)
+                .RuleFor(p => p.Auteur, f => f.Internet.UserName())
                 .RuleFor(p => p.Contenu, f => f.Lorem.Paragraph())
-                .RuleFor(p => p.DateDeCreation, f => f.Date.Recent())
+                .RuleFor(p => p.DateCreation, f => f.Date.Recent())
                 //.RuleFor(p => p.Titre, f => f.Lorem.Sentence());
             ;
             /// <summary>

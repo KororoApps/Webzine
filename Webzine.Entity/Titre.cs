@@ -1,20 +1,27 @@
 ﻿namespace Webzine.Entity
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Titre
     {
+        [Key]
         public int IdTitre { get; set; }
+
+        [ForeignKey(nameof(Artiste))]
 
         public int IdArtiste { get; set; }
 
-        //public virtual Artiste Artiste { get; set; }
 
-        //public virtual List<Commentaire> Commentaires { get; set; }
+        [ForeignKey(nameof(Artiste))]
+        public virtual Artiste Artiste { get; set; }
+
+        public virtual List<Commentaire> Commentaires { get; set; }
 
         [Required]
         [Display(Name = "Titre")]
-        [StringLength(200, MinimumLength = 1)]
+        [MinLength(1)]
+        [MaxLength(200)]
         public string Libelle { get; set; }
 
         [Display(Name = "Durée en secondes")]
@@ -45,16 +52,18 @@
         public string Album { get; set; }
 
         [Required]
-        [StringLength(4000, MinimumLength = 10)]
+        [MinLength(10)]
+        [MaxLength(4000)]
         public string Chronique { get; set; }
 
         [Required]
         [Display(Name = "Jaquette de l'album")]
-        [StringLength(250)]
+        [MaxLength(250)]
         public string UrlJaquette { get; set; } = string.Empty;
 
         [Display(Name = "URL d'écoute")]
-        [StringLength(250, MinimumLength = 13)]
+        [MinLength(13)]
+        [MaxLength(250)]
         public string UrlEcoute { get; set; }
 
     }
