@@ -28,11 +28,17 @@
             <p>Editer</p>
         </div>
 
-        @*Affichage de la chronique*@
+        @*Affichage de la chronique et de la jaquette*@
         <div class="row align-items-center mb-5">
             <div class="col-md-6">
                 <p>@Model.Titre.Chronique</p>
-         </div>
+            </div>
+            <div class="col-md-6">
+                <img src="@Model.Titre.UrlJaquette" alt="Image" class="rounded img-fluid custom-shape">
+            </div>
+        </div>
+
+       
 
        
 
