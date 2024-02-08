@@ -8,7 +8,7 @@ namespace Webzine.WebApplication.Areas.Artistes.Controllers
     [Area("Artistes")]
     public class ArtisteController: Controller
     {
-        public IActionResult ListeArtistes()
+        public IActionResult Liste()
         {
             // Créez un générateur Bogus pour les artistes musicaux
             var artisteFaker = new Faker<Artiste>()

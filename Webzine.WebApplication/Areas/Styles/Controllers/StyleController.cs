@@ -12,7 +12,7 @@ namespace Webzine.WebApplication.Areas.Styles.Controllers
     [Area("Styles")]
         public class StyleController : Controller
         {
-            public IActionResult Details()
+            public IActionResult Liste()
             {
                 /// <summary>
                 /// Configuration du générateur de fausses données pour la classe Style

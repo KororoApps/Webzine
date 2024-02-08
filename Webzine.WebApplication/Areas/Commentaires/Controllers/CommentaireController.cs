@@ -9,7 +9,7 @@ namespace Webzine.WebApplication.Areas.Commentaires.Controllers
     [Area("Commentaires")]
     public class CommentaireController : Controller
     {
-        public IActionResult Details()
+        public IActionResult Liste()
         {
             /// <summary>
             /// Configuration du générateur de fausses données pour la classe Commentaire

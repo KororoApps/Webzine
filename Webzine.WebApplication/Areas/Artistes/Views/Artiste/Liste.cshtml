@@ -1,5 +1,8 @@
-﻿@model Webzine.WebApplication.Areas.Artistes.ViewModels.ListeArtistesModel
-
+﻿
+@model Webzine.WebApplication.Areas.Artistes.ViewModels.ListeArtistesModel
+@{
+    Layout = "_Layout";
+}
 <h3>Liste des Artistes</h3>
 @foreach(var artiste in Model.Artistes)
 {
