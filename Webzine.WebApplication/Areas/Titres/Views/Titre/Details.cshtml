@@ -1,0 +1,19 @@
+﻿@model Webzine.WebApplication.Areas.Titres.ViewModels.TitreModel
+
+<h2>Details du titre</h2>
+
+@*Boucle à travers chaque titre dans la liste Titres du modèle*@
+@foreach (var titre in Model.Titres)
+{
+    @*Affichage des détails de chaque titre*@
+    <p>Libellé : @titre.Libelle</p>
+    <p>Durée du titre : @titre.Duree</p>
+    <p>Date de sortie : @titre.DateDeSortie</p>
+    <p>Date de création : @titre.DateDeCreation</p>
+    <p>Nombre de vues : @titre.NombreDeVues</p>
+    <p>Nombre de likes : @titre.NombreDeLikes</p>
+    <p>Album : @titre.Album</p>
+    <p>Chronique : @titre.Chronique</p>
+    <p>Jaquette : @titre.Jaquette</p>
+    <p>Url : @titre.Url</p>
+}
