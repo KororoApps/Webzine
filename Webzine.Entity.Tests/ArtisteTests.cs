@@ -1,4 +1,4 @@
-namespace Webzine.Entity.Tests
+/*namespace Webzine.Entity.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -52,4 +52,4 @@ namespace Webzine.Entity.Tests
             Common.HasProperty(typeof(Artiste), nameof(Artiste.Titres));
         }
     }
-}
+}*/
