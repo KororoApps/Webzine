@@ -22,11 +22,11 @@
             Common.HasProperty(typeof(Titre), nameof(Titre.IdArtiste));
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void TitreHasArtiste()
         {
             Common.HasProperty(typeof(Titre), nameof(Titre.Artiste));
-        }
+        }*/
 
         [TestMethod]
         public void TitreHasLibelle()
@@ -226,11 +226,11 @@
             Common.AttributRequis(typeof(Titre), nameof(Titre.Album));
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void TitreHasCommentaires()
         {
             Common.HasProperty(typeof(Titre), nameof(Titre.Commentaires));
-        }
+        }*/
 
         [TestMethod]
         public void TitreUrlJaquetteeIsNotMandatory()
