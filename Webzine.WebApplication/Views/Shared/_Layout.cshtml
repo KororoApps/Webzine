@@ -5,20 +5,64 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="~/lib/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/fontawesome-free-6.5.1-web/css/fontawesome.min.css" />
-    @* Ex 6.4 : Afficher le titre de la page en cours *@
+    <link rel="stylesheet" href="~/lib/fontawesome-free-6.5.1-web/css/all.min.css" />
+
 </head>
 <body>
-    @RenderBody()
-    @* Ex 6.2 : Ajouter la ligne permettant de définir la position dans le layout où sera affiché le contenu de la page. *@
-    @* Ex 8.1 : Ajouter les liens menant vers les pages Index, Groupe, Details, CreerPersonnage et ListeEquipementsDisponibles *@
-    <ul>
-        <li><a asp-action="CreerPersonnage" asp-controller="Personnage" asp-area="">Creer Personnage</a></li>
-        <li><a asp-action="Index" asp-controller="Personnage">Personnage</a></li>
-        <li><a asp-action="Index" asp-controller="Personnage">Equipement</a></li>
-    </ul>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Webzine</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mynavbar">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Index"><i class="fa-solid fa-house"></i>Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" dropdown-toggle" data-bs-toggle="dropdown" href="#"><i class="fa-solid fa-screwdriver-wrench"></i>Administration</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Link 1</a></li>
+                                <li><a class="dropdown-item" href="#">Link 2</a></li>
+                                <li><a class="dropdown-item" href="#">Link 3</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Contac"><i class="fa-solid fa-envelope"></i>Contact</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="text" placeholder="Trouver un artiste/titre">
+                        <button class="btn btn-primary" type="button">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-9 bg-primary">
+                @RenderBody()
+            </div>
+            <div class="col-sm-3 bg-dark">
+                <p>Sed ut perspiciatis...</p>
+            </div>
+       
+    </div>
+
+        <footer class="border-top footer text-muted ">
+        <div class="container-fluid">
+            &copy; ASP.NET Core - DIIAGE 2023-2024 
+        </div>
+    </footer>
+        <script src="../lib\bootstrap-5.3.2-dist\js\bootstrap.js"></script>
 </body>
 
-    <script src="~/lib/bootstrap/di st/js/bootstrap.bundle.min.js"></script>
+
 
 </html>
