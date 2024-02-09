@@ -10,7 +10,7 @@ namespace Webzine.WebApplication.Areas.Titres.Controllers
     [Area("Titres")]
     public class TitreController : Controller
     {
-        public IActionResult Index() 
+        public IActionResult Index()
         {
 
             /// <summary>
@@ -85,7 +85,7 @@ namespace Webzine.WebApplication.Areas.Titres.Controllers
             /// <summary>
             /// Retour de la vue avec le modèle de vue contenant les titres générés.
             /// <summary>
-            return this.View(titreModel);
+            return View(titreModel);
         }
     }
 }

@@ -22,11 +22,11 @@
             Common.HasProperty(typeof(Titre), nameof(Titre.IdArtiste));
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void TitreHasArtiste()
         {
             Common.HasProperty(typeof(Titre), nameof(Titre.Artiste));
-        }*/
+        }
 
         [TestMethod]
         public void TitreHasLibelle()
