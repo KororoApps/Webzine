@@ -49,14 +49,26 @@
             <div class="mb-3">
                 <label class="form-label">Styles</label>
                 
+                    @*Nouvel objet Random.*@
+                    @{
+                        var random = new Random();
+                    }
                     @foreach(var style in Model.Titre.Styles)
                     {
+                    /// <summary>
+                    /// Génération un nombre aléatoire en 0 et 1.
+                    /// <summary>
+                    var randomValue = random.Next(0, 2);
+                    /// <summary>
+                    /// Utiliser le nombre aléatoire pour déterminer si la checkbox doit être cochée.
+                    /// <summary>
+                    var isChecked = randomValue == 1 ? "checked" : "";
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="rock" id="styleRock" name="styles[]">
+                        <input class="form-check-input" type="checkbox" value="@style.Libelle" id="@style.Libelle" name="styles[]" @isChecked>
                         <label class="form-check-label" for="@style.Libelle">
                             @style.Libelle
-                        </label> 
-                        </div>
+                        </label>
+                    </div>
                     }
                     
             </div>

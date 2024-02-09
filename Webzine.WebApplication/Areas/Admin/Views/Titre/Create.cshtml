@@ -53,7 +53,7 @@
                     @foreach (var style in Model.Titre.Styles)
                     {
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="rock" id="styleRock" name="styles[]">
+                            <input class="form-check-input" type="checkbox" value="rock" id="@style.Libelle" name="styles[]">
                             <label class="form-check-label" for="@style.Libelle">
                                 @style.Libelle
                             </label>
