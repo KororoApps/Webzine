@@ -12,7 +12,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class TitreController : Controller
     {
-        public IActionResult ReadTitre()
+        public IActionResult Read()
         {
 
             /// <summary>
@@ -73,7 +73,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             return this.View(titreModel);
         }
 
-        public IActionResult DeleteTitre()
+        public IActionResult Delete()
         {
             /// <summary>
             /// Configuration du générateur de fausses données pour la classe Artiste.
@@ -111,7 +111,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             return this.View(titreModel);
         }
 
-        public IActionResult CreateTitre()
+        public IActionResult Create()
         {
 
             return this.View();
