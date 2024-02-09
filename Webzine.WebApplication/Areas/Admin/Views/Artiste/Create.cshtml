@@ -1,0 +1,37 @@
+﻿
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["nomOnglet"] = "Créer un artiste";
+}
+
+
+<div class="container">
+        @*Affichage du nom de la page*@
+        <h3>Créer un artiste</h3>
+        <hr/>
+
+        @*Formulaire de création de la page*@
+    <div class="mt-5">
+        @*ATTENTION !!! CORRIGER LES for en asp-for et ajouter adp-action...etc...!!*@
+        <form action="#" method="post">
+            <div class="mb-3">
+                <label for="nomArtiste" class="form-label">Nom de l'artiste</label>
+                <input type="text" class="form-control" id="nomArtiste" name="nomArtiste" required>
+            </div>
+            <div class="mb-3">
+                <label for="chronique" class="form-label">Biographie</label>
+                <textarea class="form-control" id="chronique" name="chronique" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Créer</button>
+        </form>
+            </div>         
+        
+    </div>
+
+    @*Lien vers le retour à l'administration du titre*@
+    <div>
+        <a href="/Admin/Artiste/Read">Retour à l'administration des artistes'</a>
+    </div>
+
+
+</div>

@@ -1,4 +1,4 @@
-﻿/*namespace Webzine.Entity.Tests
+﻿namespace Webzine.Entity.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -226,7 +226,7 @@
             Common.AttributRequis(typeof(Titre), nameof(Titre.Album));
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void TitreHasCommentaires()
         {
             Common.HasProperty(typeof(Titre), nameof(Titre.Commentaires));
@@ -238,4 +238,4 @@
             Common.AttributHasNotUrlValidation(typeof(Titre), nameof(Titre.UrlJaquette));
         }
     }
-}*/
+}
