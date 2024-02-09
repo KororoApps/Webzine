@@ -16,6 +16,41 @@
         <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
         Ajouter un nouveau titre</button>
 
+        @*Afficher la liste des titres*@
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                @*ATTENTION !! VOIR POUR METTRE DES TAG-HELPER !*@
+                    <th scope="col">Artistes</th>
+                    <th scope="col">Titres</th>
+                    <th scope="col">Durée</th>
+                    <th scope="col">Date de sortie</th>
+                    <th scope="col"><i class="fa-solid fa-eye"></i></th>
+                    <th scope="col"><i class="fa-solid fa-thumbs-up"></i></th>
+                    <th scope="col"><i class="fa-solid fa-comments"></i></th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach(var titre in Model.Titres){
+                <tr>        
+                  
+                        <td>Artiste</td>
+                        <td>@titre.Libelle</td>
+                        <td>@titre.Duree</td>
+                        <td>@titre.DateSortie</td>
+                        <td>@titre.NbLectures</td>
+                        <td>@titre.NbLikes</td>
+                        <td>NombreCommentaire</td>
+                        <td>
+                            <i class="fa-sharp fa-solid fa-pen-to-square" style="color: #74C0FC;"></i>
+                            <i class="fa-solid fa-trash" style="color: #74C0FC;"></i>
+                        </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
        
 
        

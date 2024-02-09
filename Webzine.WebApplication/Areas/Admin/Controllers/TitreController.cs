@@ -23,7 +23,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération de 1 fausse instance de la classe Artiste.
             /// <summary>//
-            var artiste = fakerArtiste.Generate();
+            var artistes = fakerArtiste.Generate(150);
 
             /// <summary>
             /// Configuration du générateur de fausses données pour la classe Commentaire.
@@ -51,18 +51,19 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
                 ;
 
             /// <summary>
-            /// Génération de 1 fausse instance de la classe Titre.
+            /// Génération de 500 fausse instance de la classe Titre.
             /// <summary>
-            var titre = titreFaker.Generate();
-            titre.Artiste = artiste;
-            titre.Commentaires = commentaires;
+            var titres = titreFaker.Generate(500);
+
+            //titres.Artistes = artistes;
+            //titres.Commentaires = commentaires;
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
             /// <summary>
             var titreModel = new TitreModel
             {
-                Titre = titre
+                Titres = titres
             };
 
             /// <summary>

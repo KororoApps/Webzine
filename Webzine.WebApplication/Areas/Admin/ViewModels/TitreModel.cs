@@ -7,6 +7,8 @@ namespace Webzine.WebApplication.Areas.Admin.ViewModels
         /// <summary>
         /// Obtient ou définit le titre.
         /// </summary>
-        public Titre Titre { get; set; } = null!;
+        public List<Titre> Titres { get; set; } = null!;
+
+        public List<Artiste> Artistes { get; set; } = null!;
     }
 }
