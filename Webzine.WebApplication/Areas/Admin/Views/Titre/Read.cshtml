@@ -1,0 +1,71 @@
+﻿@model Webzine.WebApplication.Areas.Admin.ViewModels.GroupeTitreModel
+
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["nomOnglet"] = "Liste des titres";
+}
+
+@{
+<div class="container">
+        @*Affichage du nom de la page*@
+        <h3>Titres</h3>
+        <hr/>
+
+        @*Création du bouton "Ajouter un nouveau titre*@
+        <button type="button" class="btn btn-primary">
+        <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+        Ajouter un nouveau titre</button>
+
+        @*Afficher la liste des titres*@
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                @*ATTENTION !! VOIR POUR METTRE DES TAG-HELPER !*@
+                    <th scope="col">Artistes</th>
+                    <th scope="col">Titres</th>
+                    <th scope="col">Durée</th>
+                    <th scope="col">Date de sortie</th>
+                    <th scope="col"><i class="fa-solid fa-eye"></i></th>
+                    <th scope="col"><i class="fa-solid fa-thumbs-up"></i></th>
+                    <th scope="col"><i class="fa-solid fa-comments"></i></th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach(var titre in Model.Titres){
+                <tr>        
+                  
+                        <td>@titre.Artiste.Nom</td>
+                        <td>@titre.Libelle</td>
+                        <td>@titre.Duree</td>
+                        <td>@titre.DateSortie</td>
+                        <td>@titre.NbLectures</td>
+                        <td>@titre.NbLikes</td>
+                        <td>@titre.Commentaires.Count</td>
+                        <td>
+                            <a href="/Admin/Titre/Update">
+                            <i class="fa-sharp fa-solid fa-pen-to-square" style="color: #74C0FC;"></i>
+                            </a>
+                            <a href="/Admin/Titre/Delete">
+                                <i class="fa-solid fa-trash" style="color: #74C0FC;"></i>
+                            </a>
+                        </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+       
+
+       
+
+   
+
+</div>
+}
+
+
+
+
+
+

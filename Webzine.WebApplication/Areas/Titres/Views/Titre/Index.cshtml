@@ -1,0 +1,102 @@
+﻿@model Webzine.WebApplication.Areas.Titres.ViewModels.TitreModel
+
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["nomOnglet"] = "Chronique du titre";
+}
+
+@{
+<div class="container">
+        @*Affichage du nom de l'artiste et du titre*@
+        <h3><span class="text-primary">@Model.Titre.Artiste.Nom</span> - @Model.Titre.Libelle</h3>
+        @*Date de création de l'article, Nb de like, Styles, Like, Edition*@
+        <div class="d-inline-flex p-1">
+            <i class="fa-solid fa-calendar"></i>
+            <p class="me-4">Le @Model.Titre.DateCreation.ToString("dd/MM/yyyy HH:mm")</p>
+            <i class="fa-solid fa-heart"></i>
+            <p>@Model.Titre.NbLikes</p>
+            <i class="fa-solid fa-tags"></i>
+            @foreach(var style in Model.Titre.Styles)
+            {
+                <p>@style.Libelle</p>
+            }            
+            <button type="button" class="btn btn-outline-primary">
+                <i class="fa-solid fa-thumbs-up" style="color: #4995d0;"></i>
+                like
+            </button>
+            <a href="/Admin/Titre/Update">
+                <i class="fa-sharp fa-solid fa-pen-to-square" style="color: #74C0FC;"></i>
+                <p>Editer</p>
+            </a>
+            
+        </div>
+
+        @*Affichage de la chronique et de la jaquette*@
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6">
+                <p>@Model.Titre.Chronique</p>
+            </div>
+            <div class="col-md-6">
+                <img src="@Model.Titre.UrlJaquette" alt="Image" class="rounded img-fluid custom-shape">
+            </div>
+        </div>
+
+        @*Affichage de la vidéo*@
+        <div class="text-center mt-5">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/U9OQAySv184?si=H4HRfSLHIEpucdGl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+
+        @*Formulaire pour émettre un commentaire*@
+        <div class="mt-5">
+            <h3>Donne ton avis sur le titre</h3>
+            @*ATTENTION !!! CORRIGER LES for en asp-for et ajouter adp-action...etc...Lorsque le CRUD sera présent !!*@
+            <form>
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">Nom *</label>
+                    <input placeholder="Votre nom (exemple : Emmanuel)" type="text" id="nameInput" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="commentsInput" class="form-label">Commentaire *</label>
+    <textarea placeholder="Votre commentaire..." class="form-control" id="commentsInput" rows="10" cols="10" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+
+        @*Détails des commentairess*@
+        <div class="mt-5">
+            <h3>Commentaires</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card border border-0 w-50">
+                        <div class="card-body">
+                            <div class="row">
+                                
+                                <div class="col-md-10">
+                                    @foreach (var commentaire in Model.Titre.Commentaires.OrderByDescending(c => c.DateCreation))
+                                    {
+                                        <div class="col-md-2">
+                                            <img src="/images/avatar.png" alt="Image du créateur" class="img-fluid rounded-circle">
+                                        </div>
+                                        <h5 class="card-title">@commentaire.Auteur <span class="text-secondary">le @commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm")</span></h5>
+                                    <p class="card-text">@commentaire.Contenu</p>
+                                }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+   
+
+</div>
+}
+
+
+
+
+

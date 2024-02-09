@@ -14,9 +14,13 @@
 
 
         [ForeignKey(nameof(Artiste))]
-        public virtual Artiste Artiste { get; set; }
 
-        public virtual List<Commentaire> Commentaires { get; set; }
+        
+        public Artiste Artiste { get; set; }
+
+        public List<Commentaire> Commentaires { get; set; }
+
+        public List<Style> Styles { get; set; }
 
         [Required]
         [Display(Name = "Titre")]
