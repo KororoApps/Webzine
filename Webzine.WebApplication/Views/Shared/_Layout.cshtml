@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿ 
+ @using Bogus
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -12,25 +14,27 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Webzine</a>
+                <a class="navbar-brand"href="/">Webzine</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="mynavbar">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Index"><i class="fa-solid fa-house m-1"></i>Accueil</a>
+                            <a class="nav-link" href="/"><i class="fa-solid fa-house m-1"></i>Accueil</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" dropdown-toggle" data-bs-toggle="dropdown" href="#"><i class="fa-solid fa-screwdriver-wrench  m-1"></i>Administration</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Dropdown</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Link 1</a></li>
-                                <li><a class="dropdown-item" href="#">Link 2</a></li>
-                                <li><a class="dropdown-item" href="#">Link 3</a></li>
+                                <li><a class="dropdown-item" ><i class="fa-solid fa-house m-1"></i>Tableau de bord</a></li>
+                                <li><a class="dropdown-item" href="/Admin/Artiste/Read"><i class="fa-solid fa-house m-1"></i>Artistes</a></li>
+                                <li><a class="dropdown-item" href="/Admin/Commentaire/Read"><i class="fa-solid fa-house m-1"></i>Commentaires</a></li>
+                                <li><a class="dropdown-item" href="/Admin/Style/Read"><i class="fa-solid fa-house m-1"></i>Styles</a></li>
+                                <li><a class="dropdown-item" href="/Admin/Titre/Read"><i class="fa-solid fa-house m-1"></i>Titres</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Contac"><i class="fa-solid fa-envelope  m-1"></i>Contact</a>
+                            <a class="nav-link" asp-area="Contacts" asp-controller="Contact" asp-action="Contact"><i class="fa-solid fa-envelope  m-1"></i>Contact</a>
                         </li>
                     </ul>
                     <form class="d-flex">
@@ -57,40 +61,22 @@
                 <div class="position-sticky" style="top: 2rem;">
                     <div class="p-2 ">
                         <h2 class="">A propos</h2>
-                        <p class="mb-0">Retrouver lesdernières pépitre sur notre webzine</p>
+                        <p class="mb-0">Retrouver les dernières pépitres sur notre webzine</p>
                     </div>
 
                     <div class="p-2">
                         <h3 >Styles</h3>
+                        @{
+                            var faker = new Faker();
+                            var nombreMots = 20;
+                        }
                         <ul class="mb-0">
-                            <li><a href="#">March 2021</a></li>
-                            <li><a href="#">February 2021</a></li>
-                            <li><a href="#">January 2021</a></li>
-                            <li><a href="#">December 2020</a></li>
-                            <li><a href="#">November 2020</a></li>
-                            <li><a href="#">October 2020</a></li>
-                            <li><a href="#">September 2020</a></li>
-                            <li><a href="#">August 2020</a></li>
-                            <li><a href="#">July 2020</a></li>
-                            <li><a href="#">June 2020</a></li>
-                            <li><a href="#">May 2020</a></li>
-                            <li><a href="#">April 2020</a></li>
-                            <li><a href="#">March 2021</a></li>
-                            <li><a href="#">February 2021</a></li>
-                            <li><a href="#">January 2021</a></li>
-                            <li><a href="#">December 2020</a></li>
-                            <li><a href="#">November 2020</a></li>
-                            <li><a href="#">October 2020</a></li>
-                            <li><a href="#">September 2020</a></li>
-                            <li><a href="#">August 2020</a></li>
-                            <li><a href="#">July 2020</a></li>
-                            <li><a href="#">June 2020</a></li>
-                            <li><a href="#">May 2020</a></li>
-                            <li><a href="#">April 2020</a></li>
-                            <li><a href="#">November 2020</a></li>
-                            <li><a href="#">October 2020</a></li>
-                            <li><a href="#">September 2020</a></li>
-                            <li><a href="#">August 2020</a></li>
+                            
+                            @for(var i = 0; i<nombreMots; i++)
+                            {
+                                var motAleatoire = faker.Lorem.Word();
+                                <li><a href="#">@motAleatoire</a></li>
+                            }
                         </ul>
                     </div>
 
@@ -104,9 +90,12 @@
         <footer class="container-fluid border-top footer bg-dark ">  
             &copy; ASP.NET Core - DIIAGE 2023-2024 
          </footer>
-        <script src="../lib\bootstrap-5.3.2-dist\js\bootstrap.js"></script>
+        <script src="../lib/bootstrap-5.3.2-dist/js/bootstrap.js"></script>
+        <script src="~/lib/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 
 
 </html>
+
+
