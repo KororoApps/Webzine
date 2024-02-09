@@ -5,7 +5,7 @@ namespace Webzine.WebApplication.Areas.Contacts.Controllers
     using Webzine.WebApplication.Areas.Contacts.ViewModels;
 
     [Area("Contacts")]
-    public class ContactsController : Controller
+    public class ContactController : Controller
     {
         public IActionResult Contact()
         {
