@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Areas.Admin.ViewModels.GroupeTitreModel
+﻿@model Webzine.WebApplication.Areas.Titres.ViewModels.TitreModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -11,7 +11,7 @@
         <h3>Supprimer un titre</h3>
         <hr/>
 
-        <p>Etes-vous sûr de vouloir supprimer </p>
+        <p>Etes-vous sûr de vouloir supprimer @Model.Titre.Libelle de @Model.Titre.Artiste.Nom </p>
 
         @*Bouton de suppression*@
     <button type="button" class="btn btn-danger">Supprimer</button>

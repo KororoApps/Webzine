@@ -108,7 +108,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             };
 
 
-            return this.View();
+            return this.View(titreModel);
         }
     }
 
