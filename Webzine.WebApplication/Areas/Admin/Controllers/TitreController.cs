@@ -117,6 +117,12 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             return this.View();
         }
 
+        public IActionResult Update()
+        {
+
+            return this.View();
+        }
+
 
     }
 }

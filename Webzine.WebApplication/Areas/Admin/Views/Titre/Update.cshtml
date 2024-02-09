@@ -1,0 +1,84 @@
+﻿@model Webzine.WebApplication.Areas.Titres.ViewModels.TitreModel
+
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["nomOnglet"] = "Editer un titre";
+}
+
+
+<div class="container">
+        @*Affichage du nom de la page*@
+        <h3>Modifier un titre</h3>
+        <hr/>
+
+        @*Formulaire de création de la page*@
+    <div class="mt-5">
+        @*ATTENTION !!! CORRIGER LES for en asp-for et ajouter adp-action...etc...!!*@
+        <form action="#" method="post">
+            <div class="mb-3">
+                <label for="nomArtiste" class="form-label">Nom de l'artiste</label>
+                <input type="text" class="form-control" id="nomArtiste" name="nomArtiste" required>
+            </div>
+            <div class="mb-3">
+                <label for="titre" class="form-label">Titre</label>
+                <input type="text" class="form-control" id="titre" name="titre" required>
+            </div>
+            <div class="mb-3">
+                <label for="album" class="form-label">Album</label>
+                <input type="text" class="form-control" id="album" name="album" required>
+            </div>
+            <div class="mb-3">
+                <label for="chronique" class="form-label">Chronique</label>
+                <textarea class="form-control" id="chronique" name="chronique" rows="4" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="dateSortie" class="form-label">Date de sortie</label>
+                <input type="date" class="form-control" id="dateSortie" name="dateSortie" required>
+            </div>
+            <div class="mb-3">
+                <label for="duree" class="form-label">Durée en secondes</label>
+                <input type="number" class="form-control" id="duree" name="duree" required>
+            </div>
+            <div class="mb-3">
+                <label for="jaquette" class="form-label">Jaquettes de l'album</label>
+                <input type="text" class="form-control" id="jaquette" name="jaquette" required>
+            </div>
+            <div class="mb-3">
+                <label for="urlEcoute" class="form-label">URL d'écoute</label>
+                <input type="text" class="form-control" id="urlEcoute" name="urlEcoute" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Styles</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="rock" id="styleRock" name="styles[]">
+                    <label class="form-check-label" for="styleRock">
+                        Rock
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="pop" id="stylePop" name="styles[]">
+                    <label class="form-check-label" for="stylePop">
+                        Pop
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="hiphop" id="styleHipHop" name="styles[]">
+                    <label class="form-check-label" for="styleHipHop">
+                        Hip Hop
+                    </label>
+                    <!-- Ajoutez d'autres styles selon vos besoins -->
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Créer</button>
+        </form>
+            </div>         
+        
+    </div>
+
+    @*Lien vers le retour à l'administration du titre*@
+    <div>
+        <a href="/Admin/Titre/Read">Retour à l'administration des titres'</a>
+    </div>
+
+
+</div>
