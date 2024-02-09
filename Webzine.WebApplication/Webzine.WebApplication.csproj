@@ -23,18 +23,19 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Accueil\Views\" />
+    <Folder Include="Areas\Accueil\ViewModels\" />
     <Folder Include="Areas\Artistes\Controllers\" />
     <Folder Include="Areas\Artistes\ViewModels\" />
     <Folder Include="Areas\Commentaires\Controllers\" />
     <Folder Include="Areas\Commentaires\ViewModels\" />
     <Folder Include="Areas\Styles\Controllers\" />
     <Folder Include="wwwroot\data\" />
-    <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\" />
     <Folder Include="wwwroot\favicon.ico\" />
