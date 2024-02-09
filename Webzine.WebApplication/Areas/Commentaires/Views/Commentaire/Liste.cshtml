@@ -5,7 +5,7 @@
 @foreach (var commentaire in Model.Commentaires)
 {
     @*Affichage des détails de chaque commentaire*@
-    <p>Pseudo : @commentaire.Pseudo</p>
+    <p>Pseudo : @commentaire.Auteur</p>
     <p>Contenu : @commentaire.Contenu</p>
-    <p>Date de création : @commentaire.DateDeCreation</p>
+    <p>Date de création : @commentaire.DateCreation</p>
 }
