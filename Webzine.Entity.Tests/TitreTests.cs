@@ -230,7 +230,7 @@
         public void TitreHasCommentaires()
         {
             Common.HasProperty(typeof(Titre), nameof(Titre.Commentaires));
-        }*/
+        }
 
         [TestMethod]
         public void TitreUrlJaquetteeIsNotMandatory()
