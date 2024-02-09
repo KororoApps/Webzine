@@ -1,0 +1,52 @@
+﻿@model Webzine.WebApplication.Areas.Admin.ViewModels.GroupeCommentaireModel
+
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["nomOnglet"] = "Liste des commentaires";
+}
+
+@{
+    <div class="container">
+        @*Affichage du nom de la page*@
+        <h3>Commentaires</h3>
+        <hr />
+
+        @*Afficher la liste des commentaires*@
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    @*ATTENTION !! VOIR POUR METTRE DES TAG-HELPER !*@
+                    <th scope="col">Titre</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Commentaires</th>
+                    <th scope="col">Date de création</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var commentaire in Model.Commentaires)
+                {
+                    <tr>
+
+                        <td>@commentaire.Artiste.Nom - @commentaire.Titre.Libelle</td>
+                        <td>@commentaire.Auteur</td>
+                        <td>@commentaire.Contenu</td>
+                        <td>@commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>
+                            <i class="fa-sharp fa-solid fa-pen-to-square" style="color: #74C0FC;"></i>
+                            <a href="/Admin/Commentaire/Delete">
+                                <i class="fa-solid fa-trash" style="color: #74C0FC;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+
+
+
+    </div>
+}

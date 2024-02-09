@@ -23,7 +23,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.1.3" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.2.0" />
   </ItemGroup>
@@ -34,7 +33,6 @@
     <Folder Include="Areas\Commentaires\Controllers\" />
     <Folder Include="Areas\Commentaires\ViewModels\" />
     <Folder Include="Areas\Styles\Controllers\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="wwwroot\data\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\js\" />

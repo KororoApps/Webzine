@@ -32,5 +32,8 @@
 
         [ForeignKey(nameof(Titre))]
         public Titre Titre { get; set; }
+
+        [ForeignKey(nameof(Artiste))]
+        public Artiste Artiste { get; set; }
     }
 }
