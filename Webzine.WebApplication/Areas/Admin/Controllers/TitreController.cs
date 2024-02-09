@@ -69,7 +69,33 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Retour de la vue avec le modèle de vue contenant les titres générés.
             /// <summary>
-            return View(titreModel);
+            return this.View(titreModel);
+        }
+
+        public IActionResult DeleteTitre()
+        {
+
+            var titreFaker = new Faker<Titre>()
+                .RuleFor(t => t.Libelle, f => f.Name.FullName())
+                ;
+
+            /// <summary>
+            /// Génération de 500 fausse instance de la classe Titre.
+            /// <summary>
+            var titres = titreFaker.Generate(1);
+
+            /// <summary>
+            /// Création du modèle de vue contenant la liste de Titres.
+            /// <summary>
+            var titreModel = new TitreModel
+            {
+                Titres = titres
+            };
+
+
+            return this.View();
         }
     }
+
+    
 }
