@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Areas.Admin.ViewModels.TitreModel
+﻿@model Webzine.WebApplication.Areas.Admin.ViewModels.GroupeTitreModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -35,13 +35,13 @@
             @foreach(var titre in Model.Titres){
                 <tr>        
                   
-                        <td>Artiste</td>
+                        <td>@titre.Artiste.Nom</td>
                         <td>@titre.Libelle</td>
                         <td>@titre.Duree</td>
                         <td>@titre.DateSortie</td>
                         <td>@titre.NbLectures</td>
                         <td>@titre.NbLikes</td>
-                        <td>NombreCommentaire</td>
+                        <td>@titre.Commentaires.Count</td>
                         <td>
                             <i class="fa-sharp fa-solid fa-pen-to-square" style="color: #74C0FC;"></i>
                             <a href="/Admin/Titre/DeleteTitre">

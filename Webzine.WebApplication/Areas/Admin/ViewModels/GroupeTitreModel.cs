@@ -2,13 +2,11 @@
 
 namespace Webzine.WebApplication.Areas.Admin.ViewModels
 {
-    public class TitreModel
+    public class GroupeTitreModel
     {
         /// <summary>
         /// Obtient ou définit le titre.
         /// </summary>
-        public List<Titre> Titres { get; set; } = null!;
-
-        public List<Artiste> Artistes { get; set; } = null!;
+        public IEnumerable<Titre> Titres { get; set; } = new List<Titre>();
     }
 }

@@ -7,6 +7,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
+    using Webzine.WebApplication.Areas.Titres.ViewModels;
 
     [Area("Admin")]
     public class TitreController : Controller
@@ -34,9 +35,9 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
                 .RuleFor(c => c.DateCreation, f => f.Date.Recent());
 
             /// <summary>
-            /// Génération de 3 fausses instances de la classe Commentaire.
+            /// Génération d'un nombre aléatoire de fausses instances de la classe Commentaire.
             /// <summary>//
-            var commentaires = fakerCommentaire.Generate(3);
+            Random random = new Random();
 
             /// <summary>
             /// Configuration du générateur de fausses données pour la classe Titre.
@@ -48,20 +49,20 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
                 .RuleFor(t => t.DateSortie, f => f.Date.Past())
                 .RuleFor(t => t.NbLectures, f => f.Random.Number(1, 10000))
                 .RuleFor(t => t.NbLikes, f => f.Random.Number(1, 1000))
+                .RuleFor(t => t.Artiste, f => f.PickRandom(artistes))
+                .RuleFor(t => t.Commentaires, f => fakerCommentaire.Generate(random.Next(1, 100)))
                 ;
 
             /// <summary>
             /// Génération de 500 fausse instance de la classe Titre.
             /// <summary>
             var titres = titreFaker.Generate(500);
-
-            //titres.Artistes = artistes;
             //titres.Commentaires = commentaires;
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
             /// <summary>
-            var titreModel = new TitreModel
+            var titreModel = new GroupeTitreModel
             {
                 Titres = titres
             };
@@ -74,22 +75,36 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 
         public IActionResult DeleteTitre()
         {
+            /// <summary>
+            /// Configuration du générateur de fausses données pour la classe Artiste.
+            /// <summary>
+            var fakerArtiste = new Faker<Artiste>()
+                .RuleFor(a => a.Nom, f => f.Name.FullName());
 
+            /// <summary>
+            /// Génération de 1 fausse instance de la classe Artiste.
+            /// <summary>//
+            var artiste = fakerArtiste.Generate();
+
+            /// <summary>
+            /// Configuration du générateur de fausses données pour la classe Titre.
+            /// <summary>
             var titreFaker = new Faker<Titre>()
                 .RuleFor(t => t.Libelle, f => f.Name.FullName())
+                .RuleFor(t => t.Artiste, f => artiste)
                 ;
 
             /// <summary>
-            /// Génération de 500 fausse instance de la classe Titre.
+            /// Génération de 1 fausse instance de la classe Titre.
             /// <summary>
-            var titres = titreFaker.Generate(1);
+            var titre = titreFaker.Generate();
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
             /// <summary>
             var titreModel = new TitreModel
             {
-                Titres = titres
+                Titre = titre
             };
 
 
