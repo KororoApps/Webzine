@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Areas.Titres.ViewModels.TitreModel
+﻿@model TitreModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -46,6 +46,7 @@
         @*Formulaire pour émettre un commentaire*@
         <div class="mt-5">
             <h3>Donne ton avis sur le titre</h3>
+            @*ATTENTION !!! CORRIGER LES for en asp-for et ajouter adp-action...etc...Lorsque le CRUD sera présent !!*@
             <form>
                 <div class="mb-3">
                     <label for="nameInput" class="form-label">Nom *</label>
