@@ -114,7 +114,42 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         public IActionResult Create()
         {
 
-            return this.View();
+            /// <summary>
+            /// Configuration du générateur de fausses données pour la classe Style.
+            /// <summary>
+            var fakerStyle = new Faker<Style>()
+                .RuleFor(a => a.Libelle, f => f.Random.Word());
+
+            /// <summary>
+            /// Génération de 20 fausses instances de la classe Style.
+            /// <summary>//
+            var styles = fakerStyle.Generate(20);
+
+            /// <summary>
+            /// Configuration du générateur de fausses données pour la classe Titre.
+            /// <summary>
+            var titreFaker = new Faker<Titre>()
+                .RuleFor(t => t.IdTitre, f => f.IndexFaker)
+                ;
+
+            /// <summary>
+            /// Génération de 1 fausse instance de la classe Titre.
+            /// <summary>
+            var titre = titreFaker.Generate();
+            titre.Styles = styles;
+
+            /// <summary>
+            /// Création du modèle de vue contenant la liste de Titres.
+            /// <summary>
+            var titreModel = new TitreModel
+            {
+                Titre = titre
+            };
+
+            /// <summary>
+            /// Retour de la vue avec le modèle de vue contenant les titres générés.
+            /// <summary>
+            return this.View(titreModel);
         }
 
         public IActionResult Update()
