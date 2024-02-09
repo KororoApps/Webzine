@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Areas\Artistes\Views\Artiste\ArtistesStyle.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Bogus" Version="35.4.0" />
     <PackageReference Include="Bogus.Tools.Analyzer" Version="35.4.0">
       <PrivateAssets>all</PrivateAssets>
@@ -30,7 +34,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Artistes\Controllers\" />
-    <Folder Include="Areas\Artistes\ViewModels\" />
     <Folder Include="Areas\Commentaires\Controllers\" />
     <Folder Include="Areas\Commentaires\ViewModels\" />
     <Folder Include="Areas\Styles\Controllers\" />

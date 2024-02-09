@@ -15,6 +15,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Entity", "..\Webzine.Entity\Webzine.Entity.csproj", "{BF92263C-E2B8-4F4E-90CB-169C306D1145}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Entity.Tests", "..\Webzine.Entity.Tests\Webzine.Entity.Tests.csproj", "{072724D1-0845-4520-BBD3-4BCB7EF746FF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BF92263C-E2B8-4F4E-90CB-169C306D1145} = {BF92263C-E2B8-4F4E-90CB-169C306D1145}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
