@@ -8,6 +8,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Webzine.Entity;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
     using Webzine.WebApplication.Areas.Artistes.ViewModels;
+    using Webzine.WebApplication.Areas.Titres.ViewModels;
 
     [Area("Admin")]
     public class ArtisteController : Controller
@@ -65,6 +66,15 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// Retour de la vue avec le modèle de vue contenant les titres générés.
             /// <summary>
             return this.View(artisteModel);
+        }
+
+        public IActionResult Create()
+        {
+            
+            /// <summary>
+            /// Retour de la vue avec le modèle de vue contenant les titres générés.
+            /// <summary>
+            return this.View();
         }
 
     }
