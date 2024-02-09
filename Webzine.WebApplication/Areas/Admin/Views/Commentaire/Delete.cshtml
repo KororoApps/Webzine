@@ -1,0 +1,29 @@
+﻿@model Webzine.WebApplication.Areas.Admin.ViewModels.CommentaireModel
+
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["nomOnglet"] = "Supprimer un commentaire";
+}
+
+
+<div class="container">
+    @*Affichage du nom de la page*@
+    <h3>Supprimer un commentaire</h3>
+    <hr />
+
+    <p>Etes-vous sûr de vouloir supprimer le commentaire suivant ? </p>
+
+    <p>@Model.Commentaire.Contenu</p>
+    <p>-</p>
+    <p>@Model.Commentaire.Auteur</p>
+    <p>@Model.Commentaire.DateCreation</p>
+    <p>sur</p>
+    <p>@Model.Commentaire.Titre</p>
+
+    @*Bouton de suppression*@
+    <button class="btn btn-danger" type="button">Supprimer</button>
+
+    @*Lien vers le retour à l'administration des commentaires*@    <div>
+        <a href="/Admin/Commentaire/Read">Retour à l'administration des commentaires'</a>
+    </div>
+</div>
