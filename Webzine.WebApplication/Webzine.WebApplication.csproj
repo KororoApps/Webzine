@@ -33,6 +33,7 @@
     <Folder Include="Areas\Commentaires\Controllers\" />
     <Folder Include="Areas\Commentaires\ViewModels\" />
     <Folder Include="Areas\Styles\Controllers\" />
+    <Folder Include="ViewModels\" />
     <Folder Include="wwwroot\data\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\js\" />

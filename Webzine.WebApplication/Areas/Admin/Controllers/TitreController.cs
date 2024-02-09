@@ -2,15 +2,16 @@
 using Bogus;
 
 
-namespace Webzine.WebApplication.Areas.Titres.Controllers
+namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Areas.Titres.ViewModels;
+    using Webzine.WebApplication.Areas.Admin.ViewModels;
 
-    [Area("Titres")]
+    [Area("Admin")]
     public class TitreController : Controller
     {
-        public IActionResult Index()
+        public IActionResult ReadTitre()
         {
 
             /// <summary>
@@ -38,17 +39,6 @@ namespace Webzine.WebApplication.Areas.Titres.Controllers
             var commentaires = fakerCommentaire.Generate(3);
 
             /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Style.
-            /// <summary>
-            var fakerStyle = new Faker<Style>()
-                .RuleFor(a => a.Libelle, f => f.Random.Word());
-
-            /// <summary>
-            /// Génération de 3 fausses instances de la classe Style.
-            /// <summary>//
-            var styles = fakerStyle.Generate(2);
-
-            /// <summary>
             /// Configuration du générateur de fausses données pour la classe Titre.
             /// <summary>
             var titreFaker = new Faker<Titre>()
@@ -56,14 +46,8 @@ namespace Webzine.WebApplication.Areas.Titres.Controllers
                 .RuleFor(t => t.Libelle, f => f.Name.FullName())
                 .RuleFor(t => t.Duree, f => f.Date.Timespan())
                 .RuleFor(t => t.DateSortie, f => f.Date.Past())
-                .RuleFor(t => t.DateCreation, f => f.Date.Recent())
                 .RuleFor(t => t.NbLectures, f => f.Random.Number(1, 10000))
                 .RuleFor(t => t.NbLikes, f => f.Random.Number(1, 1000))
-                .RuleFor(t => t.Album, f => f.Commerce.ProductName())
-                .RuleFor(t => t.Chronique, f => f.Lorem.Paragraphs(10))
-                .RuleFor(t => t.UrlJaquette, f => f.Image.PicsumUrl().ToString())
-                .RuleFor(t => t.UrlEcoute, f => f.Internet.Url())
-                .RuleFor(t => t.Album, f => f.Commerce.ProductName())
                 ;
 
             /// <summary>
@@ -72,7 +56,6 @@ namespace Webzine.WebApplication.Areas.Titres.Controllers
             var titre = titreFaker.Generate();
             titre.Artiste = artiste;
             titre.Commentaires = commentaires;
-            titre.Styles = styles;
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
