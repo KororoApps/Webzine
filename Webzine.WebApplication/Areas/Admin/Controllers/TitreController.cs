@@ -110,7 +110,13 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 
             return this.View(titreModel);
         }
-    }
 
-    
+        public IActionResult CreateTitre()
+        {
+
+            return this.View();
+        }
+
+
+    }
 }
