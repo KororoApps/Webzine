@@ -1,5 +1,4 @@
-﻿ 
- @using Bogus
+﻿ @using Bogus
 <!DOCTYPE html>
 
 <html>
@@ -14,7 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-3">
             <div class="container-fluid">
-                <a class="navbar-brand"href="/">Webzine</a>
+                <a class="navbar-brand" href="/">Webzine</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -26,15 +25,15 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Administration</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/Admin/Dashboard" ><i class="fa-solid fa-house m-1"></i>Tableau de bord</a></li>
-                                <li><a class="dropdown-item" href="/Admin/Artiste/Read"><i class="fa-solid fa-house m-1"></i>Artistes</a></li>
-                                <li><a class="dropdown-item" href="/Admin/Commentaire/Read"><i class="fa-solid fa-house m-1"></i>Commentaires</a></li>
-                                <li><a class="dropdown-item" href="/AdminStyles/AdminStyleAjout"><i class="fa-solid fa-house m-1"></i>Styles</a></li>
-                                <li><a class="dropdown-item" href="/Admin/Titre/Read"><i class="fa-solid fa-house m-1"></i>Titres</a></li>
+                                <li><a class="dropdown-item" href="/Admin/Dashboard"><i class="fa-solid fa-house m-1"></i>Tableau de bord</a></li>
+                                <li><a class="dropdown-item" href="/Admin/Artiste/"><i class="fa-solid fa-house m-1"></i>Artistes</a></li>
+                                <li><a class="dropdown-item" href="/Admin/Commentaire/"><i class="fa-solid fa-house m-1"></i>Commentaires</a></li>
+                                <li><a class="dropdown-item" href="/Admin/Style/"><i class="fa-solid fa-house m-1"></i>Styles</a></li>
+                                <li><a class="dropdown-item" href="/Admin/Titre/"><i class="fa-solid fa-house m-1"></i>Titres</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Contacts" asp-controller="Contact" asp-action="Contact"><i class="fa-solid fa-envelope  m-1"></i>Contact</a>
+                            <a class="nav-link" href="/Contact/"><i class="fa-solid fa-envelope  m-1"></i>Contact</a>
                         </li>
                     </ul>
                     <form class="d-flex">
@@ -42,7 +41,7 @@
                             <input class="form-control " type="text" placeholder="Trouver un artiste/titre">
                             <button class="btn btn-primary" type="button"><i class="fa-solid fa-search"></i></button>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>
@@ -56,8 +55,8 @@
             <div class="col-sm-9 p-5">
                 @RenderBody()
             </div>
-          
-                <div class="col-sm-3 p-5">
+
+            <div class="col-sm-3 p-5">
                 <div class="position-sticky" style="top: 2rem;">
                     <div class="p-2 ">
                         <h2 class="">A propos</h2>
@@ -65,14 +64,14 @@
                     </div>
 
                     <div class="p-2">
-                        <h3 >Styles</h3>
+                        <h3>Styles</h3>
                         @{
                             var faker = new Faker();
                             var nombreMots = 20;
                         }
                         <ul class="mb-0">
-                            
-                            @for(var i = 0; i<nombreMots; i++)
+
+                            @for (var i = 0; i < nombreMots; i++)
                             {
                                 var motAleatoire = faker.Lorem.Word();
                                 <li><a href="#">@motAleatoire</a></li>
@@ -80,16 +79,15 @@
                         </ul>
                     </div>
 
-                   
+
                 </div>
             </div>
-           
-       
-    </div>
 
-        <footer class="container-fluid border-top footer">  
-            &copy; ASP.NET Core - DIIAGE 2023-2024 
-         </footer>
+
+        
+        <footer class="container-fluid border-top footer">
+            &copy; ASP.NET Core - DIIAGE 2023-2024
+        </footer>
         <script src="../lib/bootstrap-5.3.2-dist/js/bootstrap.js"></script>
         <script src="~/lib/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
 </body>
