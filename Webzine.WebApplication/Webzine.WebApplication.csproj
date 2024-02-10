@@ -7,11 +7,8 @@
     <UserSecretsId>b61f1ba8-a3e6-474b-a18b-2e858acbf421</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
+	<OutputType>Exe</OutputType>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Program.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Remove="Views\Artiste\ArtistesStyle.css" />
@@ -49,5 +46,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Webzine.Entity\Webzine.Entity.csproj" />
   </ItemGroup>
+	
+	
 
 </Project>
