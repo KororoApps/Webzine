@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Areas.Artistes.ViewModels.ArtisteModel
+﻿@model Webzine.WebApplication.ViewModels.ArtisteModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -10,7 +10,6 @@
         @*Affichage du nom de la page*@
         <h3>Supprimer un artiste</h3>
         <hr/>
-
         <p>Etes-vous sûr de vouloir supprimer l'artiste "@Model.Artiste.Nom"? </p>
 
         @*Bouton de suppression*@
@@ -19,5 +18,5 @@
 
 @*Lien vers le retour à l'administration du titre*@
 <div>
-    <a href="/Admin/Artiste/Read">Retour à l'administration des artistes'</a>
+    <a href="/Admin/Artiste/">Retour à l'administration des artistes'</a>
 </div>

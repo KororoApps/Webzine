@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
 using Bogus;
 
 
@@ -7,12 +7,11 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
-    using Webzine.WebApplication.Areas.Titres.ViewModels;
 
     [Area("Admin")]
     public class TitreController : Controller
     {
-        public IActionResult Read()
+        public IActionResult Index()
         {
 
             /// <summary>
@@ -102,7 +101,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
             /// <summary>
-            var titreModel = new TitreModel
+            var titreModel = new WebApplication.ViewModels.TitreModel
             {
                 Titre = titre
             };
@@ -141,7 +140,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
             /// <summary>
-            var titreModel = new TitreModel
+            var titreModel = new WebApplication.ViewModels.TitreModel
             {
                 Titre = titre
             };
@@ -152,7 +151,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             return this.View(titreModel);
         }
 
-        public IActionResult Update()
+        public IActionResult Edit()
         {
             /// <summary>
             /// Configuration du générateur de fausses données pour la classe Artiste.
@@ -204,7 +203,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
             /// <summary>
-            var titreModel = new TitreModel
+            var titreModel = new WebApplication.ViewModels.TitreModel
             {
                 Titre = titre
             };

@@ -10,14 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Styles\ViewControllers\**" />
-    <Content Remove="Areas\Styles\ViewControllers\**" />
-    <EmbeddedResource Remove="Areas\Styles\ViewControllers\**" />
-    <None Remove="Areas\Styles\ViewControllers\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Areas\Artistes\Views\Artiste\ArtistesStyle.css" />
+    <None Remove="Views\Artiste\ArtistesStyle.css" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,12 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Accueil\Views\Accueil\" />
-    <Folder Include="Areas\Artistes\Controllers\" />
-    <Folder Include="Areas\Commentaires\Controllers\" />
-    <Folder Include="Areas\Commentaires\ViewModels\" />
-    <Folder Include="Areas\Styles\Controllers\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="wwwroot\data\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\js\" />

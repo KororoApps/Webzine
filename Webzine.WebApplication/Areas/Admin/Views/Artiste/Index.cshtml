@@ -1,0 +1,55 @@
+﻿@model Webzine.WebApplication.Areas.Admin.ViewModels.GroupeArtisteModel
+
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["nomOnglet"] = "Liste des artistes";
+}
+
+@{
+    <div class="container">
+        @*Affichage du nom de la page*@
+        <h3>Articles</h3>
+        <hr />
+
+        @*Création du bouton "Ajouter un nouvel artiste*@
+        <a href="/Admin/Titre/Create" class="btn btn-primary">
+            <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+            Ajouter un nouvel artiste
+        </a>
+        
+
+        @*Afficher la liste des articles*@
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    @*ATTENTION !! VOIR POUR METTRE DES TAG-HELPER !*@
+                    <th scope="col">Nom de l'artiste</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var artiste in Model.Artistes)
+                {
+                    <tr>
+
+                        <td>@artiste.Nom</td>
+                        <td>
+                            <a href="/Admin/Artiste/Edit">
+                                <i class="fa-sharp fa-solid fa-pen-to-square" style="color: #74C0FC;"></i>
+                            </a>
+                            <a href="/Admin/Artiste/Delete">
+                                <i class="fa-solid fa-trash" style="color: #74C0FC;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+
+
+
+    </div>
+}

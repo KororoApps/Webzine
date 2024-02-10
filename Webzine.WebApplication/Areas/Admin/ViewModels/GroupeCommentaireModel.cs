@@ -1,12 +1,12 @@
 ﻿using Webzine.Entity;
-
 namespace Webzine.WebApplication.Areas.Admin.ViewModels
 {
     public class GroupeCommentaireModel
     {
+
         /// <summary>
-        /// Obtient ou définit le commentaire.
+        /// Définit la liste des commentaires
         /// </summary>
-        public List<Commentaire> Commentaires { get; set; } = null!;
+        public IEnumerable<Commentaire> Commentaires { get; set; } = new List<Commentaire>();
     }
 }

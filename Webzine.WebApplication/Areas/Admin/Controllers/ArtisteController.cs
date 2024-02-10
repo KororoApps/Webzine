@@ -7,13 +7,13 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
-    using Webzine.WebApplication.Areas.Artistes.ViewModels;
-    using Webzine.WebApplication.Areas.Titres.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     [Area("Admin")]
     public class ArtisteController : Controller
     {
-        public IActionResult Read()
+
+        public IActionResult Index()
         {
 
             /// <summary>
@@ -77,7 +77,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             return this.View();
         }
 
-        public IActionResult Update()
+        public IActionResult Edit()
         {
             /// <summary>
             /// Configuration du générateur de fausses données pour la classe Artiste.

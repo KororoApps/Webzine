@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Bogus;
+﻿using Bogus;
 
 
 namespace Webzine.WebApplication.Areas.Admin.Controllers
@@ -7,12 +6,12 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.WebApplication.Areas.Admin.ViewModels;
-    using Webzine.WebApplication.Areas.Titres.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     [Area("Admin")]
     public class CommentaireController : Controller
     {
-        public IActionResult Read()
+        public IActionResult Index()
         {
 
             /// <summary>
