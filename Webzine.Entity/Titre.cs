@@ -15,7 +15,7 @@
 
         [ForeignKey(nameof(Artiste))]
 
-        
+
         public Artiste Artiste { get; set; }
 
         public List<Commentaire> Commentaires { get; set; }

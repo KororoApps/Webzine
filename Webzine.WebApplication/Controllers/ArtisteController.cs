@@ -1,10 +1,14 @@
-﻿using Bogus;
-using Microsoft.AspNetCore.Mvc;
-using Webzine.Entity;
-using Webzine.WebApplication.ViewModels;
+﻿// <copyright file="ArtisteController.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.WebApplication.Controllers
 {
+    using Bogus;
+    using Microsoft.AspNetCore.Mvc;
+    using Webzine.Entity;
+    using Webzine.WebApplication.Shared.ViewModels;
+
     public class ArtisteController : Controller
     {
         public IActionResult Index(string nomArtiste)

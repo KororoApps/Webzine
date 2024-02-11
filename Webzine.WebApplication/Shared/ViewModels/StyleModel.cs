@@ -1,5 +1,5 @@
 ﻿using Webzine.Entity;
-namespace Webzine.WebApplication.Areas.Admin.ViewModels
+namespace Webzine.WebApplication.Shared.ViewModels
 {
     public class StyleModel
     {

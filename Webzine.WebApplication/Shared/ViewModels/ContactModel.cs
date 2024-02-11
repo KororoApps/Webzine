@@ -1,4 +1,4 @@
-﻿namespace Webzine.WebApplication.ViewModels
+﻿namespace Webzine.WebApplication.Shared.ViewModels
 {
     public class ContactModel
     {

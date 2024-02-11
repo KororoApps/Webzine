@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Bogus;
-
+﻿// <copyright file="ArtisteController.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
+    using Bogus;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Areas.Admin.ViewModels;
-    using Webzine.WebApplication.ViewModels;
+    using Webzine.WebApplication.Shared.ViewModels;
 
     [Area("Admin")]
     public class ArtisteController : Controller
