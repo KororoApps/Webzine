@@ -11,13 +11,13 @@
 }
 <hr />
 
-<p>@Model.Bio</p>
+<p>@Model.Artiste.Biographie</p>
 
 <h1>Albums</h1>
 <hr>
 
 @*Afifchage des titres*@
-@foreach (var titre in Model.Titres)
+@foreach (var titre in Model.Artiste.Titres)
 {
     <div class="row" style="margin-left: 10px">
 
