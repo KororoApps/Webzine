@@ -63,7 +63,7 @@
 
         @*Affichage de la vidéo*@
         <div class="text-center">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/U9OQAySv184?si=H4HRfSLHIEpucdGl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe class="w-100" height="500" src="https://www.youtube.com/embed/U9OQAySv184?si=H4HRfSLHIEpucdGl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
 
         @*Formulaire pour émettre un commentaire*@
@@ -112,7 +112,7 @@
             <div class="col-md-8">
                 @foreach (var commentaire in Model.Titre.Commentaires.OrderByDescending(c => c.DateCreation))
                 {
-                    <div class="row p-5">
+                    <div class="row p-3">
                         <div class="col-md-2">
                             <img src="/images/avatar.png" alt="Image du créateur" class="img-fluid rounded-circle">
                         </div>
