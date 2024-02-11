@@ -11,82 +11,142 @@
     ViewData["titrePage"] = "Editer un titre";
 }
 <hr />
-        @*Formulaire de création de la page*@
-    <div class="mt-5">
-        @*ATTENTION !!! CORRIGER LES for en asp-for et ajouter adp-action...etc...!!*@
-        <form action="#" method="post">
-            <div class="mb-3">
-                <label for="nomArtiste" class="form-label">Nom de l'artiste</label>
-                <input placeholder=@Model.Titre.Artiste.Nom type="text" class="form-control" id="nomArtiste" name="nomArtiste" required>
+
+@*Formulaire d'édition' de la page*@
+<div>
+    <form asp-area="Admin" asp-controller="Titre" asp-action="Create" method="post" class="d-flex">
+        <div class="container">
+            <div class="form-group row mb-5">
+                <div class="col-md-2">
+                    <label asp-for="@Model.Titre.Artiste.Nom" class="form-label"></label><span class="text-danger">*</span>
+                </div>
+                <div class="col-md-10">
+                    <input asp-for="@Model.Titre.Artiste.Nom" type="text" class="form-control">
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="titre" class="form-label">Titre</label>
-                <input placeholder=@Model.Titre.Libelle type ="text" class="form-control" id="titre" name="titre" required>
+            <div class="form-group row mb-5">
+                <div class="col-md-2">
+                    <label asp-for="@Model.Titre.Libelle" class="form-label"></label><span class="text-danger">*</span>
+                </div>
+                <div class="col-md-10">
+                    <input asp-for="@Model.Titre.Libelle" type="text" class="form-control">
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="album" class="form-label">Album</label>
-                <input placeholder=@Model.Titre.Album type ="text" class="form-control" id="album" name="album" required>
+            <div class="form-group row mb-5">
+                <div class="col-md-2">
+                    <label asp-for="@Model.Titre.Album" class="form-label"></label><span class="text-danger">*</span>
+                </div>
+                <div class="col-md-10">
+                    <input asp-for="@Model.Titre.Album" type="text" class="form-control">
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="chronique" class="form-label">Chronique</label>
-                <textarea placeholder=@Model.Titre.Chronique class="form-control" id="chronique" name="chronique" rows="4" required></textarea>
+            <div class="form-group row mb-5">
+                <div class="col-md-2">
+                    <label asp-for="@Model.Titre.Chronique" class="form-label"></label><span class="text-danger">*</span>
+                </div>
+                <div class="col-md-10">
+                    <textarea asp-for="@Model.Titre.Chronique" type="text" class="form-control"></textarea>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="dateSortie" class="form-label">Date de sortie</label>
-                <input placeholder=@Model.Titre.DateSortie.ToString("dd/MM/yyyy") type="text" class="form-control" id="dateSortie" name="dateSortie" required>
-            </div>
-            <div class="mb-3">
-                <label for="duree" class="form-label">Durée en secondes</label>
-                <input placeholder=@Model.Titre.Duree. type ="number" class="form-control" id="duree" name="duree" required>
-            </div>
-            <div class="mb-3">
-                <label for="jaquette" class="form-label">Jaquettes de l'album</label>
-                <input placeholder=@Model.Titre.UrlJaquette type ="text" class="form-control" id="jaquette" name="jaquette" required>
-            </div>
-            <div class="mb-3">
-                <label for="urlEcoute" class="form-label">URL d'écoute</label>
-                <input placeholder=@Model.Titre.UrlEcoute type ="text" class="form-control" id="urlEcoute" name="urlEcoute" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Styles</label>
-                
-                    @*Nouvel objet Random.*@
-                    @{
-                        var random = new Random();
-                    }
-                    @foreach(var style in Model.Titre.Styles)
-                    {
-                    /// <summary>
-                    /// Génération un nombre aléatoire en 0 et 1.
-                    /// <summary>
-                    var randomValue = random.Next(0, 2);
-                    /// <summary>
-                    /// Utiliser le nombre aléatoire pour déterminer si la checkbox doit être cochée.
-                    /// <summary>
-                    var isChecked = randomValue == 1 ? "checked" : "";
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="@style.Libelle" id="@style.Libelle" name="styles[]" @isChecked>
-                        <label class="form-check-label" for="@style.Libelle">
-                            @style.Libelle
-                        </label>
+            <div class="form-group row mb-5">
+                <div class="col-md-2">
+                    <label asp-for="@Model.Titre.DateSortie" class="form-label"></label><span class="text-danger">*</span>
+                </div>
+                <div class="col-md-4">
+                    <input asp-for="@Model.Titre.DateSortie" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" class=" form-control">
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="@Model.Titre.Duree.TotalSeconds" class="form-label"></label><span class="text-danger">*</span>
+                </div>
+                <div class="col-md-4">
+                    <div class=" input-group">
+                        <input placeholder="@Math.Floor(Model.Titre.Duree.TotalSeconds)" asp-for="@Model.Titre.Duree" type="number" class="form-control">
+                        <span class="input-group-text">secondes</span>
                     </div>
-                    }
-                    
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Créer</button>
+            <div class="form-group row mb-5">
+                <div class="col-md-2">
+                    <label asp-for="@Model.Titre.UrlJaquette" class="form-label"></label><span class="text-danger">*</span>
+                </div>
+                <div class="col-md-10">
+                    <input asp-for="@Model.Titre.UrlJaquette" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row mb-5">
+                <div class="col-md-2">
+                    <label asp-for="@Model.Titre.UrlEcoute" class="form-label"></label>
+                </div>
+                <div class="col-md-10">
+                    <input asp-for="@Model.Titre.UrlEcoute" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row mb-5">
+                <div class="row align-items-top">
+                    <div class="col-md-2">
+                        <label asp-for="@Model.Titre.Styles" class="form-label"></label>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            @*Nouvel objet Random.*@
+                            @{
+                                var random = new Random(); 
+                            }
+                            @foreach (var style in Model.Titre.Styles)
+                            {
+                                /// <summary>
+                                /// Génération un nombre aléatoire en 0 et 1.
+                                /// <summary>
+                                var randomValue = random.Next(0, 2);
+                                /// <summary>
+                                /// Utiliser le nombre aléatoire pour déterminer si la checkbox doit être cochée.
+                                /// <summary>
+                                var isChecked = randomValue == 1 ? "checked" : "";
+                                <div class="col-md-4">
+                                    <div class="form-check align-top">
+                                        <input class="form-check-input" value="@style.Libelle" type="checkbox" name="styles[]" @isChecked>
+                                        <label class="form-check-label" asp-for="@style.Libelle">@style.Libelle</label>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group row mb-5">
+                        <div class="col-md-2">
+                            <label asp-for="@Model.Titre.NbLectures" class="form-label"></label><span class="text-danger">*</span>
+                        </div>
+                        <div class="col-md-10">
+                                            @Model.Titre.NbLectures
+                        </div>
+                    </div>
+                    <div class="form-group row mb-5">
+                        <div class="col-md-2">
+                            <label asp-for="@Model.Titre.NbLikes" class="form-label"></label><span class="text-danger">*</span>
+                        </div>
+                        <div class="col-md-10">
+                                            @Model.Titre.NbLikes
+                        </div>
+                    </div>
+
+
+                                    @*Bouton d'ajout du titre.*@
+                    <div class="form-group row mb-5">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-10">
+                            <div>
+                                <a class="btn btn-primary m-4" href="#">Sauvegarder</a>
+                            </div>
+                        </div>
+                    </div>
+
+                                    @*Bouton de retour à l'adminitration des titres.*@
+                    <a class="text-decoration-none fw-normal" asp-area="Admin" asp-controller="Titre" asp-action="Index">Retour à l'administration des styles </a>
+
+                </div>
+            </div>
         </form>
-            </div> 
-            
-            <p>Nombre de lectures* : @Model.Titre.NbLectures</p>
-            <p>Nombre de likes* : @Model.Titre.NbLikes</p>
-
-        
     </div>
-
-    @*Lien vers le retour à l'administration du titre*@
-    <div>
-        <a href="/Admin/Titre/"> Retour à l'administration des titres'</a>
-    </div>
-
-
-</div>

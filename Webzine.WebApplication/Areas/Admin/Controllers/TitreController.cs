@@ -188,7 +188,6 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>//
             var artiste = fakerArtiste.Generate();
 
-            
             /// <summary>
             /// Configuration du générateur de fausses données pour la classe Style.
             /// <summary>
