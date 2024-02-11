@@ -5,7 +5,6 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Bogus;
-    using Bogus.DataSets;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.WebApplication.Views.Shared.ViewModels;

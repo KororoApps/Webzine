@@ -9,9 +9,16 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Webzine.Entity;
     using Webzine.WebApplication.Views.Shared.ViewModels;
 
+    /// <summary>
+    /// Configuration du générateur de fausses données pour la classe Artiste.
+    /// </summary>
     [Area("Admin")]
     public class TitreController : Controller
     {
+        /// <summary>
+        /// Configuration du générateur de fausses données pour la classe Artiste.
+        /// </summary>
+        /// <returns>hhh.</returns>
         public IActionResult Index()
         {
 
@@ -73,6 +80,10 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             return this.View(titreModel);
         }
 
+        /// <summary>
+        /// Configuration du générateur de fausses données pour la classe Artiste.
+        /// </summary>
+        /// <returns>hhh.</returns>
         public IActionResult Delete()
         {
             /// <summary>
@@ -111,6 +122,10 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             return this.View(titreModel);
         }
 
+        /// <summary>
+        /// Configuration du générateur de fausses données pour la classe Artiste.
+        /// </summary>
+        /// <returns>hhh.</returns>
         public IActionResult Create()
         {
 
@@ -152,6 +167,10 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             return this.View(titreModel);
         }
 
+        /// <summary>
+        /// Configuration du générateur de fausses données pour la classe Artiste.
+        /// </summary>
+        /// <returns>hhh.</returns>
         public IActionResult Edit()
         {
             /// <summary>
