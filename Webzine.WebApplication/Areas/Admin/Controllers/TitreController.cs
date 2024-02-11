@@ -1,12 +1,13 @@
-﻿
-using Bogus;
-
+﻿// <copyright file="TitreController.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
+    using Bogus;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Areas.Admin.ViewModels;
+    using Webzine.WebApplication.Views.Shared.ViewModels;
 
     [Area("Admin")]
     public class TitreController : Controller
@@ -101,7 +102,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
             /// <summary>
-            var titreModel = new WebApplication.ViewModels.TitreModel
+            var titreModel = new TitreModel
             {
                 Titre = titre
             };
@@ -140,7 +141,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
             /// <summary>
-            var titreModel = new WebApplication.ViewModels.TitreModel
+            var titreModel = new TitreModel
             {
                 Titre = titre
             };
@@ -203,7 +204,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
             /// <summary>
-            var titreModel = new WebApplication.ViewModels.TitreModel
+            var titreModel = new TitreModel
             {
                 Titre = titre
             };

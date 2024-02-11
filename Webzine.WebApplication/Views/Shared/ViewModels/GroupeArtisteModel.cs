@@ -1,6 +1,6 @@
 ﻿using Webzine.Entity;
 
-namespace Webzine.WebApplication.Areas.Admin.ViewModels
+namespace Webzine.WebApplication.Views.Shared.ViewModels
 {
     public class GroupeArtisteModel
     {

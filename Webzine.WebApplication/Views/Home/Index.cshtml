@@ -1,37 +1,37 @@
-﻿@model Webzine.WebApplication.Areas.Admin.ViewModels.GroupeTitreModel
+﻿@model Webzine.WebApplication.Views.Shared.ViewModels.GroupeTitreModel
 
 @{
     ViewData["Title"] = "Accueil";
 }
 
 <div>
-<h1>Derniers titres chroniqués</h1>
+    <h1>Derniers titres chroniqués</h1>
 
-@foreach (var titre in Model.Titres.OrderBy(t => Guid.NewGuid()).Take(3))
-{
+    @foreach (var titre in Model.Titres.OrderBy(t => Guid.NewGuid()).Take(3))
+    {
         <div class="card flex-row p-4">
-        <div class="col-sm-3 col-lg-2">
-            <a href="/Titre/" class="ratio ratio-1x1">
-                <img class="card-img-left w-100 h-100 example-card-img-responsive p-3 object-fit-cover" src="@titre.UrlJaquette">
-            </a>
-        </div>                 
+            <div class="col-sm-3 col-lg-2">
+                <a href="/Titre/" class="ratio ratio-1x1">
+                    <img class="card-img-left w-100 h-100 example-card-img-responsive p-3 object-fit-cover" src="@titre.UrlJaquette">
+                </a>
+            </div>
             <div class="card-body p-0 ">
                 <h4 class="card-title ml-4 "><span>@titre.Artiste.Nom</span>-<span>@titre.Libelle</span></h4>
                 <p class="card-text ml-4 ">@titre.Chronique</p>
                 <div class="d-flex ml-4 ">
                     <a class="btn btn-primary p-2" href="/Titre/">Lire la suite</a>
-                <p><i class="fa-solid fa-calendar p-2"></i>@titre.DateCreation.ToString("dd/MM/yyyy HH:mm")</p>
-                @foreach (var style in @titre.Styles)
-                {
-                    <p><i class="fa-solid fa-tags p-2"></i>@style.Libelle</p>
-                }                
+                    <p><i class="fa-solid fa-calendar p-2"></i>@titre.DateCreation.ToString("dd/MM/yyyy HH:mm")</p>
+                    @foreach (var style in @titre.Styles)
+                    {
+                        <p><i class="fa-solid fa-tags p-2"></i>@style.Libelle</p>
+                    }
                 </div>
             </div>
         </div>
- }
+    }
     <div class="d-flex  justify-content-end">
         <a class="btn btn-secondary p-2 m-4" href="/">Titres plus anciens >></a>
-</div>   
+    </div>
 </div>
 
 <div>
@@ -40,7 +40,7 @@
     <div class="container">
         <div class="flex-row d-flex justify-content-between">
             @foreach (var titre in Model.Titres.OrderBy(t => Guid.NewGuid()).Take(3))
-            {     
+            {
                 <div class="col-md-4 col-lg-3">
                     <a href="/Titre/" class="text-decoration-none">
                         <div class="card">
@@ -51,10 +51,11 @@
                                 <h5 class="card-title text-primary">@titre.Libelle</h5>
                                 <p class="card-text"><spa class=" text-primary">par</spa>@titre.Artiste.Nom</p>
                             </div>
-                            </div>
-                </a>
-                </div>}
+                        </div>
+                    </a>
+                </div>
+            }
         </div>
     </div>
- </div>
+</div>
 
