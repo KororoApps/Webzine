@@ -26,7 +26,7 @@
                         <p>Styles : </p>
                         @foreach (var style in Model.Titre.Styles)
                         {
-                            <a href="#"><p class="me-4 ">@style.Libelle</p></a>
+                            <a asp-controller="Titre" asp-action="Style"><p class="me-4 ">@style.Libelle</p></a>
                         }
                     </div>
                 </div>
@@ -69,7 +69,6 @@
         @*Formulaire pour émettre un commentaire*@
         <div class="mt-5">
             <h3>Donne ton avis sur le titre</h3>
-            @*ATTENTION !!! CORRIGER LES for en asp-for et ajouter adp-action...etc...Lorsque le CRUD sera présent !!*@
             
             <form asp-controller="Commentaire" asp-action="Index" method="post" class="d-flex">
                 <div class="container">

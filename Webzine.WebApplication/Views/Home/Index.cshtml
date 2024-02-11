@@ -24,7 +24,7 @@
                     <p><i class="fa-solid fa-calendar p-2"></i>@titre.DateCreation.ToString("dd/MM/yyyy HH:mm")</p>
                     @foreach (var style in @titre.Styles)
                     {
-                        <p><i class="fa-solid fa-tags p-2"></i>@style.Libelle</p>
+                        <p><i class="fa-solid fa-tags p-2"></i><a asp-controller="Titre" asp-action="Style"><p class="me-4 ">@style.Libelle</p></a></p>
                     }
                 </div>
             </div>

@@ -12,25 +12,13 @@
     <div class="row" style="margin-left: 10px">
         <!-- Réduisez l'espacement entre les lignes -->
         <div class="col-md-1" style="display: flex; justify-content: center; align-items: center">
-            <img src="@titre.UrlJaquette" alt="Image" class="rounded img-fluid custom-shape">
+            <img src="@titre.UrlJaquette" alt="Image" class="img-fluid custom-shape">
         </div>
         <div class="col-md-6 mt-1">
             <!-- Réduisez la marge supérieure -->
             <h2>@titre.Libelle</h2>
-            <p>
-                @{
-                    var formattedDuration = FormatDuration(titre.Duree);
-                }Durée: @formattedDuration
+            <p>@titre.Duree.ToString(@"mm\:ss")
             </p>
         </div>
     </div>
-}
-
-
-@functions {
-    // Ajoutez la méthode FormatDuration ici
-    public string FormatDuration(TimeSpan duration)
-    {
-        return $"{(int)duration.TotalMinutes}:{duration.Seconds:D2}";
-    }
 }
