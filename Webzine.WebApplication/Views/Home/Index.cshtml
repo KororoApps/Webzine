@@ -7,6 +7,7 @@
 <div>
     <h1>Derniers titres chroniqués</h1>
 
+    @*Affiche 3 titres*@
     @foreach (var titre in Model.Titres.OrderBy(t => Guid.NewGuid()).Take(3))
     {
         <div class="card flex-row p-4">
@@ -34,6 +35,7 @@
     </div>
 </div>
 
+@*Affiche 3 titres*@
 <div>
     <h1>Titres les plus populaires</h1>
 

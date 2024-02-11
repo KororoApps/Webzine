@@ -57,7 +57,7 @@ namespace Webzine.WebApplication.Controllers
                 .RuleFor(t => t.Artiste, f => f.PickRandom(artistes))
                 .CustomInstantiator(f => new Titre
                 {
-                    Styles = new List<Style> { f.PickRandom(styles) },
+                    Styles = [f.PickRandom(styles)],
                 })
                 ;
 
