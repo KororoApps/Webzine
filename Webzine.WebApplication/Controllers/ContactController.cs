@@ -5,7 +5,7 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.WebApplication.Views.Shared.ViewModels;
+    using Webzine.WebApplication.Shared.ViewModels;
 
     public class ContactController : Controller
     {

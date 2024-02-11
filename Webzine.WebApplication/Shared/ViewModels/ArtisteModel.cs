@@ -1,4 +1,4 @@
-﻿namespace Webzine.WebApplication.Views.Shared.ViewModels
+﻿namespace Webzine.WebApplication.Shared.ViewModels
 {
     using Webzine.Entity;
     public class ArtisteModel

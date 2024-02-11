@@ -7,7 +7,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Bogus;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Views.Shared.ViewModels;
+    using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
     /// Configuration du générateur de fausses données pour la classe Artiste.

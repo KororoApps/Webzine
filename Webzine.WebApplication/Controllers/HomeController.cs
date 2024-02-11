@@ -7,10 +7,17 @@ namespace Webzine.WebApplication.Controllers
     using Bogus;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Views.Shared.ViewModels;
+    using Webzine.WebApplication.Shared.ViewModels;
 
+    /// <summary>
+    /// Contrôleur principal gérant les actions liées à la page d'accueil.
+    /// </summary>
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Affiche la page d'accueil avec des données générées aléatoirement.
+        /// </summary>
+        /// <returns>Vue de la page d'accueil.</returns>
         public IActionResult Index()
         {
             /// <summary>
@@ -64,7 +71,7 @@ namespace Webzine.WebApplication.Controllers
             /// <summary>
             var titreModel = new GroupeTitreModel
             {
-                Titres = titres
+                Titres = titres,
             };
 
             /// <summary>

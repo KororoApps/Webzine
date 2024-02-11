@@ -7,7 +7,7 @@ namespace Webzine.WebApplication.Controllers
     using Bogus;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Views.Shared.ViewModels;
+    using Webzine.WebApplication.Shared.ViewModels;
 
     public class ArtisteController : Controller
     {
