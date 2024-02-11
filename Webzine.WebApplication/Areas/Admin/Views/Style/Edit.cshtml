@@ -2,24 +2,24 @@
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
-    ViewData["Title"] = "Créer un style";
+    ViewData["Title"] = "Editer un style";
 }
 
 @*Affichage du nom de la page.*@
 @{
-    ViewData["titrePage"] = "Créer un style";
+    ViewData["titrePage"] = "Editer un style";
 }
 <hr />
 
 @*Formulaire d'ajout d'un style.*@
-<form asp-area="Admin" asp-controller="Style" asp-action="Create" method="post" class="col-6 d-flex">
+<form asp-area="Admin" asp-controller="Style" asp-action="Edit" method="post" class="col-6 d-flex">
     <div class="container">
         <div class="row align-items-center mb-5">
             <div class="col-auto">
                 <label asp-for="@Model.Style.Libelle" class="form-label"></label><span class="text-danger">*</span>
             </div>
             <div class="col">
-                <input asp-for="@Model.Style.Libelle" type="text" class="form-control">
+                <input asp-for="@Model.Style.Libelle" type="text" class="form-control" placeholder="@Model.Style.Libelle">
             </div>
 
             @*Bouton d'ajout du style.*@
