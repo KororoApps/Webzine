@@ -24,6 +24,20 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index()
         {
+
+            /// <summary>
+            /// Fonction pour mettre en majuscule la première lettre.
+            /// <summary>// Fonction pour mettre en majuscule la première lettre
+            static string CapitalizeFirstLetter(string input)
+            {
+                if (string.IsNullOrEmpty(input))
+                {
+                    return input;
+                }
+
+                return char.ToUpper(input[0]) + input[1..];
+            }
+
             /// <summary>
             /// Configuration du générateur de fausses données pour la classe Artiste.
             /// <summary>
@@ -52,7 +66,7 @@ namespace Webzine.WebApplication.Controllers
             /// Configuration du générateur de fausses données pour la classe Style.
             /// <summary>
             var fakerStyle = new Faker<Style>()
-                .RuleFor(a => a.Libelle, f => f.Random.Words(1));
+                .RuleFor(a => a.Libelle, f => CapitalizeFirstLetter(f.Lorem.Word()));
 
             /// <summary>
             /// Génération de 3 fausses instances de la classe Style.

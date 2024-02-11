@@ -17,7 +17,14 @@
                 </a>
             </div>
             <div class="card-body p-0 ">
-                <h4 class="card-title ml-4 "><span>@titre.Artiste.Nom</span>-<span>@titre.Libelle</span></h4>
+                <h4 class="card-title ml-4 ">
+                    <a asp-controller="Artiste" asp-action="" class="text-decoration-none">
+                        <span>@titre.Artiste.Nom</span>
+                    </a> -
+                    <a asp-controller="Titre" asp-action="" class="text-decoration-none">
+                        <span>@titre.Libelle</span>
+                    </a>
+                </h4>
                 <p class="card-text ml-4 ">@titre.Chronique</p>
                 <div class="d-flex ml-4 ">
                     <a class="btn btn-primary p-2" href="/Titre/">Lire la suite</a>
@@ -44,17 +51,21 @@
             @foreach (var titre in Model.Titres.OrderBy(t => Guid.NewGuid()).Take(3))
             {
                 <div class="col-md-4 col-lg-3">
-                    <a href="/Titre/" class="text-decoration-none">
-                        <div class="card">
-                            <div class="ratio ratio-1x1">
+
+                    <div class="card">
+
+                        <div class="ratio ratio-1x1">
+                            <a asp-controller="Titre" asp-action="" class="text-decoration-none">
                                 <img src="@titre.UrlJaquette" class="card-img-top w-100 h-100 object-fit-cover" alt="image">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title text-primary">@titre.Libelle</h5>
-                                <p class="card-text"><spa class=" text-primary">par</spa>@titre.Artiste.Nom</p>
-                            </div>
+                            </a>
                         </div>
-                    </a>
+                    </div>
+                    <div class="card-body">
+                        <a asp-controller="Titre" asp-action="" class="text-decoration-none"><h5 class="card-title text-primary">@titre.Libelle</h5></a>
+                        <p>
+                            <span>par </span><a asp-controller="Artiste" asp-action="" class="text-decoration-none text-primary">@titre.Artiste.Nom</a>
+                        </p>
+                    </div>
                 </div>
             }
         </div>

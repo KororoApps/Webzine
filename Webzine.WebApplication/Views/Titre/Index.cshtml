@@ -9,7 +9,12 @@
     <div class="container">
         <div>
             @*Affichage du nom de l'artiste et du titre*@
-            <h3><span class="text-primary">@Model.Titre.Artiste.Nom</span> - @Model.Titre.Libelle</h3>
+            <h3>
+                <a asp-controller="Artiste" asp-action="" class="text-decoration-none">
+                    <span class="text-primary">@Model.Titre.Artiste.Nom</span>
+                </a>
+                - @Model.Titre.Libelle
+            </h3>
             @*Date de création de l'article, Nb de like, Styles, Like, Edition*@
             <div class="d-inline-flex col-md-12">
                 <div class="d-inline-flex col-md-7">
@@ -26,7 +31,7 @@
                         <p>Styles : </p>
                         @foreach (var style in Model.Titre.Styles)
                         {
-                            <a asp-controller="Titre" asp-action="Style"><p class="me-4 ">@style.Libelle</p></a>
+                            <a asp-controller="Titre" asp-action="Style"><p class="me-4 "> @style.Libelle</p></a>
                         }
                     </div>
                 </div>
@@ -69,7 +74,7 @@
         @*Formulaire pour émettre un commentaire*@
         <div class="mt-5">
             <h3>Donne ton avis sur le titre</h3>
-            
+
             <form asp-controller="Commentaire" asp-action="Index" method="post" class="d-flex">
                 <div class="container">
                     @foreach (var commentaire in Model.Titre.Commentaires.Take(1))
