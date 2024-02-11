@@ -2,14 +2,15 @@
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
-    ViewData["nomOnglet"] = "Supprimer un titre";
+    ViewData["title"] = "Supprimer un titre";
 }
 
 
-<div class="container">
-        @*Affichage du nom de la page*@
-        <h3>Supprimer un titre</h3>
-        <hr/>
+@*Affichage du nom de la page.*@
+@{
+    ViewData["titrePage"] = "Supprimer un titre";
+}
+<hr />
 
         <p>Etes-vous sûr de vouloir supprimer @Model.Titre.Libelle de @Model.Titre.Artiste.Nom </p>
 

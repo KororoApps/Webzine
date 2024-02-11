@@ -2,14 +2,15 @@
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
-    ViewData["nomOnglet"] = "Editer un titre";
+    ViewData["title"] = "Editer un titre";
 }
 
 
-<div class="container">
-        @*Affichage du nom de la page*@
-        <h3>Modifier un titre</h3>
-        <hr/>
+@*Affichage du nom de la page.*@
+@{
+    ViewData["titrePage"] = "Editer un titre";
+}
+<hr />
         @*Formulaire de création de la page*@
     <div class="mt-5">
         @*ATTENTION !!! CORRIGER LES for en asp-for et ajouter adp-action...etc...!!*@
