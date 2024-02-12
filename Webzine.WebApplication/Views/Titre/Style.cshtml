@@ -6,8 +6,12 @@
 }
 
 @*Affichage du nom de la page.*@
-@{
-    ViewData["titrePage"] = "Titres ayant le style Jazz";
+@foreach (var titre in Model.Titres)
+{
+    foreach (var style in titre.Styles)
+    {
+        ViewData["titrePage"] = "Titres ayant le style " + style.Libelle;
+    }
 }
 <hr />
 

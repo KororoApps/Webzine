@@ -57,7 +57,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un titre.</returns>
         public IActionResult Delete()
         {
-            Titre titre = this.titreFactory.CreateTitre();
+            Titre titre = this.titreFactory.CreateTitre(3);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
@@ -77,7 +77,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de création d'un nouveau titre.</returns>
         public IActionResult Create()
         {
-            Titre titre = this.titreFactory.CreateTitre();
+            Titre titre = this.titreFactory.CreateTitre(17);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
@@ -99,7 +99,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue d'édition d'un titre.</returns>
         public IActionResult Edit()
         {
-            Titre titre = this.titreFactory.CreateTitre();
+            Titre titre = this.titreFactory.CreateTitre(17);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
