@@ -9,9 +9,21 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Webzine.Entity;
     using Webzine.WebApplication.Shared.ViewModels;
 
+    /// <summary>
+    /// Contrôleur responsable de la gestion des opérations liées aux commentaires dans la zone d'administration.
+    /// </summary>
+    /// <remarks>
+    /// Ce contrôleur gère l'affichage de la liste des commentaires et leur suppression.
+    /// Il utilise le générateur de fausses données Bogus pour simuler des données.
+    /// </remarks>
+
     [Area("Admin")]
     public class CommentaireController : Controller
     {
+        /// <summary>
+        /// Action pour afficher la liste des commentaires.
+        /// </summary>
+        /// <returns>Vue contenant la liste des commentaires.</returns>
         public IActionResult Index()
         {
 
@@ -51,14 +63,14 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération de 20 fausses instances de la classe Commentaire.
             /// <summary>//
-            var commentaires = fakerCommentaire.Generate(20);   
+            var commentaires = fakerCommentaire.Generate(20);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
             /// <summary>
             var commentaireModel = new GroupeCommentaireModel
             {
-                Commentaires = commentaires
+                Commentaires = commentaires,
             };
 
             /// <summary>
@@ -67,6 +79,10 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             return this.View(commentaireModel);
         }
 
+        /// <summary>
+        /// Action pour afficher la vue de suppression d'un commentaire.
+        /// </summary>
+        /// <returns>Vue de suppression d'un commentaire.</returns>
         public IActionResult Delete()
         {
             /// <summary>
@@ -112,7 +128,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             var commentaireModel = new CommentaireModel
             {
-                Commentaire = commentaire
+                Commentaire = commentaire,
             };
 
 

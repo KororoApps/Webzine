@@ -1,29 +1,33 @@
 ﻿@model Webzine.WebApplication.Shared.ViewModels.CommentaireModel
 
 @*Configuration dynamique du nom de l'onglet.*@
+@*Configuration dynamique du nom de l'onglet.*@
 @{
-    ViewData["nomOnglet"] = "Supprimer un commentaire";
+    ViewData["title"] = "Supprimer un commentaire";
 }
 
 
-<div class="container">
-    @*Affichage du nom de la page*@
-    <h3>Supprimer un commentaire</h3>
-    <hr />
+@*Affichage du nom de la page.*@
+@{
+    ViewData["titrePage"] = "Supprimer un commentaire";
+}
+<hr />
 
-    <p>Etes-vous sûr de vouloir supprimer le commentaire suivant ? </p>
+<div>
+    <div>
 
-    <p>@Model.Commentaire.Contenu</p>
-    <p>-</p>
-    <p>@Model.Commentaire.Auteur</p>
-    <p>@Model.Commentaire.DateCreation</p>
-    <p>sur</p>
-    <p>@Model.Commentaire.Titre</p>
+        <p>Etes-vous sûr de vouloir supprimer le commentaire suivant ? </p>
 
-    @*Bouton de suppression*@
-    <button class="btn btn-danger" type="button">Supprimer</button>
+        <p class="fs-5">@Model.Commentaire.Contenu</p>
+        <p>- <span class="fw-bold">@Model.Commentaire.Auteur</span> le @Model.Commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm") sur <span class="fst-italic">@Model.Commentaire.Titre</span></p>
 
-    @*Lien vers le retour à l'administration des commentaires*@    <div>
-        <a href="/Admin/Commentaire/">Retour à l'administration des commentaires'</a>
+
+        @*Bouton de suppression*@
+        <button class="btn btn-danger" type="button">Supprimer</button>
+    </div>
+
+    @*Lien vers le retour à l'administration des commentaires*@
+    <div>
+        <a class="text-decoration-none fw-normal" asp-area="Admin" asp-controller="Commentaire" asp-action="Index">Retour à l'administration des commentaires</a>
     </div>
 </div>
