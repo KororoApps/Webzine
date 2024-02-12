@@ -6,19 +6,24 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Bogus;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.CodeAnalysis.Diagnostics;
     using Webzine.Entity;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
-    /// Configuration du générateur de fausses données pour la classe Artiste.
+    /// Contrôleur responsable de la gestion des opérations liées aux titres dans la zone d'administration.
     /// </summary>
+    /// <remarks>
+    /// Ce contrôleur gère l'affichage de la liste des titres, la création, la suppression et l'édition d'un titre.
+    /// Il utilise le générateur de fausses données Bogus pour simuler des données.
+    /// </remarks>
     [Area("Admin")]
     public class TitreController : Controller
     {
         /// <summary>
-        /// Configuration du générateur de fausses données pour la classe Artiste.
+        /// Affiche la liste des titres.
         /// </summary>
-        /// <returns>hhh.</returns>
+        /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index()
         {
 
@@ -44,7 +49,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération d'un nombre aléatoire de fausses instances de la classe Commentaire.
             /// <summary>//
-            Random random = new Random();
+            Random random = new();
 
             /// <summary>
             /// Configuration du générateur de fausses données pour la classe Titre.
@@ -64,14 +69,13 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// Génération de 500 fausse instance de la classe Titre.
             /// <summary>
             var titres = titreFaker.Generate(500);
-            //titres.Commentaires = commentaires;
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
             /// <summary>
             var titreModel = new GroupeTitreModel
             {
-                Titres = titres
+                Titres = titres,
             };
 
             /// <summary>
@@ -81,9 +85,9 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// Configuration du générateur de fausses données pour la classe Artiste.
+        /// Affiche la vue de suppression d'un titre.
         /// </summary>
-        /// <returns>hhh.</returns>
+        /// <returns>Vue de suppression d'un titre.</returns>
         public IActionResult Delete()
         {
             /// <summary>
@@ -115,7 +119,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             var titreModel = new TitreModel
             {
-                Titre = titre
+                Titre = titre,
             };
 
 
@@ -123,9 +127,9 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// Configuration du générateur de fausses données pour la classe Artiste.
+        /// Affiche la vue de création d'un nouveau titre.
         /// </summary>
-        /// <returns>hhh.</returns>
+        /// <returns>Vue de création d'un nouveau titre.</returns>
         public IActionResult Create()
         {
 
@@ -158,7 +162,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             var titreModel = new TitreModel
             {
-                Titre = titre
+                Titre = titre,
             };
 
             /// <summary>
@@ -168,9 +172,9 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// Configuration du générateur de fausses données pour la classe Artiste.
+        /// Affiche la vue d'édition d'un titre.
         /// </summary>
-        /// <returns>hhh.</returns>
+        /// <returns>Vue d'édition d'un titre.</returns>
         public IActionResult Edit()
         {
             /// <summary>
@@ -184,7 +188,6 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>//
             var artiste = fakerArtiste.Generate();
 
-            
             /// <summary>
             /// Configuration du générateur de fausses données pour la classe Style.
             /// <summary>
@@ -225,7 +228,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             var titreModel = new TitreModel
             {
-                Titre = titre
+                Titre = titre,
             };
 
             /// <summary>

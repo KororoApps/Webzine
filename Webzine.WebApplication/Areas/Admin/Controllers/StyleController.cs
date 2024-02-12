@@ -10,7 +10,6 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Webzine.Entity;
     using Webzine.WebApplication.Shared.ViewModels;
 
-
     /// <summary>
     /// Contrôleur responsable de la gestion des opérations liées aux styles dans la zone d'administration.
     /// </summary>
@@ -28,11 +27,25 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue avec la liste des styles.</returns>
         public IActionResult Index()
         {
+
+            /// <summary>
+            /// Fonction pour mettre en majuscule la première lettre.
+            /// <summary>// Fonction pour mettre en majuscule la première lettre
+            static string CapitalizeFirstLetter(string input)
+            {
+                if (string.IsNullOrEmpty(input))
+                {
+                    return input;
+                }
+
+                return char.ToUpper(input[0]) + input[1..];
+            }
+
             /// <summary>
             /// Configuration du générateur de fausses données pour la classe Style.
             /// </summary>
             var fakerStyle = new Faker<Style>()
-                .RuleFor(a => a.Libelle, f => f.Random.Word());
+                .RuleFor(a => a.Libelle, f => CapitalizeFirstLetter(f.Lorem.Word()));
 
             /// <summary>
             /// Génération de 20 fausses instances de la classe Style.
