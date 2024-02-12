@@ -4,11 +4,9 @@
 
 namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
-    using Bogus;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.WebApplication.Shared.Factories;
-    using Webzine.WebApplication.Shared.Interfaces;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -22,11 +20,14 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class ArtisteController : Controller
     {
-        private readonly IArtisteFactory artisteFactory;
+        private readonly ArtisteFactory artisteFactory;
 
-        public ArtisteController(IArtisteFactory iArtisteFactory)
+        /// <summary>
+        /// Initialise une nouvelle instance de la classe <see cref="ArtisteController"/>.
+        /// </summary>
+        public ArtisteController()
         {
-            artisteFactory = iArtisteFactory;
+           this.artisteFactory = new ArtisteFactory();
         }
 
         /// <summary>
@@ -57,16 +58,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un artiste.</returns>
         public IActionResult Delete()
         {
-            /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Artiste.
-            /// <summary>
-            var fakerArtiste = new Faker<Artiste>()
-                .RuleFor(a => a.Nom, f => f.Name.FullName());
-
-            /// <summary>
-            /// Génération de 1 fausse instance de la classe Artiste.
-            /// <summary>//
-            var artiste = fakerArtiste.Generate();
+            Artiste artiste = this.artisteFactory.CreateArtiste();
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Artiste.
@@ -100,17 +92,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue d'édition d'un artiste.</returns>
         public IActionResult Edit()
         {
-            /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Artiste.
-            /// <summary>
-            var fakerArtiste = new Faker<Artiste>()
-                .RuleFor(a => a.Nom, f => f.Name.FullName())
-                .RuleFor(a => a.Biographie, (f, u) => f.Lorem.Paragraph());
-
-            /// <summary>
-            /// Génération de 1 fausse instance de la classe Artiste.
-            /// <summary>//
-            var artiste = fakerArtiste.Generate();
+            Artiste artiste = this.artisteFactory.CreateArtiste();
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Artiste.

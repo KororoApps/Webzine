@@ -16,14 +16,39 @@ namespace Webzine.WebApplication.Shared.Factories
     /// </remarks>
     /// <param name="artisteFactory">Fabrique d'artistes utilisée pour générer des données d'artiste.</param>
     /// <param name="titreFactory">Fabrique de titres utilisée pour générer des données de titre.</param>
-    public class CommentaireFactory(IArtisteFactory artisteFactory, ITitreFactory titreFactory) : ICommentaireFactory
+    public class CommentaireFactory : ICommentaireFactory
     {
-        private readonly Faker<Commentaire> fakerCommentaire = new Faker<Commentaire>()
+        private readonly Faker<Titre> fakerTitre;
+        private readonly Faker<Artiste> fakerArtiste;
+        private readonly Faker<Commentaire> fakerCommentaire;
+
+        /// <summary>
+        /// Initialise une nouvelle instance de la classe <see cref="CommentaireFactory"/>.
+        /// </summary>
+        public CommentaireFactory()
+        {
+            /// <summary>
+            /// Configuration du générateur de fausses données pour la classe Titre.
+            /// <summary>
+            this.fakerTitre = new Faker<Titre>()
+                .RuleFor(t => t.Libelle, f => f.Name.FullName());
+
+            /// <summary>
+            /// Configuration pour la génération de fausses données pour la classe Artiste.
+            /// </summary>
+            this.fakerArtiste = new Faker<Artiste>()
+                .RuleFor(a => a.Nom, f => f.Name.FullName());
+
+            /// <summary>
+            /// Configuration du générateur de fausses données pour la classe Commentaire.
+            /// <summary>
+            this.fakerCommentaire = new Faker<Commentaire>()
                 .RuleFor(c => c.Auteur, f => f.Name.FullName())
                 .RuleFor(c => c.Contenu, f => f.Lorem.Paragraph())
                 .RuleFor(c => c.DateCreation, f => f.Date.Recent())
-                .RuleFor(t => t.Artiste, f => artisteFactory.CreateArtiste())
-                .RuleFor(t => t.Titre, f => titreFactory.CreateTitre());
+                .RuleFor(a => a.Artiste, f => this.fakerArtiste.Generate())
+                .RuleFor(t => t.Titre, f => this.fakerTitre.Generate());
+        }
 
         /// <summary>
         /// Crée une instance de la classe Commentaire avec des données générées.

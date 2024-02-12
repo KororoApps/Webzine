@@ -3,11 +3,10 @@
 // </copyright>
 
 namespace Webzine.WebApplication.Areas.Admin.Controllers
-
 {
-    using Bogus;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
+    using Webzine.WebApplication.Shared.Factories;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -20,6 +19,15 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class StyleController : Controller
     {
+        private readonly StyleFactory styleFactory;
+
+        /// <summary>
+        /// Initialise une nouvelle instance de la classe <see cref="StyleController"/>.
+        /// </summary>
+        public StyleController()
+        {
+            this.styleFactory = new StyleFactory();
+        }
 
         /// <summary>
         /// Affiche la liste des styles.
@@ -27,30 +35,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue avec la liste des styles.</returns>
         public IActionResult Index()
         {
-
-            /// <summary>
-            /// Fonction pour mettre en majuscule la première lettre.
-            /// <summary>// Fonction pour mettre en majuscule la première lettre
-            static string CapitalizeFirstLetter(string input)
-            {
-                if (string.IsNullOrEmpty(input))
-                {
-                    return input;
-                }
-
-                return char.ToUpper(input[0]) + input[1..];
-            }
-
-            /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Style.
-            /// </summary>
-            var fakerStyle = new Faker<Style>()
-                .RuleFor(a => a.Libelle, f => CapitalizeFirstLetter(f.Lorem.Word()));
-
-            /// <summary>
-            /// Génération de 20 fausses instances de la classe Style.
-            /// </summary>
-            var styles = fakerStyle.Generate(20);
+            var styles = this.styleFactory.CreateStyles(25);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de styles.
@@ -78,16 +63,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un style.</returns>
         public IActionResult Delete()
         {
-            /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Style.
-            /// </summary>
-            var fakerStyle = new Faker<Style>()
-                .RuleFor(a => a.Libelle, f => f.Random.Word());
-
-            /// <summary>
-            /// Génération de 1 fausse instance de la classe Style.
-            /// </summary>
-            var style = fakerStyle.Generate();
+            Style style = this.styleFactory.CreateStyle();
 
             /// <summary>
             /// Création du modèle de vue contenant le style à supprimer.
@@ -106,16 +82,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue d'édition d'un style.</returns>
         public IActionResult Edit()
         {
-            /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Style.
-            /// </summary>
-            var fakerStyle = new Faker<Style>()
-                .RuleFor(a => a.Libelle, f => f.Random.Word());
-
-            /// <summary>
-            /// Génération de 1 fausse instance de la classe Style.
-            /// </summary>
-            var style = fakerStyle.Generate();
+            Style style = this.styleFactory.CreateStyle();
 
             /// <summary>
             /// Création du modèle de vue contenant le style à éditer.

@@ -4,9 +4,9 @@
 
 namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
-    using Bogus;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
+    using Webzine.WebApplication.Shared.Factories;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -20,53 +20,26 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class CommentaireController : Controller
     {
+        private readonly CommentaireFactory commentaireFactory;
+
+        /// <summary>
+        /// Initialise une nouvelle instance de la classe <see cref="CommentaireController"/>.
+        /// </summary>
+        public CommentaireController()
+        {
+            this.commentaireFactory = new CommentaireFactory();
+        }
+
         /// <summary>
         /// Action pour afficher la liste des commentaires.
         /// </summary>
         /// <returns>Vue contenant la liste des commentaires.</returns>
         public IActionResult Index()
         {
+            var commentaires = this.commentaireFactory.CreateCommentaires(50);
 
             /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Artiste.
-            /// <summary>
-            var fakerArtiste = new Faker<Artiste>()
-                .RuleFor(a => a.Nom, f => f.Name.FullName());
-
-            /// <summary>
-            /// Génération de 1 fausse instance de la classe Artiste.
-            /// <summary>//
-            var artistes = fakerArtiste.Generate(15);
-
-            /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Titre.
-            /// <summary>
-            var titreFaker = new Faker<Titre>()
-                .RuleFor(t => t.Libelle, f => f.Name.FullName())
-                ;
-
-            /// <summary>
-            /// Génération de 1 fausse instance de la classe Titre.
-            /// <summary>
-            var titres = titreFaker.Generate(20);
-
-            /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Commentaire.
-            /// <summary>
-            var fakerCommentaire = new Faker<Commentaire>()
-                .RuleFor(c => c.Auteur, f => f.Name.FullName())
-                .RuleFor(c => c.Contenu, f => f.Lorem.Paragraph())
-                .RuleFor(c => c.DateCreation, f => f.Date.Recent())
-                .RuleFor(t => t.Artiste, f => f.PickRandom(artistes))
-                .RuleFor(t => t.Titre, f => f.PickRandom(titres));
-
-            /// <summary>
-            /// Génération de 20 fausses instances de la classe Commentaire.
-            /// <summary>//
-            var commentaires = fakerCommentaire.Generate(20);
-
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
+            /// Création du modèle de vue contenant la liste de Artiste.
             /// <summary>
             var commentaireModel = new GroupeCommentaireModel
             {
@@ -85,53 +58,15 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un commentaire.</returns>
         public IActionResult Delete()
         {
-            /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Artiste.
-            /// <summary>
-            var fakerArtiste = new Faker<Artiste>()
-                .RuleFor(a => a.Nom, f => f.Name.FullName());
+            Commentaire commentaire = this.commentaireFactory.CreateCommentaire();
 
             /// <summary>
-            /// Génération de 1 fausse instance de la classe Artiste.
-            /// <summary>//
-            var artiste = fakerArtiste.Generate();
-
-            /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Titre.
-            /// <summary>
-            var titreFaker = new Faker<Titre>()
-                .RuleFor(t => t.Libelle, f => f.Name.FullName())
-                ;
-
-            /// <summary>
-            /// Génération de 1 fausse instance de la classe Titre.
-            /// <summary>
-            var titre = titreFaker.Generate();
-
-            /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Commentaire.
-            /// <summary>
-            var fakerCommentaire = new Faker<Commentaire>()
-                .RuleFor(c => c.Auteur, f => f.Name.FullName())
-                .RuleFor(c => c.Contenu, f => f.Lorem.Paragraph())
-                .RuleFor(c => c.DateCreation, f => f.Date.Recent())
-                .RuleFor(t => t.Artiste, f => f.PickRandom(artiste))
-                .RuleFor(t => t.Titre, f => f.PickRandom(titre));
-
-            /// <summary>
-            /// Génération de 20 fausses instances de la classe Commentaire.
-            /// <summary>//
-            var commentaire = fakerCommentaire.Generate();
-
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
+            /// Création du modèle de vue contenant un commentaire.
             /// <summary>
             var commentaireModel = new CommentaireModel
             {
                 Commentaire = commentaire,
             };
-
-
             return this.View(commentaireModel);
         }
     }

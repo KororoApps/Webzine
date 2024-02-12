@@ -20,7 +20,9 @@ namespace Webzine.WebApplication.Shared.Factories
         /// </summary>
         public StyleFactory()
         {
-            // Configuration pour la génération de fausses données pour la classe Style.
+            /// <summary>
+            /// Configuration pour la génération de fausses données pour la classe Style.
+            /// <summary>
             this.fakerStyle = new Faker<Style>()
                 .RuleFor(a => a.Libelle, f => this.CapitalizeFirstLetter(f.Lorem.Word()));
         }
