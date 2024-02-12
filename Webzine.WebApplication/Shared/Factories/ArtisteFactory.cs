@@ -11,22 +11,19 @@ namespace Webzine.WebApplication.Shared.Factories
     /// <summary>
     /// Classe de fabrique pour la création d'instances de la classe Artiste avec des données générées.
     /// </summary>
-    public class ArtisteFactory : IArtisteFactory
+    /// <remarks>
+    /// Initialise une nouvelle instance de la classe <see cref="ArtisteFactory"/>.
+    /// </remarks>
+    /// <param name="titreFactory">Fabrique de titres utilisée pour générer des données de titre.</param>
+    public class ArtisteFactory(ITitreFactory titreFactory)
     {
-        private readonly Faker<Artiste> fakerArtiste;
-
         /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="ArtisteFactory"/>.
+        /// Configuration pour la génération de fausses données pour la classe Artiste.
         /// </summary>
-        public ArtisteFactory()
-        {
-            /// <summary>
-            /// Configuration pour la génération de fausses données pour la classe Artiste.
-            /// </summary>
-            this.fakerArtiste = new Faker<Artiste>()
+        private readonly Faker<Artiste> fakerArtiste = new Faker<Artiste>()
                 .RuleFor(a => a.Nom, f => f.Name.FullName())
-                .RuleFor(a => a.Biographie, (f, u) => f.Lorem.Paragraph());
-        }
+                .RuleFor(a => a.Biographie, (f, u) => f.Lorem.Paragraph())
+                .RuleFor(t => t.Titres, f => titreFactory.CreateTitres(f.Random.Number(1, 10)));
 
         /// <summary>
         /// Crée une nouvelle instance de la classe Artiste avec des données générées.

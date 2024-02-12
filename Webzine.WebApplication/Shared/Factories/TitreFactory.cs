@@ -11,43 +11,23 @@ namespace Webzine.WebApplication.Shared.Factories
     /// <summary>
     /// Classe de fabrique pour la création d'instances de la classe Titre avec des données générées.
     /// </summary>
-    public class TitreFactory : ITitreFactory
+    /// <remarks>
+    /// Initialise une nouvelle instance de la classe <see cref="TitreFactory"/>.
+    /// </remarks>
+    /// <param name="artisteFactory">Fabrique d'artistes utilisée pour générer des données d'artiste.</param>
+    /// <param name="commentaireFactory">Fabrique de commentaires utilisée pour générer des données d'artiste.</param>
+    /// <param name="styleFactory">Fabrique de styles utilisée pour générer des données d'artiste.</param>
+    public class TitreFactory(IArtisteFactory artisteFactory, ICommentaireFactory commentaireFactory, IStyleFactory styleFactory)
     {
-        private readonly Faker<Titre> fakerTitre;
-        private readonly Faker<Artiste> fakerArtiste;
-        private readonly Faker<Commentaire> fakerCommentaire;
-        private readonly Faker<Style> fakerStyle;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="TitreFactory"/>.
-        /// </summary>
-        public TitreFactory()
-        {
-            this.fakerArtiste = new Faker<Artiste>()
-                .RuleFor(a => a.Nom, f => f.Name.FullName());
-
-            this.fakerCommentaire = new Faker<Commentaire>()
-                .RuleFor(c => c.Auteur, f => f.Name.FullName())
-                .RuleFor(c => c.Contenu, f => f.Lorem.Paragraph())
-                .RuleFor(c => c.DateCreation, f => f.Date.Recent());
-
-            this.fakerStyle = new Faker<Style>()
-                .RuleFor(a => a.Libelle, f => this.CapitalizeFirstLetter(f.Lorem.Word()));
-
-            // Générer la liste de styles en dehors de la règle principale
-            var stylesList = this.fakerStyle.Generate(20);
-
-            this.fakerTitre = new Faker<Titre>()
-                .RuleFor(t => t.IdTitre, f => f.IndexFaker)
+        private readonly Faker<Titre> fakerTitre = new Faker<Titre>()
                 .RuleFor(t => t.Libelle, f => f.Name.FullName())
                 .RuleFor(t => t.Duree, f => f.Date.Timespan())
                 .RuleFor(t => t.DateSortie, f => f.Date.Past())
                 .RuleFor(t => t.NbLectures, f => f.Random.Number(1, 10000))
                 .RuleFor(t => t.NbLikes, f => f.Random.Number(1, 1000))
-                .RuleFor(t => t.Artiste, f => f.PickRandom(this.fakerArtiste.Generate(150)))
-                .RuleFor(t => t.Commentaires, f => this.fakerCommentaire.Generate(f.Random.Number(1, 100)));
-                //.RuleFor(t => t.Styles, f => f.PickRandom(this.fakerStyle.Generate(3)));
-        }
+                .RuleFor(a => a.Artiste, f => artisteFactory.CreateArtiste())
+                .RuleFor(c => c.Commentaires, f => commentaireFactory.CreateCommentaires(f.Random.Number(1, 10)))
+                .RuleFor(s => s.Styles, f => styleFactory.CreateStyles(f.Random.Number(1, 10)));
 
         /// <summary>
         /// Crée une instance de la classe Titre avec des données générées.

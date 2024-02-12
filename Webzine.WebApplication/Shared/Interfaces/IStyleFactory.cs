@@ -4,17 +4,25 @@
 
 namespace Webzine.WebApplication.Shared.Interfaces
 {
+    using System.Collections.Generic; // Assurez-vous d'avoir cette déclaration si elle manque
     using Webzine.Entity;
 
     /// <summary>
-    /// Interface for the StyleFactory class, responsible for creating instances of the Style class.
+    /// Interface pour la classe StyleFactory, responsable de la création d'instances de la classe Style.
     /// </summary>
     public interface IStyleFactory
     {
         /// <summary>
-        /// Creates a new instance of the Style class with generated data.
+        /// Crée une nouvelle instance de la classe Style avec des données générées.
         /// </summary>
-        /// <returns>A new instance of the Style class.</returns>
+        /// <returns>Une nouvelle instance de la classe Style.</returns>
         Style CreateStyle();
+
+        /// <summary>
+        /// Crée une collection de nouvelles instances de la classe Style avec des données générées.
+        /// </summary>
+        /// <param name="random">Le nombre aléatoire de styles à générer.</param>
+        /// <returns>Une collection de nouvelles instances de la classe Style.</returns>
+        IEnumerable<Style> CreateStyles(int random);
     }
 }

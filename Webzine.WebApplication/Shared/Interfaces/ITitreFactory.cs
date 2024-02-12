@@ -4,17 +4,25 @@
 
 namespace Webzine.WebApplication.Shared.Interfaces
 {
+    using System.Collections.Generic; // Assurez-vous d'avoir cette déclaration si elle manque
     using Webzine.Entity;
 
     /// <summary>
-    /// Interface for the TitreFactory class, responsible for creating instances of the Titre class.
+    /// Interface pour la classe TitreFactory, responsable de la création d'instances de la classe Titre.
     /// </summary>
     public interface ITitreFactory
     {
         /// <summary>
-        /// Creates a new instance of the Titre class with generated data.
+        /// Crée une nouvelle instance de la classe Titre avec des données générées.
         /// </summary>
-        /// <returns>A new instance of the Titre class.</returns>
+        /// <returns>Une nouvelle instance de la classe Titre.</returns>
         Titre CreateTitre();
+
+        /// <summary>
+        /// Crée une collection de nouvelles instances de la classe Titre avec des données générées.
+        /// </summary>
+        /// <param name="random">Le nombre aléatoire de titres à générer.</param>
+        /// <returns>Une collection de nouvelles instances de la classe Titre.</returns>
+        IEnumerable<Titre> CreateTitres(int random);
     }
 }

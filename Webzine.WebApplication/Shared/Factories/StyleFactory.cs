@@ -6,12 +6,11 @@ namespace Webzine.WebApplication.Shared.Factories
 {
     using Bogus;
     using Webzine.Entity;
-    using Webzine.WebApplication.Shared.Interfaces;
 
     /// <summary>
     /// Classe de fabrique pour la création d'instances de la classe Style avec des données générées.
     /// </summary>
-    public class StyleFactory : IStyleFactory
+    public class StyleFactory
     {
         private readonly Faker<Style> fakerStyle;
 
@@ -26,12 +25,13 @@ namespace Webzine.WebApplication.Shared.Factories
         }
 
         /// <summary>
-        /// Crée une nouvelle instance de la classe Style avec des données générées.
+        /// Crée une collection d'instances de la classe Style avec des données générées.
         /// </summary>
-        /// <returns>Une nouvelle instance de la classe Style.</returns>
-        public Style CreateStyle()
+        /// <param name="random">Le nombre aléatoire de style à générer.</param>
+        /// <returns>Une collection d'instances de la classe Style.</returns>
+        public IEnumerable<Style> CreateStyles(int random)
         {
-            return this.fakerStyle.Generate();
+            return this.fakerStyle.Generate(random);
         }
 
         /// <summary>

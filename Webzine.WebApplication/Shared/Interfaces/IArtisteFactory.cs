@@ -4,6 +4,7 @@
 
 namespace Webzine.WebApplication.Shared.Interfaces
 {
+    using System.Collections.Generic; // Assurez-vous d'avoir cette déclaration si elle manque
     using Webzine.Entity;
 
     /// <summary>
