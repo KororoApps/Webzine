@@ -23,6 +23,6 @@ namespace Webzine.WebApplication.Shared.Interfaces
         /// </summary>
         /// <param name="random">Le nombre aléatoire de styles à générer.</param>
         /// <returns>Une collection de nouvelles instances de la classe Style.</returns>
-        IEnumerable<Style> CreateStyles(int random);
+        List<Style> CreateStyles(int random);
     }
 }

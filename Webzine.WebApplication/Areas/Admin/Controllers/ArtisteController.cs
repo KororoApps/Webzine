@@ -7,6 +7,8 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Bogus;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
+    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.WebApplication.Shared.Interfaces;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -20,22 +22,20 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class ArtisteController : Controller
     {
+        private readonly IArtisteFactory artisteFactory;
+
+        public ArtisteController(IArtisteFactory iArtisteFactory)
+        {
+            artisteFactory = iArtisteFactory;
+        }
+
         /// <summary>
         /// Action pour afficher la liste des artistes.
         /// </summary>
         /// <returns>Vue contenant la liste des artistes.</returns>
         public IActionResult Index()
         {
-            /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Artiste.
-            /// <summary>
-            var fakerArtiste = new Faker<Artiste>()
-                .RuleFor(a => a.Nom, f => f.Name.FullName());
-
-            /// <summary>
-            /// Génération de 1 fausse instance de la classe Artiste.
-            /// <summary>//
-            var artistes = fakerArtiste.Generate(150);
+            var artistes = this.artisteFactory.CreateArtistes(150);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Artiste.

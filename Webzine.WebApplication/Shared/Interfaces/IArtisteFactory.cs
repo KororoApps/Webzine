@@ -17,5 +17,12 @@ namespace Webzine.WebApplication.Shared.Interfaces
         /// </summary>
         /// <returns>Une nouvelle instance de la classe Artiste.</returns>
         Artiste CreateArtiste();
+
+        /// <summary>
+        /// Crée une collection de nouvelles instances de la classe Artiste avec des données générées.
+        /// </summary>
+        /// <param name="random">Le nombre aléatoire de artistes à générer.</param>
+        /// <returns>Une collection de nouvelles instances de la classe Artiste.</returns>
+        List<Artiste> CreateArtistes(int random);
     }
 }

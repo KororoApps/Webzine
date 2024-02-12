@@ -17,7 +17,7 @@ namespace Webzine.WebApplication.Shared.Factories
     /// <param name="artisteFactory">Fabrique d'artistes utilisée pour générer des données d'artiste.</param>
     /// <param name="commentaireFactory">Fabrique de commentaires utilisée pour générer des données d'artiste.</param>
     /// <param name="styleFactory">Fabrique de styles utilisée pour générer des données d'artiste.</param>
-    public class TitreFactory(IArtisteFactory artisteFactory, ICommentaireFactory commentaireFactory, IStyleFactory styleFactory)
+    public class TitreFactory(IArtisteFactory artisteFactory, ICommentaireFactory commentaireFactory, IStyleFactory styleFactory) : ITitreFactory
     {
         private readonly Faker<Titre> fakerTitre = new Faker<Titre>()
                 .RuleFor(t => t.Libelle, f => f.Name.FullName())
@@ -36,6 +36,16 @@ namespace Webzine.WebApplication.Shared.Factories
         public Titre CreateTitre()
         {
             return this.fakerTitre.Generate();
+        }
+
+        /// <summary>
+        /// Crée une liste de titres avec des données générées.
+        /// </summary>
+        /// <param name="count">Le nombre de titre à générer.</param>
+        /// <returns>Une liste de titre générés.</returns>
+        public List<Titre> CreateTitres(int count)
+        {
+            return this.fakerTitre.Generate(count);
         }
 
         /// <summary>

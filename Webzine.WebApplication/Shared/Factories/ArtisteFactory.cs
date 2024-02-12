@@ -15,7 +15,7 @@ namespace Webzine.WebApplication.Shared.Factories
     /// Initialise une nouvelle instance de la classe <see cref="ArtisteFactory"/>.
     /// </remarks>
     /// <param name="titreFactory">Fabrique de titres utilisée pour générer des données de titre.</param>
-    public class ArtisteFactory(ITitreFactory titreFactory)
+    public class ArtisteFactory(ITitreFactory titreFactory) : IArtisteFactory
     {
         /// <summary>
         /// Configuration pour la génération de fausses données pour la classe Artiste.
@@ -32,6 +32,16 @@ namespace Webzine.WebApplication.Shared.Factories
         public Artiste CreateArtiste()
         {
             return this.fakerArtiste.Generate();
+        }
+
+        /// <summary>
+        /// Crée une liste d'artistes avec des données générées.
+        /// </summary>
+        /// <param name="count">Le nombre d'artistes à générer.</param>
+        /// <returns>Une liste d'artistes générés.</returns>
+        public List<Artiste> CreateArtistes(int count)
+        {
+            return this.fakerArtiste.Generate(count);
         }
     }
 }

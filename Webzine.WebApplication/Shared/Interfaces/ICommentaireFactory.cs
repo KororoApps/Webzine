@@ -23,6 +23,6 @@ namespace Webzine.WebApplication.Shared.Interfaces
         /// </summary>
         /// <param name="random">Le nombre aléatoire de commentaires à générer.</param>
         /// <returns>Une collection de nouvelles instances de la classe Commentaire.</returns>
-        IEnumerable<Commentaire> CreateCommentaires(int random);
+        List<Commentaire> CreateCommentaires(int random);
     }
 }

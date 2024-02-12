@@ -23,6 +23,6 @@ namespace Webzine.WebApplication.Shared.Interfaces
         /// </summary>
         /// <param name="random">Le nombre aléatoire de titres à générer.</param>
         /// <returns>Une collection de nouvelles instances de la classe Titre.</returns>
-        IEnumerable<Titre> CreateTitres(int random);
+        List<Titre> CreateTitres(int random);
     }
 }

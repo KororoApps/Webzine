@@ -16,7 +16,7 @@ namespace Webzine.WebApplication.Shared.Factories
     /// </remarks>
     /// <param name="artisteFactory">Fabrique d'artistes utilisée pour générer des données d'artiste.</param>
     /// <param name="titreFactory">Fabrique de titres utilisée pour générer des données de titre.</param>
-    public class CommentaireFactory(IArtisteFactory artisteFactory, ITitreFactory titreFactory)
+    public class CommentaireFactory(IArtisteFactory artisteFactory, ITitreFactory titreFactory) : ICommentaireFactory
     {
         private readonly Faker<Commentaire> fakerCommentaire = new Faker<Commentaire>()
                 .RuleFor(c => c.Auteur, f => f.Name.FullName())
@@ -26,11 +26,20 @@ namespace Webzine.WebApplication.Shared.Factories
                 .RuleFor(t => t.Titre, f => titreFactory.CreateTitre());
 
         /// <summary>
+        /// Crée une instance de la classe Commentaire avec des données générées.
+        /// </summary>
+        /// <returns>Instance de la classe Commentaire créée.</returns>
+        public Commentaire CreateCommentaire()
+        {
+            return this.fakerCommentaire.Generate();
+        }
+
+        /// <summary>
         /// Crée une collection d'instances de la classe Commentaire avec des données générées.
         /// </summary>
         /// <param name="random">Le nombre aléatoire de commentaires à générer.</param>
         /// <returns>Une collection d'instances de la classe Commentaire.</returns>
-        public IEnumerable<Commentaire> CreateCommentaires(int random)
+        public List<Commentaire> CreateCommentaires(int random)
         {
             return this.fakerCommentaire.Generate(random);
         }
