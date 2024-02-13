@@ -11,14 +11,14 @@ namespace Webzine.WebApplication.Controllers
     /// <summary>
     /// Contrôleur principal gérant les actions liées à la page d'accueil.
     /// </summary>
-    public class HomeController : Controller
+    public class RechercheController : Controller
     {
         private readonly TitreFactory titreFactory;
 
         /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="HomeController"/>.
+        /// Initialise une nouvelle instance de la classe <see cref="RechercheController"/>.
         /// </summary>
-        public HomeController()
+        public RechercheController()
         {
             this.titreFactory = new TitreFactory();
         }
