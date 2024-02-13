@@ -29,15 +29,15 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Administration</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/Admin/Dashboard"><i class="fa-solid fa-house m-1"></i>Tableau de bord</a></li>
-                                <li><a class="dropdown-item" href="/Admin/Artiste/"><i class="fa-solid fa-house m-1"></i>Artistes</a></li>
-                                <li><a class="dropdown-item" href="/Admin/Commentaire/"><i class="fa-solid fa-house m-1"></i>Commentaires</a></li>
-                                <li><a class="dropdown-item" href="/Admin/Style/"><i class="fa-solid fa-house m-1"></i>Styles</a></li>
-                                <li><a class="dropdown-item" href="/Admin/Titre/"><i class="fa-solid fa-house m-1"></i>Titres</a></li>
+                                <li><a asp-area="Admin" asp-controller="Dashboard" asp-action="" class="text-decoration-none dropdown-item"><i class="fa-solid fa-house m-1"></i>Tableau de bord</a></li>
+                                <li><a asp-area="Admin" asp-controller="Artiste" asp-action="" class="text-decoration-none dropdown-item"><i class="fa-solid fa-house m-1"></i>Artistes</a></li>
+                                <li><a asp-area="Admin" asp-controller="Commentaire" asp-action="" class="text-decoration-none dropdown-item"><i class="fa-solid fa-house m-1"></i>Commentaires</a></li>
+                                <li><a asp-area="Admin" asp-controller="Style" asp-action="" class="text-decoration-none dropdown-item"><i class="fa-solid fa-house m-1"></i>Styles</a></li>
+                                <li><a asp-area="Admin" asp-controller="TItre" asp-action="" class="text-decoration-none dropdown-item"><i class="fa-solid fa-house m-1"></i>Titres</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Contact/"><i class="fa-solid fa-envelope  m-1"></i>Contact</a>
+                            <a asp-area="" asp-controller="Contact" asp-action="" class="nav-link text-decoration-none dropdown-item"><i class="fa-solid fa-envelope  m-1"></i>Contact</a>
                         </li>
                     </ul>
                     <form class="d-flex">
