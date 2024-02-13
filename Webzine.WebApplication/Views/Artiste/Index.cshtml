@@ -4,12 +4,17 @@
 @{
     ViewData["title"] = "Artiste";
 }
+@section Sidebar {
+    @await Component.InvokeAsync("LayoutSideBar")
+}
+
 
 @*Affichage du nom de la page.*@
 @{
     ViewData["titrePage"] = Model.Artiste.Nom;
 }
 <hr />
+
 
 <p>@Model.Artiste.Biographie</p>
 

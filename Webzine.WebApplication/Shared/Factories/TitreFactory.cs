@@ -5,6 +5,7 @@
 namespace Webzine.WebApplication.Shared.Factories
 {
     using Bogus;
+    using System.Globalization;
     using Webzine.Entity;
     using Webzine.WebApplication.Shared.Interfaces;
 
@@ -92,9 +93,15 @@ namespace Webzine.WebApplication.Shared.Factories
         /// Crée une liste de titres avec des données générées.
         /// </summary>
         /// <param name="count">Le nombre de titre à générer.</param>
+        /// <param name="nombreStyles">Le nombre de styles à générer pour le Titre.</param>
         /// <returns>Une liste de titre générés.</returns>
-        public List<Titre> CreateTitres(int count)
+        public List<Titre> CreateTitres(int count, int nombreStyles)
         {
+            /// <summary>
+            /// Configurer la règle pour la propriété Styles avec le nombre spécifié.
+            /// </summary>
+            this.fakerTitre.RuleFor(s => s.Styles, f => this.fakerStyle.Generate(nombreStyles));
+
             return this.fakerTitre.Generate(count);
         }
 

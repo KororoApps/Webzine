@@ -15,7 +15,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top pt-2">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-3">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">Webzine</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -50,58 +50,32 @@
                 </div>
             </div>
         </nav>
-
     </header>
-
     <div class="container-fluid">
 
+        @* Afficher le titre de la page *@
         <div class="row">
-            <div class="col-md-9 p-5">
-                @* Afficher le titre de la page *@
-                
-                <h1>@ViewData["titrePage"]</h1>
-                @RenderBody()
-            </div>
-
-                <div class="col-md-3 p-5 ">
-                <div class="position-sticky" style="top: 2rem;">
-                    <div class="p-2 ">
-                        <h2 class="">A propos</h2>
-                        <p class="mb-0">Retrouver les dernières pépitres sur notre webzine</p>
-                    </div>
-
-                    <div class="p-2">
-                        <h3>Styles</h3>
-                        @{
-                            var faker = new Faker();
-                            var nombreMots = 20;
-                        }
-                        <ul class="mb-0">
-
-                            @for (var i = 0; i < nombreMots; i++)
-                            {
-                                var motAleatoire = faker.Lorem.Word();
-                                <li><a href="#">@motAleatoire</a></li>
-                            }
-                        </ul>
-                    </div>
-
-
+            <div class="col-md-10">
+                <div class="row align-text-bottom-center">
+                    <h1>@ViewData["titrePage"]</h1>
+                    @RenderBody()
                 </div>
             </div>
-           
-
-
-        
+            <div class="col-md-2">
+                @RenderSection("Sidebar", required: false)
+            </div>
+        </div>
         <footer class="container-fluid border-top footer">
             &copy; ASP.NET Core - DIIAGE 2023-2024
         </footer>
         <script src="../lib/bootstrap-5.3.2-dist/js/bootstrap.js"></script>
         <script src="~/lib/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+    </div>
 </body>
-
-
-
 </html>
+
+
+
 
 

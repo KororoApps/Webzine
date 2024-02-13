@@ -35,7 +35,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index()
         {
-            var titres = this.titreFactory.CreateTitres(150);
+            var titres = this.titreFactory.CreateTitres(150, 3);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.

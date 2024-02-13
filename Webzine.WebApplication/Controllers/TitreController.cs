@@ -57,7 +57,7 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue contenant la liste des titres liés au style.</returns>
         public IActionResult Style()
         {
-            var titres = this.titreFactory.CreateTitres(20);
+            var titres = this.titreFactory.CreateTitres(20, 3);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.

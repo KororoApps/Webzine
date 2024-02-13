@@ -23,7 +23,8 @@ namespace Webzine.WebApplication.Shared.Interfaces
         /// Crée une collection de nouvelles instances de la classe Titre avec des données générées.
         /// </summary>
         /// <param name="count">Le nombre aléatoire de titres à générer.</param>
+        /// /// <param name="nombreStyles">Le nombre de styles à générer pour le Titre.</param>
         /// <returns>Une collection de nouvelles instances de la classe Titre.</returns>
-        List<Titre> CreateTitres(int count);
+        List<Titre> CreateTitres(int count, int nombreStyles);
     }
 }

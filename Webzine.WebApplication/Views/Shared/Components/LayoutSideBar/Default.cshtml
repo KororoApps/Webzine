@@ -1,0 +1,18 @@
+﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeStyleModel;
+
+
+    <div class="position-sticky" style="top: 2rem;">
+        <partial name="_AProposPartielle.cshtml" />
+
+        <div class="p-2">
+            <h3>Styles</h3>
+            <ul class="mb-0">
+
+                @foreach (var style in Model.Styles)
+                {
+                    
+                    <li><a href="#">@style.Libelle</a></li>
+                }
+            </ul>
+        </div>
+    </div>
