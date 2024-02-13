@@ -1,33 +1,42 @@
-﻿// ViewComponents/LayoutSectionViewComponent.cs
-using Microsoft.AspNetCore.Mvc;
-
-using Webzine.WebApplication.Shared.Factories;
-using Webzine.WebApplication.Shared.ViewModels;
+﻿// <copyright file="LayoutSideBarViewComponent.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.WebApplication.Shared.Views
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.WebApplication.Shared.ViewModels;
+
     /// <summary>
-    /// Description du composant.
+    /// Initialise une nouvelle instance de la classe <see cref="LayoutSideBarViewComponent"/>.
     /// </summary>
     public class LayoutSideBarViewComponent : ViewComponent
     {
+        /// <summary>
+        /// Utilisation d'une injection de dépendance pour la factory des styles.
+        /// </summary>
 
         private readonly StyleFactory styleFactory;
 
         /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="StyleController"/>.
+        /// Initialise une nouvelle instance de la classe <see cref="LayoutSideBarViewComponent"/>.
         /// </summary>
         public LayoutSideBarViewComponent()
         {
             this.styleFactory = new StyleFactory();
         }
 
+        /// <summary>
+        /// Méthode invoquée lors de l'exécution du composant de vue.
+        /// </summary>
+        /// <returns>Une tâche asynchrone représentant l'opération.</returns>
+
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            // du code ici, on peut faire comme dans un controller
-            // à savoir, récupérer un model et le passer à la vue
-
-
+            /// <summary>
+            /// // Récupération des styles depuis la factory.
+            /// </summary>
             var styles = this.styleFactory.CreateStyles(20);
 
             /// <summary>
@@ -37,14 +46,12 @@ namespace Webzine.WebApplication.Shared.Views
             {
                 Styles = styles,
             };
+            /// <summary>
+            /// Passage du modèle à la vue
+            /// <summary>
             var vm = styleModel;
 
-            // attention : si cela peut ressembler à un contrôleur, cela n'en
-            // est pas un. Le view component ne répond pas à une requête HTTP
             return this.View(vm);
-
-            // ou par exemple nomDeMaVue (au lieu de Default.cshtml)
-            // return this.View('nomDeMaVue', vm);
         }
     }
 }

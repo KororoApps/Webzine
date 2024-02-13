@@ -8,17 +8,15 @@
     @await Component.InvokeAsync("LayoutSideBar")
 }
 
-
 @*Affichage du nom de la page.*@
 @{
     ViewData["titrePage"] = Model.Artiste.Nom;
 }
 <hr />
 
-
 <p>@Model.Artiste.Biographie</p>
 
-<h1>Albums</h1>
+<p class="fs-1">Albums</p>
 <hr>
 
 @*Afifchage des titres*@
@@ -34,10 +32,14 @@
             <div class="col-md-10 mb-5">
                 @*Afficher la liste des Titres*@
                 <table class="table">
-                    <h2>
-                        @titre.Album
-                    </h2>
+
+
                     <thead>
+                        <tr>
+                            <th class="fs-3 colspan= 2">
+                                @titre.Album
+                            </th>
+                        </tr>
                         <tr>
                             <th class="text-start w-25">Durée</th>
                             <th class="text-start">Titre</th>
@@ -52,6 +54,5 @@
                 </table>
             </div>
         </div>
-
     </div>
 }
