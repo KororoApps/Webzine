@@ -35,7 +35,7 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index()
         {
-            Titre titre = this.titreFactory.CreateTitre();
+            Titre titre = this.titreFactory.CreateTitre(3);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
@@ -57,31 +57,7 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue contenant la liste des titres liés au style.</returns>
         public IActionResult Style()
         {
-            /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Artiste.
-            /// <summary>
-            var fakerArtiste = new Faker<Artiste>()
-                .RuleFor(a => a.Nom, f => f.Name.FullName());
-
-            /// <summary>
-            /// Génération de 1 fausse instance de la classe Artiste.
-            /// <summary>//
-            var artistes = fakerArtiste.Generate(150);
-
-            /// <summary>
-            /// Configuration du générateur de fausses données pour la classe Titre.
-            /// <summary>
-            var titreFaker = new Faker<Titre>()
-                .RuleFor(t => t.Libelle, f => f.Name.FullName())
-                .RuleFor(t => t.Duree, f => TimeSpan.FromSeconds(f.Random.Number(60, 600)))
-                .RuleFor(t => t.Artiste, f => f.PickRandom(artistes))
-                .RuleFor(t => t.UrlJaquette, f => f.Image.PicsumUrl().ToString())
-                ;
-
-            /// <summary>
-            /// Génération de 500 fausse instance de la classe Titre.
-            /// <summary>
-            var titres = titreFaker.Generate(500);
+            var titres = this.titreFactory.CreateTitres(20, 3);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.

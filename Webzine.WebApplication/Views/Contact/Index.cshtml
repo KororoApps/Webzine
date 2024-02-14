@@ -2,8 +2,15 @@
 @{
     Layout = "_Layout";
 }
+@section Sidebar {
+    @await Component.InvokeAsync("LayoutSideBar")
+}
 
-<h2>Contact</h2>
+@*Affichage du nom de la page.*@
+@{
+    ViewData["titrePage"] = "Contact";
+}
+<hr />
 
 @foreach (string contact in Model.listString)
 {
@@ -11,7 +18,8 @@
         @contact
     </div>
 }
-<a> <i class="fa-solid fa-phone m-1"></i> 03 80 73 45 90; </a> <br/>
+<a> <i class="fa-solid fa-phone m-1"></i> 03 80 73 45 90; </a>
+<br />
 <a class="text-primary text-decoration-none"><i class="fa-solid fa-envelope m-1"></i> secretariat@cucdb.fr</a>
 
 <h2 class="text-left">Suivez-Nous</h2>

@@ -11,37 +11,39 @@
 }
 <hr />
 
-@*Création du bouton "Ajouter un nouvel artiste*@
-<a asp-area="Admin" asp-controller="Artiste" asp-action="Create" class="btn btn-primary mb-4">
-    <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
-    Ajouter un nouvel artiste
-</a>
+<div class="container">
 
-@*Afficher la liste des articles*@
-<table class="table table-striped table-bordered">
+    @*Création du bouton "Ajouter un nouvel artiste*@
+    <a asp-area="Admin" asp-controller="Artiste" asp-action="Create" class="btn btn-primary mb-4">
+        <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+        Ajouter un nouvel artiste
+    </a>
 
-    <thead>
-        <tr class="table-secondary custom-no-border">
-            @*ATTENTION !! VOIR POUR METTRE DES TAG-HELPER !*@
-            <th scope="col">Nom de l'artiste</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var artiste in Model.Artistes)
-        {
-            <tr>
-                <td>@artiste.Nom</td>
-                <td>
-                    <a asp-area="Admin" asp-controller="Artiste" asp-action="Edit" class="text-decoration-none">
-                        <i class="fa-solid fa-edit text-primary p-2" style="color: #74C0FC;"></i>
-                    </a>
-                    <a asp-area="Admin" asp-controller="Artiste" asp-action="Delete" class="text-decoration-none">
-                        <i class="fa-solid fa-trash text-primary" style="color: #74C0FC;"></i>
-                    </a>
-                </td>
+    @*Afficher la liste des articles*@
+    <table class="table table-striped table-bordered">
+
+        <thead>
+            <tr class="table-secondary custom-no-border">
+                @*ATTENTION !! VOIR POUR METTRE DES TAG-HELPER !*@
+                <th scope="col">Nom de l'artiste</th>
+                <th scope="col">Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
-}
+        </thead>
+        <tbody>
+            @foreach (var artiste in Model.Artistes)
+            {
+                <tr>
+                    <td>@artiste.Nom</td>
+                    <td>
+                        <a asp-area="Admin" asp-controller="Artiste" asp-action="Edit" class="text-decoration-none">
+                            <i class="fa-solid fa-edit text-primary p-2" style="color: #74C0FC;"></i>
+                        </a>
+                        <a asp-area="Admin" asp-controller="Artiste" asp-action="Delete" class="text-decoration-none">
+                            <i class="fa-solid fa-trash text-primary" style="color: #74C0FC;"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

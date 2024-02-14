@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="LayoutSideBarComponent.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Views\Artiste\ArtistesStyle.css" />
   </ItemGroup>
 

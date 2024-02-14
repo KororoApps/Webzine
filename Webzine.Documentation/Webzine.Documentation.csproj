@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Installation\équipe 4 - dossier de configuration - Copier.md" />
     <None Remove="styleCop\stylecop.json" />
+    <None Remove="équipe 4 - dossier de configuration.md" />
   </ItemGroup>
 
   <ItemGroup>

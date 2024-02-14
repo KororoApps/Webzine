@@ -5,6 +5,7 @@
 namespace Webzine.WebApplication.Shared.Factories
 {
     using Bogus;
+    using System.Globalization;
     using Webzine.Entity;
     using Webzine.WebApplication.Shared.Interfaces;
 
@@ -67,16 +68,24 @@ namespace Webzine.WebApplication.Shared.Factories
                 .RuleFor(t => t.UrlEcoute, f => f.Internet.Url())
                 .RuleFor(t => t.Album, f => f.Commerce.ProductName())
                 .RuleFor(a => a.Artiste, f => this.fakerArtiste.Generate())
-                .RuleFor(c => c.Commentaires, f => this.fakerCommentaire.Generate(f.Random.Number(1, 7)))
-                .RuleFor(s => s.Styles, f => this.fakerStyle.Generate(17));
+                .RuleFor(c => c.Commentaires, f => this.fakerCommentaire.Generate(f.Random.Number(1, 7)));
     }
 
         /// <summary>
-        /// Crée une instance de la classe Titre avec des données générées.
+        /// Crée une instance de la classe Titre avec des données générées et une configuration spécifique pour la propriété Styles.
         /// </summary>
+        /// <param name="nombreStyles">Le nombre de styles à générer pour le Titre.</param>
         /// <returns>Instance de la classe Titre créée.</returns>
-        public Titre CreateTitre()
+        public Titre CreateTitre(int nombreStyles)
         {
+            /// <summary>
+            /// Configurer la règle pour la propriété Styles avec le nombre spécifié.
+            /// </summary>
+            this.fakerTitre.RuleFor(s => s.Styles, f => this.fakerStyle.Generate(nombreStyles));
+
+            /// <summary>
+            /// Générer et retourner une instance unique de Titre.
+            /// </summary>
             return this.fakerTitre.Generate();
         }
 
@@ -84,9 +93,15 @@ namespace Webzine.WebApplication.Shared.Factories
         /// Crée une liste de titres avec des données générées.
         /// </summary>
         /// <param name="count">Le nombre de titre à générer.</param>
+        /// <param name="nombreStyles">Le nombre de styles à générer pour le Titre.</param>
         /// <returns>Une liste de titre générés.</returns>
-        public List<Titre> CreateTitres(int count)
+        public List<Titre> CreateTitres(int count, int nombreStyles)
         {
+            /// <summary>
+            /// Configurer la règle pour la propriété Styles avec le nombre spécifié.
+            /// </summary>
+            this.fakerTitre.RuleFor(s => s.Styles, f => this.fakerStyle.Generate(nombreStyles));
+
             return this.fakerTitre.Generate(count);
         }
 
