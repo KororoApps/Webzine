@@ -17,27 +17,27 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top pt-2">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">Webzine</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Webzine</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="mynavbar">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/"><i class="fa-solid fa-house m-1"></i>Accueil</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house m-1"></i>Accueil</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Administration</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/Admin/Dashboard"><i class="fa-solid fa-house m-1"></i>Tableau de bord</a></li>
-                                <li><a class="dropdown-item" href="/Admin/Artiste/"><i class="fa-solid fa-house m-1"></i>Artistes</a></li>
-                                <li><a class="dropdown-item" href="/Admin/Commentaire/"><i class="fa-solid fa-house m-1"></i>Commentaires</a></li>
-                                <li><a class="dropdown-item" href="/Admin/Style/"><i class="fa-solid fa-house m-1"></i>Styles</a></li>
-                                <li><a class="dropdown-item" href="/Admin/Titre/"><i class="fa-solid fa-house m-1"></i>Titres</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i class="fa-solid fa-house m-1"></i>Tableau de bord</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Artiste" asp-action="Index"><i class="fa-solid fa-users m-1"></i>Artistes</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Commentaire" asp-action="Index"><i class="fa-solid fa-comment m-1"></i>Commentaires</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Style" asp-action="Index"><i class="fa-solid fa-tags m-1"></i>Styles</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Titre" asp-action="Index"><i class="fa-solid fa-music m-1"></i>Titres</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Contact/"><i class="fa-solid fa-envelope  m-1"></i>Contact</a>
+                            <a class="nav-link"  asp-controller="Contact" asp-action="Index"><i class="fa-solid fa-envelope  m-1"></i>Contact</a>
                         </li>
                     </ul>
                     <form class="d-flex">
