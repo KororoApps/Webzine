@@ -16,17 +16,18 @@
 <body>
     <partial name="_HeaderVuePartielle.cshtml" />
 
-    <div class="container-fluid mt-4">
+    <div class="container mt-4">
 
         @* Afficher le titre de la page *@
         <div class="row">
-            <div class="col-md-10">
+            <div class="@((IsSectionDefined("Sidebar")) ? "col-md-10" : "col-md-12")">
                 <div class="row align-text-bottom-center">
                     <h1>@ViewData["titrePage"]</h1>
                     @RenderBody()
                 </div>
             </div>
-            <div class="col-md-2">
+
+            <div class="@((IsSectionDefined("Sidebar")) ? "col-md-2" : "col-md-0")">
                 @RenderSection("Sidebar", required: false)
             </div>
         </div>
