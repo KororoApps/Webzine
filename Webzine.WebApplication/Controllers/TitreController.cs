@@ -4,7 +4,6 @@
 
 namespace Webzine.WebApplication.Controllers
 {
-    using Bogus;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.WebApplication.Shared.Factories;

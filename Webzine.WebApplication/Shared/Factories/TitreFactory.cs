@@ -5,7 +5,6 @@
 namespace Webzine.WebApplication.Shared.Factories
 {
     using Bogus;
-    using System.Globalization;
     using Webzine.Entity;
     using Webzine.WebApplication.Shared.Interfaces;
 
@@ -15,9 +14,6 @@ namespace Webzine.WebApplication.Shared.Factories
     /// <remarks>
     /// Initialise une nouvelle instance de la classe <see cref="TitreFactory"/>.
     /// </remarks>
-    /// <param name="artisteFactory">Fabrique d'artistes utilisée pour générer des données d'artiste.</param>
-    /// <param name="commentaireFactory">Fabrique de commentaires utilisée pour générer des données d'artiste.</param>
-    /// <param name="styleFactory">Fabrique de styles utilisée pour générer des données d'artiste.</param>
     public class TitreFactory : ITitreFactory
     {
         private readonly Faker<Titre> fakerTitre;
@@ -69,7 +65,7 @@ namespace Webzine.WebApplication.Shared.Factories
                 .RuleFor(t => t.Album, f => f.Commerce.ProductName())
                 .RuleFor(a => a.Artiste, f => this.fakerArtiste.Generate())
                 .RuleFor(c => c.Commentaires, f => this.fakerCommentaire.Generate(f.Random.Number(1, 7)));
-    }
+        }
 
         /// <summary>
         /// Crée une instance de la classe Titre avec des données générées et une configuration spécifique pour la propriété Styles.

@@ -28,7 +28,7 @@ namespace Webzine.WebApplication.Controllers
 
             ContactModel contacts = new()
             {
-                listString =
+                ListString =
                 [
                     companyName,
                     address,

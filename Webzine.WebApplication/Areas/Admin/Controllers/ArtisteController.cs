@@ -13,10 +13,9 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     /// Contrôleur responsable de la gestion des opérations liées aux artistes dans la zone d'administration.
     /// </summary>
     /// <remarks>
-    /// Ce contrôleur gère l'affichage de la liste des artiste, la création, la suppression et l'édition d'un artiste.
+    /// Ce contrôleur gère l'affichage de la liste des artistes, la création, la suppression et l'édition d'un artiste.
     /// Il utilise le générateur de fausses données Bogus pour simuler des données.
     /// </remarks>
-
     [Area("Admin")]
     public class ArtisteController : Controller
     {
@@ -27,7 +26,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// </summary>
         public ArtisteController()
         {
-           this.artisteFactory = new ArtisteFactory();
+            this.artisteFactory = new ArtisteFactory();
         }
 
         /// <summary>
@@ -36,10 +35,10 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue contenant la liste des artistes.</returns>
         public IActionResult Index()
         {
-            var artistes = this.artisteFactory.CreateArtistes(150);
+            var artistes = this.artisteFactory.CreateArtistes(20);
 
             /// <summary>
-            /// Création du modèle de vue contenant la liste de Artiste.
+            /// Création du modèle de vue contenant la liste d'Artistes.
             /// <summary>
             var artisteModel = new GroupeArtisteModel
             {
@@ -47,7 +46,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             };
 
             /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
+            /// Retour de la vue avec le modèle de vue contenant les artistes générés.
             /// <summary>
             return this.View(artisteModel);
         }
@@ -61,7 +60,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             Artiste artiste = this.artisteFactory.CreateArtiste();
 
             /// <summary>
-            /// Création du modèle de vue contenant la liste de Artiste.
+            /// Création du modèle de vue contenant un Artiste.
             /// <summary>
             var artisteModel = new ArtisteModel
             {
@@ -69,7 +68,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             };
 
             /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
+            /// Retour de la vue avec le modèle de vue contenant l'artiste généré.
             /// <summary>
             return this.View(artisteModel);
         }
@@ -81,7 +80,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         public IActionResult Create()
         {
             /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
+            /// Retour de la vue pour la création d'un artiste.
             /// <summary>
             return this.View();
         }
@@ -95,7 +94,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             Artiste artiste = this.artisteFactory.CreateArtiste();
 
             /// <summary>
-            /// Création du modèle de vue contenant la liste de Artiste.
+            /// Création du modèle de vue contenant un Artiste.
             /// <summary>
             var artisteModel = new ArtisteModel
             {
@@ -103,7 +102,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             };
 
             /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
+            /// Retour de la vue avec le modèle de vue contenant l'artiste généré.
             /// <summary>
             return this.View(artisteModel);
         }

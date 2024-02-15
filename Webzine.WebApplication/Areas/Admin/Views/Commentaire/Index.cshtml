@@ -5,21 +5,20 @@
     ViewData["title"] = "Liste des commentaires";
 }
 
-
 @*Affichage du nom de la page.*@
 @{
     ViewData["titrePage"] = "Commentaires";
 }
 <hr />
 
-@*Afficher la liste des commentaires*@
+@*Afficher la liste des commentaires.*@
 <table class="table table-striped table-bordered">
     <thead>
         <tr class="table-secondary custom-no-border">
             <th scope="col">Titre</th>
             <th scope="col">Nom</th>
             <th scope="col">Commentaires</th>
-            <th scope="col">Date de création</th>
+            <th scope="col" class="col-md-2">Date de création</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -27,7 +26,6 @@
         @foreach (var commentaire in Model.Commentaires)
         {
             <tr>
-
                 <td>
                     <a asp-area="" asp-controller="Artiste" asp-action="" class="text-decoration-none">@commentaire.Artiste.Nom</a>
                     - <a asp-area="" asp-controller="Titre" asp-action="" class="text-decoration-none">@commentaire.Titre.Libelle</a>
@@ -35,20 +33,20 @@
                 <td>@commentaire.Auteur</td>
                 <td>@commentaire.Contenu</td>
                 <td>@commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm:ss")</td>
-                <td>
-                    <a asp-area="Admin" asp-controller="Commentaire" asp-action="Delete" class="text-decoration-none">
-                        <i class="fa-solid fa-trash text-primary" style="color: #74C0FC;"></i>
-                    </a>
+                <td class="text-center">
+                    <div class="d-flex justify-content-center">
+                        <a asp-area="Admin" asp-controller="Commentaire" asp-action="Delete" class="text-decoration-none">
+                            <i class="fa-solid fa-trash text-primary" style="color: #74C0FC;"></i>
+                        </a>
+                    </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-
-
-
-
-
-    </div>
-}
+<div class="d-flex  justify-content-end">
+    <a class="btn btn-secondary p-2" asp-area="" asp-controller="Commentaire" asp-action="">
+        Commentaires plus anciens >>
+    </a>
+</div>

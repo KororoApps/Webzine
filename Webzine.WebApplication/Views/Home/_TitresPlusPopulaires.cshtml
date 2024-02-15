@@ -1,0 +1,27 @@
+﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
+
+@*Affiche 3 titres.*@
+<div>
+    <h1>Titres les plus populaires</h1>
+
+    <div class="container">
+        <div class="row">
+            @foreach (var titre in Model.Titres.OrderBy(t => Guid.NewGuid()).Take(3))
+            {
+                <div class="col-12 col-sm-12 col-md-4 mt-5">
+                    <a href="/Titre/" class="text-decoration-none">
+                        <div class="card">
+                            <div class="ratio ratio-1x1">
+                                <img src="@titre.UrlJaquette" class="card-img-top w-100 h-100 object-fit-cover" alt="image">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">@titre.Libelle</h5>
+                                <p class="card-text">par <span class="text-primary">@titre.Artiste.Nom</span></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

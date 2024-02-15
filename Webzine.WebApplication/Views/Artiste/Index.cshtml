@@ -12,14 +12,14 @@
 @{
     ViewData["titrePage"] = Model.Artiste.Nom;
 }
-<hr />
-
-<p>@Model.Artiste.Biographie</p>
-
-<p class="fs-1">Albums</p>
 <hr>
 
-@*Afifchage des titres*@
+<p>@Model.Artiste.Biographie</p>
+<p class="fs-1">Albums</p>
+
+<hr>
+
+@*Affichage des titres.*@
 @foreach (var titre in Model.Artiste.Titres)
 {
     <div class="row" style="margin-left: 10px">
@@ -30,13 +30,16 @@
             </div>
 
             <div class="col-md-10 mb-5">
-                @*Afficher la liste des Titres*@
+
+                @*Afficher la liste des Titres.*@
                 <table class="table">
 
                     <thead>
                         <tr>
-                            <th class="fs-3 colspan= 2">
+                            <th class="fs-3 colspan=2 border-0">
+                                <div class="text-nowrap">
                                 @titre.Album
+                                </div>
                             </th>
                         </tr>
                         <tr>
@@ -44,24 +47,23 @@
                             <th class="text-start">Titre</th>
                         </tr>
                     </thead>
-                    
+
                     <tbody>
                         @{
                             Random random = new Random();
                             int numberOfTitlesToShow = random.Next(2, 8);
                             var randomTitles = Model.Artiste.Titres.OrderBy(x => random.Next()).Take(numberOfTitlesToShow).ToList();
                         }
-
                         @foreach (var titres in randomTitles)
                         {
-                        <tr>
-                            <td class="text-start">@titres.Duree.ToString(@"mm\:ss")</td>
-                            <td class="text-start"><a asp-controller="Titre" asp-action="" class="text-decoration-none">@titres.Libelle</a></td>
-                        </tr>
+                            <tr>
+                                <td class="text-start">@titres.Duree.ToString(@"mm\:ss")</td>
+                                <td class="text-start"><a asp-controller="Titre" asp-action="" class="text-decoration-none">@titres.Libelle</a></td>
+                            </tr>
                         }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-   }
+}
