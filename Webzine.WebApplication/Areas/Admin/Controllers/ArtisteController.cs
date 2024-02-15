@@ -36,7 +36,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue contenant la liste des artistes.</returns>
         public IActionResult Index()
         {
-            var artistes = this.artisteFactory.CreateArtistes(150);
+            var artistes = this.artisteFactory.CreateArtistes(20);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Artiste.

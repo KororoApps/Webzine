@@ -77,7 +77,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de création d'un nouveau titre.</returns>
         public IActionResult Create()
         {
-            Titre titre = this.titreFactory.CreateTitre(17);
+            Titre titre = this.titreFactory.CreateTitre(20);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.

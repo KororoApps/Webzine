@@ -36,7 +36,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue contenant la liste des commentaires.</returns>
         public IActionResult Index()
         {
-            var commentaires = this.commentaireFactory.CreateCommentaires(50);
+            var commentaires = this.commentaireFactory.CreateCommentaires(20);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Artiste.
