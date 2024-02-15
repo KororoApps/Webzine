@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Installation\équipe 4 - dossier de configuration - Copier.md" />
+    <None Remove="styleCop\stylecop.json" />
+    <None Remove="équipe 4 - dossier de configuration.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="styleCop\stylecop.json" />
+  </ItemGroup>
+
+</Project>

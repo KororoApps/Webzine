@@ -1,0 +1,18 @@
+﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
+
+@{
+    ViewData["title"] = "Accueil";
+}
+@section Sidebar {
+    @await Component.InvokeAsync("LayoutSideBar")
+}
+
+<h1>Derniers titres chroniqués</h1>
+
+<partial name="_DerniersTitresChroniques.cshtml" />
+
+<partial name="_TitresPlusPopulaires.cshtml" />
+
+
+
+

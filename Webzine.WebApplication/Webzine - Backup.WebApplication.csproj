@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>b61f1ba8-a3e6-474b-a18b-2e858acbf421</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>.</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Styles\ViewControllers\**" />
+    <Content Remove="Areas\Styles\ViewControllers\**" />
+    <EmbeddedResource Remove="Areas\Styles\ViewControllers\**" />
+    <None Remove="Areas\Styles\ViewControllers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="35.4.0" />
+    <PackageReference Include="Bogus.Tools.Analyzer" Version="35.4.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Artistes\Controllers\" />
+    <Folder Include="Areas\Artistes\ViewModels\" />
+    <Folder Include="Areas\Commentaires\Controllers\" />
+    <Folder Include="Areas\Commentaires\ViewModels\" />
+    <Folder Include="Areas\Styles\Controllers\" />
+    <Folder Include="wwwroot\data\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\js\" />
+    <Folder Include="wwwroot\lib\" />
+    <Folder Include="wwwroot\favicon.ico\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Webzine.Entity\Webzine.Entity.csproj" />
+  </ItemGroup>
+
+</Project>
