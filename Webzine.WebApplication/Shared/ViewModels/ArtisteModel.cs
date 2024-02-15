@@ -15,6 +15,5 @@ namespace Webzine.WebApplication.Shared.ViewModels
         /// Obtient ou définit l'artiste.
         /// </summary>
         public Artiste Artiste { get; set; } = null!;
-
     }
 }

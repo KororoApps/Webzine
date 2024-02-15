@@ -4,7 +4,6 @@
 
 namespace Webzine.WebApplication.Controllers
 {
-    using Bogus;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.WebApplication.Shared.Factories;
@@ -32,7 +31,6 @@ namespace Webzine.WebApplication.Controllers
         /// <summary>
         /// Action pour afficher les détails d'un artiste.
         /// </summary>
-        /// <param name="nomArtiste">Nom de l'artiste.</param>
         /// <returns>Vue contenant les détails de l'artiste.</returns>
         public IActionResult Index()
         {

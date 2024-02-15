@@ -13,7 +13,7 @@
 
 <div class="container">
 
-    @*Création du bouton "Ajouter un nouveau titre.*@
+    @*Création du bouton "Ajouter un nouveau style.*@
     <a asp-area="Admin" asp-controller="Style" asp-action="Create" class="btn btn-primary mb-4">
         <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
         Ajouter un nouveau style
@@ -25,7 +25,7 @@
         <thead>
             <tr class="table-secondary custom-no-border">
                 <th scope="col">Libellé</th>
-                <th scope="col">Actions</th>
+                <th scope="col" class="col-md-1">Actions</th>
             </tr>
         </thead>
 
@@ -34,13 +34,15 @@
             {
                 <tr>
                     <td>@style.Libelle</td>
-                    <td>
-                        <a asp-area="Admin" asp-controller="Style" asp-action="Edit" class="text-decoration-none">
-                            <i class="fa-solid fa-edit text-primary p-2" style="color: #74C0FC;"></i>
-                        </a>
-                        <a asp-area="Admin" asp-controller="Style" asp-action="Delete" class="text-decoration-none">
-                            <i class="fa-solid fa-trash text-primary" style="color: #74C0FC;"></i>
-                        </a>
+                    <td class="text-center">
+                        <div class="d-flex justify-content-center">
+                            <a asp-area="Admin" asp-controller="Style" asp-action="Edit" class="text-decoration-none">
+                                <i class="fa-solid fa-edit text-primary p-2" style="color: #74C0FC;"></i>
+                            </a>
+                            <a asp-area="Admin" asp-controller="Style" asp-action="Delete" class="text-decoration-none">
+                                <i class="fa-solid fa-trash text-primary" style="color: #74C0FC;"></i>
+                            </a>
+                        </div>
                     </td>
                 </tr>
             }

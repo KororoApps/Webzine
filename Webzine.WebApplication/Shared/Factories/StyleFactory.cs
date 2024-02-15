@@ -51,7 +51,6 @@ namespace Webzine.WebApplication.Shared.Factories
         /// </summary>
         /// <param name="input">La chaîne à traiter.</param>
         /// <returns>La chaîne avec la première lettre en majuscule.</returns>
-
         public string CapitalizeFirstLetter(string input)
         {
             if (string.IsNullOrEmpty(input))

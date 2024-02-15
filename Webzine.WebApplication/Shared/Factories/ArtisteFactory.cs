@@ -14,8 +14,6 @@ namespace Webzine.WebApplication.Shared.Factories
     /// <remarks>
     /// Initialise une nouvelle instance de la classe <see cref="ArtisteFactory"/>.
     /// </remarks>
-    /// <param name="titreFactory">Fabrique de titres utilisée pour générer des données de titre.</param>
-    /// 
     public class ArtisteFactory : IArtisteFactory
     {
         private readonly Faker<Titre> fakerTitre;

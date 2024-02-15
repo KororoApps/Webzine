@@ -4,20 +4,21 @@
 @{
     ViewData["nomOnglet"] = "Chronique du titre";
 }
+
 @section Sidebar {
     @await Component.InvokeAsync("LayoutSideBar")
 }
 
 <div class="container">
     <div>
-        @*Affichage du nom de l'artiste et du titre*@
+        @*Affichage du nom de l'artiste et du titre.*@
         <h3>
             <a asp-controller="Artiste" asp-action="" class="text-decoration-none">
                 <span class="text-primary">@Model.Titre.Artiste.Nom</span>
             </a>
             - @Model.Titre.Libelle
         </h3>
-        @*Date de création de l'article, Nb de like, Styles, Like, Edition*@
+        @*Date de création de l'article, Nb de like, Styles, Like, Edition.*@
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-md-8">
@@ -57,9 +58,7 @@
         </div>
     </div>
 
-
-
-    @*Affichage de la chronique et de la jaquette*@
+    @*Affichage de la chronique et de la jaquette.*@
     <div class="row">
         <div class="d-flex flex-column justify-content-start text-justify col-md-7">
             <p>@Model.Titre.Chronique</p>
@@ -71,12 +70,12 @@
         </div>
     </div>
 
-    @*Affichage de la vidéo*@
+    @*Affichage de la vidéo.*@
     <div class="text-center">
         <iframe class="w-100" height="500" src="https://www.youtube.com/embed/U9OQAySv184?si=H4HRfSLHIEpucdGl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
 
-    @*Formulaire pour émettre un commentaire*@
+    @*Formulaire pour émettre un commentaire.*@
     <div class="mt-5">
         <h3>Donne ton avis sur le titre</h3>
 
@@ -116,7 +115,7 @@
         </form>
     </div>
 
-    @*Détails des commentairess*@
+    @*Détails des commentaires.*@
     <div class="mt-5">
         <h3>Commentaires</h3>
         <div class="col-md-8">
@@ -127,7 +126,10 @@
                         <img src="/images/avatar.png" alt="Image du créateur" class="img-fluid rounded-circle">
                     </div>
                     <div class="col-md-10">
-                        <h5 class="card-title">@commentaire.Auteur <span class="text-secondary">le @commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm")</span></h5>
+                        <h5 class="card-title">
+                            @commentaire.Auteur
+                            <span class="text-secondary">le @commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm")</span>
+                        </h5>
                         <p class="card-text">@commentaire.Contenu</p>
                     </div>
                 </div>

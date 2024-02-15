@@ -1,58 +1,59 @@
 ﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
 
-
-@*Pour avoir des noms et des nombres aléatoires*@
+@*Pour avoir des noms et des nombres aléatoires.*@
 @{
     Random random = new Random();
     int numberOfTitlesToShow = random.Next(2, 8);
     var randomTitles = Model.Titres.OrderBy(x => random.Next()).Take(numberOfTitlesToShow).ToList();
 
-    // Obtenir deux noms d'artiste aléatoire
+    @*Obtenir deux noms d'artiste aléatoire.*@
     string randomArtist1 = randomTitles[random.Next(randomTitles.Count)].Artiste.Nom;
     string randomArtist2 = randomTitles.FirstOrDefault(t => t.Artiste.Nom != randomArtist1)?.Artiste.Nom;
 
-    // Obtenir un titre aléatoire
+    @*Obtenir un titre aléatoire.*@
     string randomTitre = randomTitles[random.Next(randomTitles.Count)].Libelle;
 
-    // Accumuler le nombre total de lectures
+    @*Accumuler le nombre total de lectures.*@
     int totalLectures = randomTitles.Sum(t => t.NbLectures);
 
-    // Accumuler le nombre total de likes
+    @*Accumuler le nombre total de likes.*@
     int totalLikes = randomTitles.Sum(t => t.NbLikes);
 
-    // Accumuler le nombre d'artistes différents
+    @*Accumuler le nombre d'artistes différents.*@
     int numberOfDistinctArtists = randomTitles.Select(t => t.Artiste.Nom).Distinct().Count();
 
-    // Accumuler le nombre de styles différents
+    @*Accumuler le nombre de styles différents.*@
     int numberOfDistinctStyles = randomTitles.SelectMany(t => t.Styles).Distinct().Count();
 }
+
 <h1>Tableau de bord</h1>
 <hr>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
             <div class="d-flex justify-content-around">
+                @*Nombre d'artistes.*@
                 <a href="https://diiage.cucdb.fr/" class="container w-75 text-decoration-none">
-                    <div class="card bg-light mt-4 p-5 text-white text-center">
+                    <div class="bg-light mt-4 p-5 text-white text-center">
                         <div class="text-primary ">
                             <i class="fa-solid fa-users fa-5x mb-2"></i>
                         </div>
                         <p class="fs-2 text-primary">
                             @numberOfDistinctArtists
-                            
                         </p>
                         <p class="text-primary">
                             Artistes
                         </p>
                     </div>
                 </a>
+                @*Artiste le plus chroniqué.*@
                 <a href="https://www.facebook.com/diiage/" class="container w-75 text-decoration-none">
-                    <div class="card bg-light mt-4 p-5 text-white text-center">
+                    <div class="bg-light mt-4 p-5 text-white text-center">
                         <div class="text-primary">
                             <i class="fa-solid fa-user fa-5x mb-2"></i>
                         </div>
                         <p class="fs-2 text-primary">
-                            
                             @randomArtist1
                         </p>
                         <p class="text-primary">
@@ -60,8 +61,9 @@
                         </p>
                     </div>
                 </a>
+                @*Artiste avec le plus de titres.*@
                 <a href="https://www.instagram.com/diiage.cucdb/?hl=en" class="container w-75 text-decoration-none">
-                    <div class="card bg-light mt-4 p-5 text-white text-center">
+                    <div class="bg-light mt-4 p-5 text-white text-center">
                         <div class="text-primary">
                             <i class="fa-solid fa-trophy fa-5x mb-2"></i>
                         </div>
@@ -78,8 +80,9 @@
     </div>
     <div class="row">
         <div class="d-flex justify-content-around">
+            @*Nombre de briographies d'artistes.*@
             <a href="https://fr.linkedin.com/company/diiage" class="container w-75 text-decoration-none">
-                <div class="card bg-light mt-4 p-5 text-white text-center">
+                <div class="bg-light mt-4 p-5 text-white text-center">
                     <div class="text-primary">
                         <i class="fa-solid fa-book fa-5x mb-2"></i>
                     </div>
@@ -91,8 +94,9 @@
                     </p>
                 </div>
             </a>
+            @*Titre le plus lu.*@
             <a href="https://www.google.com/maps/place/C.U.C.D.B.+Centre+Universitaire+Catholique+De+Bourgogne/@@47.3348851,5.0514213,17z/data=!3m1!4b1!4m6!3m5!1s0x47f29dfee14743ed:0x7d1348ede68455cb!8m2!3d47.3348851!4d5.0540016!16s%2Fg%2F1td04cy3?entry=ttu" class="container w-75 text-decoration-none">
-                <div class="card bg-light mt-4 p-5 text-white text-center">
+                <div class="bg-light mt-4 p-5 text-white text-center">
                     <div class="text-primary">
                         <i class="fa-solid fa-compact-disc fa-5x mb-2"></i>
                     </div>
@@ -104,8 +108,9 @@
                     </p>
                 </div>
             </a>
+                    @*Nombre de titres.*@
             <a href="https://twitter.com/DiiageCucdb" class="container w-75 text-decoration-none">
-                <div class="card bg-light mt-4 p-5 text-white text-center">
+                <div class="bg-light mt-4 p-5 text-white text-center">
                     <div class="text-primary">
                         <i class="fa-solid fa-music fa-5x mb-2"></i>
                     </div>
@@ -121,8 +126,9 @@
     </div>
     <div class="row">
         <div class="d-flex justify-content-around">
+            @*Nombre de styles de musique.*@
             <a href="https://twitter.com/DiiageCucdb" class="container w-75 text-decoration-none">
-                <div class="card bg-light mt-4 p-5 text-white text-center">
+                <div class="bg-light mt-4 p-5 text-white text-center">
                     <div class="text-primary">
                         <i class="fa-solid fa-tags fa-5x mb-2"></i>
                     </div>
@@ -134,8 +140,9 @@
                     </p>
                 </div>
             </a>
+            @*Nombre de lectures.*@
             <a href="https://twitter.com/DiiageCucdb" class="container w-75 text-decoration-none">
-                <div class="card bg-light mt-4 p-5 text-white text-center">
+                <div class="bg-light mt-4 p-5 text-white text-center">
                     <div class="text-dark font-size-3">
                         <i class="fa-solid fa-eye fa-5x mb-2"></i>
                     </div>
@@ -147,8 +154,9 @@
                     </p>
                 </div>
             </a>
+            @*Nombre de likes.*@
             <a href="https://twitter.com/DiiageCucdb" class="container w-75 text-decoration-none">
-                <div class="card bg-light mt-4 p-5 text-white text-center">
+                <div class="bg-light mt-4 p-5 text-white text-center">
                     <div class="text-dark w-5">
                         <i class="fa-solid fa-thumbs-up fa-5x mb-2"></i>
                     </div>

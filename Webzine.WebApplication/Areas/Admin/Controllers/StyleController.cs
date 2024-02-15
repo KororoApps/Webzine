@@ -38,13 +38,16 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             var styles = this.styleFactory.CreateStyles(25);
 
             /// <summary>
-            /// Création du modèle de vue contenant la liste de styles.
+            /// Création du modèle de vue contenant la liste de Styles.
             /// </summary>
             var styleModel = new GroupeStyleModel
             {
                 Styles = styles,
             };
 
+            /// <summary>
+            /// Retour de la vue avec le modèle de vue contenant les styles générés.
+            /// <summary>
             return this.View(styleModel);
         }
 
@@ -54,6 +57,9 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de création d'un nouveau style.</returns>
         public IActionResult Create()
         {
+            /// <summary>
+            /// Retour de la vue pour la création d'un style.
+            /// <summary>
             return this.View();
         }
 
@@ -73,6 +79,9 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
                 Style = style,
             };
 
+            /// <summary>
+            /// Retour de la vue avec le modèle de vue contenant le style généré.
+            /// <summary>
             return this.View(styleModel);
         }
 
@@ -92,6 +101,9 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
                 Style = style,
             };
 
+            /// <summary>
+            /// Retour de la vue avec le modèle de vue contenant le style généré.
+            /// <summary>
             return this.View(styleModel);
         }
     }

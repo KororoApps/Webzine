@@ -8,13 +8,13 @@
     @await Component.InvokeAsync("LayoutSideBar")
 }
 
-
 @*Affichage du nom de la page.*@
 @foreach (var titre in Model.Titres)
 {
-        ViewData["titrePage"] = $"Résultats de la recherche pour \"{titre.Libelle}\"";
+    ViewData["titrePage"] = $"Résultats de la recherche pour \"{titre.Libelle}\"";
 }
 <hr />
+
 <p class="fs-2">Artistes</p>
 <p>Aucun artiste.</p>
 

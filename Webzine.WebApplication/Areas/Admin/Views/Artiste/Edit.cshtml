@@ -5,7 +5,6 @@
     ViewData["title"] = "Editer un artiste";
 }
 
-
 @*Affichage du nom de la page.*@
 @{
     ViewData["titrePage"] = "Editer un artiste";
@@ -31,20 +30,22 @@
                 <textarea asp-for="@Model.Artiste.Biographie" type="text" class="form-control"></textarea>
             </div>
         </div>
+
         @*Bouton d'édition de l'artiste.*@
         <div class="form-group row mb-5">
             <div class="col-md-2">
             </div>
             <div class="col-md-10">
-                <div>
-                    <a class="btn btn-primary m-4" href="#">Sauvegarder</a>
-                </div>
+                <a class="btn btn-primary" href="#">
+                    Sauvegarder
+                </a>
             </div>
         </div>
 
-
         @*Bouton de retour à l'adminitration des aristes.*@
-        <a class="text-decoration-none fw-normal" asp-area="Admin" asp-controller="Artiste" asp-action="Index">Retour à l'administration des artistes </a>
+        <a class="text-decoration-none fw-normal" asp-area="Admin" asp-controller="Artiste" asp-action="Index">
+            Retour à l'administration des artistes
+        </a>
     </div>
 </form>
 

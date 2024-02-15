@@ -8,7 +8,6 @@
     @await Component.InvokeAsync("LayoutSideBar")
 }
 
-
 @*Affichage du nom de la page.*@
 @foreach (var titre in Model.Titres)
 {
@@ -19,12 +18,12 @@
 }
 <hr />
 
-@*Afifchage des titres*@
+@*Afifchage des titres.*@
 @foreach (var titre in Model.Titres)
 {
-    <div class="row mb-3" style="margin-left: 10px">
+    <div class="row mb-2" style="margin-left: 10px">
         <div class="col-md-1" style="display: flex; justify-content: center; align-items: center">
-            <img src="@titre.UrlJaquette" alt="Image" class="img-fluid custom-shape">
+            <img src="@titre.UrlJaquette" alt="Image" class="img-fluid custom-shape w-100 h-100 object-fit-cover">
         </div>
         <div class="col-md-6 mt-1">
             <a asp-controller="Titre" asp-action="" class="text-decoration-none">@titre.Artiste.Nom - @titre.Libelle</a>

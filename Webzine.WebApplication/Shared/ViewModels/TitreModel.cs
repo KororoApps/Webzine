@@ -11,7 +11,6 @@ namespace Webzine.WebApplication.Shared.ViewModels
     /// </summary>
     public class TitreModel
     {
-
         /// <summary>
         /// Obtient ou définit le titre.
         /// </summary>

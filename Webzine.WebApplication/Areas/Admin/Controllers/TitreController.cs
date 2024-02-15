@@ -60,14 +60,16 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             Titre titre = this.titreFactory.CreateTitre(3);
 
             /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
+            /// Création du modèle de vue contenant un Titre.
             /// <summary>
             var titreModel = new TitreModel
             {
                 Titre = titre,
             };
 
-
+            /// <summary>
+            /// Retour de la vue avec le modèle de vue contenant le titre généré.
+            /// <summary>
             return this.View(titreModel);
         }
 
@@ -80,7 +82,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             Titre titre = this.titreFactory.CreateTitre(20);
 
             /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
+            /// Création du modèle de vue contenant un Titre.
             /// <summary>
             var titreModel = new TitreModel
             {
@@ -88,7 +90,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             };
 
             /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
+            /// Retour de la vue avec le modèle de vue contenant le titre généré afin d'avoir accès aux styles.
             /// <summary>
             return this.View(titreModel);
         }
@@ -102,7 +104,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             Titre titre = this.titreFactory.CreateTitre(17);
 
             /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
+            /// Création du modèle de vue contenant un Titre.
             /// <summary>
             var titreModel = new TitreModel
             {
@@ -110,7 +112,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             };
 
             /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
+            /// Retour de la vue avec le modèle de vue contenant le titre généré.
             /// <summary>
             return this.View(titreModel);
         }

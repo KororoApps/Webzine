@@ -26,7 +26,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         }
 
         /// <summary>
-        ///   Affiche la page d'index du tableau de bord administratif.
+        /// Affiche la page d'index du tableau de bord administratif.
         /// </summary>
         /// <returns>Vue avec le modèle de vue contenant les titres générés.</returns>
         public IActionResult Index()
