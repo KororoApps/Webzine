@@ -18,37 +18,40 @@
             - @Model.Titre.Libelle
         </h3>
         @*Date de création de l'article, Nb de like, Styles, Like, Edition*@
-        <div class="d-inline-flex col-md-12">
-            <div class="d-inline-flex col-md-7">
-                <div class="col-md-4 d-inline-flex">
-                    <i class="fa-solid fa-calendar p-1"></i>
-                    <p class="me-4 ">Le @Model.Titre.DateCreation.ToString("dd/MM/yyyy HH:mm")</p>
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-md-8">
+                    <div class="d-inline-flex">
+                        <i class="fa-solid fa-calendar p-1"></i>
+                        <p class="me-4 ">Le @Model.Titre.DateCreation.ToString("dd/MM/yyyy HH:mm")</p>
+                    </div>
+                    <div class="d-inline-flex">
+                        <i class="fa-solid fa-heart p-1"></i>
+                        <p class="me-4 ">@Model.Titre.NbLikes</p>
+                    </div>
+                    <div class="d-inline-flex">
+                        <i class="fa-solid fa-tags p-1"></i>
+                        <p>
+                            Styles :
+                            @foreach (var style in Model.Titre.Styles)
+                            {
+                                <a asp-controller="Titre" asp-action="Style"><span class="me-4 ">@style.Libelle</span></a>
+                            }
+                    </div>
                 </div>
-                <div class="col-md-2 d-inline-flex">
-                    <i class="fa-solid fa-heart p-1"></i>
-                    <p class="me-4 ">@Model.Titre.NbLikes</p>
-                </div>
-                <div class="col-md-6 d-inline-flex">
-                    <i class="fa-solid fa-tags p-1"></i>
-                    <p>Styles : </p>
-                    @foreach (var style in Model.Titre.Styles)
-                    {
-                        <a asp-controller="Titre" asp-action="Style"><p class="me-4 "> @style.Libelle</p></a>
-                    }
-                </div>
-            </div>
-            <div class="d-inline-flex col-md-5 justify-content-end">
-                <div class="col-md-6 d-inline-flex justify-content-end">
-                    <a class="btn btn-outline-primary">
-                        <i class="fa-solid fa-thumbs-up" style="color: #4995d0;"></i>
-                        like
-                    </a>
-                </div>
-                <div class="col-md-6 d-inline-flex justify-content-end">
-                    <a asp-area="Admin" asp-controller="Titre" asp-action="Edit" class="text-decoration-none">
-                        <i class="fa-solid fa-edit text-primary p-2" style="color: #74C0FC;"></i>
-                        Editer
-                    </a>
+                <div class="col-md-2">
+                    <div class="d-inline-flex">
+                        <a class="btn btn-outline-primary">
+                            <i class="fa-solid fa-thumbs-up" style="color: #4995d0;"></i>
+                            like
+                        </a>
+                    </div>
+                    <div class="d-inline-flex">
+                        <a asp-area="Admin" asp-controller="Titre" asp-action="Edit" class="text-decoration-none">
+                            <i class="fa-solid fa-edit text-primary p-2" style="color: #74C0FC;"></i>
+                            Editer
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

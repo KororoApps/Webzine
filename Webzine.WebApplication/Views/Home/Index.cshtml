@@ -24,15 +24,37 @@
                     </div>
                     <div class="col-sm-9 col-lg-10">
                         <div class="card-body">
-                            <h4 class="card-title"><span>@titre.Artiste.Nom</span>-<span>@titre.Libelle</span></h4>
+                            <h4 class="card-title">
+                                <span>
+                                    <a asp-area="" asp-controller="Artiste" asp-action="" class="text-decoration-none">
+                                        @titre.Artiste.Nom
+                                    </a>
+                                </span>
+                                <span class=" text-primary">
+                                    -
+                                </span>
+                                <span>
+                                    <a asp-area="" asp-controller="Titre" asp-action="" class="text-decoration-none">
+                                        @titre.Libelle
+                                    </a>
+                                </span>
+                            </h4>
                             <p class="card-text">@titre.Chronique.Substring(0, Math.Min(200, titre.Chronique.Length))...</p>
                             <div class="d-flex">
-                                <a class="btn btn-primary btn-sm mb-2 mb-sm-0 me-sm-2 mb-sm-0 me-sm-2" href="/Titre/">Lire la suite</a>
-                                <p class="mb-0"><i class="fa-solid fa-calendar p-2"></i>@titre.DateCreation.ToString("dd/MM/yyyy HH:mm")</p>
-                                @foreach (var style in @titre.Styles)
-                                {
-                                    <p class="mb-0"><i class="fa-solid fa-tags p-2"></i>@style.Libelle</p>
-                                }
+                                <a class="btn btn-primary btn-sm mb-2 mb-sm-0 me-sm-2 mb-sm-0 me-sm-2text-decoration-none" asp-area="" asp-controller="Titre" asp-action="">
+                                    Lire la suite
+                                </a>
+                                <p class="mb-0"><i class="fa-solid fa-calendar p-2"></i>@titre.DateCreation.ToString("dd/MM/yyyy HH:mm:ss")</p>
+                                <p class="mb-0">
+                                    <i class="fa-solid fa-tags p-2"></i>
+                                    @foreach (var style in @titre.Styles)
+                                    {
+                                        <a asp-area="" asp-controller="Titre" asp-action="Style" class="text-decoration-none">
+                                            @style.Libelle
+                                        </a>
+                                        <span> </span>
+                                    }
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -61,7 +83,7 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title text-primary">@titre.Libelle</h5>
-                                <p class="card-text"><spa class=" text-primary">par</spa>@titre.Artiste.Nom</p>
+                                <p class="card-text">par <span class=" text-primary">@titre.Artiste.Nom</span></p>
                             </div>
                         </div>
                     </a>
