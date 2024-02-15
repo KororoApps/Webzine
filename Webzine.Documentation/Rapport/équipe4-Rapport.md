@@ -124,8 +124,6 @@ Il a refaçonné le backlog de notre AzureDevOps pour une meilleure organisation
 Pour finir il s’est occupé de la rédaction de la documentation.
 
 
-
-
 # **4. Organisation des ops**
 
 Les ops ont commencé à mettre en place les différents serveurs nécessaires au projet : 
