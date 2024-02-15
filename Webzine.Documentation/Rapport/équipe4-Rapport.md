@@ -1,5 +1,3 @@
-<# Rapport 
- 
 # **1. Introduction** ##
  
 Le projet répond au besoin du client de développer une application web de type Webzine, un magazine publié sous la forme d'un site web. </br>
