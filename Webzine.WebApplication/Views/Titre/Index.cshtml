@@ -27,7 +27,9 @@
                         <p class="me-4 ">Le @Model.Titre.DateCreation.ToString("dd/MM/yyyy HH:mm")</p>
                     </div>
                     <div class="d-inline-flex">
-                        <i class="fa-solid fa-heart p-1"></i>
+                        <form>
+                            <button type="submit" class="btn m-0 p-0"><i class="fa-solid fa-heart p-1"></i></button>
+                        </form>
                         <p class="me-4 ">@Model.Titre.NbLikes</p>
                     </div>
                     <div class="d-inline-flex">
