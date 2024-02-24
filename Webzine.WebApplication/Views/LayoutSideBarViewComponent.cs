@@ -5,7 +5,8 @@
 namespace Webzine.WebApplication.Shared.Views
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Entity;
+    using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -13,20 +14,6 @@ namespace Webzine.WebApplication.Shared.Views
     /// </summary>
     public class LayoutSideBarViewComponent : ViewComponent
     {
-        /// <summary>
-        /// Utilisation d'une injection de dépendance pour la factory des styles.
-        /// </summary>
-
-        private readonly StyleFactory styleFactory;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="LayoutSideBarViewComponent"/>.
-        /// </summary>
-        public LayoutSideBarViewComponent()
-        {
-            this.styleFactory = new StyleFactory();
-        }
-
         /// <summary>
         /// Méthode invoquée lors de l'exécution du composant de vue.
         /// </summary>
@@ -37,7 +24,7 @@ namespace Webzine.WebApplication.Shared.Views
             /// <summary>
             /// // Récupération des styles depuis la factory.
             /// </summary>
-            var styles = this.styleFactory.CreateStyles(20);
+            List<Style> styles = DataFactory.GenerateFakeStyles(25);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.

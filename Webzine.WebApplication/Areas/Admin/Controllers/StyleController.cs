@@ -6,7 +6,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -19,23 +19,16 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class StyleController : Controller
     {
-        private readonly StyleFactory styleFactory;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="StyleController"/>.
-        /// </summary>
-        public StyleController()
-        {
-            this.styleFactory = new StyleFactory();
-        }
-
         /// <summary>
         /// Affiche la liste des styles.
         /// </summary>
         /// <returns>Vue avec la liste des styles.</returns>
         public IActionResult Index()
         {
-            var styles = this.styleFactory.CreateStyles(25);
+            /// <summary>
+            /// Génération d'une liste de styles.
+            /// <summary>
+            List<Style> styles = DataFactory.GenerateFakeStyles(50);
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Styles.
@@ -69,7 +62,12 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un style.</returns>
         public IActionResult Delete()
         {
-            Style style = this.styleFactory.CreateStyle();
+            /// <summary>
+            /// Génération d'un style.
+            /// <summary>
+            List<Style> styles = DataFactory.GenerateFakeStyles(50);
+            Style style = styles.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+
 
             /// <summary>
             /// Création du modèle de vue contenant le style à supprimer.
@@ -91,7 +89,11 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue d'édition d'un style.</returns>
         public IActionResult Edit()
         {
-            Style style = this.styleFactory.CreateStyle();
+            /// <summary>
+            /// Génération d'un style.
+            /// <summary>
+            List<Style> styles = DataFactory.GenerateFakeStyles(50);
+            Style style = styles.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>
             /// Création du modèle de vue contenant le style à éditer.

@@ -6,7 +6,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -19,23 +19,23 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class CommentaireController : Controller
     {
-        private readonly CommentaireFactory commentaireFactory;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="CommentaireController"/>.
-        /// </summary>
-        public CommentaireController()
-        {
-            this.commentaireFactory = new CommentaireFactory();
-        }
-
         /// <summary>
         /// Action pour afficher la liste des commentaires.
         /// </summary>
         /// <returns>Vue contenant la liste des commentaires.</returns>
         public IActionResult Index()
         {
-            var commentaires = this.commentaireFactory.CreateCommentaires(20);
+            /// <summary>
+            /// Génération d'un artiste.
+            /// <summary>
+            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
+
+            /// <summary>
+            /// Génération d'une liste de commentaires.
+            /// <summary>
+            List<Commentaire> commentaires = artiste.SelectMany(a => a.Titres)
+                .SelectMany(t => t.Commentaires)
+                .ToList();
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Commentaires.
@@ -57,7 +57,17 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un commentaire.</returns>
         public IActionResult Delete()
         {
-            Commentaire commentaire = this.commentaireFactory.CreateCommentaire();
+            /// <summary>
+            /// Génération d'un artiste.
+            /// <summary>
+            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
+
+            /// <summary>
+            /// Génération d'un commentaire.
+            /// <summary>
+            Commentaire commentaire = artiste.SelectMany(a => a.Titres)
+                .SelectMany(t => t.Commentaires)
+                .First();
 
             /// <summary>
             /// Création du modèle de vue contenant un commentaire.
@@ -68,7 +78,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             };
 
             /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les commentaires générés.
+            /// Retour de la vue avec le modèle de vue contenant le commentaire généré.
             /// <summary>
             return this.View(commentaireModel);
         }

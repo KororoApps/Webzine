@@ -5,7 +5,8 @@
 namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Entity;
+    using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -14,24 +15,18 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class DashboardController : Controller
     {
-
-        private readonly TitreFactory titreFactory;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="DashboardController"/>.
-        /// </summary>
-        public DashboardController()
-        {
-            this.titreFactory = new TitreFactory();
-        }
-
         /// <summary>
         /// Affiche la page d'index du tableau de bord administratif.
         /// </summary>
         /// <returns>Vue avec le modèle de vue contenant les titres générés.</returns>
         public IActionResult Index()
         {
-            var titres = this.titreFactory.CreateTitres(15, 3);
+            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
+
+            /// <summary>
+            /// Génération d'une liste de titres.
+            /// <summary>
+            List<Titre> titres = artistes.SelectMany(a => a.Titres).ToList();
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.

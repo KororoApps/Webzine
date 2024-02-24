@@ -5,7 +5,8 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Entity;
+    using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -13,15 +14,6 @@ namespace Webzine.WebApplication.Controllers
     /// </summary>
     public class HomeController : Controller
     {
-        private readonly TitreFactory titreFactory;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="HomeController"/>.
-        /// </summary>
-        public HomeController()
-        {
-            this.titreFactory = new TitreFactory();
-        }
 
         /// <summary>
         /// Affiche la page d'accueil avec des données générées aléatoirement.
@@ -29,20 +21,28 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue de la page d'accueil.</returns>
         public IActionResult Index()
         {
-            var titres = this.titreFactory.CreateTitres(20, 3);
+            /// <summary>
+            /// Génération d'une liste d'artistes.
+            /// <summary>
+            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
 
             /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
+            /// Génération d'une liste de titres.
             /// <summary>
-            var titreModel = new GroupeTitreModel
+            List<Titre> titres = artistes.SelectMany(a => a.Titres).ToList();
+
+            /// <summary>
+            /// Création du modèle de vue contenant la liste des titres.
+            /// <summary>
+            GroupeTitreModel groupeTitreModel = new()
             {
                 Titres = titres,
             };
 
             /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
+            /// Retour de la vue avec le modèle de vue contenant les détails des titres.
             /// <summary>
-            return this.View(titreModel);
+            return this.View(groupeTitreModel);
         }
     }
 }

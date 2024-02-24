@@ -6,7 +6,7 @@ namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -18,26 +18,25 @@ namespace Webzine.WebApplication.Controllers
     /// </remarks>
     public class TitreController : Controller
     {
-        private readonly TitreFactory titreFactory;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="TitreController"/>.
-        /// </summary>
-        public TitreController()
-        {
-            this.titreFactory = new TitreFactory();
-        }
-
         /// <summary>
         /// Action qui affiche la liste des titres.
         /// </summary>
         /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index()
         {
-            Titre titre = this.titreFactory.CreateTitre(3);
+            /// <summary>
+            /// Génération d'une liste d'artistes.
+            /// <summary>
+            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
 
             /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
+            /// Génération d'un titre.
+            /// <summary>
+            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
+            Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+
+            /// <summary>
+            /// Création du modèle de vue contenant un titre.
             /// <summary>
             var titreModel = new TitreModel
             {
@@ -45,7 +44,7 @@ namespace Webzine.WebApplication.Controllers
             };
 
             /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
+            /// Retour de la vue avec le modèle de vue contenant le titre généré.
             /// <summary>
             return this.View(titreModel);
         }
@@ -56,7 +55,12 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue contenant la liste des titres liés au style.</returns>
         public IActionResult Style()
         {
-            var titres = this.titreFactory.CreateTitres(20, 3);
+            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
+
+            /// <summary>
+            /// Génération d'une liste de titres.
+            /// <summary>
+            List<Titre> titres = artistes.SelectMany(a => a.Titres).ToList();
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
@@ -67,7 +71,7 @@ namespace Webzine.WebApplication.Controllers
             };
 
             /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
+            /// Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.
             /// <summary>
             return this.View(titreModel);
         }

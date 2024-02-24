@@ -6,7 +6,7 @@ namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -18,23 +18,17 @@ namespace Webzine.WebApplication.Controllers
     /// </remarks>
     public class ArtisteController : Controller
     {
-        private readonly ArtisteFactory artisteFactory;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="ArtisteController"/>.
-        /// </summary>
-        public ArtisteController()
-        {
-            this.artisteFactory = new ArtisteFactory();
-        }
-
         /// <summary>
         /// Action pour afficher les détails d'un artiste.
         /// </summary>
         /// <returns>Vue contenant les détails de l'artiste.</returns>
         public IActionResult Index()
         {
-            Artiste artiste = this.artisteFactory.CreateArtiste();
+            /// <summary>
+            /// Génération d'un artiste.
+            /// <summary>
+            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
+            Artiste artiste = artistes.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Artiste.
