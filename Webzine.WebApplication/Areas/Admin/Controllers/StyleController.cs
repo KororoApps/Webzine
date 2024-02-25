@@ -62,6 +62,17 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// Action HTTP POST pour confirmer la création d'un style.
+        /// </summary>
+        /// <returns>Redirection vers l'action Index après la création.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateConfirmed()
+        {
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        /// <summary>
         /// Affiche la vue de suppression d'un style.
         /// </summary>
         /// <returns>Vue de suppression d'un style.</returns>
@@ -89,6 +100,18 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// Action HTTP POST pour confirmer la suppression d'un style.
+        /// </summary>
+        /// <param name="id">L'identifiant du style à supprimer.</param>
+        /// <returns>Redirection vers l'action Index après la suppression.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        /// <summary>
         /// Affiche la vue d'édition d'un style.
         /// </summary>
         /// <returns>Vue d'édition d'un style.</returns>
@@ -112,6 +135,18 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// Retour de la vue avec le modèle de vue contenant le style généré.
             /// <summary>
             return this.View(styleModel);
+        }
+
+        /// <summary>
+        /// Action HTTP POST pour confirmer l'édition d'un style.
+        /// </summary>
+        /// <param name="id">L'identifiant du style à éditer.</param>
+        /// <returns>Redirection vers l'action Index après l'édition.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditConfirmed(int id)
+        {
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

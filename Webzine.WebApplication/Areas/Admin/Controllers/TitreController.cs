@@ -87,6 +87,18 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// Action HTTP POST pour confirmer la suppression d'un titre.
+        /// </summary>
+        /// <param name="id">L'identifiant du titre à supprimer.</param>
+        /// <returns>Redirection vers l'action Index après la suppression.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        /// <summary>
         /// Affiche la vue de création d'un nouveau titre.
         /// </summary>
         /// <returns>Vue de création d'un nouveau titre.</returns>
@@ -118,6 +130,17 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// Action HTTP POST pour confirmer la création d'un titre.
+        /// </summary>
+        /// <returns>Redirection vers l'action Index après la création.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateConfirmed()
+        {
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        /// <summary>
         /// Affiche la vue d'édition d'un titre.
         /// </summary>
         /// <returns>Vue d'édition d'un titre.</returns>
@@ -146,6 +169,18 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// Retour de la vue avec le modèle de vue contenant le titre généré.
             /// <summary>
             return this.View(titreModel);
+        }
+
+        /// <summary>
+        /// Action HTTP POST pour confirmer l'édition d'un titre.
+        /// </summary>
+        /// <param name="id">L'identifiant du titre à éditer.</param>
+        /// <returns>Redirection vers l'action Index après l'édition.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditConfirmed(int id)
+        {
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

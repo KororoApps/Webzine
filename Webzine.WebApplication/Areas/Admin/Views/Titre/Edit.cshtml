@@ -13,7 +13,7 @@
 
 @*Formulaire d'édition' de la page.*@
 <div>
-    <form asp-area="Admin" asp-controller="Titre" asp-action="Create" method="post" class="d-flex">
+    <form method="post" asp-action="EditConfirmed" asp-controller="Titre" class="d-flex">
         <div class="container">
             <div class="form-group row mb-5">
                 <div class="col-md-2">
@@ -132,9 +132,9 @@
                     </div>
                     <div class="col-md-10">
                         <div>
-                            <a class="btn btn-primary m-5" href="#">
+                            <button type="submit" class="btn btn-primary mb-5">
                                 Sauvegarder
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>

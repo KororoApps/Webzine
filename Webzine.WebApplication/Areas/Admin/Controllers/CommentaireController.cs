@@ -87,5 +87,17 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             return this.View(commentaireModel);
         }
+
+        /// <summary>
+        /// Action HTTP POST pour confirmer la suppression d'un commentaire.
+        /// </summary>
+        /// <param name="id">L'identifiant du commentaire à supprimer.</param>
+        /// <returns>Redirection vers l'action Index après la suppression.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            return this.RedirectToAction(nameof(this.Index));
+        }
     }
 }

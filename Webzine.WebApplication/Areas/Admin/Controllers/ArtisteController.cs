@@ -76,6 +76,18 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// Action HTTP POST pour confirmer la suppression d'un artiste.
+        /// </summary>
+        /// <param name="id">L'identifiant de l'artiste à supprimer.</param>
+        /// <returns>Redirection vers l'action Index après la suppression.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        /// <summary>
         /// Action pour afficher la vue de création d'un artiste.
         /// </summary>
         /// <returns>Vue de création d'un artiste.</returns>
@@ -85,6 +97,17 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// Retour de la vue pour la création d'un artiste.
             /// <summary>
             return this.View();
+        }
+
+        /// <summary>
+        /// Action HTTP POST pour confirmer la création d'un artiste.
+        /// </summary>
+        /// <returns>Redirection vers l'action Index après la création.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateConfirmed()
+        {
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         /// <summary>
@@ -111,6 +134,18 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// Retour de la vue avec le modèle de vue contenant les détails de l'artiste.
             /// <summary>
             return this.View(artisteModel);
+        }
+
+        /// <summary>
+        /// Action HTTP POST pour confirmer l'édition d'un artiste.
+        /// </summary>
+        /// <param name="id">L'identifiant de l'artiste à éditer.</param>
+        /// <returns>Redirection vers l'action Index après l'édition.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditConfirmed(int id)
+        {
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }
