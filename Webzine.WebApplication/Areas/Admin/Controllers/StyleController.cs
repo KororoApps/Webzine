@@ -31,11 +31,16 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             List<Style> styles = DataFactory.GenerateFakeStyles(50);
 
             /// <summary>
+            /// Tri de la liste des styles par nom.
+            /// <summary>
+            var stylesTries = styles.OrderBy(s => s.Libelle).ToList();
+
+            /// <summary>
             /// Création du modèle de vue contenant la liste de Styles.
             /// </summary>
             var styleModel = new GroupeStyleModel
             {
-                Styles = styles,
+                Styles = stylesTries,
             };
 
             /// <summary>

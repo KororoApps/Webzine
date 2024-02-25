@@ -82,7 +82,7 @@ namespace Webzine.Entity.Fixtures
                 .RuleFor(t => t.Libelle, f => f.Name.FullName())
                 .RuleFor(t => t.Duree, f => f.Date.Timespan())
                 .RuleFor(t => t.DateSortie, f => f.Date.Past())
-                .RuleFor(t => t.DateCreation, f => f.Date.Recent())
+                .RuleFor(t => t.DateCreation, f => f.Date.Past())
                 .RuleFor(t => t.NbLectures, f => f.Random.Number(1, 10000))
                 .RuleFor(t => t.NbLikes, f => f.Random.Number(1, 1000))
                 .RuleFor(t => t.Album, f => f.Commerce.ProductName())

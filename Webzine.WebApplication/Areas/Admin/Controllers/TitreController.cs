@@ -37,11 +37,16 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             List<Titre> titres = artistes.SelectMany(a => a.Titres).ToList();
 
             /// <summary>
+            /// Tri de la liste des titres par date de création.
+            /// <summary>
+            var titresTries = titres.OrderByDescending(t => t.DateSortie).ToList();
+
+            /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
             /// <summary>
             var titreModel = new GroupeTitreModel
             {
-                Titres = titres,
+                Titres = titresTries,
             };
 
             /// <summary>

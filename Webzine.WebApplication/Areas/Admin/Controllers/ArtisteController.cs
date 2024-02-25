@@ -28,14 +28,19 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération d'une liste d'artistes.
             /// <summary>
-            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(20);
+            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(150);
+
+            /// <summary>
+            /// Tri de la liste des artistes par nom.
+            /// <summary>
+            var artistesTries = artistes.OrderBy(a => a.Nom).ToList();
 
             /// <summary>
             /// Création du modèle de vue contenant la liste d'Artistes.
             /// <summary>
             var artisteModel = new GroupeArtisteModel
             {
-                Artistes = artistes,
+                Artistes = artistesTries,
             };
 
             /// <summary>
