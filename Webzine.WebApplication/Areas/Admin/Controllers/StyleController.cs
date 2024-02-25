@@ -6,7 +6,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -19,30 +19,28 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class StyleController : Controller
     {
-        private readonly StyleFactory styleFactory;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="StyleController"/>.
-        /// </summary>
-        public StyleController()
-        {
-            this.styleFactory = new StyleFactory();
-        }
-
         /// <summary>
         /// Affiche la liste des styles.
         /// </summary>
         /// <returns>Vue avec la liste des styles.</returns>
         public IActionResult Index()
         {
-            var styles = this.styleFactory.CreateStyles(25);
+            /// <summary>
+            /// Génération d'une liste de styles.
+            /// <summary>
+            List<Style> styles = DataFactory.GenerateFakeStyles(50);
+
+            /// <summary>
+            /// Tri de la liste des styles par nom.
+            /// <summary>
+            var stylesTries = styles.OrderBy(s => s.Libelle).ToList();
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Styles.
             /// </summary>
             var styleModel = new GroupeStyleModel
             {
-                Styles = styles,
+                Styles = stylesTries,
             };
 
             /// <summary>
@@ -64,12 +62,28 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// Action HTTP POST pour confirmer la création d'un style.
+        /// </summary>
+        /// <returns>Redirection vers l'action Index après la création.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateConfirmed()
+        {
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        /// <summary>
         /// Affiche la vue de suppression d'un style.
         /// </summary>
         /// <returns>Vue de suppression d'un style.</returns>
         public IActionResult Delete()
         {
-            Style style = this.styleFactory.CreateStyle();
+            /// <summary>
+            /// Génération d'un style.
+            /// <summary>
+            List<Style> styles = DataFactory.GenerateFakeStyles(50);
+            Style style = styles.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+
 
             /// <summary>
             /// Création du modèle de vue contenant le style à supprimer.
@@ -86,12 +100,28 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// Action HTTP POST pour confirmer la suppression d'un style.
+        /// </summary>
+        /// <param name="id">L'identifiant du style à supprimer.</param>
+        /// <returns>Redirection vers l'action Index après la suppression.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        /// <summary>
         /// Affiche la vue d'édition d'un style.
         /// </summary>
         /// <returns>Vue d'édition d'un style.</returns>
         public IActionResult Edit()
         {
-            Style style = this.styleFactory.CreateStyle();
+            /// <summary>
+            /// Génération d'un style.
+            /// <summary>
+            List<Style> styles = DataFactory.GenerateFakeStyles(50);
+            Style style = styles.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>
             /// Création du modèle de vue contenant le style à éditer.
@@ -105,6 +135,18 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// Retour de la vue avec le modèle de vue contenant le style généré.
             /// <summary>
             return this.View(styleModel);
+        }
+
+        /// <summary>
+        /// Action HTTP POST pour confirmer l'édition d'un style.
+        /// </summary>
+        /// <param name="id">L'identifiant du style à éditer.</param>
+        /// <returns>Redirection vers l'action Index après l'édition.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditConfirmed(int id)
+        {
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

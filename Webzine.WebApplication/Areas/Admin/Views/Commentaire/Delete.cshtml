@@ -23,10 +23,15 @@
             <span class="fst-italic">@Model.Commentaire.Titre</span>
         </p>
 
-        @*Bouton de suppression.*@
-        <button class="btn btn-danger mb-5" type="button">
-            Supprimer
-        </button>
+        @* Formulaire pour soumettre la demande de suppression *@
+        <form method="post" asp-action="DeleteConfirmed" asp-controller="Commentaire">
+            @* Utilisez un champ anti-forgery pour protéger le formulaire *@
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="btn btn-danger mb-5">
+                Supprimer
+            </button>
+        </form>
     </div>
 
     @*Lien vers le retour à l'administration des commentaires.*@

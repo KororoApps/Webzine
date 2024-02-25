@@ -12,7 +12,7 @@
 <hr />
 
 @*Formulaire de création de l'artiste.*@
-<form asp-area="Admin" asp-controller="Artiste" asp-action="Create" method="post" class="d-flex">
+<form method="post" asp-action="CreateConfirmed" asp-controller="Artiste" class="d-flex">
     <div class="container">
         <div class="form-group row mb-5">
             <div class="col-md-2">
@@ -37,9 +37,9 @@
             </div>
             <div class="col-md-10">
                 <div>
-                    <a class="btn btn-primary" href="#">
+                    <button type="submit" class="btn btn-primary mb-5">
                         Créer
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

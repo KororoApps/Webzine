@@ -5,7 +5,8 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Entity;
+    using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -13,23 +14,19 @@ namespace Webzine.WebApplication.Controllers
     /// </summary>
     public class RechercheController : Controller
     {
-        private readonly TitreFactory titreFactory;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="RechercheController"/>.
-        /// </summary>
-        public RechercheController()
-        {
-            this.titreFactory = new TitreFactory();
-        }
-
         /// <summary>
         /// Affiche la page d'accueil avec des données générées aléatoirement.
         /// </summary>
         /// <returns>Vue de la page d'accueil.</returns>
         public IActionResult Index()
         {
-            var titres = this.titreFactory.CreateTitres(20, 3);
+            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
+
+            /// <summary>
+            /// Génération d'un titre.
+            /// <summary>
+            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
+            Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.

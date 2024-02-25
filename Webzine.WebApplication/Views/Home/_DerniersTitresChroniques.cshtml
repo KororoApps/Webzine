@@ -1,7 +1,7 @@
 ﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
 
 @*Affiche 3 titres*@
-@foreach (var titre in Model.Titres.OrderBy(t => Guid.NewGuid()).Take(3))
+@foreach (var titre in Model.Titres.Take(3))
 {
     <div class="container">
         <div class="row">

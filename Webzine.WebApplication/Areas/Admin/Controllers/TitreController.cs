@@ -6,7 +6,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -19,15 +19,6 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class TitreController : Controller
     {
-        private readonly TitreFactory titreFactory;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="TitreController"/>.
-        /// </summary>
-        public TitreController()
-        {
-            this.titreFactory = new TitreFactory();
-        }
 
         /// <summary>
         /// Affiche la liste des titres.
@@ -35,14 +26,27 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index()
         {
-            var titres = this.titreFactory.CreateTitres(150, 3);
+            /// <summary>
+            /// Génération d'une liste d'artistes.
+            /// <summary>
+            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
+
+            /// <summary>
+            /// Génération d'une liste de titres.
+            /// <summary>
+            List<Titre> titres = artistes.SelectMany(a => a.Titres).ToList();
+
+            /// <summary>
+            /// Tri de la liste des titres par date de création.
+            /// <summary>
+            var titresTries = titres.OrderByDescending(t => t.DateSortie).ToList();
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
             /// <summary>
             var titreModel = new GroupeTitreModel
             {
-                Titres = titres,
+                Titres = titresTries,
             };
 
             /// <summary>
@@ -57,7 +61,16 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un titre.</returns>
         public IActionResult Delete()
         {
-            Titre titre = this.titreFactory.CreateTitre(3);
+            /// <summary>
+            /// Génération d'une liste d'artistes.
+            /// <summary>
+            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
+
+            /// <summary>
+            /// Génération d'un titre.
+            /// <summary>
+            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
+            Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>
             /// Création du modèle de vue contenant un Titre.
@@ -71,6 +84,18 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// Retour de la vue avec le modèle de vue contenant le titre généré.
             /// <summary>
             return this.View(titreModel);
+        }
+
+        /// <summary>
+        /// Action HTTP POST pour confirmer la suppression d'un titre.
+        /// </summary>
+        /// <param name="id">L'identifiant du titre à supprimer.</param>
+        /// <returns>Redirection vers l'action Index après la suppression.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         /// <summary>
@@ -79,29 +104,16 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de création d'un nouveau titre.</returns>
         public IActionResult Create()
         {
-            Titre titre = this.titreFactory.CreateTitre(20);
+            /// <summary>
+            /// Génération d'une liste d'artistes.
+            /// <summary>
+            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
 
             /// <summary>
-            /// Création du modèle de vue contenant un Titre.
+            /// Génération d'un titre.
             /// <summary>
-            var titreModel = new TitreModel
-            {
-                Titre = titre,
-            };
-
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant le titre généré afin d'avoir accès aux styles.
-            /// <summary>
-            return this.View(titreModel);
-        }
-
-        /// <summary>
-        /// Affiche la vue d'édition d'un titre.
-        /// </summary>
-        /// <returns>Vue d'édition d'un titre.</returns>
-        public IActionResult Edit()
-        {
-            Titre titre = this.titreFactory.CreateTitre(17);
+            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
+            Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>
             /// Création du modèle de vue contenant un Titre.
@@ -117,6 +129,58 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             return this.View(titreModel);
         }
 
+        /// <summary>
+        /// Action HTTP POST pour confirmer la création d'un titre.
+        /// </summary>
+        /// <returns>Redirection vers l'action Index après la création.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateConfirmed()
+        {
+            return this.RedirectToAction(nameof(this.Index));
+        }
 
+        /// <summary>
+        /// Affiche la vue d'édition d'un titre.
+        /// </summary>
+        /// <returns>Vue d'édition d'un titre.</returns>
+        public IActionResult Edit()
+        {
+            /// <summary>
+            /// Génération d'une liste d'artistes.
+            /// <summary>
+            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
+
+            /// <summary>
+            /// Génération d'un titre.
+            /// <summary>
+            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
+            Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+
+            /// <summary>
+            /// Création du modèle de vue contenant un Titre.
+            /// <summary>
+            var titreModel = new TitreModel
+            {
+                Titre = titre,
+            };
+
+            /// <summary>
+            /// Retour de la vue avec le modèle de vue contenant le titre généré.
+            /// <summary>
+            return this.View(titreModel);
+        }
+
+        /// <summary>
+        /// Action HTTP POST pour confirmer l'édition d'un titre.
+        /// </summary>
+        /// <param name="id">L'identifiant du titre à éditer.</param>
+        /// <returns>Redirection vers l'action Index après l'édition.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditConfirmed(int id)
+        {
+            return this.RedirectToAction(nameof(this.Index));
+        }
     }
 }
