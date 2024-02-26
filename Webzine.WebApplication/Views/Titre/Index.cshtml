@@ -13,7 +13,7 @@
     <div>
         @*Affichage du nom de l'artiste et du titre.*@
         <h3>
-            <a asp-controller="Artiste" asp-action="" class="text-decoration-none">
+            <a asp-controller="Artiste" asp-action="" >
                 <span class="text-primary">@Model.Titre.Artiste.Nom</span>
             </a>
             - @Model.Titre.Libelle
@@ -50,7 +50,7 @@
                         </a>
                     </div>
                     <div class="d-inline-flex">
-                        <a asp-area="Admin" asp-controller="Titre" asp-action="Edit" class="text-decoration-none">
+                        <a asp-area="Admin" asp-controller="Titre" asp-action="Edit" >
                             <i class="fa-solid fa-edit text-primary p-2" style="color: #74C0FC;"></i>
                             Editer
                         </a>

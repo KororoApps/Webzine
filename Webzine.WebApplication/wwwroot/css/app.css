@@ -1,3 +1,7 @@
 ﻿.custom-no-border {
     border-color: transparent !important;
 }
+
+a{
+    text-decoration: none;
+}
