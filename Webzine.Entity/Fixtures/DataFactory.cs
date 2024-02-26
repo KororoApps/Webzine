@@ -52,6 +52,7 @@ namespace Webzine.Entity.Fixtures
         public static void GenerateFakeStyles()
         {
             var styleFaker = new Faker<Style>()
+                .RuleFor(t => t.IdStyle, f => f.IndexFaker)
                 .RuleFor(s => s.Libelle, f => f.Lorem.Word());
 
             Styles = styleFaker.Generate(25);
@@ -81,6 +82,9 @@ namespace Webzine.Entity.Fixtures
                 .RuleFor(a => a.Nom, f => f.Name.FullName())
                 .RuleFor(a => a.Biographie, f => f.Lorem.Paragraph());
 
+            var titreFaker = new Faker<Titre>()
+               .RuleFor(t => t.Libelle, f => f.Name.FullName());
+
             Artistes = artisteFaker.Generate(300);
         }
 
@@ -90,6 +94,7 @@ namespace Webzine.Entity.Fixtures
         public static void GenerateFakeTitres()
         {
             var titreFaker = new Faker<Titre>()
+                .RuleFor(t => t.IdTitre, f => f.IndexFaker)
                 .RuleFor(t => t.Libelle, f => f.Name.FullName())
                 .RuleFor(t => t.Duree, f => f.Date.Timespan())
                 .RuleFor(t => t.DateSortie, f => f.Date.Past())

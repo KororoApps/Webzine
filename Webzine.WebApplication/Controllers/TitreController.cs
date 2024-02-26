@@ -50,12 +50,7 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue contenant la liste des titres liés au style.</returns>
         public IActionResult Style()
         {
-            List<Artiste> artistes = DataFactory.Artistes;
-
-            /// <summary>
-            /// Génération d'une liste de titres.
-            /// <summary>
-            List<Titre> titres = artistes.SelectMany(a => a.Titres).ToList();
+            List<Titre> titres = DataFactory.Titres;
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
