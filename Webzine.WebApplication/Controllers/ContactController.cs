@@ -5,7 +5,6 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
     /// Contrôleur gérant les actions liées à la page de contact.
@@ -19,25 +18,9 @@ namespace Webzine.WebApplication.Controllers
         public IActionResult Index()
         {
             /// <summary>
-            /// Génération des contacts.
-            /// </summary>
-            string companyName = "C.U.C.D.B - DIIAGE";
-            string address = "69 Avenue Aristide Briand";
-            string villeDepartement = "21000 Dijon";
-
-            ContactModel contacts = new()
-            {
-                ListString =
-                [
-                    companyName,
-                    address,
-                    villeDepartement
-                ],
-            };
+            /// Retour de la vue.
             /// <summary>
-            /// Retour de la vue
-            /// <summary>
-            return this.View(contacts);
+            return this.View();
         }
     }
 }
