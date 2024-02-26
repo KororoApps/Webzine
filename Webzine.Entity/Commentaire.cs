@@ -12,7 +12,7 @@
         /// <summary>
         /// Obtient ou définit l'identifiant unique du commentaire.
         /// </summary>
-        public required int IdCommentaire { get; set; }
+        public int IdCommentaire { get; set; }
 
         /// <summary>
         /// Obtient ou définit le nom de l'auteur du commentaire.
@@ -40,13 +40,13 @@
         [Required]
         [ReadOnly(true)]
         [Display(Name = "Date de création")]
-        public required DateTime DateCreation { get; set; }
+        public DateTime DateCreation { get; set; }
 
         /// <summary>
         /// Obtient ou définit l'identifiant du titre auquel le commentaire est associé.
         /// </summary>
         [ForeignKey(nameof(Titre))]
-        public required int IdTitre { get; set; }
+        public int IdTitre { get; set; }
 
         /// <summary>
         /// Obtient ou définit le titre auquel le commentaire est associé.

@@ -10,7 +10,7 @@
         /// <summary>
         /// Obtient ou définit l'identifiant unique de l'artiste.
         /// </summary>
-        public required int IdArtiste { get; set; }
+        public int IdArtiste { get; set; }
 
         /// <summary>
         /// Obtient ou définit le nom de l'artiste.

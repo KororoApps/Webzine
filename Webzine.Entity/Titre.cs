@@ -12,14 +12,14 @@
         /// Obtient ou définit l'identifiant unique du titre.
         /// </summary>
         [Key]
-        public required int IdTitre { get; set; }
+        public int IdTitre { get; set; }
 
         /// <summary>
         /// Obtient ou définit l'identifiant de l'artiste associé au titre.
         /// </summary>
         [ForeignKey(nameof(Artiste))]
 
-        public required int IdArtiste { get; set; }
+        public int IdArtiste { get; set; }
 
         /// <summary>
         /// Obtient ou définit l'artiste associé au titre.
@@ -37,6 +37,7 @@
         /// </summary>
         public required List<Style> Styles { get; set; }
 
+
         /// <summary>
         /// Obtient ou définit le titre du morceau.
         /// </summary>
@@ -51,7 +52,7 @@
         /// </summary>
         [Display(Name = "Durée en secondes")]
 
-        public TimeSpan? Duree { get; set; }
+        public TimeSpan Duree { get; set; }
 
         /// <summary>
         /// Obtient ou définit la date de sortie du morceau.
@@ -59,14 +60,14 @@
         [Required]
         [Display(Name = "Date de sortie")]
 
-        public required DateTime DateSortie { get; set; }
+        public DateTime DateSortie { get; set; }
 
         /// <summary>
         /// Obtient ou définit la date de création du morceau.
         /// </summary>
         [Required]
         [Display(Name = "Date de création")]
-        public required DateTime DateCreation { get; set; }
+        public DateTime DateCreation { get; set; }
 
         /// <summary>
         /// Obtient ou définit le nombre de lectures du morceau.
@@ -74,7 +75,7 @@
         [Required]
         [Display(Name = "Nombre de lectures")]
 
-        public required int NbLectures { get; set; }
+        public int NbLectures { get; set; }
 
         /// <summary>
         /// Obtient ou définit le nombre de likes du morceau.
@@ -82,7 +83,7 @@
         [Required]
         [Display(Name = "Nombre de likes")]
 
-        public required int NbLikes { get; set; }
+        public int NbLikes { get; set; }
 
         /// <summary>
         /// Obtient ou définit le nom de l'album auquel appartient le morceau.
@@ -105,7 +106,7 @@
         [Required]
         [Display(Name = "Jaquette de l'album")]
         [MaxLength(250)]
-        public required string UrlJaquette { get; set; } = string.Empty;
+        public string UrlJaquette { get; set; } = string.Empty;
 
         /// <summary>
         /// Obtient ou définit l'URL d'écoute du morceau.

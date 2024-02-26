@@ -13,7 +13,7 @@
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public required int IdStyle { get; set; }
+        public int IdStyle { get; set; }
 
         /// <summary>
         /// Obtient ou définit le libellé du style musical.

@@ -16,7 +16,6 @@ namespace Webzine.WebApplication.Controllers
         /// Action pour afficher la page de contact.
         /// </summary>
         /// <returns>Une vue avec les informations de contact.</returns>
-
         public IActionResult Index()
         {
             /// <summary>
