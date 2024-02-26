@@ -29,12 +29,8 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération d'une liste d'artistes.
             /// <summary>
-            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
+            List<Titre> titres = DataFactory.Titres;
 
-            /// <summary>
-            /// Génération d'une liste de titres.
-            /// <summary>
-            List<Titre> titres = artistes.SelectMany(a => a.Titres).ToList();
 
             /// <summary>
             /// Tri de la liste des titres par date de création.
@@ -61,15 +57,11 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un titre.</returns>
         public IActionResult Delete()
         {
-            /// <summary>
-            /// Génération d'une liste d'artistes.
-            /// <summary>
-            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
 
             /// <summary>
             /// Génération d'un titre.
             /// <summary>
-            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
+            List<Titre> titres = DataFactory.Titres;
             Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>
@@ -107,12 +99,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération d'une liste d'artistes.
             /// <summary>
-            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
-
-            /// <summary>
-            /// Génération d'un titre.
-            /// <summary>
-            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
+            List<Titre> titres = DataFactory.Titres;
             Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>
@@ -149,12 +136,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération d'une liste d'artistes.
             /// <summary>
-            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
-
-            /// <summary>
-            /// Génération d'un titre.
-            /// <summary>
-            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
+            List<Titre> titres = DataFactory.Titres;
             Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>

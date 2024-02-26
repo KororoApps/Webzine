@@ -24,7 +24,7 @@ namespace Webzine.WebApplication.Shared.Views
             /// <summary>
             /// // Récupération des styles depuis la factory.
             /// </summary>
-            List<Style> styles = DataFactory.GenerateFakeStyles(25);
+            List<Style> styles = DataFactory.Styles;
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.

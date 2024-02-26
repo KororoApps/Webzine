@@ -27,12 +27,7 @@ namespace Webzine.WebApplication.Controllers
             /// <summary>
             /// Génération d'une liste d'artistes.
             /// <summary>
-            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
-
-            /// <summary>
-            /// Génération d'un titre.
-            /// <summary>
-            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
+            List<Titre> titres = DataFactory.Titres;
             Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>
@@ -55,7 +50,7 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue contenant la liste des titres liés au style.</returns>
         public IActionResult Style()
         {
-            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
+            List<Artiste> artistes = DataFactory.Artistes;
 
             /// <summary>
             /// Génération d'une liste de titres.

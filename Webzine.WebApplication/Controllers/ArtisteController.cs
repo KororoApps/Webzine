@@ -27,7 +27,7 @@ namespace Webzine.WebApplication.Controllers
             /// <summary>
             /// Génération d'un artiste.
             /// <summary>
-            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
+            List<Artiste> artistes = DataFactory.Artistes;
             Artiste artiste = artistes.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>

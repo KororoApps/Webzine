@@ -8,6 +8,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Webzine.Entity;
     using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
+ 
 
     /// <summary>
     /// Contrôleur responsable de la gestion des opérations liées aux artistes dans la zone d'administration.
@@ -28,7 +29,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération d'une liste d'artistes.
             /// <summary>
-            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(150);
+           List<Artiste> artistes = DataFactory.Artistes;
 
             /// <summary>
             /// Tri de la liste des artistes par nom.
@@ -58,7 +59,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération d'un artiste.
             /// <summary>
-            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
+            List<Artiste> artistes = DataFactory.Artistes;
             Artiste artiste = artistes.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>
@@ -119,7 +120,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération d'un artiste.
             /// <summary>
-            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
+            List<Artiste> artistes = DataFactory.Artistes;
             Artiste artiste = artistes.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>

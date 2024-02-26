@@ -22,14 +22,9 @@ namespace Webzine.WebApplication.Controllers
         public IActionResult Index()
         {
             /// <summary>
-            /// Génération d'une liste d'artistes.
-            /// <summary>
-            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
-
-            /// <summary>
             /// Génération d'une liste de titres.
             /// <summary>
-            List<Titre> titres = artistes.SelectMany(a => a.Titres).ToList();
+            List<Titre> titres = DataFactory.Titres;
 
             /// <summary>
             /// Tri de la liste des titres par date de création.

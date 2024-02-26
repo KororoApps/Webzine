@@ -28,14 +28,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération d'un artiste.
             /// <summary>
-            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(150);
-
-            /// <summary>
-            /// Génération d'une liste de commentaires.
-            /// <summary>
-            List<Commentaire> commentaires = artiste.SelectMany(a => a.Titres)
-                .SelectMany(t => t.Commentaires)
-                .ToList();
+            List<Commentaire> commentaires = DataFactory.Commentaires;
 
             /// <summary>
             /// Tri de la liste des commentaires par date de création.
@@ -63,16 +56,11 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         public IActionResult Delete()
         {
             /// <summary>
-            /// Génération d'un artiste.
-            /// <summary>
-            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
-
-            /// <summary>
             /// Génération d'un commentaire.
             /// <summary>
-            Commentaire commentaire = artiste.SelectMany(a => a.Titres)
-                .SelectMany(t => t.Commentaires)
-                .First();
+            List<Commentaire> commentaires = DataFactory.Commentaires;
+            Commentaire commentaire = commentaires.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+
 
             /// <summary>
             /// Création du modèle de vue contenant un commentaire.

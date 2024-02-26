@@ -28,7 +28,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération d'une liste de styles.
             /// <summary>
-            List<Style> styles = DataFactory.GenerateFakeStyles(50);
+            List<Style> styles = DataFactory.Styles;
 
             /// <summary>
             /// Tri de la liste des styles par nom.
@@ -81,7 +81,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération d'un style.
             /// <summary>
-            List<Style> styles = DataFactory.GenerateFakeStyles(50);
+            List<Style> styles = DataFactory.Styles;
             Style style = styles.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
 
@@ -120,7 +120,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             /// <summary>
             /// Génération d'un style.
             /// <summary>
-            List<Style> styles = DataFactory.GenerateFakeStyles(50);
+            List<Style> styles = DataFactory.Styles;
             Style style = styles.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
             /// <summary>

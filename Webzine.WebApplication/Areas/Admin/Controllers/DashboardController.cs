@@ -21,7 +21,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue avec le modèle de vue contenant les titres générés.</returns>
         public IActionResult Index()
         {
-            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
+            List<Artiste> artistes = DataFactory.Artistes;
 
             /// <summary>
             /// Génération d'une liste de titres.

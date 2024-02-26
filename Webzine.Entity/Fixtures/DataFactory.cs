@@ -11,72 +11,83 @@ namespace Webzine.Entity.Fixtures
     /// </summary>
     public static class DataFactory
     {
+        // Initialise les listes d'entités
+        static DataFactory()
+        {
+            Artistes = new List<Artiste>();
+            Titres = new List<Titre>();
+            Commentaires = new List<Commentaire>();
+            Styles = new List<Style>();
+
+            // Génère des données fictives pour les entités
+            GenerateFakeArtiste();
+            GenerateFakeStyles();
+            GenerateFakeCommentaires();
+            GenerateFakeTitres();
+        }
+
         /// <summary>
-        /// Instance statique de la classe Random pour la génération de nombres aléatoires.
+        /// Obtient ou définit liste d'artistes fictifs.
         /// </summary>
-        private static readonly Random Random = new();
+        public static List<Artiste> Artistes { get; set; }
+
+        /// <summary>
+        /// Obtient ou définit liste de styles fictifs.
+        /// </summary>
+        public static List<Style> Styles { get; set; }
+
+        /// <summary>
+        /// Obtient ou définit liste de titres fictifs.
+        /// </summary>
+        public static List<Titre> Titres { get; set; }
+
+        /// <summary>
+        /// Obtient ou définit liste de commentaires fictifs.
+        /// </summary>
+        public static List<Commentaire> Commentaires { get; set; }
 
         /// <summary>
         /// Génère une liste de styles fictifs.
         /// </summary>
-        /// <param name="count">Nombre de styles à générer.</param>
-        /// <returns>Liste de styles fictifs.</returns>
-        public static List<Style> GenerateFakeStyles(int count)
+        public static void GenerateFakeStyles()
         {
             var styleFaker = new Faker<Style>()
                 .RuleFor(s => s.Libelle, f => f.Lorem.Word());
 
-            return styleFaker.Generate(count);
+            Styles = styleFaker.Generate(25);
         }
 
         /// <summary>
-        /// Génère une liste de commentaires fictifs pour un titre donné.
+        /// Génère une liste de commentaires fictifs.
         /// </summary>
-        /// <param name="count">Nombre de commentaires à générer.</param>
-        /// <param name="titre">Titre associé aux commentaires.</param>
-        /// <returns>Liste de commentaires fictifs.</returns>
-        public static List<Commentaire> GenerateFakeCommentaires(int count, Titre titre)
+        public static void GenerateFakeCommentaires()
         {
             var commentaireFaker = new Faker<Commentaire>()
+                .RuleFor(c => c.IdCommentaire, f => f.IndexFaker)
                 .RuleFor(c => c.Auteur, f => f.Name.FullName())
                 .RuleFor(c => c.Contenu, f => f.Lorem.Sentence())
-                .RuleFor(c => c.DateCreation, f => f.Date.Past())
-                .RuleFor(t => t.Titre, f => titre);
+                .RuleFor(c => c.DateCreation, f => f.Date.Past());
 
-            return commentaireFaker.Generate(count);
+            Commentaires = commentaireFaker.Generate(30);
         }
 
         /// <summary>
         /// Génère une liste d'artistes fictifs.
         /// </summary>
-        /// <param name="count">Nombre d'artistes à générer.</param>
-        /// <returns>Liste d'artistes fictifs.</returns>
-        public static List<Artiste> GenerateFakeArtiste(int count)
+        public static void GenerateFakeArtiste()
         {
             var artisteFaker = new Faker<Artiste>()
+                .RuleFor(t => t.IdArtiste, f => f.IndexFaker)
                 .RuleFor(a => a.Nom, f => f.Name.FullName())
                 .RuleFor(a => a.Biographie, f => f.Lorem.Paragraph());
 
-            var artistes = artisteFaker.Generate(count);
-
-            foreach (var artiste in artistes)
-            {
-                /// <summary>
-                /// Générer des titres pour chaque artiste.
-                /// </summary>
-                artiste.Titres = DataFactory.GenerateFakeTitres(Random.Next(1, 10), artiste);
-            }
-
-            return artistes;
+            Artistes = artisteFaker.Generate(300);
         }
 
         /// <summary>
         /// Génère une liste de titres fictifs.
         /// </summary>
-        /// <param name="count">Nombre de titres à générer.</param>
-        /// <param name="artiste">Artiste associé aux titres.</param>
-        /// <returns>Liste de titres fictifs.</returns>
-        public static List<Titre> GenerateFakeTitres(int count, Artiste artiste)
+        public static void GenerateFakeTitres()
         {
             var titreFaker = new Faker<Titre>()
                 .RuleFor(t => t.Libelle, f => f.Name.FullName())
@@ -90,20 +101,11 @@ namespace Webzine.Entity.Fixtures
                 .RuleFor(t => t.UrlJaquette, f => f.Image.PicsumUrl().ToString())
                 .RuleFor(t => t.UrlEcoute, f => f.Internet.Url())
                 .RuleFor(t => t.Album, f => f.Commerce.ProductName())
-                .RuleFor(t => t.Artiste, f => artiste)
-                .RuleFor(t => t.Styles, f => DataFactory.GenerateFakeStyles(Random.Next(1, 3)));
+                .RuleFor(t => t.Artiste, f => f.PickRandom(Artistes))
+                .RuleFor(t => t.Commentaires, f => f.PickRandom(Commentaires, 15).ToList())
+                .RuleFor(t => t.Styles, f => f.PickRandom(Styles, 3).ToList());
 
-            var titres = titreFaker.Generate(count);
-
-            foreach (var titre in titres)
-            {
-                /// <summary>
-                /// Générer des commentaires pour chaque titre.
-                /// </summary>
-                titre.Commentaires = DataFactory.GenerateFakeCommentaires(Random.Next(1, 30), titre);
-            }
-
-            return titres;
+            Titres = titreFaker.Generate(500);
         }
     }
 }

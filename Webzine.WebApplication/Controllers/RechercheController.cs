@@ -20,13 +20,12 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue de la page d'accueil.</returns>
         public IActionResult Index()
         {
-            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
+            List<Artiste> artistes = DataFactory.Artistes;
 
             /// <summary>
             /// Génération d'un titre.
             /// <summary>
-            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
-            Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+            List<Titre> titres = DataFactory.Titres;
 
             /// <summary>
             /// Création du modèle de vue contenant la liste de Titres.
