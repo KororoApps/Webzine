@@ -26,7 +26,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         public IActionResult Index()
         {
             /// <summary>
-            /// Génération d'un artiste.
+            /// Génération d'un commentaire.
             /// <summary>
             List<Commentaire> commentaires = DataFactory.Commentaires;
 

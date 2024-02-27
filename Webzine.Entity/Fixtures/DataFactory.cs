@@ -5,6 +5,7 @@
 namespace Webzine.Entity.Fixtures
 {
     using Bogus;
+    using Bogus.DataSets;
 
     /// <summary>
     /// Classe statique pour générer des données fictives avec Bogus pour les entités du projet.
@@ -82,8 +83,6 @@ namespace Webzine.Entity.Fixtures
                 .RuleFor(a => a.Nom, f => f.Name.FullName())
                 .RuleFor(a => a.Biographie, f => f.Lorem.Paragraph());
 
-            var titreFaker = new Faker<Titre>()
-               .RuleFor(t => t.Libelle, f => f.Name.FullName());
 
             Artistes = artisteFaker.Generate(300);
         }
@@ -111,6 +110,14 @@ namespace Webzine.Entity.Fixtures
                 .RuleFor(t => t.Styles, f => f.PickRandom(Styles, 3).ToList());
 
             Titres = titreFaker.Generate(500);
+
+            foreach (var titre in Titres)
+            {
+                foreach (var commentaire in titre.Commentaires)
+                {
+                    commentaire.Titre = titre;
+                }
+            }
         }
     }
 }
