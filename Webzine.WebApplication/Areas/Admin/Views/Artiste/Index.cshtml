@@ -35,10 +35,10 @@
                     <td>@artiste.Nom</td>
                     <td class="text-center">
                         <div class="d-flex justify-content-center">
-                            <a asp-area="Admin" asp-controller="Artiste" asp-action="Edit" >
+                            <a asp-area="Admin" asp-controller="Artiste" asp-action="Edit" asp-route-id="@artiste.IdArtiste">
                                 <i class="fa-solid fa-edit text-primary p-2" style="color: #74C0FC;"></i>
                             </a>
-                            <a asp-area="Admin" asp-controller="Artiste" asp-action="Delete" >
+                            <a asp-area="Admin" asp-controller="Artiste" asp-action="Delete" asp-route-id="@artiste.IdArtiste">
                                 <i class="fa-solid fa-trash text-primary" style="color: #74C0FC;"></i>
                             </a>
                         </div>

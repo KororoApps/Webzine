@@ -68,7 +68,7 @@
                                 }
 
                                 <td class="text-start">@titreAleatoire.Duree.ToString(@"mm\:ss")</td>
-                                <td class="text-start"><a asp-controller="Titre" asp-action="">@titreAleatoire.Libelle</a></td>
+                                <td class="text-start"><a asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">@titreAleatoire.Libelle</a></td>
                             </tr>
                         }
                     </tbody>

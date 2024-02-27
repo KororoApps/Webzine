@@ -35,7 +35,7 @@
                 <td>@commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm:ss")</td>
                 <td class="text-center">
                     <div class="d-flex justify-content-center">
-                        <a asp-area="Admin" asp-controller="Commentaire" asp-action="Delete" >
+                        <a asp-area="Admin" asp-controller="Commentaire" asp-action="Delete" asp-route-id="@commentaire.IdCommentaire">
                             <i class="fa-solid fa-trash text-primary" style="color: #74C0FC;"></i>
                         </a>
                     </div>

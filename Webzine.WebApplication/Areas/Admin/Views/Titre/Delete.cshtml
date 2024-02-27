@@ -16,7 +16,7 @@
         <p>Etes-vous sûr de vouloir supprimer le titre "@Model.Titre.Libelle"" de @Model.Titre.Artiste.Nom ? </p>
 
         @* Formulaire pour soumettre la demande de suppression *@
-        <form method="post" asp-action="DeleteConfirmed" asp-controller="Titre">
+        <form method="post" asp-action="DeleteConfirmed" asp-controller="Titre" asp-route-id="@Model.Titre.IdTitre">
             @* Utilisez un champ anti-forgery pour protéger le formulaire *@
             @Html.AntiForgeryToken()
 

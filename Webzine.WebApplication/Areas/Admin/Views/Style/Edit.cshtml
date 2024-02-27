@@ -12,7 +12,7 @@
 <hr />
 
 @*Formulaire d'ajout d'un style.*@
-<form method="post" asp-action="EditConfirmed" asp-controller="Style" class="col-6 d-flex">
+<form method="post" asp-action="EditConfirmed" asp-controller="Style" asp-route-id="@Model.Style.IdStyle" class="col-6 d-flex">
     <div class="container">
         <div class="row align-items-center mb-5">
             <div class="col-auto">

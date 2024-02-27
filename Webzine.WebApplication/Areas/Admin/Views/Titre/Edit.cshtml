@@ -13,7 +13,7 @@
 
 @*Formulaire d'édition' de la page.*@
 <div>
-    <form method="post" asp-action="EditConfirmed" asp-controller="Titre" class="d-flex">
+    <form method="post" asp-action="EditConfirmed" asp-controller="Titre" asp-route-id="@Model.Titre.IdTitre" class="d-flex">
         <div class="container">
             <div class="form-group row mb-5">
                 <div class="col-md-2">

@@ -16,7 +16,7 @@
         <p>Etes-vous sûr de vouloir supprimer le style de musique <span>"@Model.Style.Libelle"</span> ?</p>
 
         @* Formulaire pour soumettre la demande de suppression *@
-        <form method="post" asp-action="DeleteConfirmed" asp-controller="Style">
+        <form method="post" asp-action="DeleteConfirmed" asp-controller="Style" asp-route-id="@Model.Style.IdStyle">
             @* Utilisez un champ anti-forgery pour protéger le formulaire *@
             @Html.AntiForgeryToken()
 

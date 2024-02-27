@@ -12,7 +12,7 @@
 <hr />
 
 @*Formulaire d'édition de l'artiste*@
-<form method="post" asp-action="EditConfirmed" asp-controller="Artiste" class="d-flex">
+<form method="post" asp-action="EditConfirmed" asp-controller="Artiste" asp-route-id="@Model.Artiste.IdArtiste" class="d-flex">
     <div class="container">
         <div class="form-group row mb-5">
             <div class="col-md-2">

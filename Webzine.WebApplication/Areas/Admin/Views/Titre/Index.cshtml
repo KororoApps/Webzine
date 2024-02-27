@@ -46,10 +46,10 @@
                     <td>@titre.Commentaires.Count</td>
                     <td class="text-center">
                         <div class="d-flex justify-content-center">
-                            <a asp-area="Admin" asp-controller="Titre" asp-action="Edit" >
+                            <a asp-area="Admin" asp-controller="Titre" asp-action="Edit" asp-route-id="@titre.IdTitre">
                                 <i class="fa-solid fa-edit text-primary p-2" style="color: #74C0FC;"></i>
                             </a>
-                            <a asp-area="Admin" asp-controller="Titre" asp-action="Delete" >
+                            <a asp-area="Admin" asp-controller="Titre" asp-action="Delete" asp-route-id="@titre.IdTitre">
                                 <i class="fa-solid fa-trash text-primary" style="color: #74C0FC;"></i>
                             </a>
                         </div>
