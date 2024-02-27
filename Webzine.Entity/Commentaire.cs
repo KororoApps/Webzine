@@ -51,7 +51,6 @@
         /// <summary>
         /// Obtient ou définit le titre auquel le commentaire est associé.
         /// </summary>
-        [ForeignKey(nameof(Titre))]
         public required Titre Titre { get; set; }
     }
 }

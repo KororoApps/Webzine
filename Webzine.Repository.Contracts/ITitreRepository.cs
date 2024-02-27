@@ -2,7 +2,7 @@
 
 namespace Webzine.Repository.Contracts
 {
-    public interface ITtitreRepository
+    public interface ITitreRepository
     {
         void Add(Titre titre);
         int Count();
