@@ -14,3 +14,7 @@ a{
 .justify-chronique {
     text-align: justify;
 }
+
+.footer{
+    min-height:calc(100vh-100px)
+}
