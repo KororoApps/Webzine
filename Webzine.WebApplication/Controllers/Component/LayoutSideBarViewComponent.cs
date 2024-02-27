@@ -2,7 +2,7 @@
 // Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
 // </copyright>
 
-namespace Webzine.WebApplication.Shared.Views
+namespace Webzine.WebApplication.Controllers.Component
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
@@ -38,7 +38,7 @@ namespace Webzine.WebApplication.Shared.Views
             /// <summary>
             var vm = styleModel;
 
-            return this.View(vm);
+            return View(vm);
         }
     }
 }
