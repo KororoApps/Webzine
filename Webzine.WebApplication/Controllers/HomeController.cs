@@ -21,27 +21,19 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue de la page d'accueil.</returns>
         public IActionResult Index()
         {
-            /// <summary>
-            /// Génération d'une liste de titres.
-            /// <summary>
+            // Génération d'une liste de titres.
             List<Titre> titres = DataFactory.Titres;
 
-            /// <summary>
-            /// Tri de la liste des titres par date de création.
-            /// <summary>
+            // Tri de la liste des titres par date de création.
             var titresTries = titres.OrderByDescending(t => t.DateCreation).ToList();
 
-            /// <summary>
-            /// Création du modèle de vue contenant la liste des titres.
-            /// <summary>
+            // Création du modèle de vue contenant la liste des titres.
             GroupeTitreModel groupeTitreModel = new()
             {
                 Titres = titresTries,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les détails des titres.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant les détails des titres.
             return this.View(groupeTitreModel);
         }
     }

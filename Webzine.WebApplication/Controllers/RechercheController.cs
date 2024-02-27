@@ -22,22 +22,16 @@ namespace Webzine.WebApplication.Controllers
         {
             List<Artiste> artistes = DataFactory.Artistes;
 
-            /// <summary>
-            /// Génération d'un titre.
-            /// <summary>
+            // Génération d'un titre.
             List<Titre> titres = DataFactory.Titres;
 
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
-            /// <summary>
+            // Création du modèle de vue contenant la liste de Titres.
             var titreModel = new GroupeTitreModel
             {
                 Titres = titres,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant les titres générés.
             return this.View(titreModel);
         }
     }

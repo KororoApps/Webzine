@@ -25,27 +25,19 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue avec la liste des styles.</returns>
         public IActionResult Index()
         {
-            /// <summary>
-            /// Génération d'une liste de styles.
-            /// <summary>
+            // Génération d'une liste de styles.
             List<Style> styles = DataFactory.Styles;
 
-            /// <summary>
-            /// Tri de la liste des styles par nom.
-            /// <summary>
+            // Tri de la liste des styles par nom.
             var stylesTries = styles.OrderBy(s => s.Libelle).ToList();
 
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Styles.
-            /// </summary>
+            // Création du modèle de vue contenant la liste de Styles.
             var styleModel = new GroupeStyleModel
             {
                 Styles = stylesTries,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les styles générés.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant les styles générés.
             return this.View(styleModel);
         }
 
@@ -55,9 +47,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de création d'un nouveau style.</returns>
         public IActionResult Create()
         {
-            /// <summary>
-            /// Retour de la vue pour la création d'un style.
-            /// <summary>
+            // Retour de la vue pour la création d'un style.
             return this.View();
         }
 
@@ -78,24 +68,18 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un style.</returns>
         public IActionResult Delete()
         {
-            /// <summary>
-            /// Génération d'un style.
-            /// <summary>
+            // Génération d'un style.
             List<Style> styles = DataFactory.Styles;
             Style style = styles.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
 
-            /// <summary>
-            /// Création du modèle de vue contenant le style à supprimer.
-            /// </summary>
+            // Création du modèle de vue contenant le style à supprimer.
             var styleModel = new StyleModel
             {
                 Style = style,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant le style généré.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant le style généré.
             return this.View(styleModel);
         }
 
@@ -117,23 +101,17 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue d'édition d'un style.</returns>
         public IActionResult Edit()
         {
-            /// <summary>
-            /// Génération d'un style.
-            /// <summary>
+            // Génération d'un style.
             List<Style> styles = DataFactory.Styles;
             Style style = styles.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
-            /// <summary>
-            /// Création du modèle de vue contenant le style à éditer.
-            /// </summary>
+            // Création du modèle de vue contenant le style à éditer.
             var styleModel = new StyleModel
             {
                 Style = style,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant le style généré.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant le style généré.
             return this.View(styleModel);
         }
 

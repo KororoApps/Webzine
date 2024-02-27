@@ -26,27 +26,20 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue contenant la liste des artistes.</returns>
         public IActionResult Index()
         {
-            /// <summary>
-            /// Génération d'une liste d'artistes.
-            /// <summary>
-           List<Artiste> artistes = DataFactory.Artistes;
 
-            /// <summary>
-            /// Tri de la liste des artistes par nom.
-            /// <summary>
+            // Génération d'une liste d'artistes.
+            List<Artiste> artistes = DataFactory.Artistes;
+
+            // Tri de la liste des artistes par nom.
             var artistesTries = artistes.OrderBy(a => a.Nom).ToList();
 
-            /// <summary>
-            /// Création du modèle de vue contenant la liste d'Artistes.
-            /// <summary>
+            // Création du modèle de vue contenant la liste d'Artistes.
             var artisteModel = new GroupeArtisteModel
             {
                 Artistes = artistesTries,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les artistes générés.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant les artistes générés.
             return this.View(artisteModel);
         }
 
@@ -56,23 +49,17 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un artiste.</returns>
         public IActionResult Delete()
         {
-            /// <summary>
-            /// Génération d'un artiste.
-            /// <summary>
+            // Génération d'un artiste.
             List<Artiste> artistes = DataFactory.Artistes;
             Artiste artiste = artistes.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
-            /// <summary>
-            /// Création du modèle de vue contenant un artiste.
-            /// <summary>
+            // Création du modèle de vue contenant un artiste.=
             var artisteModel = new ArtisteModel
             {
                 Artiste = artiste,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les détails de l'artiste.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant les détails de l'artiste.
             return this.View(artisteModel);
         }
 
@@ -94,9 +81,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de création d'un artiste.</returns>
         public IActionResult Create()
         {
-            /// <summary>
-            /// Retour de la vue pour la création d'un artiste.
-            /// <summary>
+            // Retour de la vue pour la création d'un artiste.
             return this.View();
         }
 
@@ -117,23 +102,17 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue d'édition d'un artiste.</returns>
         public IActionResult Edit()
         {
-            /// <summary>
-            /// Génération d'un artiste.
-            /// <summary>
+            // Génération d'un artiste.
             List<Artiste> artistes = DataFactory.Artistes;
             Artiste artiste = artistes.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
-            /// <summary>
-            /// Création du modèle de vue contenant un artiste.
-            /// <summary>
+            // Création du modèle de vue contenant un artiste.
             var artisteModel = new ArtisteModel
             {
                 Artiste = artiste,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les détails de l'artiste.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant les détails de l'artiste.
             return this.View(artisteModel);
         }
 

@@ -24,23 +24,17 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index()
         {
-            /// <summary>
-            /// Génération d'une liste d'artistes.
-            /// <summary>
+            // Génération d'une liste d'artistes.
             List<Titre> titres = DataFactory.Titres;
             Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
-            /// <summary>
-            /// Création du modèle de vue contenant un titre.
-            /// <summary>
+            // Création du modèle de vue contenant un titre.
             var titreModel = new TitreModel
             {
                 Titre = titre,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant le titre généré.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant le titre généré.
             return this.View(titreModel);
         }
 
@@ -52,17 +46,13 @@ namespace Webzine.WebApplication.Controllers
         {
             List<Titre> titres = DataFactory.Titres;
 
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
-            /// <summary>
+            // Création du modèle de vue contenant la liste de Titres.
             var titreModel = new GroupeTitreModel
             {
                 Titres = titres,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.
             return this.View(titreModel);
         }
     }

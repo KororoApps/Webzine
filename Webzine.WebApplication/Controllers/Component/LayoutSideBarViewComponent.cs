@@ -18,24 +18,18 @@ namespace Webzine.WebApplication.Controllers.Component
         /// Méthode invoquée lors de l'exécution du composant de vue.
         /// </summary>
         /// <returns>Une tâche asynchrone représentant l'opération.</returns>
-
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            /// <summary>
-            /// // Récupération des styles depuis la factory.
-            /// </summary>
+            // Récupération des styles depuis la factory.
             List<Style> styles = DataFactory.Styles;
 
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
-            /// <summary>
+            // Création du modèle de vue contenant la liste de Titres.
             var styleModel = new GroupeStyleModel
             {
                 Styles = styles,
             };
-            /// <summary>
-            /// Passage du modèle à la vue
-            /// <summary>
+
+            // Passage du modèle à la vue
             var vm = styleModel;
 
             return View(vm);
