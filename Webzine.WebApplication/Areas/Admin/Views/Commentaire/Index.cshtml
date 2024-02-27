@@ -27,15 +27,15 @@
         {
             <tr>
                 <td>
-                    <a asp-area="" asp-controller="Artiste" asp-action="" class="text-decoration-none">@commentaire.Titre.Artiste.Nom</a>
-                    - <a asp-area="" asp-controller="Titre" asp-action="" class="text-decoration-none">@commentaire.Titre.Libelle</a>
+                    <a asp-area="" asp-controller="Artiste" asp-action="" >@commentaire.Titre.Artiste.Nom</a>
+                    - <a asp-area="" asp-controller="Titre" asp-action="" >@commentaire.Titre.Libelle</a>
                 </td>
                 <td>@commentaire.Auteur</td>
                 <td>@commentaire.Contenu</td>
                 <td>@commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm:ss")</td>
                 <td class="text-center">
                     <div class="d-flex justify-content-center">
-                        <a asp-area="Admin" asp-controller="Commentaire" asp-action="Delete" class="text-decoration-none">
+                        <a asp-area="Admin" asp-controller="Commentaire" asp-action="Delete" asp-route-id="@commentaire.IdCommentaire">
                             <i class="fa-solid fa-trash text-primary" style="color: #74C0FC;"></i>
                         </a>
                     </div>

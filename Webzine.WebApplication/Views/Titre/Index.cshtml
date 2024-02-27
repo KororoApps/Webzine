@@ -13,7 +13,7 @@
     <div>
         @*Affichage du nom de l'artiste et du titre.*@
         <h3>
-            <a asp-controller="Artiste" asp-action="" class="text-decoration-none">
+            <a asp-controller="Artiste" asp-action="" >
                 <span class="text-primary">@Model.Titre.Artiste.Nom</span>
             </a>
             - @Model.Titre.Libelle
@@ -36,7 +36,12 @@
                         <i class="fa-solid fa-tags p-1"></i>
                         <p>
                             Styles :
-                            @foreach (var style in Model.Titre.Styles)
+                            @{
+                                var random = new Random();
+                                var nombreDeStyles = random.Next(1, 4);
+                            }
+
+                            @foreach (var style in Model.Titre.Styles.Take(nombreDeStyles))
                             {
                                 <a asp-controller="Titre" asp-action="Style"><span class="me-4 ">@style.Libelle</span></a>
                             }
@@ -50,7 +55,7 @@
                         </a>
                     </div>
                     <div class="d-inline-flex">
-                        <a asp-area="Admin" asp-controller="Titre" asp-action="Edit" class="text-decoration-none">
+                        <a asp-area="Admin" asp-controller="Titre" asp-action="Edit" asp-route-id="@Model.Titre.IdTitre" >
                             <i class="fa-solid fa-edit text-primary p-2" style="color: #74C0FC;"></i>
                             Editer
                         </a>

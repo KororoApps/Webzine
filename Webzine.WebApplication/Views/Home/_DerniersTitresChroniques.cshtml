@@ -8,15 +8,15 @@
             <div class="card border-0 p-4">
                 <div class="row g-0 bg-light">
                     <div class="col-sm-3 col-lg-2">
-                        <a href="/Titre/" class="ratio ratio-1x1">
-                            <img class="card-img-top w-100 h-100 example-card-img-responsive p-3 object-fit-cover" src="@titre.UrlJaquette" alt="Image de la carte">
+                        <a asp-area="" asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">
+                            <img src="@titre.UrlJaquette" class="card-img-top w-100 h-100 example-card-img-responsive p-3 object-fit-cover" alt="image">                            
                         </a>
                     </div>
                     <div class="col-sm-9 col-lg-10">
                         <div class="card-body">
                             <h4 class="card-title">
                                 <span>
-                                    <a asp-area="" asp-controller="Artiste" asp-action="" class="text-decoration-none">
+                                    <a asp-area="" asp-controller="Artiste" asp-action="" asp-route-id="@titre.Artiste.Nom">
                                         @titre.Artiste.Nom
                                     </a>
                                 </span>
@@ -24,7 +24,7 @@
                                     -
                                 </span>
                                 <span>
-                                    <a asp-area="" asp-controller="Titre" asp-action="" class="text-decoration-none">
+                                    <a asp-area="" asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">
                                         @titre.Libelle
                                     </a>
                                 </span>
@@ -32,7 +32,7 @@
                             @*Lire la suite, Date de l'article, Styles*@
                             <p class="card-text">@titre.Chronique.Substring(0, Math.Min(200, titre.Chronique.Length))...</p>
                             <div class="d-flex">
-                                <a class="btn btn-primary btn-sm mb-2 mb-sm-0 me-sm-2 mb-sm-0 me-sm-2text-decoration-none" asp-area="" asp-controller="Titre" asp-action="">
+                                <a class="btn btn-primary btn-sm mb-2 mb-sm-0 me-sm-2 mb-sm-0 me-sm-2" asp-area="" asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">
                                     Lire la suite
                                 </a>
                                 <p class="mb-0">
@@ -41,12 +41,16 @@
                                 </p>
                                 <p class="mb-0">
                                     <i class="fa-solid fa-tags ps-3"></i>
-                                    @foreach (var style in @titre.Styles)
+                                    @{
+                                        var random = new Random();
+                                        var nombreDeStyles = random.Next(1, 4);
+                                    }
+
+                                    @foreach (var style in titre.Styles.Take(nombreDeStyles))
                                     {
-                                        <a asp-area="" asp-controller="Titre" asp-action="Style" class="text-decoration-none">
+                                        <a asp-area="" asp-controller="Titre" asp-action="Style" asp-route-id="@style.Libelle">
                                             @style.Libelle
                                         </a>
-                                        <span> </span>
                                     }
                                 </p>
                             </div>

@@ -24,28 +24,17 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index()
         {
-            /// <summary>
-            /// Génération d'une liste d'artistes.
-            /// <summary>
-            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
-
-            /// <summary>
-            /// Génération d'un titre.
-            /// <summary>
-            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
+            // Génération d'une liste d'artistes.
+            List<Titre> titres = DataFactory.Titres;
             Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
-            /// <summary>
-            /// Création du modèle de vue contenant un titre.
-            /// <summary>
+            // Création du modèle de vue contenant un titre.
             var titreModel = new TitreModel
             {
                 Titre = titre,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant le titre généré.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant le titre généré.
             return this.View(titreModel);
         }
 
@@ -55,24 +44,15 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue contenant la liste des titres liés au style.</returns>
         public IActionResult Style()
         {
-            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
+            List<Titre> titres = DataFactory.Titres;
 
-            /// <summary>
-            /// Génération d'une liste de titres.
-            /// <summary>
-            List<Titre> titres = artistes.SelectMany(a => a.Titres).ToList();
-
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
-            /// <summary>
+            // Création du modèle de vue contenant la liste de Titres.
             var titreModel = new GroupeTitreModel
             {
                 Titres = titres,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.
             return this.View(titreModel);
         }
     }

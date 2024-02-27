@@ -26,32 +26,20 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index()
         {
-            /// <summary>
-            /// Génération d'une liste d'artistes.
-            /// <summary>
-            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
+            // Génération d'une liste d'artistes.
+            List<Titre> titres = DataFactory.Titres;
 
-            /// <summary>
-            /// Génération d'une liste de titres.
-            /// <summary>
-            List<Titre> titres = artistes.SelectMany(a => a.Titres).ToList();
 
-            /// <summary>
-            /// Tri de la liste des titres par date de création.
-            /// <summary>
+            // Tri de la liste des titres par date de création.
             var titresTries = titres.OrderByDescending(t => t.DateSortie).ToList();
 
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
-            /// <summary>
+            // Création du modèle de vue contenant la liste de Titres.
             var titreModel = new GroupeTitreModel
             {
                 Titres = titresTries,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant les titres générés.
             return this.View(titreModel);
         }
 
@@ -61,28 +49,18 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un titre.</returns>
         public IActionResult Delete()
         {
-            /// <summary>
-            /// Génération d'une liste d'artistes.
-            /// <summary>
-            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
 
-            /// <summary>
-            /// Génération d'un titre.
-            /// <summary>
-            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
+            // Génération d'un titre.
+            List<Titre> titres = DataFactory.Titres;
             Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
-            /// <summary>
-            /// Création du modèle de vue contenant un Titre.
-            /// <summary>
+            // Création du modèle de vue contenant un Titre.
             var titreModel = new TitreModel
             {
                 Titre = titre,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant le titre généré.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant le titre généré.
             return this.View(titreModel);
         }
 
@@ -104,28 +82,17 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de création d'un nouveau titre.</returns>
         public IActionResult Create()
         {
-            /// <summary>
-            /// Génération d'une liste d'artistes.
-            /// <summary>
-            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
-
-            /// <summary>
-            /// Génération d'un titre.
-            /// <summary>
-            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
+            // Génération d'une liste d'artistes.
+            List<Titre> titres = DataFactory.Titres;
             Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
-            /// <summary>
-            /// Création du modèle de vue contenant un Titre.
-            /// <summary>
+            // Création du modèle de vue contenant un Titre.
             var titreModel = new TitreModel
             {
                 Titre = titre,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant le titre généré.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant le titre généré.
             return this.View(titreModel);
         }
 
@@ -146,28 +113,17 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue d'édition d'un titre.</returns>
         public IActionResult Edit()
         {
-            /// <summary>
-            /// Génération d'une liste d'artistes.
-            /// <summary>
-            List<Artiste> artiste = DataFactory.GenerateFakeArtiste(1);
-
-            /// <summary>
-            /// Génération d'un titre.
-            /// <summary>
-            List<Titre> titres = artiste.SelectMany(a => a.Titres).ToList();
+            // Génération d'une liste d'artistes.
+            List<Titre> titres = DataFactory.Titres;
             Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
-            /// <summary>
-            /// Création du modèle de vue contenant un Titre.
-            /// <summary>
+            // Création du modèle de vue contenant un Titre.
             var titreModel = new TitreModel
             {
                 Titre = titre,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant le titre généré.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant le titre généré.
             return this.View(titreModel);
         }
 

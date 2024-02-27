@@ -16,7 +16,7 @@
     <div class="container">
         <div class="form-group row mb-5">
             <div class="col-md-2">
-                <label asp-for="Artiste.Nom" class="form-label"></label><span class="text-danger">*</span>
+                <label asp-for="Artiste.Nom" class="form-label required-label"></label>
             </div>
             <div class="col-md-10">
                 <input asp-for="Artiste.Nom" type="text" class="form-control">
@@ -24,7 +24,7 @@
         </div>
         <div class="form-group row mb-5">
             <div class="col-md-2">
-                <label asp-for="Artiste.Biographie" class="form-label"></label><span class="text-danger">*</span>
+                <label asp-for="Artiste.Biographie" class="form-label required-label"></label>
             </div>
             <div class="col-md-10">
                 <textarea asp-for="Artiste.Biographie" type="text" class="form-control"></textarea>
@@ -45,7 +45,7 @@
         </div>
 
         @*Bouton de retour à l'adminitration des artistes.*@
-        <a class="text-decoration-none fw-normal" asp-area="Admin" asp-controller="Artiste" asp-action="Index">
+        <a class=" fw-normal" asp-area="Admin" asp-controller="Artiste" asp-action="Index">
             Retour à l'administration des artistes
         </a>
     </div>

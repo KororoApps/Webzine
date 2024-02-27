@@ -21,24 +21,15 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue avec le modèle de vue contenant les titres générés.</returns>
         public IActionResult Index()
         {
-            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
+            List<Titre> titres = DataFactory.Titres;
 
-            /// <summary>
-            /// Génération d'une liste de titres.
-            /// <summary>
-            List<Titre> titres = artistes.SelectMany(a => a.Titres).ToList();
-
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
-            /// <summary>
+            // Création du modèle de vue contenant la liste de Titres.
             var titreModel = new GroupeTitreModel
             {
                 Titres = titres,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant les titres générés.
             return this.View(titreModel);
         }
     }

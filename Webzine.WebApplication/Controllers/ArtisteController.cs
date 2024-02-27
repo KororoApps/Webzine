@@ -24,24 +24,16 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue contenant les détails de l'artiste.</returns>
         public IActionResult Index()
         {
-            /// <summary>
-            /// Génération d'un artiste.
-            /// <summary>
-            List<Artiste> artistes = DataFactory.GenerateFakeArtiste(10);
-            Artiste artiste = artistes.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+            List<Titre> titres = DataFactory.Titres;
 
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Artiste.
-            /// <summary>
-            var artisteModel = new ArtisteModel
+            // Création du modèle de vue contenant la liste de Titres.
+            var titreModel = new GroupeTitreModel
             {
-                Artiste = artiste,
+                Titres = titres,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les détails de l'artiste.
-            /// <summary>
-            return this.View(artisteModel);
+            // Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.
+            return this.View(titreModel);
         }
     }
 }

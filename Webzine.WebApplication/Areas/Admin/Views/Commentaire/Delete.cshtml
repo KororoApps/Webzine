@@ -16,15 +16,14 @@
         <p>Etes-vous sûr de vouloir supprimer le commentaire suivant ? </p>
 
         <p class="fs-5">@Model.Commentaire.Contenu</p>
-        <p>
-            -
+        <p class="blockquote-footer">
             <span class="fw-bold">@Model.Commentaire.Auteur</span>
             le @Model.Commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm:ss") sur
-            <span class="fst-italic">@Model.Commentaire.Titre</span>
+            <span class="fst-italic">@Model.Commentaire.Titre.Libelle</span>
         </p>
 
         @* Formulaire pour soumettre la demande de suppression *@
-        <form method="post" asp-action="DeleteConfirmed" asp-controller="Commentaire">
+        <form method="post" asp-action="DeleteConfirmed" asp-controller="Commentaire" asp-route-id="@Model.Commentaire.IdCommentaire">
             @* Utilisez un champ anti-forgery pour protéger le formulaire *@
             @Html.AntiForgeryToken()
 
@@ -36,7 +35,7 @@
 
     @*Lien vers le retour à l'administration des commentaires.*@
     <div>
-        <a class="text-decoration-none fw-normal" asp-area="Admin" asp-controller="Commentaire" asp-action="Index">
+        <a class=" fw-normal" asp-area="Admin" asp-controller="Commentaire" asp-action="Index">
             Retour à l'administration des commentaires
         </a>
     </div>

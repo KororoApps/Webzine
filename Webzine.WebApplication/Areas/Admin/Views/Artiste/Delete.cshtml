@@ -16,7 +16,7 @@
         <p>Etes-vous sûr de vouloir supprimer l'artiste "@Model.Artiste.Nom" ? </p>
 
         @* Formulaire pour soumettre la demande de suppression *@
-        <form method="post" asp-action="DeleteConfirmed" asp-controller="Artiste">
+        <form method="post" asp-action="DeleteConfirmed" asp-controller="Artiste" asp-route-id="@Model.Artiste.IdArtiste">
             @* Utilisez un champ anti-forgery pour protéger le formulaire *@
             @Html.AntiForgeryToken()
 
@@ -28,7 +28,7 @@
 
     @*Lien vers le retour à l'administration du artiste.*@
     <div>
-        <a class="text-decoration-none fw-normal" asp-area="Admin" asp-controller="Artiste" asp-action="Index">
+        <a class=" fw-normal" asp-area="Admin" asp-controller="Artiste" asp-action="Index">
             Retour à l'administration des artistes
         </a>
     </div>
