@@ -5,3 +5,8 @@
 a{
     text-decoration: none !important;
 }
+
+.required-label::after {
+    content: " *" !important;
+    color: red !important;
+}
