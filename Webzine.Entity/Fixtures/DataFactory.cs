@@ -107,7 +107,7 @@ namespace Webzine.Entity.Fixtures
                 .RuleFor(t => t.Album, f => f.Commerce.ProductName())
                 .RuleFor(t => t.Artiste, f => f.PickRandom(Artistes))
                 .RuleFor(t => t.Commentaires, f => f.PickRandom(Commentaires, 15).ToList())
-                .RuleFor(t => t.Styles, f => f.PickRandom(Styles, 3).ToList());
+                .RuleFor(t => t.Styles, f => f.PickRandom(Styles, 15).ToList());
 
             Titres = titreFaker.Generate(500);
 
