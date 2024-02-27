@@ -36,7 +36,12 @@
                         <i class="fa-solid fa-tags p-1"></i>
                         <p>
                             Styles :
-                            @foreach (var style in Model.Titre.Styles)
+                            @{
+                                var random = new Random();
+                                var nombreDeStyles = random.Next(1, 4);
+                            }
+
+                            @foreach (var style in Model.Titre.Styles.Take(nombreDeStyles))
                             {
                                 <a asp-controller="Titre" asp-action="Style"><span class="me-4 ">@style.Libelle</span></a>
                             }

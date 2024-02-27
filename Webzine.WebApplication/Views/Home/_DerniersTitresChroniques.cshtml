@@ -41,12 +41,16 @@
                                 </p>
                                 <p class="mb-0">
                                     <i class="fa-solid fa-tags ps-3"></i>
-                                    @foreach (var style in @titre.Styles)
+                                    @{
+                                        var random = new Random();
+                                        var nombreDeStyles = random.Next(1, 4);
+                                    }
+
+                                    @foreach (var style in titre.Styles.Take(nombreDeStyles))
                                     {
-                                        <a asp-area="" asp-controller="Titre" asp-action="Style" >
+                                        <a asp-area="" asp-controller="Titre" asp-action="Style">
                                             @style.Libelle
                                         </a>
-                                        <span> </span>
                                     }
                                 </p>
                             </div>
