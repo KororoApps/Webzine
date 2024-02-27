@@ -10,3 +10,7 @@ a{
     content: " *" !important;
     color: red !important;
 }
+
+.justify-chronique {
+    text-align: justify;
+}
