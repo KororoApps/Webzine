@@ -14,7 +14,7 @@
 <div class="container">
     @*Création du bouton "Ajouter un nouveau titre.*@
     <a asp-area="Admin" asp-controller="Titre" asp-action="Create" class="btn btn-primary mb-4">
-        <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+        <i class="fa-solid fa-plus button"></i>
         Ajouter un nouveau titre
     </a>
 
@@ -47,10 +47,10 @@
                     <td class="text-center">
                         <div class="d-flex justify-content-center">
                             <a asp-area="Admin" asp-controller="Titre" asp-action="Edit" asp-route-id="@titre.IdTitre">
-                                <i class="fa-solid fa-edit text-primary p-2" style="color: #74C0FC;"></i>
+                                <i class="fa-solid fa-edit text-primary p-2 icone"></i>
                             </a>
                             <a asp-area="Admin" asp-controller="Titre" asp-action="Delete" asp-route-id="@titre.IdTitre">
-                                <i class="fa-solid fa-trash text-primary" style="color: #74C0FC;"></i>
+                                <i class="fa-solid fa-trash text-primary icone"></i>
                             </a>
                         </div>
                     </td>

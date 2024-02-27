@@ -24,7 +24,6 @@
         /// <summary>
         /// Obtient ou définit l'artiste associé au titre.
         /// </summary>
-        [ForeignKey(nameof(Artiste))]
         public required Artiste Artiste { get; set; }
 
         /// <summary>

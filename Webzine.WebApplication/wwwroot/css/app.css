@@ -18,3 +18,11 @@ a{
 .footer{
     min-height:calc(100vh-100px)
 }
+
+.icone {
+    color: #74C0FC;
+}
+
+.button {
+    color: #ffffff;
+}

@@ -15,7 +15,7 @@
 
     @*Création du bouton "Ajouter un nouvel artiste.*@
     <a asp-area="Admin" asp-controller="Artiste" asp-action="Create" class="btn btn-primary mb-4">
-        <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+        <i class="fa-solid fa-plus button"></i>
         Ajouter un nouvel artiste
     </a>
 
@@ -36,10 +36,10 @@
                     <td class="text-center">
                         <div class="d-flex justify-content-center">
                             <a asp-area="Admin" asp-controller="Artiste" asp-action="Edit" asp-route-id="@artiste.IdArtiste">
-                                <i class="fa-solid fa-edit text-primary p-2" style="color: #74C0FC;"></i>
+                                <i class="fa-solid fa-edit text-primary p-2 icone"></i>
                             </a>
                             <a asp-area="Admin" asp-controller="Artiste" asp-action="Delete" asp-route-id="@artiste.IdArtiste">
-                                <i class="fa-solid fa-trash text-primary" style="color: #74C0FC;"></i>
+                                <i class="fa-solid fa-trash text-primary icone"></i>
                             </a>
                         </div>
                     </td>

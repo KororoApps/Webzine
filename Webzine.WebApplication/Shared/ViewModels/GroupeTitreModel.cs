@@ -15,5 +15,15 @@ namespace Webzine.WebApplication.Shared.ViewModels
         /// Obtient ou définit la liste des titres dans le groupe.
         /// </summary>
         public IEnumerable<Titre> Titres { get; set; } = new List<Titre>();
+
+        /// <summary>
+        /// Obtient ou définit le terme de recherche saisi dans le formulaire.
+        /// </summary>
+        public string? Recherche { get; set; }
+
+        /// <summary>
+        /// Obtient ou définit la liste des artistes dans le groupe.
+        /// </summary>
+        public List<Artiste>? Artistes { get; set; } = new List<Artiste>();
     }
 }
