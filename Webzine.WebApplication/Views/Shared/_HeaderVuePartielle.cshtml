@@ -67,10 +67,10 @@
                 </ul>
 
                 @*Barre de recherche*@
-                <form class="d-flex">
+                <form class="d-flex" asp-action="" asp-controller="Recherche" asp-action="" method="POST">
                     <div class="input-group">
-                        <input class="form-control " type="text" placeholder="Trouver un artiste/titre">
-                        <a asp-area="" asp-controller="Recherche" asp-action="" class="btn btn-primary  rounded-end"><i class="fa-solid fa-search"></i></a>
+                        <input class="form-control " type="text" name="recherche" placeholder="Trouver un artiste/titre">
+                        <button type="submit" class="btn btn-primary rounded-end"><i class="fa-solid fa-search"></i></button>
                         <i class="fa-solid fa-search"></i>
                     </div>
                 </form>

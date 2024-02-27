@@ -9,14 +9,48 @@
 }
 
 @*Affichage du nom de la page.*@
-@foreach (var titre in Model.Titres)
-{
-    ViewData["titrePage"] = $"Résultats de la recherche pour \"{titre.Libelle}\"";
+@{
+    ViewData["titrePage"] = $"Résultats de la recherche pour \"{Model.Recherche}\"";
 }
 <hr />
 
-<p class="fs-2">Artistes</p>
-<p>Aucun artiste.</p>
 
-<p class="fs-2">Titres</p>
-<p>Aucun titre.</p>
+@if (Model.Artistes.Any())
+{
+    // Affichez la liste des titres ici
+    <p class="fs-2">Artistes</p>
+    foreach (var artiste in Model.Artistes)
+    {
+        <div class="d-inline">
+            <i class="fa-solid fa-user"></i>
+            <a asp-area="" asp-controller="Artiste" asp-action="" asp-route-id="@artiste.Nom">@artiste.Nom</a>
+        </div>
+    }
+}
+else
+{
+    <p class="fs-2">Artistes</p>
+    <p>Aucun artiste.</p>
+}
+
+@if (Model.Titres.Any())
+{
+    <p class="fs-2 mt-4">Titres</p>
+    foreach (var titre in Model.Titres)
+    {
+        <div class="row mb-3">
+            <div class="col-md-1">
+                <img src="@titre.UrlJaquette" alt="Image" class="img-fluid custom-shape w-100 h-100 object-fit-cover">
+            </div>
+            <div class="col-md-6 mt-1">
+                <a asp-area="" asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">@titre.Artiste.Nom - @titre.Album - @titre.Libelle</a>
+                <p>Durée : @titre.Duree.ToString(@"mm\:ss")</p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p class="fs-2">Titres</p>
+    <p>Aucun titre.</p>
+}
