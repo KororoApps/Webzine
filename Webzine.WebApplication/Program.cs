@@ -22,6 +22,11 @@ app.UseStaticFiles();
 // Active le middleware permettant le routage des requêtes entrantes.
 app.UseRouting();
 
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
+
 // Exercice : Définissez vos routes ci-dessous.
 // Ex 7.4
 
@@ -37,4 +42,3 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.Run();
-

@@ -1,7 +1,11 @@
-﻿namespace Webzine.EntitiesContext
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
+namespace Webzine.EntitiesContext
 {
-    public class Class1
+    public class WebzineContext: DbContext
     {
+        public WebzineContext(DbContextOptions<WebzineContext>options):base(options) { }
 
     }
 }
