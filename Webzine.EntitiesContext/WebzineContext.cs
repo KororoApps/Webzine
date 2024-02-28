@@ -4,8 +4,12 @@ using Webzine.Entity;
 
 namespace Webzine.EntitiesContext
 {
-    public class WebzineContext: DbContext
+    public partial class WebzineContext: DbContext
     {
+        public WebzineContext()
+        {
+        }
+
         public WebzineContext(DbContextOptions<WebzineContext>options):base(options) { }
 
         public virtual DbSet<Artiste> Artistes { get; set; }
@@ -13,6 +17,11 @@ namespace Webzine.EntitiesContext
         public virtual DbSet<Commentaire> Commentaires { get; set; }
         public virtual DbSet<Titre> Titres { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.LogTo(NLog.LogManager.GetCurrentClassLogger().Info, Microsoft.Extensions.Logging.LogLevel.Information);
+            optionsBuilder.UseNpgsql($"Host=localhost;Port=5432;Database=webzine;Username=postgres;Password=es");
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -80,8 +89,9 @@ namespace Webzine.EntitiesContext
             }
             );
 
-
-
+            OnModelCreatingPartial(modelBuilder);
         }
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
+    
 }

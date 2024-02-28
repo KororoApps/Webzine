@@ -10,6 +10,7 @@
         /// <summary>
         /// Obtient ou définit l'identifiant unique de l'artiste.
         /// </summary>
+        [Key]
         public int IdArtiste { get; set; }
 
         /// <summary>
