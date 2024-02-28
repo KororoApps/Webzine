@@ -1,6 +1,9 @@
 // <copyright file="Program.cs" company="Diiage 2026">
 // Copyright (c) Diiage 2026. All rights reserved.
 // </copyright>
+builder.Logging.ClearProviders();
+builder.Host.UseNLog();
+
 using Bogus;
 
 var builder = WebApplication.CreateBuilder(args);
