@@ -1,17 +1,22 @@
 // <copyright file="Program.cs" company="Diiage 2026">
 // Copyright (c) Diiage 2026. All rights reserved.
 // </copyright>
-builder.Logging.ClearProviders();
-builder.Host.UseNLog();
 
-using Bogus;
+//#if !DEBUG
+
+//#endif
+
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Logging.ClearProviders();
+builder.Host.UseNLog();
 
 // Ajoute les services nécessaires pour permettre l'utilisation des
 // controllers avec des vues.
 builder.Services.AddControllersWithViews()
-    // Ajoute la compilation des vues lors de l'exécution de l'application.
+    // Ajosute la compilation des vues lors de l'exécution de l'application.
     // Cela nous évite de recompiler l'application à chaque modification de vue.
     // Nécessite le package Nuget Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.
     .AddRazorRuntimeCompilation();
@@ -30,8 +35,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-// Exercice : Définissez vos routes ci-dessous.
-// Ex 7.4
 
 // Ajoute un endpoint permettant de router les urls
 // avec la forme /controller/action/id(optionnel).
@@ -44,4 +47,12 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Récupère la chaîne de connexion à la base dans les paramètres
+   //string? connect = builder.Configuration.GetConnectionString("WebzineConnect");
+
+   //Enregistre la classe de contexte de données comme service
+   //en lui indiquant la connexion à utiliser
+  // builder.Services.AddDbContext<WebzineContext>(opt => opt.npg(connect));
+
 app.Run();

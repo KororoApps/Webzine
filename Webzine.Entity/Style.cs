@@ -29,6 +29,6 @@
         /// </summary>
 
         [Required]
-        public required List<Titre> Titres { get; set; };
+        public required List<Titre> Titres { get; set; }
     }
 }
