@@ -17,4 +17,8 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0-preview.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Webzine.Entity\Webzine.Entity.csproj" />
+  </ItemGroup>
+
 </Project>
