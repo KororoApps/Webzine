@@ -9,7 +9,7 @@ using Webzine.EntitiesContext;
 
 using NLog.Web;
 using Microsoft.EntityFrameworkCore;
-using (var context = new WebzineContext())
+using (var context = new WebzineDbContext())
 {
 
     var builder = WebApplication.CreateBuilder(args);
@@ -51,13 +51,6 @@ using (var context = new WebzineContext())
     app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
-
-    // Récupère la chaîne de connexion à la base dans les paramètres
-    // string? connect = builder.Configuration.GetConnectionString("WebzineConnect");
-
-    //Enregistre la classe de contexte de données comme service
-    //en lui indiquant la connexion à utiliser
-    //builder.Services.AddDbContext<WebzineContext>(opt => opt.UseNpgsql(connect));
 
     context.Database.EnsureDeleted();
     context.Database.EnsureCreated();
