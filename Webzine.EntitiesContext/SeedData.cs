@@ -5,11 +5,10 @@ namespace Webzine.EntitiesContext
 {
     public static class SeedData
     {
-        public static void Initialize(IServiceProvider serviceProvider)
+        public static void Initialize(IServiceProvider serviceProvider, WebzineDbContext context)
         {
-            using var context = new WebzineDbContext();
-
-            // Désactivez le suivi des changements pour les Commentaires
+            
+            // Désactivez le suivi des changements 
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
             context.Artistes.AddRange(DataFactory.Artistes);

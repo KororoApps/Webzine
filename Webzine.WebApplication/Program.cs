@@ -1,67 +1,63 @@
-// <copyright file="Program.cs" company="Diiage 2026">
-// Copyright (c) Diiage 2026. All rights reserved.
-// </copyright>
+using Microsoft.EntityFrameworkCore;
+using NLog.Web;
 using Webzine.EntitiesContext;
 
-//#if !DEBUG
+var builder = WebApplication.CreateBuilder(args);
 
-//#endif
-
-using NLog.Web;
-using Microsoft.EntityFrameworkCore;
-using (var context = new WebzineDbContext())
+// Charge la configuration en fonction de l'environnement
+if (builder.Environment.IsDevelopment())
 {
+    builder.Configuration.AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
+}
+else
+{
+    builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+}
 
-    var builder = WebApplication.CreateBuilder(args);
+// Ajoute le DbContext avec l'injection de dépendance
+builder.Services.AddDbContext<WebzineDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-    builder.Logging.ClearProviders();
-    builder.Host.UseNLog();
+// Configure les services nécessaires
+builder.Services.AddControllersWithViews()
+    .AddRazorRuntimeCompilation();
 
-    // Ajoute les services nécessaires pour permettre l'utilisation des
-    // controllers avec des vues.
-    builder.Services.AddControllersWithViews()
-        // Ajosute la compilation des vues lors de l'exécution de l'application.
-        // Cela nous évite de recompiler l'application à chaque modification de vue.
-        // Nécessite le package Nuget Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.
-        .AddRazorRuntimeCompilation();
+// Initialise NLog
+builder.Logging.ClearProviders();
+builder.Host.UseNLog();
 
-    var app = builder.Build();
+var app = builder.Build();
 
-    // Active la possibilité de servir des fichiers statiques présents dans
-    // le dossier wwwroot.
-    app.UseStaticFiles();
+// Redirection HTTPS si ce n'est pas en développement
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
-    // Active le middleware permettant le routage des requêtes entrantes.
-    app.UseRouting();
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
-    if (!app.Environment.IsDevelopment())
-    {
-        app.UseHttpsRedirection();
-    }
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
-
-    // Ajoute un endpoint permettant de router les urls
-    // avec la forme /controller/action/id(optionnel).
-    // Equivalent à app.MapDefaultControllerRoute()
-    app.MapControllerRoute(
-      name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    );
-
-    app.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
 using (var scope = app.Services.CreateScope())
 {
+    var services = scope.ServiceProvider;
 
+    var context = services.GetRequiredService<WebzineDbContext>();
+
+    // Assure la création de la base de données
     context.Database.EnsureDeleted();
+
     context.Database.EnsureCreated();
 
     // Votre opération de seeding
-    //DbSeeder.SeedData();
-    var services = scope.ServiceProvider;
-    SeedData.Initialize(services);
-     
+    SeedData.Initialize(services, context);
 }
-    app.Run();
-}
+
+app.UseStaticFiles();
+app.UseRouting();
+
+app.Run();

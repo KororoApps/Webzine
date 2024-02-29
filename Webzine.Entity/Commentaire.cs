@@ -12,6 +12,7 @@
         /// Obtient ou définit l'identifiant unique du commentaire.
         /// </summary>
         [Key]
+        [Required]
         public int IdCommentaire { get; set; }
 
         /// <summary>

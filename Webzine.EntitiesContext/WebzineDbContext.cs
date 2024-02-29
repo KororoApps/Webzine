@@ -3,13 +3,13 @@ using Webzine.Entity;
 
 namespace Webzine.EntitiesContext
 {
-    public partial class WebzineDbContext: DbContext
+    public partial class WebzineDbContext : DbContext
     {
         public WebzineDbContext()
         {
         }
 
-        public WebzineDbContext(DbContextOptions<WebzineDbContext>options):base(options) { }
+        public WebzineDbContext(DbContextOptions<WebzineDbContext> options) : base(options) { }
 
         public virtual DbSet<Artiste> Artistes { get; set; }
         public virtual DbSet<Style> Styles { get; set; }
@@ -19,7 +19,6 @@ namespace Webzine.EntitiesContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.LogTo(NLog.LogManager.GetCurrentClassLogger().Info, Microsoft.Extensions.Logging.LogLevel.Information);
-            optionsBuilder.UseNpgsql($"Host=10.4.1.70;Port=5432;Database=webzine;Username=postgres;Password=Azerty@123");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,7 +27,7 @@ namespace Webzine.EntitiesContext
             {
                 entity.ToTable("Artiste");
 
-                entity.HasIndex(a => a.IdArtiste,"IX_artiste_artiste_id").IsUnique();
+                entity.HasIndex(a => a.IdArtiste, "IX_artiste_artiste_id").IsUnique();
 
                 entity.Property(a => a.IdArtiste).IsRequired();
                 entity.Property(a => a.Nom).HasMaxLength(50).HasColumnName("Nom de l'artiste").IsRequired();
@@ -60,7 +59,7 @@ namespace Webzine.EntitiesContext
                 entity.HasIndex(s => s.IdStyle, "IX_style_style_id").IsUnique();
 
                 entity.Property(s => s.IdStyle).IsRequired();
-                entity.Property(s => s.Libelle).HasMaxLength(50).HasColumnName("Libellé").IsRequired();    
+                entity.Property(s => s.Libelle).HasMaxLength(50).HasColumnName("Libellé").IsRequired();
             }
             );
 
@@ -92,5 +91,5 @@ namespace Webzine.EntitiesContext
         }
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
-    
+
 }

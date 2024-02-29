@@ -11,6 +11,7 @@
         /// Obtient ou définit l'identifiant unique de l'artiste.
         /// </summary>
         [Key]
+        [Required]
         public int IdArtiste { get; set; }
 
         /// <summary>

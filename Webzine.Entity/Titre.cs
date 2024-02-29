@@ -11,6 +11,7 @@
         /// Obtient ou définit l'identifiant unique du titre.
         /// </summary>
         [Key]
+        [Required] public int Id { get; set; }
         public int IdTitre { get; set; }
 
         /// <summary>
