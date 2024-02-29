@@ -65,9 +65,13 @@ namespace Webzine.Repository
         /// <returns></returns>
         public IEnumerable<Titre> FindAll()
         {
-            List<Titre> titres =  DataFactory.Titres;
+            List<Titre> titres = DataFactory.Titres;
 
-            return titres;
+            var orderedTitres = titres
+                .OrderByDescending(c => c.DateCreation)
+                .ToList();
+
+            return orderedTitres;
         }
 
         /// <summary>
