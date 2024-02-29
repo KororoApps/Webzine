@@ -31,7 +31,7 @@ namespace Webzine.Repository
             }
 
             _context.Artistes.Remove(artiste);
-            _context.SaveChanges(); throw new NotImplementedException();
+            _context.SaveChanges();
         }
 
         public Artiste Find(int id)
