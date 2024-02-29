@@ -8,6 +8,8 @@ namespace Webzine.WebApplication.Controllers
     using Webzine.Entity;
     using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.Repository;
+    using Webzine.Repository.Contracts;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des artistes.
@@ -18,22 +20,27 @@ namespace Webzine.WebApplication.Controllers
     /// </remarks>
     public class ArtisteController : Controller
     {
+        private readonly IArtisteRepository _artisteRepository;
+
+        public ArtisteController(IArtisteRepository artisteRepository) 
+        {
+            _artisteRepository = artisteRepository;
+        }
+
         /// <summary>
         /// Action pour afficher les détails d'un artiste.
         /// </summary>
         /// <returns>Vue contenant les détails de l'artiste.</returns>
         public IActionResult Index()
         {
-            List<Titre> titres = DataFactory.Titres;
+            var artistes = _artisteRepository.FindAll();
 
-            // Création du modèle de vue contenant la liste de Titres.
-            var titreModel = new GroupeTitreModel
+            var artisteModel = new GroupeArtisteModel
             {
-                Titres = titres,
+                Artistes = artistes,
             };
 
-            // Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.
-            return this.View(titreModel);
+            return View(artisteModel);
         }
     }
 }
