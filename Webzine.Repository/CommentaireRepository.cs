@@ -33,7 +33,11 @@ namespace Webzine.Repository
         /// <returns></returns>
         public Commentaire Find(int id)
         {
-            var Commentaire = _context.Commentaires.Include(c => c.Titre).Where(c => c.IdCommentaire == id).First();
+            var Commentaire = _context.Commentaires.Include(c => c.Titre).Where(c => c.IdCommentaire == id).FirstOrDefault();
+            if (Commentaire == null)
+            {
+                throw new ArgumentNullException(nameof(Commentaire));
+            }
             return Commentaire;
         }
 
