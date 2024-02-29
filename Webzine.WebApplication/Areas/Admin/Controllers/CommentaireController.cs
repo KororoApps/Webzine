@@ -5,8 +5,6 @@
 namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.Entity;
-    using Webzine.Entity.Fixtures;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
