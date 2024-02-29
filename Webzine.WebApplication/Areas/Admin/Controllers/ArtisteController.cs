@@ -8,7 +8,8 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Webzine.Entity;
     using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
- 
+    using Webzine.Repository;
+    using Webzine.Repository.Contracts;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des opérations liées aux artistes dans la zone d'administration.
@@ -20,47 +21,44 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class ArtisteController : Controller
     {
+
+        private readonly IArtisteRepository _artisteRepository;
+
+        public ArtisteController(IArtisteRepository artisteRepository)
+        {
+            _artisteRepository = artisteRepository;
+        }
         /// <summary>
         /// Action pour afficher la liste des artistes.
         /// </summary>
         /// <returns>Vue contenant la liste des artistes.</returns>
         public IActionResult Index()
         {
-
-            // Génération d'une liste d'artistes.
-            List<Artiste> artistes = DataFactory.Artistes;
-
-            // Tri de la liste des artistes par nom.
+            var artistes = _artisteRepository.FindAll();
             var artistesTries = artistes.OrderBy(a => a.Nom).ToList();
 
-            // Création du modèle de vue contenant la liste d'Artistes.
             var artisteModel = new GroupeArtisteModel
             {
                 Artistes = artistesTries,
             };
 
-            // Retour de la vue avec le modèle de vue contenant les artistes générés.
-            return this.View(artisteModel);
+            return View(artisteModel);
         }
 
         /// <summary>
         /// Action pour afficher la vue de suppression d'un artiste.
         /// </summary>
         /// <returns>Vue de suppression d'un artiste.</returns>
-        public IActionResult Delete()
+        public IActionResult Delete(int id)
         {
-            // Génération d'un artiste.
-            List<Artiste> artistes = DataFactory.Artistes;
-            Artiste artiste = artistes.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+            var artiste = _artisteRepository.Find(id);
 
-            // Création du modèle de vue contenant un artiste.=
             var artisteModel = new ArtisteModel
             {
                 Artiste = artiste,
             };
 
-            // Retour de la vue avec le modèle de vue contenant les détails de l'artiste.
-            return this.View(artisteModel);
+            return View(artisteModel);
         }
 
         /// <summary>
@@ -72,7 +70,8 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            return this.RedirectToAction(nameof(this.Index));
+            _artisteRepository.Delete(_artisteRepository.Find(id));
+            return RedirectToAction(nameof(Index));
         }
 
         /// <summary>
@@ -81,8 +80,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de création d'un artiste.</returns>
         public IActionResult Create()
         {
-            // Retour de la vue pour la création d'un artiste.
-            return this.View();
+            return View();
         }
 
         /// <summary>
@@ -91,29 +89,26 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateConfirmed()
+        public IActionResult CreateConfirmed(Artiste artiste)
         {
-            return this.RedirectToAction(nameof(this.Index));
+            _artisteRepository.Add(artiste);
+            return RedirectToAction(nameof(Index));
         }
 
         /// <summary>
         /// Action pour afficher la vue d'édition d'un artiste.
         /// </summary>
         /// <returns>Vue d'édition d'un artiste.</returns>
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
-            // Génération d'un artiste.
-            List<Artiste> artistes = DataFactory.Artistes;
-            Artiste artiste = artistes.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+            var artiste = _artisteRepository.Find(id);
 
-            // Création du modèle de vue contenant un artiste.
             var artisteModel = new ArtisteModel
             {
                 Artiste = artiste,
             };
 
-            // Retour de la vue avec le modèle de vue contenant les détails de l'artiste.
-            return this.View(artisteModel);
+            return View(artisteModel);
         }
 
         /// <summary>
@@ -123,9 +118,10 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditConfirmed(int id)
+        public IActionResult EditConfirmed(Artiste artiste)
         {
-            return this.RedirectToAction(nameof(this.Index));
+            _artisteRepository.Update(artiste);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

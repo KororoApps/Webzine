@@ -19,7 +19,7 @@ namespace Webzine.EntitiesContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.LogTo(NLog.LogManager.GetCurrentClassLogger().Info, Microsoft.Extensions.Logging.LogLevel.Information);
-            optionsBuilder.UseNpgsql($"Host=localhost;Port=5432;Database=webzine;Username=postgres;Password=es");
+            optionsBuilder.UseNpgsql($"Host=10.4.1.70;Port=5432;Database=webzine;Username=postgres;Password=Azerty@123");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
