@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Entity.Tests", "..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Repository.Contracts", "..\Webzine.Repository.Contracts\Webzine.Repository.Contracts.csproj", "{DEF3149B-30AF-479D-A02F-D48A6F63039F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webzine.EntitiesContext", "..\Webzine.EntitiesContext\Webzine.EntitiesContext.csproj", "{21D2CEB6-A069-494D-9F24-63A20C62116E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.EntitiesContext", "..\Webzine.EntitiesContext\Webzine.EntitiesContext.csproj", "{21D2CEB6-A069-494D-9F24-63A20C62116E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wenzine.Repository", "..\Wenzine.Repository\Wenzine.Repository.csproj", "{7CF998A3-020B-48A9-AAC8-0FA0437E4F41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{21D2CEB6-A069-494D-9F24-63A20C62116E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21D2CEB6-A069-494D-9F24-63A20C62116E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21D2CEB6-A069-494D-9F24-63A20C62116E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF998A3-020B-48A9-AAC8-0FA0437E4F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF998A3-020B-48A9-AAC8-0FA0437E4F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF998A3-020B-48A9-AAC8-0FA0437E4F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF998A3-020B-48A9-AAC8-0FA0437E4F41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

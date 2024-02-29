@@ -8,6 +8,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Webzine.Entity;
     using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
+    using Wenzine.Repository;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des opérations liées aux styles dans la zone d'administration.
@@ -19,22 +20,22 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class StyleController : Controller
     {
+        private StyleRepository _styleRepository;
+
+        public StyleController(StyleRepository styleRepository)
+        {
+            _styleRepository = styleRepository;
+        }
         /// <summary>
         /// Affiche la liste des styles.
         /// </summary>
         /// <returns>Vue avec la liste des styles.</returns>
         public IActionResult Index()
         {
-            // Génération d'une liste de styles.
-            List<Style> styles = DataFactory.Styles;
-
-            // Tri de la liste des styles par nom.
-            var stylesTries = styles.OrderBy(s => s.Libelle).ToList();
-
             // Création du modèle de vue contenant la liste de Styles.
             var styleModel = new GroupeStyleModel
             {
-                Styles = stylesTries,
+                Styles = _styleRepository.FindAll(),
             };
 
             // Retour de la vue avec le modèle de vue contenant les styles générés.
@@ -66,17 +67,13 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// Affiche la vue de suppression d'un style.
         /// </summary>
         /// <returns>Vue de suppression d'un style.</returns>
-        public IActionResult Delete()
+        public IActionResult Delete(int id)
         {
-            // Génération d'un style.
-            List<Style> styles = DataFactory.Styles;
-            Style style = styles.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
-
 
             // Création du modèle de vue contenant le style à supprimer.
             var styleModel = new StyleModel
             {
-                Style = style,
+                Style = _styleRepository.Find(id),
             };
 
             // Retour de la vue avec le modèle de vue contenant le style généré.
@@ -92,6 +89,8 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
+            _styleRepository.Delete(_styleRepository.Find(id));
+
             return this.RedirectToAction(nameof(this.Index));
         }
 
