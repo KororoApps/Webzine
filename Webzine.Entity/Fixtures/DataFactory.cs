@@ -53,7 +53,7 @@ namespace Webzine.Entity.Fixtures
         public static void GenerateFakeStyles()
         {
             var styleFaker = new Faker<Style>()
-                .RuleFor(t => t.IdStyle, f => f.IndexFaker)
+                .RuleFor(t => t.IdStyle, f => f.IndexFaker + 1)
                 .RuleFor(s => s.Libelle, f => f.Lorem.Word());
 
             Styles = styleFaker.Generate(25);
@@ -65,10 +65,10 @@ namespace Webzine.Entity.Fixtures
         public static void GenerateFakeCommentaires()
         {
             var commentaireFaker = new Faker<Commentaire>()
-                .RuleFor(c => c.IdCommentaire, f => f.IndexFaker)
+                .RuleFor(c => c.IdCommentaire, f => f.IndexFaker + 1)
                 .RuleFor(c => c.Auteur, f => f.Name.FullName())
                 .RuleFor(c => c.Contenu, f => f.Lorem.Sentence())
-                .RuleFor(c => c.DateCreation, f => f.Date.Past());
+                .RuleFor(c => c.DateCreation, f => f.Date.Past().ToUniversalTime());
 
             Commentaires = commentaireFaker.Generate(30);
         }
@@ -79,7 +79,7 @@ namespace Webzine.Entity.Fixtures
         public static void GenerateFakeArtiste()
         {
             var artisteFaker = new Faker<Artiste>()
-                .RuleFor(t => t.IdArtiste, f => f.IndexFaker)
+                .RuleFor(t => t.IdArtiste, f => f.IndexFaker + 1)
                 .RuleFor(a => a.Nom, f => f.Name.FullName())
                 .RuleFor(a => a.Biographie, f => f.Lorem.Paragraph());
 
@@ -93,11 +93,11 @@ namespace Webzine.Entity.Fixtures
         public static void GenerateFakeTitres()
         {
             var titreFaker = new Faker<Titre>()
-                .RuleFor(t => t.IdTitre, f => f.IndexFaker)
+                .RuleFor(t => t.IdTitre, f => f.IndexFaker + 1)
                 .RuleFor(t => t.Libelle, f => f.Name.FullName())
                 .RuleFor(t => t.Duree, f => f.Date.Timespan())
-                .RuleFor(t => t.DateSortie, f => f.Date.Past())
-                .RuleFor(t => t.DateCreation, f => f.Date.Past())
+                .RuleFor(t => t.DateSortie, f => f.Date.Past().ToUniversalTime())
+                .RuleFor(t => t.DateCreation, f => f.Date.Past().ToUniversalTime())
                 .RuleFor(t => t.NbLectures, f => f.Random.Number(1, 10000))
                 .RuleFor(t => t.NbLikes, f => f.Random.Number(1, 1000))
                 .RuleFor(t => t.Album, f => f.Commerce.ProductName())

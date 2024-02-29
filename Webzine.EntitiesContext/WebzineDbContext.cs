@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Data.Common;
 using Webzine.Entity;
 
 namespace Webzine.EntitiesContext

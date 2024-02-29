@@ -51,13 +51,24 @@ using (var context = new WebzineDbContext())
     app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+using (var scope = app.Services.CreateScope())
+{
 
     context.Database.EnsureDeleted();
     context.Database.EnsureCreated();
 
+    // Votre opération de seeding
+    //DbSeeder.SeedData();
+var services = scope.ServiceProvider;
+SeedData.Initialize(services);
+
+     
+}
+
     
     
     //context.Database.Migrate();
-    context.Artistes.Where(a => a.Nom.Length > 0).ToList().ForEach(a => Console.WriteLine(a.Nom));
+    //context.Artistes.Where(a => a.Nom.Length > 0).ToList().ForEach(a => Console.WriteLine(a.Nom));
+
     app.Run();
 }
