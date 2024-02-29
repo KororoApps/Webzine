@@ -1,52 +1,42 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Webzine.EntitiesContext;
 using Webzine.Entity;
+using Webzine.Entity.Fixtures;
 using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
 {
-    public class DbArtisteRepository : IArtisteRepository
+    public class LocalArtisteRepository : IArtisteRepository
     {
-        private readonly WebzineDbContext _context;
-        public DbArtisteRepository(WebzineDbContext context)
-        {
-            _context = context;
-        }
-
         /// <summary>
-        /// Ajoute un Artiste à base de donnée
+        /// Ajoute un Artiste aux fausses données
         /// </summary>
         /// <param name="artiste"></param>
         public void Add(Artiste artiste)
         {
-            if (artiste == null)
-            {
-                throw new ArgumentNullException(nameof(artiste));
-            }
+            // Génère un nouvel identifiant
+            artiste.IdArtiste = DataFactory.Artistes.Count + 1;
 
-            _context.Artistes
-                .Add(artiste);
-
-            _context
-                .SaveChanges();
+            // Ajoute le nouveal artiste à la liste
+            DataFactory.Artistes.Add(artiste);
         }
 
         /// <summary>
-        /// Supprimme un artiste de la base de donnée
+        /// Supprimme un artiste aux fausses données
         /// </summary>
         /// <param name="artiste"></param>
         public void Delete(Artiste artiste)
         {
-            if (artiste == null)
+            // Recherche le artiste dans la liste
+            var artisteASupprimer = DataFactory.Artistes
+                .FirstOrDefault(a => a.IdArtiste == artiste.IdArtiste);
+
+            // Supprime le artiste s'il existe
+            if (artisteASupprimer != null)
             {
-                throw new ArgumentNullException(nameof(artiste));
+                DataFactory.Artistes
+                    .Remove(artisteASupprimer);
             }
-
-            _context.Artistes
-                .Remove(artiste);
-
-            _context
-                .SaveChanges();
         }
 
         /// <summary>
@@ -54,17 +44,10 @@ namespace Webzine.Repository
         /// </summary>
         /// <param name="idArtiste"></param>
         /// <returns></returns>
-
         public Artiste Find(int idArtiste)
         {
-            var artiste = _context.Artistes
-                .SingleOrDefault(t => t.IdArtiste == idArtiste);
-
-            if (artiste == null)
-            {
-                //Exception si on ne trouve pas d'artiste correspondant
-                throw new ArgumentNullException();
-            }
+            var artiste = DataFactory.Artistes
+                .FirstOrDefault(a => a.IdArtiste == idArtiste);
 
             return artiste;
         }
@@ -73,14 +56,15 @@ namespace Webzine.Repository
         /// Renvoie tous les Artistes
         /// </summary>
         /// <returns></returns>
-
         public IEnumerable<Artiste> FindAll()
         {
-            var allArtistes = _context.Artistes
-                .OrderBy(t => t.Nom)
+            List<Artiste> artiste = DataFactory.Artistes;
+
+            var orderedArtistes = artiste
+                .OrderByDescending(a => a.Nom)
                 .ToList();
 
-            return allArtistes;
+            return orderedArtistes;
         }
 
         /// <summary>
