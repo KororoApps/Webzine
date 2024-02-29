@@ -29,9 +29,9 @@ namespace Webzine.EntitiesContext
 
                 entity.HasIndex(a => a.IdArtiste, "IX_artiste_artiste_id").IsUnique();
 
-                entity.Property(a => a.IdArtiste).IsRequired();
-                entity.Property(a => a.Nom).HasMaxLength(50).HasColumnName("Nom de l'artiste").IsRequired();
-                entity.Property(a => a.Biographie).IsRequired();
+                entity.Property(a => a.IdArtiste);
+                entity.Property(a => a.Nom);
+                entity.Property(a => a.Biographie);
 
                 entity.HasMany(a => a.Titres).WithOne(t => t.Artiste);
             }
@@ -43,10 +43,10 @@ namespace Webzine.EntitiesContext
 
                 entity.HasIndex(c => c.IdCommentaire, "IX_commentaire_commentaire_id").IsUnique();
 
-                entity.Property(c => c.IdCommentaire).IsRequired();
-                entity.Property(c => c.Auteur).HasMaxLength(30).HasColumnName("Nom").IsRequired();
-                entity.Property(c => c.Contenu).HasMaxLength(1000).HasColumnName("Commentaire").IsRequired();
-                entity.Property(c => c.DateCreation).HasColumnName("Date de création").IsRequired();
+                entity.Property(c => c.IdCommentaire);
+                entity.Property(c => c.Auteur);
+                entity.Property(c => c.Contenu);
+                entity.Property(c => c.DateCreation);
 
                 entity.HasOne(c => c.Titre).WithMany(t => t.Commentaires);
             }
@@ -58,8 +58,8 @@ namespace Webzine.EntitiesContext
 
                 entity.HasIndex(s => s.IdStyle, "IX_style_style_id").IsUnique();
 
-                entity.Property(s => s.IdStyle).IsRequired();
-                entity.Property(s => s.Libelle).HasMaxLength(50).HasColumnName("Libellé").IsRequired();
+                entity.Property(s => s.IdStyle);
+                entity.Property(s => s.Libelle);
             }
             );
 
@@ -69,17 +69,17 @@ namespace Webzine.EntitiesContext
 
                 entity.HasIndex(t => t.IdTitre, "IX_titre_titre_id").IsUnique();
 
-                entity.Property(t => t.IdTitre).IsRequired();
-                entity.Property(t => t.Libelle).HasMaxLength(200).HasColumnName("Titre").IsRequired();
-                entity.Property(t => t.Duree).HasColumnName("Durée en secondes").IsRequired();
-                entity.Property(t => t.DateSortie).HasColumnName("Date de sortie").IsRequired();
-                entity.Property(t => t.DateCreation).HasColumnName("Date de Création").IsRequired();
-                entity.Property(t => t.NbLectures).HasColumnName("Nombre de lecture").IsRequired();
-                entity.Property(t => t.NbLikes).HasColumnName("Nombre de likes").IsRequired();
-                entity.Property(t => t.Album).IsRequired();
-                entity.Property(t => t.Chronique).HasMaxLength(4000).IsRequired();
-                entity.Property(t => t.UrlJaquette).HasColumnName("Jaquette de l'album").HasMaxLength(250).IsRequired();
-                entity.Property(t => t.UrlEcoute).HasColumnName("URL d'écoute").HasMaxLength(250);
+                entity.Property(t => t.IdTitre);
+                entity.Property(t => t.Libelle);
+                entity.Property(t => t.Duree);
+                entity.Property(t => t.DateSortie);
+                entity.Property(t => t.DateCreation);
+                entity.Property(t => t.NbLectures);
+                entity.Property(t => t.NbLikes);
+                entity.Property(t => t.Album);
+                entity.Property(t => t.Chronique);
+                entity.Property(t => t.UrlJaquette);
+                entity.Property(t => t.UrlEcoute);
 
                 entity.HasOne(t => t.Artiste).WithMany(a => a.Titres);
                 entity.HasMany(t => t.Commentaires).WithOne(c => c.Titre);
