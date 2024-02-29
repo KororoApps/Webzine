@@ -1,7 +1,6 @@
 ﻿namespace Webzine.Entity
 {
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
     /// Représente un titre musical dans le système.
@@ -17,7 +16,6 @@
         /// <summary>
         /// Obtient ou définit l'identifiant de l'artiste associé au titre.
         /// </summary>
-        [ForeignKey(nameof(Artiste))]
 
         public int IdArtiste { get; set; }
 
@@ -114,5 +112,6 @@
         [MinLength(13)]
         [MaxLength(250)]
         public string? UrlEcoute { get; set; }
+
     }
 }

@@ -2,7 +2,6 @@
 {
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
     /// Représente un commentaire associé à un titre dans le système.
@@ -12,6 +11,7 @@
         /// <summary>
         /// Obtient ou définit l'identifiant unique du commentaire.
         /// </summary>
+        [Key]
         public int IdCommentaire { get; set; }
 
         /// <summary>
@@ -45,7 +45,6 @@
         /// <summary>
         /// Obtient ou définit l'identifiant du titre auquel le commentaire est associé.
         /// </summary>
-        [ForeignKey(nameof(Titre))]
         public int IdTitre { get; set; }
 
         /// <summary>

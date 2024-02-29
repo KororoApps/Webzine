@@ -1,18 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Data.Common;
 using Webzine.Entity;
 
 namespace Webzine.EntitiesContext
 {
-    public class WebzineContext: DbContext
+    public partial class WebzineDbContext: DbContext
     {
-        public WebzineContext(DbContextOptions<WebzineContext>options):base(options) { }
+        public WebzineDbContext()
+        {
+        }
+
+        public WebzineDbContext(DbContextOptions<WebzineDbContext>options):base(options) { }
 
         public virtual DbSet<Artiste> Artistes { get; set; }
         public virtual DbSet<Style> Styles { get; set; }
         public virtual DbSet<Commentaire> Commentaires { get; set; }
         public virtual DbSet<Titre> Titres { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.LogTo(NLog.LogManager.GetCurrentClassLogger().Info, Microsoft.Extensions.Logging.LogLevel.Information);
+            optionsBuilder.UseNpgsql($"Host=localhost;Port=5432;Database=webzine;Username=postgres;Password=es");
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -80,8 +88,9 @@ namespace Webzine.EntitiesContext
             }
             );
 
-
-
+            OnModelCreatingPartial(modelBuilder);
         }
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
+    
 }
