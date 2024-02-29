@@ -12,7 +12,7 @@
         /// Obtient ou définit l'identifiant unique du style.
         /// </summary>
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required]
         public int IdStyle { get; set; }
 
         /// <summary>
