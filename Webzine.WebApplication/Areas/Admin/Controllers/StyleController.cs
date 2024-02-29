@@ -8,7 +8,8 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Webzine.Entity;
     using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
-    using Wenzine.Repository;
+    using Webzine.Repository;
+    using Webzine.Repository.Contracts;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des opérations liées aux styles dans la zone d'administration.
@@ -20,9 +21,9 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class StyleController : Controller
     {
-        private StyleRepository _styleRepository;
+        private IStyleRepository _styleRepository;
 
-        public StyleController(StyleRepository styleRepository)
+        public StyleController(IStyleRepository styleRepository)
         {
             _styleRepository = styleRepository;
         }

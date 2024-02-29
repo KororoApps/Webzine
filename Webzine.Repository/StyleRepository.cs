@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Webzine.EntitiesContext;
 using Webzine.Entity;
-using Webzine.Entity.Fixtures;
 using Webzine.Repository.Contracts;
 
-namespace Wenzine.Repository
+namespace Webzine.Repository
 {
     // Implémente l'interface IStyleRepository
     public class StyleRepository : IStyleRepository
@@ -37,7 +35,8 @@ namespace Wenzine.Repository
         /// <returns> Retourne le style trouvé</returns>
         public Style Find(int id)
         {
-            Style style;
+            var style = _context.Styles.Include(c => c.IdStyle == id).FirstOrDefault();
+    
             if (_context.Styles.Any()) 
             {
                 style = _context.Styles
@@ -48,8 +47,8 @@ namespace Wenzine.Repository
             else
             {
                 // Génération d'un style à partir de DataFactory.
-                var styles = DataFactory.Styles;
-                style = styles.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+                //var styles = DataFactory.Styles;
+                //style = styles.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
             }
 
             return style;
@@ -61,21 +60,22 @@ namespace Wenzine.Repository
         /// <returns>Retourne tous les styles</returns>
         public IEnumerable<Style> FindAll()
         {
-            IEnumerable<Style> allStyles;
+
+            var styles = _context.Styles.Include(c => c.Libelle).ToList();
 
             if (_context.Styles.Any()) 
             {
-                allStyles = _context.Styles.Include(c => c.Titres).OrderBy(c => c.IdStyle).ToList();
+                styles = _context.Styles.Include(c => c.Titres).OrderBy(c => c.IdStyle).ToList();
             }
             else
             {
                 // Génération d'un style à partir de DataFactory.
-                var styles = DataFactory.Styles;
-                allStyles = styles.OrderBy(t => Guid.NewGuid()).ToList();
+                //var styles = DataFactory.Styles;
+                //allStyles = styles.OrderBy(t => Guid.NewGuid()).ToList();
 
             }
                 
-            return allStyles;
+            return styles;
         }
         // Méthode pour mettre à jour un style (non implémentée)
         public void Update(Style style)
