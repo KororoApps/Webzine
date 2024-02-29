@@ -59,16 +59,9 @@ using (var scope = app.Services.CreateScope())
 
     // Votre opération de seeding
     //DbSeeder.SeedData();
-var services = scope.ServiceProvider;
-SeedData.Initialize(services);
-
+    var services = scope.ServiceProvider;
+    SeedData.Initialize(services);
      
 }
-
-    
-    
-    //context.Database.Migrate();
-    //context.Artistes.Where(a => a.Nom.Length > 0).ToList().ForEach(a => Console.WriteLine(a.Nom));
-
     app.Run();
 }
