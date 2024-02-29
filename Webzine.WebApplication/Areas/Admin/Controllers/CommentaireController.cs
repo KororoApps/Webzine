@@ -7,6 +7,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Entity.Fixtures;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -19,22 +20,21 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class CommentaireController : Controller
     {
+        private readonly ICommentaireRepository commentaireRepository;
+        public CommentaireController(ICommentaireRepository commentaireRepository)
+        {
+            this.commentaireRepository = commentaireRepository;
+        }
         /// <summary>
         /// Action pour afficher la liste des commentaires.
         /// </summary>
         /// <returns>Vue contenant la liste des commentaires.</returns>
         public IActionResult Index()
         {
-            // Génération d'un commentaire.
-            List<Commentaire> commentaires = DataFactory.Commentaires;
-
-            // Tri de la liste des commentaires par date de création.
-            var commentairesTries = commentaires.OrderByDescending(c => c.DateCreation).ToList();
-
             // Création du modèle de vue contenant la liste de Commentaires.
             var commentaireModel = new GroupeCommentaireModel
             {
-                Commentaires = commentairesTries,
+                Commentaires = commentaireRepository.FindAll(),
             };
 
             // Retour de la vue avec le modèle de vue contenant les commentaires générés.
@@ -45,17 +45,12 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// Action pour afficher la vue de suppression d'un commentaire.
         /// </summary>
         /// <returns>Vue de suppression d'un commentaire.</returns>
-        public IActionResult Delete()
+        public IActionResult Delete(int id)
         {
-            // Génération d'un commentaire.
-            List<Commentaire> commentaires = DataFactory.Commentaires;
-            Commentaire commentaire = commentaires.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
-
-
             // Création du modèle de vue contenant un commentaire.
             var commentaireModel = new CommentaireModel
             {
-                Commentaire = commentaire,
+                Commentaire = commentaireRepository.Find(id),
             };
 
             // Retour de la vue avec le modèle de vue contenant le commentaire généré.
@@ -71,6 +66,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
+            commentaireRepository.Delete(commentaireRepository.Find(id));
             return this.RedirectToAction(nameof(this.Index));
         }
     }
