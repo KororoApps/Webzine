@@ -43,7 +43,7 @@
 
                             @foreach (var style in Model.Titre.Styles)
                             {
-                                <a asp-controller="Titre" asp-action="Style"><span class="me-4 ">@style.Libelle</span></a>
+                                <a asp-area="" asp-controller="Titre" asp-action="Style" asp-route-id="@style.Libelle"><span class="me-4 ">@style.Libelle</span></a>
                             }
                     </div>
                 </div>
