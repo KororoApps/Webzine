@@ -7,6 +7,7 @@ namespace Webzine.WebApplication.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Entity.Fixtures;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -14,23 +15,22 @@ namespace Webzine.WebApplication.Controllers
     /// </summary>
     public class HomeController : Controller
     {
+        private readonly ITitreRepository _titreRepository;
 
+        public HomeController(ITitreRepository titreRepository)
+        {
+            _titreRepository = titreRepository;
+        }
         /// <summary>
-        /// Affiche la page d'accueil avec des données générées aléatoirement.
+        /// Affiche la page d'accueil.
         /// </summary>
         /// <returns>Vue de la page d'accueil.</returns>
         public IActionResult Index()
         {
-            // Génération d'une liste de titres.
-            List<Titre> titres = DataFactory.Titres;
-
-            // Tri de la liste des titres par date de création.
-            var titresTries = titres.OrderByDescending(t => t.DateCreation).ToList();
-
             // Création du modèle de vue contenant la liste des titres.
             GroupeTitreModel groupeTitreModel = new()
             {
-                Titres = titresTries,
+                Titres = this._titreRepository.FindAll(),
             };
 
             // Retour de la vue avec le modèle de vue contenant les détails des titres.
