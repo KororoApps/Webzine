@@ -10,32 +10,32 @@ var builder = WebApplication.CreateBuilder(args);
 // Charge la configuration en fonction de l'environnement.
 if (builder.Environment.IsDevelopment())
 {
-    builder.Configuration.AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
+    //builder.Configuration.AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
+
+    builder.Services.AddDbContext<WebzineDbContext>(options =>
+   options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
 }
 else
 {
-    builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+    //builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+    builder.Services.AddDbContext<WebzineDbContext>(options =>
+   options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
 }
 
-// Connexion à la base PostGreSQL
-/*builder.Services.AddDbContext<WebzineDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));*/
-
-// Connexion à la base SQLite
-builder.Services.AddDbContext<WebzineDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
-
-// Ajoute les repositories avec l'injection de dépendance.
-builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
-builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
-builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
-builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
-
-// Ajoute les repositories avec l'injection de dépendance pour la base de données.
-/*builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
-builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
-//builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
-builder.Services.AddScoped<ICommentaireRepository,DbCommentaireRepository>();*/
+if ((builder.Configuration.GetSection("Repository").Value == "Local")){
+    builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
+    builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
+    builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
+    builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
+}
+else
+{
+    builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
+    builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
+    builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
+    builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
+}
 
 // Configure les services nécessaires.
 builder.Services.AddControllersWithViews()
