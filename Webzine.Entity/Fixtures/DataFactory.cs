@@ -22,9 +22,9 @@ namespace Webzine.Entity.Fixtures
 
             // Génère des données fictives pour les entités
             GenerateFakeArtiste();
-            GenerateFakeStyles();
-            GenerateFakeCommentaires();
+            GenerateFakeStyles();           
             GenerateFakeTitres();
+            GenerateFakeCommentaires();
         }
 
         /// <summary>
@@ -59,19 +59,6 @@ namespace Webzine.Entity.Fixtures
             Styles = styleFaker.Generate(25);
         }
 
-        /// <summary>
-        /// Génère une liste de commentaires fictifs.
-        /// </summary>
-        public static void GenerateFakeCommentaires()
-        {
-            var commentaireFaker = new Faker<Commentaire>()
-                .RuleFor(c => c.IdCommentaire, f => f.IndexFaker + 1)
-                .RuleFor(c => c.Auteur, f => f.Name.FullName())
-                .RuleFor(c => c.Contenu, f => f.Lorem.Sentence())
-                .RuleFor(c => c.DateCreation, f => f.Date.Past().ToUniversalTime());
-
-            Commentaires = commentaireFaker.Generate(30);
-        }
 
         /// <summary>
         /// Génère une liste d'artistes fictifs.
@@ -106,18 +93,25 @@ namespace Webzine.Entity.Fixtures
                 .RuleFor(t => t.UrlEcoute, f => f.Internet.Url())
                 .RuleFor(t => t.Album, f => f.Commerce.ProductName())
                 .RuleFor(t => t.Artiste, f => f.PickRandom(Artistes))
-                .RuleFor(t => t.Commentaires, f => f.PickRandom(Commentaires, 15).ToList())
+                //.RuleFor(t => t.Commentaires, f => f.PickRandom(Commentaires, 10).ToList())
                 .RuleFor(t => t.Styles, f => f.PickRandom(Styles, 15).ToList());
 
-            Titres = titreFaker.Generate(500);
+            Titres = titreFaker.Generate(400);
 
-            foreach (var titre in Titres)
-            {
-                foreach (var commentaire in titre.Commentaires)
-                {
-                    commentaire.Titre = titre;
-                }
-            }
+        }
+        /// <summary>
+        /// Génère une liste de commentaires fictifs.
+        /// </summary>
+        public static void GenerateFakeCommentaires()
+        {
+            var commentaireFaker = new Faker<Commentaire>()
+                .RuleFor(c => c.IdCommentaire, f => f.IndexFaker + 1)
+                .RuleFor(c => c.Auteur, f => f.Name.FullName())
+                .RuleFor(c => c.Contenu, f => f.Lorem.Sentence())
+                .RuleFor(c => c.DateCreation, f => f.Date.Past().ToUniversalTime())
+                .RuleFor(c => c.Titre, f => f.PickRandom(Titres));
+
+            Commentaires = commentaireFaker.Generate(1000);
         }
     }
 }

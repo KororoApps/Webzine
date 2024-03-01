@@ -11,10 +11,10 @@ namespace Webzine.EntitiesContext
             // Désactivez le suivi des changements 
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
-            context.Artistes.AddRange(DataFactory.Artistes);
+            context.Artistes.AddRange(DataFactory.Artistes);   
+            context.Commentaires.AddRange(DataFactory.Commentaires);
             context.Styles.AddRange(DataFactory.Styles);
             context.Titres.AddRange(DataFactory.Titres);
-            context.Commentaires.AddRange(DataFactory.Commentaires);
 
             // SaveChanges après le seeding
             context.SaveChanges();
