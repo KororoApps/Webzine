@@ -58,6 +58,7 @@ namespace Webzine.Repository
         public Artiste Find(int idArtiste)
         {
             var artiste = _context.Artistes
+                .Include(c => c.Titres)
                 .SingleOrDefault(t => t.IdArtiste == idArtiste);
 
             if (artiste == null)
