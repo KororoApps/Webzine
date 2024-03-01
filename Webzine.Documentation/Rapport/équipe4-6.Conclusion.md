@@ -18,3 +18,20 @@ Au-delà des lignes de code et des fonctionnalités implémentées, ce projet no
 Ces apprentissages constituent des atouts précieux pour nos futures collaborations et projets. 
 
 En somme, le succès de ce projet ne se mesure pas seulement aux fonctionnalités déployées, mais aussi à la croissance individuelle et collective que nous avons réalisée au cours de ce parcours.
+
+
+# **6.1. Conclusion - Jalon 2**
+
+Les objectifs de ce deuxième jalon étaient non plus de générer des fausses données lors du démarrage de l'applicaiton mais de créer une base de données et de récupérer les données de cette dernière,
+mais aussi de mettre en place l'automatisation de la publication de l'application.
+
+Pour se faire nous avons mis en place un développement par couches en ajoutant une couche repository et une couche context entre notre controller et notre base de données.
+Dans un second temps nous avons mis en place et configuré des pipelines afin d'assurer l'automatisation de la publication de l'application
+
+Nous avons mis tout au long de ce jalon un point d'honneur à développer le travail d'équipe au sein des équipes Dev et Ops mais tout particulièrement à créer une vraie cohésion DevOps.
+Pour se faire nous avons mis en place des outils de suivis et nous sommes efforcés à entretenir la communication sur les avancées de chacuns tout au long de la semaine et même en dehors des heures de travail habutielles.
+
+La complèxite grandissante des objectifs ainsi que la deadline plus courte que le jalon 1 nous ont poussés dans nos retranchements mais nous ont aussi permis de développer une vraie entraide où chacun faisait attention à l'avancement et aux difficultés rencontrées par les autres.
+
+Dans l'ensemble, le deuxième jalon a été un chapitre intense mais fructueux de notre parcours.
+Les leçons apprises et les compétences acquises au cours de cette phase seront des atouts précieux pour les étapes futures du projet, et témoignent de la résilience et de l'engagement de l'équipe envers la réussite du projet.

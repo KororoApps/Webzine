@@ -7,11 +7,12 @@ Afin de débuter sur la même base et d'être tous en accord, nous avons travail
 ![Logo](images/Modelisation_donnees.png)
 
 Une fois établie, il nous a permis d'identifier les entités à créer pour notre application ainsi que les données nécessaires à chacune pour que l'application finale fonctionne correctement avec tous les éléments nécessaires.
-| FONCTIONNALITES                                | TEMPS PASSE |
-|------------------------------------------------|-------------|
-| Mise en place du projet Azure avec Epic, Feature, UserStory et Task |   1h30          |
-|Création du projet sur Visual Studio avec installation des nuggets nécessaires          |   1h00          |
-| Répartition de la création des fausses données |         0h15    |
+
+| FONCTIONNALITES																| TEMPS PASSE |
+|-------------------------------------------------------------------------------|:-----------:|
+| Mise en place du projet Azure avec Epic, Feature, UserStory et Task			|     1h30    |
+|Création du projet sur Visual Studio avec installation des nuggets nécessaires |     1h00    |
+| Répartition de la création des fausses données								|     0h15    |
 
 ## 2.1. Répartition des tâches
 
@@ -22,52 +23,56 @@ Une fois établie, il nous a permis d'identifier les entités à créer pour not
 Vous pouvez retrouver nos [Comptes Rendus d'Activité pour un détail précis du travail effectué](https://groupesbtest.sharepoint.com/:x:/s/DIIAGE2026DI1P4/EY5e9Z9cSJlNhY6EC677OKkBNBYJHpZv8_6OMtE7qLdtiQ?e=SJ8cjc&wdOrigin=TEAMS-MAGLEV.teams_ns.rwc&wdExp=TEAMS-TREATMENT&wdhostclicktime=1708886671961&web=1)
 
 ### 2.2.2. Lucas FERNANDEZ
-| TÂCHES                                | TEMPS PASSE |
-|------------------------------------------------|-------------|
-| Mise en place du backlog AzureDevops           |             |
-| Mise en place des User Stories sur AzureDevops |             |
-| Création des fausses données pour l'entité Artiste  |    4h00         |
-| Création de la page Artiste  |             |
-| Création de la page Dashboard               |             |
-| Rédaction de la documentation                                                |             |
+| TÂCHES												| TEMPS PASSE |
+|-------------------------------------------------------|:-----------:|
+| Mise en place du backlog AzureDevops					|    0h15     |
+| Mise en place des User Stories sur AzureDevops		|    1h00     |
+| Création des fausses données pour l'entité Artiste	|    4h00     |
+| Création de l'entité Artiste							|    1h00     |
+| Création de la page Artiste							|    2h00     |
+| Création de la page Dashboard							|    1h30     |
+| Création du Dashboard	Azure DevOps					|    1h30     |
+| Correction et assignation des tâches Azure DevOps		|    1h00     |
+| Rédaction de la documentation							|    3h00     |
 
 ### 2.2.3. Dylann-Nick ETOU
 
-| TÂCHES                                | TEMPS PASSE |
-|------------------------------------------------|-------------|
-| Création du layout          |             |
-| Création de la navbar |             |
-| Création de la liste des styles à droite des pages              |             |
-| Création du footer   |             |=
+| TÂCHES												| TEMPS PASSE |
+|-------------------------------------------------------|:-----------:|
+| Création du layout									|             |
+| Création de la navbar									|             |
+| Création de la liste des styles à droite des pages    |             |
+| Création du footer									|             |
 
 ### 2.2.4. Antoine COUVERT
 
-| TÂCHES                                | TEMPS PASSE |
-|------------------------------------------------|-------------|
-| Création de la page Contact et de ses données         |      3h15       |
-| Test de l'application et listing des bugs et des points ne correspondant pas exactement à la demande client           |   2h30          |
-| Création des fausses données pour l'entité Style              |   4h00          | 
-|  Création de l'entité Style             |     1h00        |
+| TÂCHES																										| TEMPS PASSE |
+|---------------------------------------------------------------------------------------------------------------|:-----------:|
+| Création de la page Contact et de ses données																	|     3h15    |
+| Test de l'application et listing des bugs et des points ne correspondant pas exactement à la demande client   |     2h30    |
+| Création des fausses données pour l'entité Style																|     4h00    | 
+|  Création de l'entité Style																					|     1h00    |
 
 ### 2.2.5. Elodie SPONTON
 
-| TÂCHES                                | TEMPS PASSE |
-|------------------------------------------------|-------------|
-| Création des fausses données pour l'entité Titre  |    4h00         |
-| Création des fausses données pour l'entité Commentaire  |    1h00         |
-| Création des fausses données pour l'entité Style  |    1h00         |
-| Création des fausses données pour l'entité Artiste  |    4h00         |
-| Création de l'entité Titre  |    1h00         |
-| Création de la page Titre         |  6h00           |
-| Création de la page Recherche  |   0h30    | 
-| Création de la page API Version  |  0h10     | Création des pages administration (CRUD) des commentaires |             |
-| Création des pages administration (CRUD)  des titres          |   8h00          |
-| Création des pages administration (CRUD)  des styles          |     3h00        | 
-| Création des pages administration (CRUD)  des commentaires          |   2h30          |
-| Création des pages administration (CRUD)  des artistes          |     3h00        |
-| Mise en place des fausses données pour l'ensemble de l'application dans un fichier commun         |      11h00       |
-| Création d'un View Component et d'une View Partial pour la colonne à droite de l'application         |      3h30       |
-| Mise au propre du code         |      7h00       |
+| TÂCHES																						| TEMPS PASSE |
+|-----------------------------------------------------------------------------------------------|:-----------:|
+| Création des fausses données pour l'entité Titre												|    4h00     |
+| Création des fausses données pour l'entité Commentaire										|    1h00     |
+| Création des fausses données pour l'entité Style												|    1h00     |
+| Création des fausses données pour l'entité Artiste											|    4h00     |
+| Création de l'entité Titre																	|    1h00     |
+| Création de la page Titre																		|    6h00     |
+| Création de la page Recherche																	|    0h30     | 
+| Création de la page API Version																|    0h10     |
+| Création des pages administration (CRUD) des commentaires										|             |
+| Création des pages administration (CRUD)  des titres											|    8h00     |
+| Création des pages administration (CRUD)  des styles											|    3h00     | 
+| Création des pages administration (CRUD)  des commentaires									|    2h30     |
+| Création des pages administration (CRUD)  des artistes										|    3h00     |
+| Mise en place des fausses données pour l'ensemble de l'application dans un fichier commun     |    11h00    |
+| Création d'un View Component et d'une View Partial pour la colonne à droite de l'application  |    3h30     | 
+| Mise au propre du code																		|    7h00     |
 
 ## 2.2. Fonctionnement de l'équipe
 
