@@ -4,7 +4,7 @@ using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
 {
-    public class TitreRepository : ITitreRepository
+    public class LocalTitreRepository : ITitreRepository
     {
 
         /// <summary>

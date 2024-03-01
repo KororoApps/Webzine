@@ -6,14 +6,14 @@ using Webzine.Repository.Contracts;
 namespace Webzine.Repository
 {
     // Implémente l'interface IStyleRepository
-    public class StyleRepository : IStyleRepository
+    public class DbStyleRepository : IStyleRepository
     {
         // Contexte de base de données pour accéder aux données
         private readonly WebzineDbContext _context;
         
 
         // Constructeur prenant le contexte en paramètre
-        public StyleRepository(WebzineDbContext context)
+        public DbStyleRepository(WebzineDbContext context)
         {
             _context = context;
         }
@@ -25,8 +25,18 @@ namespace Webzine.Repository
         // Méthode pour supprimer un style
         public void Delete(Style style)
         {
-             _context.Styles
-                .Remove(style);      
+
+            if (style == null)
+            {
+                throw new ArgumentNullException(nameof(style));
+            }
+            else
+            {
+                _context.Styles
+                     .Remove(style);
+                _context
+                    .SaveChanges();
+            }          
         }
         /// <summary>
         /// Méthode pour trouver un style par son identifiant
@@ -35,22 +45,11 @@ namespace Webzine.Repository
         /// <returns> Retourne le style trouvé</returns>
         public Style Find(int id)
         {
-            var style = _context.Styles.Include(c => c.IdStyle == id).FirstOrDefault();
-    
-            if (_context.Styles.Any()) 
-            {
-                style = _context.Styles
-                .Include(c => c.Titres)
-                .Where(c => c.IdStyle == id)
-                .First();
-            }
-            else
-            {
-                // Génération d'un style à partir de DataFactory.
-                //var styles = DataFactory.Styles;
-                //style = styles.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
-            }
-
+             var  style = _context.Styles
+                 .Include(s => s.Titres)
+                 .Where(s => s.IdStyle == id)
+                 .First();
+                
             return style;
 
         }
@@ -60,21 +59,11 @@ namespace Webzine.Repository
         /// <returns>Retourne tous les styles</returns>
         public IEnumerable<Style> FindAll()
         {
+            var  styles = _context.Styles
+                .Include(s => s.Titres)
+                .OrderBy(s => s.IdStyle)
+                .ToList();     
 
-            var styles = _context.Styles.Include(c => c.Libelle).ToList();
-
-            if (_context.Styles.Any()) 
-            {
-                styles = _context.Styles.Include(c => c.Titres).OrderBy(c => c.IdStyle).ToList();
-            }
-            else
-            {
-                // Génération d'un style à partir de DataFactory.
-                //var styles = DataFactory.Styles;
-                //allStyles = styles.OrderBy(t => Guid.NewGuid()).ToList();
-
-            }
-                
             return styles;
         }
         // Méthode pour mettre à jour un style (non implémentée)
