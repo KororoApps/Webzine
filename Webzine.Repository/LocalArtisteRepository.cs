@@ -61,7 +61,7 @@ namespace Webzine.Repository
             List<Artiste> artiste = DataFactory.Artistes;
 
             var orderedArtistes = artiste
-                .OrderByDescending(a => a.Nom)
+                .OrderBy(a => a.Nom)
                 .ToList();
 
             return orderedArtistes;
