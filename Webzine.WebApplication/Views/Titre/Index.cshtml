@@ -84,7 +84,7 @@
 
         <form asp-controller="Commentaire" asp-action="Index" method="post" class="d-flex">
             <div class="container">
-                @foreach (var commentaire in Model.Titre.Commentaires.Take(1))
+                @foreach (var commentaire in Model.Titre.Commentaires)
                 {
                     <div class="form-group row mb-5">
                         <div class="col-md-2">
