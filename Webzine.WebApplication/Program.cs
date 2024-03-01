@@ -19,9 +19,13 @@ else
     builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 }
 
-// Ajoute le DbContext avec l'injection de dépendance.
+// Connexion à la base PostGreSQL
+/*builder.Services.AddDbContext<WebzineDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));*/
+
+// Connexion à la base SQLite
 builder.Services.AddDbContext<WebzineDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
 
 // Ajoute les repositories avec l'injection de dépendance.
 /*builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
