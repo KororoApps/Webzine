@@ -33,8 +33,7 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue contenant les détails de l'artiste.</returns>
         public IActionResult Index(int id)
         {
-            List<Artiste> artisteList = new();
-            artisteList.Add(this._artisteRepository.Find(id));
+            List<Artiste> artisteList = [this._artisteRepository.Find(id)];
             var artisteModel = new GroupeArtisteModel
             {
                 Artistes = artisteList,
