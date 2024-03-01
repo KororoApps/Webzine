@@ -24,6 +24,11 @@ namespace Webzine.WebApplication.Shared.ViewModels
         /// <summary>
         /// Obtient ou définit la liste des artistes dans le groupe.
         /// </summary>
-        public List<Artiste>? Artistes { get; set; } = new List<Artiste>();
+        public List<Artiste>? Artistes { get; set; } = [];
+
+        /// <summary>
+        /// Obtient ou définit un style dans le groupe.
+        /// </summary>
+        public string? Libelle { get; set; }
     }
 }

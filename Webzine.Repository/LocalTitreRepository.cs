@@ -118,7 +118,14 @@ namespace Webzine.Repository
         /// <returns></returns>
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
-            throw new NotImplementedException();
+            List<Titre> titres = DataFactory.Titres;
+
+            var orderedTitres = titres
+                .Where(t => t.Styles.Any(s => s.Libelle.Equals(libelle)))
+                .OrderByDescending(c => c.Libelle)
+                .ToList();
+
+            return orderedTitres;
         }
 
         /// <summary>

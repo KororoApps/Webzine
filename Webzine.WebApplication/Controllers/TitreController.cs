@@ -16,15 +16,21 @@ namespace Webzine.WebApplication.Controllers
     /// Ce contrôleur gère l'affichage de la chronique d'un titre.
     /// Il utilise le générateur de fausses données Bogus pour simuler des données.
     /// </remarks>
-    /// <remarks>
-    /// Initialise une nouvelle instance de la classe <see cref="TitreController"/>.
-    /// </remarks>
-    /// <param name="titreRepository">Le repository des titres utilisé par le contrôleur.</param>
-    /// <param name="styleRepository">Le repository des styles utilisé par le contrôleur.</param>
-    public class TitreController(ITitreRepository titreRepository, IStyleRepository styleRepository) : Controller
+    public class TitreController : Controller
     {
-        private readonly ITitreRepository titreRepository = titreRepository;
-        private readonly IStyleRepository styleRepository = styleRepository;
+        private readonly ITitreRepository titreRepository;
+        private readonly IStyleRepository styleRepository;
+
+        /// <summary>
+        /// Initialise une nouvelle instance de la classe <see cref="TitreController"/>.
+        /// </summary>
+        /// <param name="titreRepository">Le repository des titres utilisé par le contrôleur.</param>
+        /// <param name="styleRepository">Le repository des styles utilisé par le contrôleur.</param>
+        public TitreController(ITitreRepository titreRepository, IStyleRepository styleRepository)
+        {
+            this.titreRepository = titreRepository;
+            this.styleRepository = styleRepository;
+        }
 
         /// <summary>
         /// Action qui affiche la liste des titres.
@@ -46,16 +52,15 @@ namespace Webzine.WebApplication.Controllers
         /// <summary>
         /// Action permettant d'afficher les titres liés à un style.
         /// </summary>
-        /// <param name="id">Identifiant du style.</param>
+        /// /// <param name="id">Libellé du style.</param>
         /// <returns>Vue contenant la liste des titres liés au style.</returns>
-        public IActionResult Style(int id)
+        public IActionResult Style(string id)
         {
-            List<Style> styles = [this.styleRepository.Find(id)];
-
-            // Création du modèle de vue contenant la liste de Titres.
-            var titreModel = new GroupeStyleModel
+            // Création du modèle de vue contenant un titre.
+            var titreModel = new GroupeTitreModel
             {
-                Styles = styles,
+                Titres = this.titreRepository.SearchByStyle(id),
+                Libelle = id,
             };
 
             // Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.

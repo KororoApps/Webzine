@@ -41,7 +41,7 @@
                                 var nombreDeStyles = random.Next(1, 4);
                             }
 
-                            @foreach (var style in Model.Titre.Styles.Take(nombreDeStyles))
+                            @foreach (var style in Model.Titre.Styles)
                             {
                                 <a asp-controller="Titre" asp-action="Style"><span class="me-4 ">@style.Libelle</span></a>
                             }
@@ -119,7 +119,7 @@
     <div class="mt-5">
         <h3>Commentaires</h3>
         <div class="col-md-8">
-            @if (Model.Titre.Commentaires.Any())
+            @if (Model.Titre.Commentaires != null && Model.Titre.Commentaires.Any())
             {
                 @foreach (var commentaire in Model.Titre.Commentaires.OrderByDescending(c => c.DateCreation))
                 {

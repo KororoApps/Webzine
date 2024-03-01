@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeStyleModel
+﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -9,17 +9,15 @@
 }
 
 @*Affichage du nom de la page.*@
-@foreach (var titre in Model.Styles.First().Titres)
-{
-    foreach (var style in Model.Styles)
-    {
-        ViewData["titrePage"] = "Titres ayant le style " + style.Libelle;
-    }
+@{
+        ViewData["titrePage"] = "Titres ayant le style " + Model.Libelle;
 }
 <hr />
+<p>Nombre de titres : @Model.Titres.Count()</p>
 
 @*Affichage des titres.*@
-@foreach (var titre in Model.Styles.First().Titres)
+
+@foreach (var titre in Model.Titres)
 {
     <div class="row mb-2">
         <div class="col-md-1">
