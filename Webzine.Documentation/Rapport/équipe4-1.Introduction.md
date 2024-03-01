@@ -46,3 +46,16 @@ Notre équipe est sous la responsabilité de M.Sassignol, désigné chef de proj
 La suite du rapport détaille l’organisation au sein de l’équipe qu’il s’agisse de la partie DEV ou OPS. </br>
 Il passera en revue la cohésion que nous avons mis en place afin de nous tenir informés des réalisations de chacun avant de revenir sur les problèmes rencontrés tout au long de ce projet.
 
+# **2. STRUCTURE DU PROJET** ##
+
+
+## 1.1. Architecture MVC
+
+Le développement de ce projet suit une approche "en couches", une méthode qui implique l'ajout progressif de couches distinctes pour assurer une structure organisée.
+
+Dans notre cas, nous avons introduit les couches Repository et Context. Cela a pour but de segmenter efficacement le processus de récupération des données, renforçant ainsi la modularité de notre application.
+
+![Schema](images/Structure_du_Projet.png)
+
+Le fichier context permet de définir la configuration de la base de données ainsi que la définition des entitées qu'elle doit contenir.
+Le context facilite les migrations de base de données permettant de changer le schéma de la base de données avec les évolutions de l'application.
