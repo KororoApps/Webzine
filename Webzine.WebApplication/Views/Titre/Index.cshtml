@@ -69,7 +69,7 @@
     <div class="row mt-4">
         <div class="col-lg-12 pt-4 pt-lg-0">
             <img src="@Model.Titre.UrlJaquette" alt="Image" class="float-end imgshadow w-30 h-30 object-fit-cover example-card-img-responsive m-3">
-            <p class="justify-chronique">@Model.Titre.Chronique</p>            
+            <p class="justify-chronique">@Model.Titre.Chronique</p>
         </div>
     </div>
 
@@ -84,25 +84,22 @@
 
         <form asp-controller="Commentaire" asp-action="Index" method="post" class="d-flex">
             <div class="container">
-                @foreach (var commentaire in Model.Titre.Commentaires)
-                {
-                    <div class="form-group row mb-5">
-                        <div class="col-md-2">
-                            <label asp-for="@commentaire.Auteur" class="form-label"></label><span class="text-danger">*</span>
-                        </div>
-                        <div class="col-md-10">
-                            <input placeholder="Votre nom (exemple : Emmanuel)" type="text" id="nameInput" class="form-control" required>
-                        </div>
+                <div class="form-group row mb-5">
+                    <div class="col-md-2">
+                        <span class="form-label">Nom</span><span class="text-danger">*</span>
                     </div>
-                    <div class="form-group row mb-5">
-                        <div class="col-md-2">
-                            <label asp-for="@commentaire.Contenu" for="commentsInput" class="form-label"></label><span class="text-danger">*</span>
-                        </div>
-                        <div class="col-md-10">
-                            <textarea placeholder="Votre commentaire..." class="form-control" id="commentsInput" rows="10" cols="10" required></textarea>
-                        </div>
+                    <div class="col-md-10">
+                        <input placeholder="Votre nom (exemple : Emmanuel)" type="text" id="nameInput" class="form-control" required>
                     </div>
-                }
+                </div>
+                <div class="form-group row mb-5">
+                    <div class="col-md-2">
+                        <span class="form-label">Commentaire</span><span class="text-danger">*</span>
+                    </div>
+                    <div class="col-md-10">
+                        <textarea placeholder="Votre commentaire..." class="form-control" id="commentsInput" rows="10" cols="10" required></textarea>
+                    </div>
+                </div>
 
                 @*Bouton d'ajout du titre.*@
                 <div class="form-group row mb-5">
@@ -122,20 +119,23 @@
     <div class="mt-5">
         <h3>Commentaires</h3>
         <div class="col-md-8">
-            @foreach (var commentaire in Model.Titre.Commentaires.OrderByDescending(c => c.DateCreation))
+            @if (Model.Titre.Commentaires.Any())
             {
-                <div class="row p-3">
-                    <div class="col-md-2">
-                        <img src="/images/avatar.png" alt="Image du créateur" class="img-fluid rounded-circle">
+                @foreach (var commentaire in Model.Titre.Commentaires.OrderByDescending(c => c.DateCreation))
+                {
+                    <div class="row p-3">
+                        <div class="col-md-2">
+                            <img src="/images/avatar.png" alt="Image du créateur" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="col-md-10">
+                            <h5 class="card-title">
+                                @commentaire.Auteur
+                                <span class="text-secondary">le @commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm")</span>
+                            </h5>
+                            <p class="card-text">@commentaire.Contenu</p>
+                        </div>
                     </div>
-                    <div class="col-md-10">
-                        <h5 class="card-title">
-                            @commentaire.Auteur
-                            <span class="text-secondary">le @commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm")</span>
-                        </h5>
-                        <p class="card-text">@commentaire.Contenu</p>
-                    </div>
-                </div>
+                }
             }
         </div>
     </div>

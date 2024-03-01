@@ -79,7 +79,7 @@ namespace Webzine.Repository
             var allCommentaires = _context.Commentaires
                 .Include(c => c.Titre)
                 .Include(c => c.Titre.Artiste)
-                .OrderBy(t => t.DateCreation)
+                .OrderByDescending(t => t.DateCreation)
                 .ToList();
 
             return allCommentaires;
