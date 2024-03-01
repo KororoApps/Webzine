@@ -5,7 +5,6 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.Entity;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
@@ -16,21 +15,13 @@ namespace Webzine.WebApplication.Controllers
     /// Ce contrôleur gère l'affichage de la chronique d'un titre.
     /// Il utilise le générateur de fausses données Bogus pour simuler des données.
     /// </remarks>
-    public class TitreController : Controller
+    /// <remarks>
+    /// Initialise une nouvelle instance de la classe <see cref="TitreController"/>.
+    /// </remarks>
+    /// <param name="titreRepository">Le repository des titres utilisé par le contrôleur.</param>
+    public class TitreController(ITitreRepository titreRepository) : Controller
     {
-        private readonly ITitreRepository titreRepository;
-        private readonly IStyleRepository styleRepository;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="TitreController"/>.
-        /// </summary>
-        /// <param name="titreRepository">Le repository des titres utilisé par le contrôleur.</param>
-        /// <param name="styleRepository">Le repository des styles utilisé par le contrôleur.</param>
-        public TitreController(ITitreRepository titreRepository, IStyleRepository styleRepository)
-        {
-            this.titreRepository = titreRepository;
-            this.styleRepository = styleRepository;
-        }
+        private readonly ITitreRepository titreRepository = titreRepository;
 
         /// <summary>
         /// Action qui affiche la liste des titres.
