@@ -13,7 +13,7 @@
     <div>
         @*Affichage du nom de l'artiste et du titre.*@
         <h3>
-            <a asp-controller="Artiste" asp-action="" asp-route-id="@Model.Titre.Artiste.IdArtiste">
+            <a asp-controller="Artiste" asp-action="Index" asp-route-id="@Model.Titre.Artiste.IdArtiste">
                 <span class="text-primary">@Model.Titre.Artiste.Nom</span>
             </a>
             - @Model.Titre.Libelle
