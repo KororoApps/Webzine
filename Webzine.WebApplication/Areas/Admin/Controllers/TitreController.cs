@@ -7,6 +7,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Entity.Fixtures;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -19,7 +20,12 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class TitreController : Controller
     {
+        private readonly ITitreRepository _titreRepository;
 
+        public TitreController(ITitreRepository titreRepository)
+        {
+            this._titreRepository = titreRepository;
+        }
         /// <summary>
         /// Affiche la liste des titres.
         /// </summary>
@@ -47,20 +53,16 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// Affiche la vue de suppression d'un titre.
         /// </summary>
         /// <returns>Vue de suppression d'un titre.</returns>
-        public IActionResult Delete()
+        public IActionResult Delete(int id)
         {
 
-            // Génération d'un titre.
-            List<Titre> titres = DataFactory.Titres;
-            Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+            var titre = this._titreRepository.Find(id);
 
-            // Création du modèle de vue contenant un Titre.
             var titreModel = new TitreModel
             {
                 Titre = titre,
             };
 
-            // Retour de la vue avec le modèle de vue contenant le titre généré.
             return this.View(titreModel);
         }
 
@@ -73,6 +75,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
+            this._titreRepository.Delete(this._titreRepository.Find(id));
             return this.RedirectToAction(nameof(this.Index));
         }
 
