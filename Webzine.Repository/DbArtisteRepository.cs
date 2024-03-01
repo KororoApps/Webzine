@@ -78,6 +78,7 @@ namespace Webzine.Repository
         public IEnumerable<Artiste> FindAll()
         {
             var allArtistes = _context.Artistes
+                .Include(c => c.Titres)
                 .OrderBy(t => t.Nom)
                 .ToList();
 

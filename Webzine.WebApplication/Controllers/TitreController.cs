@@ -7,6 +7,7 @@ namespace Webzine.WebApplication.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Entity.Fixtures;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -18,20 +19,22 @@ namespace Webzine.WebApplication.Controllers
     /// </remarks>
     public class TitreController : Controller
     {
+        private readonly ITitreRepository _titreRepository;
+
+        public TitreController(ITitreRepository titreRepository)
+        {
+            _titreRepository = titreRepository;
+        }
         /// <summary>
         /// Action qui affiche la liste des titres.
         /// </summary>
         /// <returns>Vue avec la liste des titres générés.</returns>
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            // Génération d'une liste d'artistes.
-            List<Titre> titres = DataFactory.Titres;
-            Titre titre = titres.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
-
             // Création du modèle de vue contenant un titre.
             var titreModel = new TitreModel
             {
-                Titre = titre,
+                Titre = this._titreRepository.Find(id),
             };
 
             // Retour de la vue avec le modèle de vue contenant le titre généré.
@@ -49,7 +52,7 @@ namespace Webzine.WebApplication.Controllers
             // Création du modèle de vue contenant la liste de Titres.
             var titreModel = new GroupeTitreModel
             {
-                Titres = titres,
+                Titres = this._titreRepository.FindAll(),
             };
 
             // Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.

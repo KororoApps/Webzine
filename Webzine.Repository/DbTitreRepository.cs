@@ -1,4 +1,5 @@
-﻿using Webzine.EntitiesContext;
+﻿using Microsoft.EntityFrameworkCore;
+using Webzine.EntitiesContext;
 using Webzine.Entity;
 using Webzine.Repository.Contracts;
 
@@ -64,6 +65,9 @@ namespace Webzine.Repository
         public Titre Find(int idTitre)
         {
             var titre = _context.Titres
+                .Include(t => t.Artiste)
+                .Include(t => t.Commentaires)
+                .Include(t => t.Styles)
                 .SingleOrDefault(t => t.IdTitre == idTitre);
 
             if (titre == null)
@@ -91,6 +95,9 @@ namespace Webzine.Repository
         public IEnumerable<Titre> FindAll()
         {
             var allTitres = _context.Titres
+                .Include(t => t.Artiste)
+                .Include(t => t.Commentaires)
+                .Include(t => t.Styles)
                 .OrderBy(t => t.Libelle)
                 .ToList();
 

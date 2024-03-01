@@ -6,10 +6,8 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.Entity.Fixtures;
-    using Webzine.WebApplication.Shared.ViewModels;
-    using Webzine.Repository;
     using Webzine.Repository.Contracts;
+    using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des opérations liées aux artistes dans la zone d'administration.
@@ -26,7 +24,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 
         public ArtisteController(IArtisteRepository artisteRepository)
         {
-            _artisteRepository = artisteRepository;
+            this._artisteRepository = artisteRepository;
         }
         /// <summary>
         /// Action pour afficher la liste des artistes.
@@ -34,15 +32,12 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue contenant la liste des artistes.</returns>
         public IActionResult Index()
         {
-            var artistes = _artisteRepository.FindAll();
-            var artistesTries = artistes.OrderBy(a => a.Nom).ToList();
-
             var artisteModel = new GroupeArtisteModel
             {
-                Artistes = artistesTries,
+                Artistes = this._artisteRepository.FindAll(),
             };
 
-            return View(artisteModel);
+            return this.View(artisteModel);
         }
 
         /// <summary>
@@ -51,14 +46,14 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un artiste.</returns>
         public IActionResult Delete(int id)
         {
-            var artiste = _artisteRepository.Find(id);
+            var artiste = this._artisteRepository.Find(id);
 
             var artisteModel = new ArtisteModel
             {
                 Artiste = artiste,
             };
 
-            return View(artisteModel);
+            return this.View(artisteModel);
         }
 
         /// <summary>
@@ -70,8 +65,8 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            _artisteRepository.Delete(_artisteRepository.Find(id));
-            return RedirectToAction(nameof(Index));
+            this._artisteRepository.Delete(this._artisteRepository.Find(id));
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         /// <summary>
@@ -80,7 +75,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de création d'un artiste.</returns>
         public IActionResult Create()
         {
-            return View();
+            return this.View();
         }
 
         /// <summary>
@@ -91,8 +86,8 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateConfirmed(Artiste artiste)
         {
-            _artisteRepository.Add(artiste);
-            return RedirectToAction(nameof(Index));
+            this._artisteRepository.Add(artiste);
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         /// <summary>
@@ -101,14 +96,14 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue d'édition d'un artiste.</returns>
         public IActionResult Edit(int id)
         {
-            var artiste = _artisteRepository.Find(id);
+            var artiste = this._artisteRepository.Find(id);
 
             var artisteModel = new ArtisteModel
             {
                 Artiste = artiste,
             };
 
-            return View(artisteModel);
+            return this.View(artisteModel);
         }
 
         /// <summary>
@@ -120,8 +115,8 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EditConfirmed(Artiste artiste)
         {
-            _artisteRepository.Update(artiste);
-            return RedirectToAction(nameof(Index));
+            this._artisteRepository.Update(artiste);
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
+﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeArtisteModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -10,22 +10,22 @@
 
 @*Affichage du nom de la page.*@
 @{
-    ViewData["titrePage"] = @Model.Titres.First().Artiste.Nom;
+    ViewData["titrePage"] = @Model.Artistes.First().Nom;
 }
 <hr>
 
-<p>@Model.Titres.First().Artiste.Biographie</p>
+<p>@Model.Artistes.First().Biographie</p>
 <p class="fs-1">Albums</p>
 
 <hr>
 
 @{
-    var titresArray = Model.Titres.ToArray();
+    var titresArray = Model.Artistes.First().Titres.ToArray();
     var nombreDeTitres = titresArray.Length;
 }
 
 @*Affichage des titres.*@
-@foreach (var titre in Model.Titres)
+@foreach (var titre in Model.Artistes.First().Titres)
 {
     <div class="row">
 
