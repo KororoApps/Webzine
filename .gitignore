@@ -360,3 +360,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# BDD SQLite
+WebzineDbContext.db
+WebzineDbContext.db-shm
+WebzineDbContext.db-wal
+
