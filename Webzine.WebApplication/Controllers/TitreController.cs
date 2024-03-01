@@ -20,10 +20,12 @@ namespace Webzine.WebApplication.Controllers
     public class TitreController : Controller
     {
         private readonly ITitreRepository _titreRepository;
+        private readonly IStyleRepository _styleRepository;
 
-        public TitreController(ITitreRepository titreRepository)
+        public TitreController(ITitreRepository titreRepository, IStyleRepository styleRepository)
         {
             _titreRepository = titreRepository;
+            _styleRepository = styleRepository;
         }
         /// <summary>
         /// Action qui affiche la liste des titres.
@@ -45,14 +47,14 @@ namespace Webzine.WebApplication.Controllers
         /// Action permettant d'afficher les titres liés à un style.
         /// </summary>
         /// <returns>Vue contenant la liste des titres liés au style.</returns>
-        public IActionResult Style()
+        public IActionResult Style(int id)
         {
-            List<Titre> titres = DataFactory.Titres;
+            List<Style> styles = [this._styleRepository.Find(id)];
 
             // Création du modèle de vue contenant la liste de Titres.
-            var titreModel = new GroupeTitreModel
+            var titreModel = new GroupeStyleModel
             {
-                Titres = this._titreRepository.FindAll(),
+                Styles = styles,
             };
 
             // Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.
