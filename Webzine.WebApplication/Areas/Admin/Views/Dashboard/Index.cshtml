@@ -1,30 +1,5 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
+﻿@model Webzine.WebApplication.Shared.ViewModels.DashboardModel
 
-@*Pour avoir des noms et des nombres aléatoires.*@
-@{
-    Random random = new Random();
-    int numberOfTitlesToShow = random.Next(2, 8);
-    var randomTitles = Model.Titres.OrderBy(x => random.Next()).Take(numberOfTitlesToShow).ToList();
-
-    @*Obtenir deux noms d'artiste aléatoire.*@
-    string randomArtist1 = randomTitles[random.Next(randomTitles.Count)].Artiste.Nom;
-    string randomArtist2 = randomTitles.FirstOrDefault(t => t.Artiste.Nom != randomArtist1)?.Artiste.Nom;
-
-    @*Obtenir un titre aléatoire.*@
-    string randomTitre = randomTitles[random.Next(randomTitles.Count)].Libelle;
-
-    @*Accumuler le nombre total de lectures.*@
-    int totalLectures = randomTitles.Sum(t => t.NbLectures);
-
-    @*Accumuler le nombre total de likes.*@
-    int totalLikes = randomTitles.Sum(t => t.NbLikes);
-
-    @*Accumuler le nombre d'artistes différents.*@
-    int numberOfDistinctArtists = randomTitles.Select(t => t.Artiste.Nom).Distinct().Count();
-
-    @*Accumuler le nombre de styles différents.*@
-    int numberOfDistinctStyles = randomTitles.SelectMany(t => t.Styles).Distinct().Count();
-}
 
 <h1>Tableau de bord</h1>
 <hr>
@@ -40,7 +15,7 @@
                             <i class="fa-solid fa-users fa-5x mb-2"></i>
                         </div>
                         <p class="fs-2 text-primary">
-                            @numberOfDistinctArtists
+                            @Model.NbArtistes
                         </p>
                         <p class="text-primary">
                             Artistes
@@ -54,7 +29,7 @@
                             <i class="fa-solid fa-user fa-5x mb-2"></i>
                         </div>
                         <p class="fs-2 text-primary">
-                            @randomArtist1
+                            @Model.ArtistePlusChronique
                         </p>
                         <p class="text-primary">
                             Artiste le plus chroniqué
@@ -68,7 +43,7 @@
                             <i class="fa-solid fa-trophy fa-5x mb-2"></i>
                         </div>
                         <p class="fs-2 text-primary">
-                            @randomArtist2
+                            @Model.ArtistePlusDeTitres.Nom
                         </p>
                         <p class="text-primary">
                             Artiste avec le plus de titres
@@ -87,7 +62,7 @@
                         <i class="fa-solid fa-book fa-5x mb-2"></i>
                     </div>
                     <p class="fs-2 text-primary">
-                        @numberOfDistinctArtists
+                        @Model.NbBioArtiste
                     </p>
                     <p class="text-primary">
                         Biographies d'artistes
@@ -101,7 +76,7 @@
                         <i class="fa-solid fa-compact-disc fa-5x mb-2"></i>
                     </div>
                     <p class="fs-2 text-primary text-capitalize" ">
-                    @randomTitre
+                    @Model.TitrePlusLu.Libelle
                     </p>
                     <p class="text-primary">
                         Titre le plus lu
@@ -115,7 +90,7 @@
                         <i class="fa-solid fa-music fa-5x mb-2"></i>
                     </div>
                     <p class="fs-2 text-primary">
-                                @Model.Titres.Count()
+                                @Model.NbTitres
                     </p>
                     <p class="text-primary">
                         Titres
@@ -133,7 +108,7 @@
                         <i class="fa-solid fa-tags fa-5x mb-2"></i>
                     </div>
                     <p class="fs-2 text-primary">
-                        @numberOfDistinctStyles
+                        @Model.NbStyles
                     </p>
                     <p class="text-primary">
                         Styles de musique
@@ -147,7 +122,7 @@
                         <i class="fa-solid fa-eye fa-5x mb-2"></i>
                     </div>
                     <p class="fs-2 text-dark">
-                        @totalLectures
+                        @Model.NbLectures
                     </p>
                     <p class="text-dark">
                         Lectures
@@ -161,7 +136,7 @@
                         <i class="fa-solid fa-thumbs-up fa-5x mb-2"></i>
                     </div>
                     <p class="fs-2 text-dark">
-                        @totalLikes
+                        @Model.NbLikes
                     </p>
                     <p class="text-dark">
                         Likes

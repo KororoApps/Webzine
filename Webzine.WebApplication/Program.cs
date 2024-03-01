@@ -7,7 +7,7 @@ using Webzine.Repository.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Charge la configuration en fonction de l'environnement.
+/*// Charge la configuration en fonction de l'environnement.
 if (builder.Environment.IsDevelopment())
 {
     //builder.Configuration.AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
@@ -21,9 +21,20 @@ else
 
     builder.Services.AddDbContext<WebzineDbContext>(options =>
    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
+}*/
+
+if ((builder.Configuration.GetSection("AppSettings:SGBD").Value == "SQLite"))
+{
+    builder.Services.AddDbContext<WebzineDbContext>(options =>
+  options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
+}
+else if ((builder.Configuration.GetSection("AppSettings:SGBD").Value == "PostgreSQL"))
+{
+    builder.Services.AddDbContext<WebzineDbContext>(options =>
+   options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
 }
 
-if ((builder.Configuration.GetSection("Repository").Value == "Local")){
+if ((builder.Configuration.GetSection("AppSettings:Repository").Value == "Local")){
     builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
     builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
     builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
