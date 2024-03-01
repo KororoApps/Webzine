@@ -24,15 +24,15 @@ builder.Services.AddDbContext<WebzineDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Ajoute les repositories avec l'injection de dépendance.
-builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
+/*builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
 builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
 builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
-builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
+builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();*/
 
 // Ajoute les repositories avec l'injection de dépendance pour la base de données.
 builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
 builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
-builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
+//builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
 builder.Services.AddScoped<ICommentaireRepository,DbCommentaireRepository>();
 
 // Configure les services nécessaires.

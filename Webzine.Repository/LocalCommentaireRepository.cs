@@ -21,7 +21,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Supprimmer un commentaire dansles fausses données
+        /// Supprimmer un commentaire dans les fausses données
         /// </summary>
         /// <param name="commentaire"></param>
         public void Delete(Commentaire commentaire)

@@ -8,7 +8,7 @@ namespace Webzine.Repository
     {
 
         /// <summary>
-        /// Ajoute un Titre à base de donnée
+        /// Ajoute un Titre aux fausses données
         /// </summary>
         /// <param name="titre"></param>
         public void Add(Titre titre)
@@ -29,7 +29,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Supprimme un Titre de la base de donnée
+        /// Supprimme un Titre aux fausses données
         /// </summary>
         /// <param name="Titre"></param>
         public void Delete(Titre titre)
