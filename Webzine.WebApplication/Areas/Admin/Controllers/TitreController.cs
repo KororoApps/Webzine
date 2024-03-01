@@ -20,7 +20,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class TitreController : Controller
     {
-        ITitreRepository _titreRepository;
+        private readonly ITitreRepository _titreRepository;
 
         public TitreController(ITitreRepository titreRepository)
         {
@@ -32,10 +32,17 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index()
         {
+            // Génération d'une liste de titres.
+            List<Titre> titres = DataFactory.Titres;
+
+
+            // Tri de la liste des titres par date de création.
+            var titresTries = titres.OrderByDescending(t => t.DateSortie).ToList();
+
             // Création du modèle de vue contenant la liste de Titres.
             var titreModel = new GroupeTitreModel
             {
-                Titres = this._titreRepository.FindAll(),
+                Titres = titresTries,
             };
 
             // Retour de la vue avec le modèle de vue contenant les titres générés.
@@ -48,13 +55,14 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un titre.</returns>
         public IActionResult Delete(int id)
         {
-            // Création du modèle de vue contenant un Titre.
+
+            var titre = this._titreRepository.Find(id);
+
             var titreModel = new TitreModel
             {
-                Titre = this._titreRepository.Find(id),
+                Titre = titre,
             };
 
-            // Retour de la vue avec le modèle de vue contenant le titre généré.
             return this.View(titreModel);
         }
 
@@ -88,7 +96,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             };
 
             // Retour de la vue avec le modèle de vue contenant le titre généré.
-            return this.View(titreModel);
+            return this.View();
         }
 
         /// <summary>
