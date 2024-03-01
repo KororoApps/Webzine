@@ -54,9 +54,19 @@ namespace Webzine.Entity.Fixtures
         {
             var styleFaker = new Faker<Style>()
                 .RuleFor(t => t.IdStyle, f => f.IndexFaker + 1)
-                .RuleFor(s => s.Libelle, f => f.Lorem.Word());
+                .RuleFor(s => s.Libelle, f => f.Music.Genre());
 
-            Styles = styleFaker.Generate(25);
+            Styles = styleFaker.Generate(18);
+
+            // Assurer l'unicité des libellés
+            var libellesUniques = new HashSet<string>();
+            foreach (var style in Styles)
+            {
+                while (!libellesUniques.Add(style.Libelle))
+                {
+                    style.Libelle = styleFaker.Generate().Libelle;
+                }
+            }
         }
 
 
