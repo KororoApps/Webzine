@@ -56,7 +56,7 @@ namespace Webzine.Repository
             List<Style> styles = DataFactory.Styles ;
 
             var orderedStyle = styles
-                .OrderByDescending(c => c.Titres)
+                .OrderByDescending(c => c.Libelle)
                 .ToList();
 
             return orderedStyle;
