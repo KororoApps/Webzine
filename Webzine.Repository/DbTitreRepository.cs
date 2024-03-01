@@ -1,16 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Webzine.EntitiesContext;
 using Webzine.Entity;
+using Webzine.Entity.Fixtures;
 using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
 {
+
+    /// <summary>
+    /// Implémente l'interface ITitreRepository pour les opérations liées à la gestion des titres dans la base de données.
+    /// </summary>
     public class DbTitreRepository(WebzineDbContext context) : ITitreRepository
     {
         private readonly WebzineDbContext _context = context;
 
         /// <summary>
-        /// Ajoute un Titre à base de donnée
+        /// Ajoute un Titre.
         /// </summary>
         /// <param name="titre"></param>
         public void Add(Titre titre)
@@ -28,7 +33,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Compte le nombre de titre
+        /// Compte le nombre de titre.
         /// </summary>
         /// <returns></returns>
         public int Count()
@@ -40,7 +45,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Supprimme un Titre de la base de donnée
+        /// Supprimme un Titre.
         /// </summary>
         /// <param name="titre"></param>
         public void Delete(Titre titre)
@@ -58,7 +63,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        ///Renvoie le premier Titre ayant l'id mise en paramètre
+        ///Renvoie le premier Titre ayant l'id mise en paramètre.
         /// </summary>
         /// <param name="idTitre"></param>
         /// <returns></returns>
@@ -80,7 +85,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Retourne les titres demandés (pour la pagination) triés selon la date de création (du plus récent à ancien)
+        /// Retourne les titres demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Titre> FindTitres(int offset, int limit)
@@ -89,7 +94,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Renvoie tous les Titres
+        /// Renvoie tous les Titres.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Titre> FindAll()
@@ -105,7 +110,43 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Incrémente le nombre de lecture d'un titre
+        /// Renvoie tous le titre le plus lu.
+        /// </summary>
+        /// <returns></returns>
+        public Titre FindTitreLePlusLu()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Renvoie le nombre de titres.
+        /// </summary>
+        /// <returns></returns>
+        public int NombreTitres()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Renvoie le nombre de likes totals.
+        /// </summary>
+        /// <returns></returns>
+        public int NombreLikes()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Renvoie le nombre de lectures totales.
+        /// </summary>
+        /// <returns></returns>
+        public int NombreLectures()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Incrémente le nombre de lecture d'un titre.
         /// </summary>
         /// <returns></returns>
         public void IncrementNbLectures(Titre titre)
@@ -114,7 +155,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Incrémente le nombre de like d'un titre
+        /// Incrémente le nombre de like d'un titre.
         /// </summary>
         /// <returns></returns>
         public void IncrementNbLikes(Titre titre)
@@ -123,7 +164,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Recherche de manière insensible à la casse les titres contenant le mot recherché
+        /// Recherche de manière insensible à la casse les titres contenant le mot recherché.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Titre> Search(string mot)
@@ -132,7 +173,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Recherche de manière insensible à la casse les titres contenant le style de musique cherchée
+        /// Recherche de manière insensible à la casse les titres contenant le style de musique cherchée.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Titre> SearchByStyle(string libelle)        {
@@ -140,7 +181,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Met à jour un titre
+        /// Met à jour un titre.
         /// </summary>
         /// <returns></returns>
         public void Update(Titre titre)

@@ -8,7 +8,7 @@ namespace Webzine.Repository
     {
 
         /// <summary>
-        /// Ajouter un commentaire depuis les fausses données
+        /// Ajoute un Commentaire.
         /// </summary>
         /// <param name="commentaire"></param>
         public void Add(Commentaire commentaire)
@@ -21,7 +21,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Supprimmer un commentaire dans les fausses données
+        /// Supprimme un commentaire.
         /// </summary>
         /// <param name="commentaire"></param>
         public void Delete(Commentaire commentaire)
@@ -39,7 +39,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        ///Renvoie un commentaire
+        /// Renvoie le premier commentaire ayant l'id mise en paramètre.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -52,7 +52,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Renvoie une liste de commentaire par ordre de creation
+        /// Renvoie une liste de commentaire par ordre de creation.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Commentaire> FindAll()
@@ -67,7 +67,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Retourne les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent à ancien)
+        /// Retourne les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Commentaire> FindCommentaires(int offset, int limit)

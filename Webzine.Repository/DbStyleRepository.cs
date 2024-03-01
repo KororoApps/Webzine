@@ -5,24 +5,27 @@ using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
 {
-    // Implémente l'interface IStyleRepository
-    public class DbStyleRepository : IStyleRepository
+    /// <summary>
+    /// Implémente l'interface IStyleRepository pour la gestion des styles en utilisant une base de données.
+    /// </summary>
+    public class DbStyleRepository(WebzineDbContext context) : IStyleRepository
     {
         // Contexte de base de données pour accéder aux données
-        private readonly WebzineDbContext _context;
-        
+        private readonly WebzineDbContext _context = context;
 
-        // Constructeur prenant le contexte en paramètre
-        public DbStyleRepository(WebzineDbContext context)
-        {
-            _context = context;
-        }
-        // Méthode pour ajouter un style (non implémentée)
+        /// <summary>
+        /// Ajoute un style.
+        /// </summary>
+        /// <param name="style">Le style à ajouter.</param>
         public void Add(Style style)
         {
             throw new NotImplementedException();
         }
-        // Méthode pour supprimer un style
+
+        /// <summary>
+        /// Supprime un style.
+        /// </summary>
+        /// <param name="style">Le style à supprimer.</param>
         public void Delete(Style style)
         {
 
@@ -38,11 +41,12 @@ namespace Webzine.Repository
                     .SaveChanges();
             }          
         }
+
         /// <summary>
-        /// Méthode pour trouver un style par son identifiant
+        /// Trouve un style par son identifiant.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns> Retourne le style trouvé</returns>
+        /// <param name="id">L'identifiant du style.</param>
+        /// <returns>Le style correspondant à l'identifiant.</returns>
         public Style Find(int id)
         {
              var  style = _context.Styles
@@ -53,10 +57,11 @@ namespace Webzine.Repository
             return style;
 
         }
+
         /// <summary>
-        /// Méthode pour trouver tous les styles
+        /// Trouve tous les styles.
         /// </summary>
-        /// <returns>Retourne tous les styles</returns>
+        /// <returns>Une liste de tous les styles.</returns>
         public IEnumerable<Style> FindAll()
         {
             var  styles = _context.Styles
@@ -66,8 +71,21 @@ namespace Webzine.Repository
 
             return styles;
         }
-        // Méthode pour mettre à jour un style (non implémentée)
+
+        /// <summary>
+        /// Met à jour un style.
+        /// </summary>
+        /// <param name="style">Le style à mettre à jour.</param>
         public void Update(Style style)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Retourne le nombre de styles.
+        /// </summary>
+        /// <returns>Le nombre total de styles.</returns>
+        public int NombreStyles()
         {
             throw new NotImplementedException();
         }

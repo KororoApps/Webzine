@@ -76,7 +76,7 @@ namespace Webzine.Entity.Fixtures
             var artisteFaker = new Faker<Artiste>()
                 .RuleFor(t => t.IdArtiste, f => f.IndexFaker + 1)
                 .RuleFor(a => a.Nom, f => f.Name.FullName())
-                .RuleFor(a => a.Biographie, f => f.Lorem.Paragraph());
+                .RuleFor(a => a.Biographie, f => f.Random.Bool() ? f.Lorem.Paragraph() : null);
 
             Artistes = artisteFaker.Generate(150);
         }
