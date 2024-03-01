@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Webzine.Entity;
+﻿using Webzine.Entity;
 using Webzine.Entity.Fixtures;
 using Webzine.Repository.Contracts;
 
@@ -11,18 +6,36 @@ namespace Webzine.Repository
 {
     public class LocalCommentaireRepository : ICommentaireRepository
     {
+
+        /// <summary>
+        /// Ajouter un commentaire depuis les fausses données
+        /// </summary>
+        /// <param name="commentaire"></param>
         public void Add(Commentaire commentaire)
         {
-            throw new NotImplementedException();
+            // Génère un nouvel identifiant
+            commentaire.IdCommentaire = DataFactory.Commentaires.Count + 1;
+
+            // Ajoute le nouveau commentaire à la liste
+            DataFactory.Commentaires.Add(commentaire);
         }
 
         /// <summary>
-        /// Fait semblant de supprimmer un commentaire depuis les fausses données
+        /// Supprimmer un commentaire dans les fausses données
         /// </summary>
         /// <param name="commentaire"></param>
         public void Delete(Commentaire commentaire)
         {
+            // Recherche le commentaire dans la liste
+            var commentaireASupprimer = DataFactory.Commentaires
+                .FirstOrDefault(t => t.IdCommentaire == commentaire.IdCommentaire);
 
+            // Supprime le commentaire s'il existe
+            if (commentaireASupprimer != null)
+            {
+                DataFactory.Commentaires
+                    .Remove(commentaireASupprimer);
+            }
         }
 
         /// <summary>
@@ -32,8 +45,9 @@ namespace Webzine.Repository
         /// <returns></returns>
         public Commentaire Find(int id)
         {
-            List<Commentaire> commentaires = DataFactory.Commentaires;
-            Commentaire commentaire = commentaires.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+            var commentaire = DataFactory.Commentaires
+                .FirstOrDefault(t => t.IdCommentaire == id);
+
             return commentaire;
         }
 
@@ -44,8 +58,21 @@ namespace Webzine.Repository
         public IEnumerable<Commentaire> FindAll()
         {
             List<Commentaire> commentaires = DataFactory.Commentaires;
-            var orderedCommentaires = commentaires.OrderByDescending(c => c.DateCreation).ToList();
+
+            var orderedCommentaires = commentaires
+                .OrderByDescending(c => c.DateCreation)
+                .ToList();
+
             return orderedCommentaires;
+        }
+
+        /// <summary>
+        /// Retourne les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent à ancien)
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Commentaire> FindCommentaires(int offset, int limit)
+        {
+            throw new NotImplementedException();
         }
     }
 }
