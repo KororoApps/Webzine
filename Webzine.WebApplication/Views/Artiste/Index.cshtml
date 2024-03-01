@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeArtisteModel
+﻿@model Webzine.WebApplication.Shared.ViewModels.ArtisteModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -10,22 +10,17 @@
 
 @*Affichage du nom de la page.*@
 @{
-    ViewData["titrePage"] = @Model.Artistes.First().Nom;
+    ViewData["titrePage"] = @Model.Artiste.Nom;
 }
 <hr>
 
-<p>@Model.Artistes.First().Biographie</p>
+<p>@Model.Artiste.Biographie</p>
 <p class="fs-1">Albums</p>
 
 <hr>
 
-@{
-    var titresArray = Model.Artistes.First().Titres.ToArray();
-    var nombreDeTitres = titresArray.Length;
-}
-
 @*Affichage des titres.*@
-@foreach (var titre in Model.Artistes.First().Titres)
+@foreach (var titre in Model.Artiste.Titres)
 {
     <div class="row">
 
@@ -54,23 +49,10 @@
                     </thead>
 
                     <tbody>
-                        @{
-                            var random = new Random();
-                            var nombreDeRepetitions = random.Next(1, 10);
-                        }
-
-                        @for (int i = 0; i < nombreDeRepetitions; i++)
-                        {
                             <tr>
-                                @{
-                                    // Obtenir une durée et un libellé aléatoire à partir du tableau de titres
-                                    var titreAleatoire = titresArray[random.Next(nombreDeTitres)];
-                                }
-
-                                <td class="text-start">@titreAleatoire.Duree.ToString(@"mm\:ss")</td>
-                                <td class="text-start"><a asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">@titreAleatoire.Libelle</a></td>
-                            </tr>
-                        }
+                                <td class="text-start">@titre.Duree.ToString(@"mm\:ss")</td>
+                                <td class="text-start"><a asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">@titre.Libelle</a></td>
+                            </tr>                        
                     </tbody>
                 </table>
             </div>

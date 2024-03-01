@@ -78,7 +78,7 @@ namespace Webzine.Entity.Fixtures
                 .RuleFor(a => a.Nom, f => f.Name.FullName())
                 .RuleFor(a => a.Biographie, f => f.Lorem.Paragraph());
 
-            Artistes = artisteFaker.Generate(300);
+            Artistes = artisteFaker.Generate(150);
         }
 
         /// <summary>
@@ -98,7 +98,6 @@ namespace Webzine.Entity.Fixtures
                 .RuleFor(t => t.Chronique, f => f.Lorem.Paragraphs(10))
                 .RuleFor(t => t.UrlJaquette, f => f.Image.PicsumUrl().ToString())
                 .RuleFor(t => t.UrlEcoute, f => f.Internet.Url())
-                .RuleFor(t => t.Album, f => f.Commerce.ProductName())
                 .RuleFor(t => t.Artiste, f => f.PickRandom(Artistes))
                 .RuleFor(t => t.Styles, f => f.PickRandom(Styles, f.Random.Int(1, 3)).ToList());
 
