@@ -7,7 +7,7 @@ using Webzine.Repository.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Charge la configuration en fonction de l'environnement.
+/*// Charge la configuration en fonction de l'environnement.
 if (builder.Environment.IsDevelopment())
 {
     //builder.Configuration.AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
@@ -19,6 +19,17 @@ else
 {
     //builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
+    builder.Services.AddDbContext<WebzineDbContext>(options =>
+   options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
+}*/
+
+if ((builder.Configuration.GetSection("AppSettings:SGBD").Value == "SQLite"))
+{
+    builder.Services.AddDbContext<WebzineDbContext>(options =>
+  options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
+}
+else if ((builder.Configuration.GetSection("AppSettings:SGBD").Value == "PostgreSQL"))
+{
     builder.Services.AddDbContext<WebzineDbContext>(options =>
    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
 }
