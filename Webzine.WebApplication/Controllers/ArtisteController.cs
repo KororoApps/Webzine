@@ -24,23 +24,23 @@ namespace Webzine.WebApplication.Controllers
 
         public ArtisteController(IArtisteRepository artisteRepository) 
         {
-            _artisteRepository = artisteRepository;
+            this._artisteRepository = artisteRepository;
         }
 
         /// <summary>
         /// Action pour afficher les détails d'un artiste.
         /// </summary>
         /// <returns>Vue contenant les détails de l'artiste.</returns>
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            var artistes = _artisteRepository.FindAll();
-
+            List<Artiste> artisteList = new();
+            artisteList.Add(this._artisteRepository.Find(id));
             var artisteModel = new GroupeArtisteModel
             {
-                Artistes = artistes,
+                Artistes = artisteList,
             };
 
-            return View(artisteModel);
+            return this.View(artisteModel);
         }
     }
 }
