@@ -23,7 +23,7 @@ else
    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
 }
 
-if ((builder.Configuration.GetSection("Repository").Value == "Local")){
+if ((builder.Configuration.GetSection("AppSettings:Repository").Value == "Local")){
     builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
     builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
     builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
