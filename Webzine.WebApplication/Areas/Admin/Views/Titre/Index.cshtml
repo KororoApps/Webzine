@@ -43,7 +43,7 @@
                     <td>@titre.DateSortie.ToString("dd/MM/yyyy")</td>
                     <td>@titre.NbLectures</td>
                     <td>@titre.NbLikes</td>
-                    <td>@titre.Commentaires.Count</td>
+                    <td>@(titre.Commentaires?.Count ?? 0)</td>
                     <td class="text-center">
                         <div class="d-flex justify-content-center">
                             <a asp-area="Admin" asp-controller="Titre" asp-action="Edit" asp-route-id="@titre.IdTitre">

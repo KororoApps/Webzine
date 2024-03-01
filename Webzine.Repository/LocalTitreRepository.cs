@@ -1,10 +1,12 @@
-﻿using Webzine.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using Webzine.EntitiesContext;
+using Webzine.Entity;
 using Webzine.Entity.Fixtures;
 using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
 {
-    public class TitreRepository : ITitreRepository
+    public class LocalTitreRepository : ITitreRepository
     {
 
         /// <summary>

@@ -6,14 +6,14 @@ using Webzine.Repository.Contracts;
 namespace Webzine.Repository
 {
     // Implémente l'interface IStyleRepository
-    public class StyleRepository : IStyleRepository
+    public class LocalStyleRepository : IStyleRepository
     {
         // Contexte de base de données pour accéder aux données
         private readonly WebzineDbContext _context;
         
 
         // Constructeur prenant le contexte en paramètre
-        public StyleRepository(WebzineDbContext context)
+        public LocalStyleRepository(WebzineDbContext context)
         {
             _context = context;
         }
