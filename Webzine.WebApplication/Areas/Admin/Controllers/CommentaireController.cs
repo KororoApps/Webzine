@@ -5,6 +5,7 @@
 namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Webzine.Entity;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
@@ -16,13 +17,11 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     /// Il utilise le générateur de fausses données Bogus pour simuler des données.
     /// </remarks>
     [Area("Admin")]
-    public class CommentaireController : Controller
+    public class CommentaireController(ICommentaireRepository commentaireRepository, ITitreRepository titreRepository) : Controller
     {
-        private readonly ICommentaireRepository commentaireRepository;
-        public CommentaireController(ICommentaireRepository commentaireRepository)
-        {
-            this.commentaireRepository = commentaireRepository;
-        }
+        private readonly ICommentaireRepository commentaireRepository = commentaireRepository;
+        private readonly ITitreRepository titreRepository = titreRepository;
+
         /// <summary>
         /// Action pour afficher la liste des commentaires.
         /// </summary>
@@ -32,7 +31,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             // Création du modèle de vue contenant la liste de Commentaires.
             var commentaireModel = new GroupeCommentaireModel
             {
-                Commentaires = commentaireRepository.FindAll(),
+                Commentaires = this.commentaireRepository.FindAll(),
             };
 
             // Retour de la vue avec le modèle de vue contenant les commentaires générés.
@@ -40,15 +39,35 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// Action pour afficher la vue de création d'un artiste.
+        /// </summary>
+        /// <param name="commentaire">L'entité Commentaire à créer</param>
+        /// <param name="IdTitre">Id du titre lié au commentaire</param>
+        /// <returns>Vue de création d'un artiste.</returns>
+        public IActionResult Create(Commentaire commentaire, int IdTitre)
+        {
+            Titre titre = this.titreRepository.Find(IdTitre);
+
+            commentaire.DateCreation = DateTime.Now;
+            commentaire.Titre = titre;
+            commentaire.Titre.Artiste = titre.Artiste;
+            commentaire.Contenu = commentaire.Contenu;
+
+            this.commentaireRepository.Add(commentaire);
+            return this.RedirectToAction("Index", "Commentaire", new { area = "Admin"});
+        }
+
+        /// <summary>
         /// Action pour afficher la vue de suppression d'un commentaire.
         /// </summary>
+        /// <param name="id">L'identifiant du commentaire à supprimer.</param>
         /// <returns>Vue de suppression d'un commentaire.</returns>
         public IActionResult Delete(int id)
         {
             // Création du modèle de vue contenant un commentaire.
             var commentaireModel = new CommentaireModel
             {
-                Commentaire = commentaireRepository.Find(id),
+                Commentaire = this.commentaireRepository.Find(id),
             };
 
             // Retour de la vue avec le modèle de vue contenant le commentaire généré.
@@ -64,7 +83,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            commentaireRepository.Delete(commentaireRepository.Find(id));
+            this.commentaireRepository.Delete(this.commentaireRepository.Find(id));
             return this.RedirectToAction(nameof(this.Index));
         }
     }

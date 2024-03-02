@@ -43,6 +43,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action pour afficher la vue de suppression d'un artiste.
         /// </summary>
+        /// <param name="id">L'identifiant de l'artiste à supprimer.</param>
         /// <returns>Vue de suppression d'un artiste.</returns>
         public IActionResult Delete(int id)
         {

@@ -24,6 +24,8 @@ namespace Webzine.Repository
                 throw new ArgumentNullException(nameof(commentaire));
             }
 
+            commentaire.DateCreation = DateTime.Now;
+
             _context.Commentaires
                 .Add(commentaire);
 

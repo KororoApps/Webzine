@@ -25,6 +25,8 @@ namespace Webzine.Repository
                 throw new ArgumentNullException(nameof(titre));
             }
 
+            titre.DateCreation = DateTime.Now;
+
             _context.Titres
                 .Add(titre);
 

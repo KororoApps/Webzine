@@ -82,8 +82,9 @@
     <div class="mt-5">
         <h3>Donne ton avis sur le titre</h3>
 
-        <form asp-controller="Commentaire" asp-action="Index" method="post" class="d-flex">
+        <form method="post" asp-area="Admin" asp-controller="Commentaire" asp-action="Create" class="d-flex">
             <div class="container">
+                <input type="hidden" asp-for="@Model.Titre.IdTitre" name="IdTitre" />
                 <div class="form-group row mb-5">
                     <div class="col-md-2">
                         <span class="form-label">Nom</span><span class="text-danger">*</span>
@@ -99,6 +100,7 @@
                     <div class="col-md-10">
                         <textarea placeholder="Votre commentaire..." class="form-control" id="commentsInput" rows="10" cols="10" required></textarea>
                     </div>
+
                 </div>
 
                 @*Bouton d'ajout du titre.*@

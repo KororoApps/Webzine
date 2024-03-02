@@ -109,7 +109,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action HTTP POST pour confirmer la création d'un titre.
         /// </summary>
-        /// <param name="titre">L'entité Titre à créer</param>
+        /// <param name="titre">L'entité Titre à créer.</param>
         /// <param name="styleIds">L'identifiant du/des style(s) à créer au titre.</param>
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
