@@ -1,7 +1,6 @@
 ﻿namespace Webzine.Entity
 {
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
     /// Représente un style musical dans le système.
@@ -27,8 +26,7 @@
         /// <summary>
         /// Obtient ou définit les titres utilisant le style
         /// </summary>
-
-        [Required]
-        public required List<Titre> Titres { get; set; }
+        //[Required]
+        public List<Titre> Titres { get; set; } = new List<Titre>();
     }
 }

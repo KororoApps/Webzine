@@ -108,12 +108,6 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateConfirmed(Titre titre, List<int> styleIds)
         {
-            /*if (!this.ModelState.IsValid)
-            {
-                // Traitement en cas de modèle non valide
-                return this.RedirectToAction(nameof(this.Create));
-            }*/
-
             IEnumerable<Style> styles = this.styleRepository.FindByIds(styleIds);
             Artiste artiste = this.artisteRepository.Find(titre.Artiste.IdArtiste);
             titre.Styles = styles.ToList();

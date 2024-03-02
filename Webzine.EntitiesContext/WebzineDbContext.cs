@@ -8,7 +8,6 @@ namespace Webzine.EntitiesContext
         public WebzineDbContext()
         {
         }
-
         public WebzineDbContext(DbContextOptions<WebzineDbContext> options) : base(options) { }
 
         public virtual DbSet<Artiste> Artistes { get; set; }
@@ -33,7 +32,7 @@ namespace Webzine.EntitiesContext
                 entity.Property(a => a.Nom);
                 entity.Property(a => a.Biographie);
 
-                entity.HasMany(a => a.Titres).WithOne(t => t.Artiste);
+                entity.HasMany(a => a.Titres);
             }
             );
 
@@ -60,6 +59,8 @@ namespace Webzine.EntitiesContext
 
                 entity.Property(s => s.IdStyle);
                 entity.Property(s => s.Libelle);
+
+                entity.HasMany(s => s.Titres);
             }
             );
 
@@ -81,9 +82,9 @@ namespace Webzine.EntitiesContext
                 entity.Property(t => t.UrlJaquette);
                 entity.Property(t => t.UrlEcoute);
 
-                entity.HasOne(t => t.Artiste).WithMany(a => a.Titres);
+                entity.HasOne(t => t.Artiste);
                 entity.HasMany(t => t.Commentaires).WithOne(c => c.Titre);
-                entity.HasMany(t => t.Styles).WithMany(s => s.Titres);
+                entity.HasMany(t => t.Styles);
             }
             );
 

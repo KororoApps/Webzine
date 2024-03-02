@@ -30,6 +30,6 @@
         /// <summary>
         /// Obtient ou définit la liste des titres associés à cet artiste.
         /// </summary>
-        public required List<Titre> Titres { get; set; }
+        public List<Titre> Titres { get; set; }
     }
 }
