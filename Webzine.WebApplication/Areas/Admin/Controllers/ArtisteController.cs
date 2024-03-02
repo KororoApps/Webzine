@@ -20,12 +20,17 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     public class ArtisteController : Controller
     {
 
-        private readonly IArtisteRepository _artisteRepository;
+        private readonly IArtisteRepository artisteRepository;
 
+        /// <summary>
+        /// Initialise une nouvelle instance de la classe <see cref="ArtisteController"/>.
+        /// </summary>
+        /// <param name="artisteRepository">Le repository des artistes à injecter.</param>
         public ArtisteController(IArtisteRepository artisteRepository)
         {
-            this._artisteRepository = artisteRepository;
+            this.artisteRepository = artisteRepository;
         }
+
         /// <summary>
         /// Action pour afficher la liste des artistes.
         /// </summary>
@@ -34,7 +39,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         {
             var artisteModel = new GroupeArtisteModel
             {
-                Artistes = this._artisteRepository.FindAll(),
+                Artistes = this.artisteRepository.FindAll(),
             };
 
             return this.View(artisteModel);
@@ -47,7 +52,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un artiste.</returns>
         public IActionResult Delete(int id)
         {
-            var artiste = this._artisteRepository.Find(id);
+            var artiste = this.artisteRepository.Find(id);
 
             var artisteModel = new ArtisteModel
             {
@@ -66,7 +71,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            this._artisteRepository.Delete(this._artisteRepository.Find(id));
+            this.artisteRepository.Delete(this.artisteRepository.Find(id));
             return this.RedirectToAction(nameof(this.Index));
         }
 
@@ -82,22 +87,24 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action HTTP POST pour confirmer la création d'un artiste.
         /// </summary>
+        /// <param name="artiste">L'artiste à ajouter.</param>
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CreateConfirmed(Artiste artiste)
         {
-            this._artisteRepository.Add(artiste);
+            this.artisteRepository.Add(artiste);
             return this.RedirectToAction(nameof(this.Index));
         }
 
         /// <summary>
         /// Action pour afficher la vue d'édition d'un artiste.
         /// </summary>
+        /// <param name="id">L'identifiant de l'artiste à éditer.</param>
         /// <returns>Vue d'édition d'un artiste.</returns>
         public IActionResult Edit(int id)
         {
-            var artiste = this._artisteRepository.Find(id);
+            var artiste = this.artisteRepository.Find(id);
 
             var artisteModel = new ArtisteModel
             {
@@ -110,13 +117,13 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action HTTP POST pour confirmer l'édition d'un artiste.
         /// </summary>
-        /// <param name="id">L'identifiant de l'artiste à éditer.</param>
+        /// <param name="artiste">L'artiste à éditer.</param>
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditConfirmed(Artiste artiste)
         {
-            this._artisteRepository.Update(artiste);
+            this.artisteRepository.Update(artiste);
             return this.RedirectToAction(nameof(this.Index));
         }
     }
