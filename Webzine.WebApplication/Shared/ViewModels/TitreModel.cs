@@ -22,8 +22,18 @@ namespace Webzine.WebApplication.Shared.ViewModels
         public IEnumerable<Style>? Styles { get; set; }
 
         /// <summary>
+        /// Obtient ou définit un commentaire.
+        /// </summary>
+        public Commentaire Commentaire { get; set; }
+
+        /// <summary>
         /// Obtient ou définit les artistes.
         /// </summary>
         public IEnumerable<Artiste>? Artistes { get; set; }
+
+        /// <summary>
+        /// Obtient ou définit les commentaires.
+        /// </summary>
+        public IEnumerable<Commentaire>? Commentaires { get; set; }
     }
 }

@@ -5,6 +5,7 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Webzine.Entity;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
@@ -19,9 +20,10 @@ namespace Webzine.WebApplication.Controllers
     /// Initialise une nouvelle instance de la classe <see cref="TitreController"/>.
     /// </remarks>
     /// <param name="titreRepository">Le repository des titres utilisé par le contrôleur.</param>
-    public class TitreController(ITitreRepository titreRepository) : Controller
+    public class TitreController(ITitreRepository titreRepository, ICommentaireRepository commentaireRepository) : Controller
     {
         private readonly ITitreRepository titreRepository = titreRepository;
+        private readonly ICommentaireRepository commentaireRepository = commentaireRepository;
 
         /// <summary>
         /// Action qui affiche la liste des titres.
@@ -30,10 +32,14 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index(int id)
         {
+            // Génération d'une liste de styles.
+            var commentaires = this.commentaireRepository.FindCommentairesByIdTitre(id);
+
             // Création du modèle de vue contenant un titre.
             var titreModel = new TitreModel
             {
                 Titre = this.titreRepository.Find(id),
+                Commentaires = commentaires,
             };
 
             // Retour de la vue avec le modèle de vue contenant le titre généré.

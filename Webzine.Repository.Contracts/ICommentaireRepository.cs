@@ -21,5 +21,8 @@ namespace Webzine.Repository.Contracts
 
         // Renvoie tout les commentaires.
         IEnumerable<Commentaire> FindAll();
+
+        // Renvoie une liste de commentaire par ordre de creation.
+        IEnumerable<Commentaire> FindCommentairesByIdTitre(int id);
     }
 }

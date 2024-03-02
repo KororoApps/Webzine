@@ -25,13 +25,13 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue de la page d'accueil.</returns>
         public IActionResult Index()
         {
+
             // Création du modèle de vue contenant la liste des titres.
             GroupeTitreModel groupeTitreModel = new()
             {
                 Titres = this.titreRepository.FindAll(),
                 TitresPopulaires = this.titreRepository.FindTitresLesPlusLike(),
                 ParutionChroniqueTitre = this.titreRepository.ParutionChroniqueTitres(),
-
             };
 
             // Retour de la vue avec le modèle de vue contenant les détails des titres.

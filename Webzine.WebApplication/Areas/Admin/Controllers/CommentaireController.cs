@@ -54,10 +54,9 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 
             Titre titre = this.titreRepository.Find(IdTitre);
 
+            Console.WriteLine(commentaire.Auteur);
             commentaire.DateCreation = DateTime.Now;
             commentaire.Titre = titre;
-            commentaire.Titre.Artiste = titre.Artiste;
-            commentaire.Contenu = commentaire.Contenu;
 
             this.commentaireRepository.Add(commentaire);
             return this.RedirectToAction("Index", "Commentaire", new { area = "Admin"});

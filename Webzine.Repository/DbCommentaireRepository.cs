@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Webzine.EntitiesContext;
 using Webzine.Entity;
+using Webzine.Entity.Fixtures;
 using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
@@ -84,6 +85,22 @@ namespace Webzine.Repository
                 .ToList();
 
             return allCommentaires;
+        }
+
+        /// <summary>
+        /// Renvoie une liste de commentaire par ordre de creation.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
+        {
+            List<Commentaire> commentaires = DataFactory.Commentaires;
+
+            var orderedCommentaires = commentaires
+                 .Where(c => c.Titre != null && c.Titre.IdTitre == id)
+                 .OrderByDescending(c => c.DateCreation)
+                 .ToList();
+
+            return orderedCommentaires;
         }
 
         /// <summary>

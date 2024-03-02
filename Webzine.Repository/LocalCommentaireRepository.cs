@@ -67,6 +67,22 @@ namespace Webzine.Repository
         }
 
         /// <summary>
+        /// Renvoie une liste de commentaire par ordre de creation.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
+        {
+            List<Commentaire> commentaires = DataFactory.Commentaires;
+
+            var orderedCommentaires = commentaires
+                .Where(c => c.Titre != null && c.Titre.IdTitre == id)
+                .OrderBy(c => c.DateCreation)
+                .ToList();
+
+            return orderedCommentaires;
+        }
+
+        /// <summary>
         /// Retourne les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
         /// </summary>
         /// <returns></returns>
