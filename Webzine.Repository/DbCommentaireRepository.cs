@@ -26,8 +26,7 @@ namespace Webzine.Repository
 
             commentaire.DateCreation = DateTime.Now;
 
-            _context.Commentaires
-                .Add(commentaire);
+            _context.Add<Commentaire>(commentaire);
 
             _context
                 .SaveChanges();

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Webzine.EntitiesContext;
 using Webzine.Entity;
-using Webzine.Entity.Fixtures;
 using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
@@ -10,18 +9,14 @@ namespace Webzine.Repository
     /// <summary>
     /// Implémente l'interface ITitreRepository pour les opérations liées à la gestion des titres dans la base de données.
     /// </summary>
-    public class DbTitreRepository : ITitreRepository
+    /// <remarks>
+    /// Initialise une nouvelle instance de la classe DbTitreRepository.
+    /// </remarks>
+    /// <param name="context">Le contexte de base de données.</param>
+    public class DbTitreRepository(WebzineDbContext context) : ITitreRepository
     {
-        private readonly WebzineDbContext _context;
+        private readonly WebzineDbContext _context = context;
 
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe DbTitreRepository.
-        /// </summary>
-        /// <param name="context">Le contexte de base de données.</param>
-        public DbTitreRepository(WebzineDbContext context)
-        {
-            _context = context;
-        }
         /// <summary>
         /// Ajoute un Titre.
         /// </summary>
@@ -35,8 +30,7 @@ namespace Webzine.Repository
 
             titre.DateCreation = DateTime.Now;
 
-            _context.Titres
-                .Add(titre);
+            _context.Add<Titre>(titre);
 
             _context
                 .SaveChanges();
@@ -65,11 +59,15 @@ namespace Webzine.Repository
                 throw new ArgumentNullException(nameof(titre));
             }
 
-            _context.Titres
-                .Remove(titre);
+            try
+            {
+                _context.Titres
+                    .Remove(titre);
 
-            _context
-                .SaveChanges();
+                _context
+                    .SaveChanges();
+
+            } catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
 
         /// <summary>
@@ -113,7 +111,7 @@ namespace Webzine.Repository
                 .Include(t => t.Artiste)
                 .Include(t => t.Commentaires)
                 .Include(t => t.Styles)
-                .OrderBy(t => t.Libelle)
+                .OrderByDescending(t => t.DateCreation)
                 .ToList();
 
             return allTitres;

@@ -14,6 +14,7 @@
 @*Formulaire d'édition de l'artiste*@
 <form method="post" asp-action="EditConfirmed" asp-controller="Artiste" asp-route-id="@Model.Artiste.IdArtiste" class="d-flex">
     <div class="container">
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group row mb-5">
             <div class="col-md-2">
                 <label asp-for="@Model.Artiste.Nom" class="form-label required-label"></label>

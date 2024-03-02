@@ -9,18 +9,13 @@ namespace Webzine.Repository
     /// <summary>
     /// Implémente l'interface IArtisteRepository en utilisant une base de données.
     /// </summary>
-    public class DbArtisteRepository : IArtisteRepository
+    /// <remarks>
+    /// Initialise une nouvelle instance de la classe DbArtisteRepository.
+    /// </remarks>
+    /// <param name="context">Le contexte de base de données.</param>
+    public class DbArtisteRepository(WebzineDbContext context) : IArtisteRepository
     {
-        private readonly WebzineDbContext _context;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe DbArtisteRepository.
-        /// </summary>
-        /// <param name="context">Le contexte de base de données.</param>
-        public DbArtisteRepository(WebzineDbContext context)
-        {
-            _context = context;
-        }
+        private readonly WebzineDbContext _context = context;
 
         /// <summary>
         /// Ajoute un artiste.
@@ -33,11 +28,9 @@ namespace Webzine.Repository
                 throw new ArgumentNullException(nameof(artiste));
             }
 
-            _context.Artistes
-                .Add(artiste);
+            _context.Add<Artiste>(artiste);
 
-            _context
-                .SaveChanges();
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -52,10 +45,9 @@ namespace Webzine.Repository
             }
 
             _context.Artistes
-                .Remove(artiste);
+                 .Remove(artiste);
 
-            _context
-                .SaveChanges();
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -86,7 +78,7 @@ namespace Webzine.Repository
         {
             var allArtistes = _context.Artistes
                 .Include(c => c.Titres)
-                .OrderBy(t => t.Nom)
+                .OrderBy(t => t.Nom.ToLower())
                 .ToList();
 
             return allArtistes;

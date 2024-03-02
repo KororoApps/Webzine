@@ -14,6 +14,7 @@
 @*Formulaire d'ajout d'un style.*@
 <form method="post" asp-action="CreateConfirmed" asp-controller="Style" class="col-6 d-flex">
     <div class="container">
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="row align-items-center mb-5">
             <div class="col-auto">
                 <label asp-for="@Model.Style.Libelle" class="form-label required-label"></label>

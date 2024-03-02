@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Webzine.EntitiesContext;
 using Webzine.Entity;
-using Webzine.Entity.Fixtures;
 using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
@@ -20,7 +19,14 @@ namespace Webzine.Repository
         /// <param name="style">Le style à ajouter.</param>
         public void Add(Style style)
         {
-            throw new NotImplementedException();
+            if (style == null)
+            {
+                throw new ArgumentNullException(nameof(style));
+            }
+
+            _context.Add<Style>(style);
+
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -38,8 +44,8 @@ namespace Webzine.Repository
             {
                 _context.Styles
                      .Remove(style);
-                _context
-                    .SaveChanges();
+
+                _context.SaveChanges();
             }          
         }
 
@@ -66,7 +72,7 @@ namespace Webzine.Repository
         public IEnumerable<Style> FindAll()
         {
             var  styles = _context.Styles
-                .OrderBy(c => c.Libelle)
+                .OrderBy(c => c.Libelle.ToLower())
                 .ToList();
 
             return styles;

@@ -36,19 +36,11 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index()
         {
-            // Génération d'une liste de titres.
-            List<Titre> titres = DataFactory.Titres;
-
-            // Tri de la liste des titres par date de création.
-            var titresTries = titres.OrderByDescending(t => t.DateSortie).ToList();
-
-            // Création du modèle de vue contenant la liste de Titres.
             var titreModel = new GroupeTitreModel
             {
-                Titres = titresTries,
+                Titres = this.titreRepository.FindAll(),
             };
 
-            // Retour de la vue avec le modèle de vue contenant les titres générés.
             return this.View(titreModel);
         }
 
@@ -116,12 +108,18 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateConfirmed(Titre titre, List<int> styleIds)
         {
-           IEnumerable<Style> styles = this.styleRepository.FindByIds(styleIds);
-           Artiste artiste = this.artisteRepository.Find(titre.Artiste.IdArtiste);
-           titre.Styles = styles.ToList();
-           titre.Artiste = artiste;
-           this.titreRepository.Add(titre);
-           return this.RedirectToAction(nameof(this.Index));
+            /*if (!this.ModelState.IsValid)
+            {
+                // Traitement en cas de modèle non valide
+                return this.RedirectToAction(nameof(this.Create));
+            }*/
+
+            IEnumerable<Style> styles = this.styleRepository.FindByIds(styleIds);
+            Artiste artiste = this.artisteRepository.Find(titre.Artiste.IdArtiste);
+            titre.Styles = styles.ToList();
+            titre.Artiste = artiste;
+            this.titreRepository.Add(titre);
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         /// <summary>
