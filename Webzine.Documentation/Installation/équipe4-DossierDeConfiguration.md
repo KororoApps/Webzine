@@ -11,7 +11,7 @@ Il est impératif de respecter scrupuleusement ces instructions afin d'assurer u
 
 ### 1.1.1. Lancement avec Windows 
 
-Pour lancer l'application sur Windows, la commande ci-dessous doit-être lancer dans un terminal :
+Pour lancer l'application sur Windows, la commande ci-dessous doit-être lancer dans un terminal (de préférence en recherchant ce dernier dans le menu démarer) :
 
 dotnet publish --configuration Release -r win-x64 Webzine.WebApplication.csproj
 
@@ -20,7 +20,7 @@ WebZine\Webzine.WebApplication\bin\Release\net8.0\win-x64\publish
 
 ![Logo](./images/Lancement_avec_WIndows.png)
 
-Ouvrir un terminal et faire la commande :
+Ouvrir un terminal en clickant sur le chemin du fichier en haut et en tapant "cmd" et faire la commande :
 
 dotnet .\Webzine.WebApplication.dll
 
