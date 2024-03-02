@@ -6,10 +6,10 @@
 
     <div class="container">
         <div class="row">
-            @foreach (var titre in Model.Titres.OrderBy(t => Guid.NewGuid()).Take(3))
+            @foreach (var titre in Model.TitresPopulaires)
             {
                 <div class="col-12 col-sm-12 col-md-4 mt-5">
-                    <a href="/Titre/" class="text-decoration-none">
+                    <a asp-area="" asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">
                         <div class="card">
                             <div class="ratio ratio-1x1">
                                 <img src="@titre.UrlJaquette" class="card-img-top w-100 h-100 object-fit-cover" alt="image">

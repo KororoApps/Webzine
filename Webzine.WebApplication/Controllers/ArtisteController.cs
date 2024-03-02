@@ -6,7 +6,7 @@ namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -16,37 +16,22 @@ namespace Webzine.WebApplication.Controllers
     /// Ce contrôleur gère l'affichage de la biographie d'un artiste.
     /// Il utilise le générateur de fausses données Bogus pour simuler des données.
     /// </remarks>
-    public class ArtisteController : Controller
+    public class ArtisteController(IArtisteRepository artisteRepository) : Controller
     {
-        private readonly ArtisteFactory artisteFactory;
+        private readonly IArtisteRepository artisteRepository = artisteRepository;
 
         /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="ArtisteController"/>.
+        /// Action permettant d'afficher les artistes liés à un groupe.
         /// </summary>
-        public ArtisteController()
+        /// <param name="id">Identifiant du groupe d'artistes.</param>
+        /// <returns>Vue contenant la liste des artistes liés au groupe.</returns>
+        public IActionResult Index(int id)
         {
-            this.artisteFactory = new ArtisteFactory();
-        }
-
-        /// <summary>
-        /// Action pour afficher les détails d'un artiste.
-        /// </summary>
-        /// <returns>Vue contenant les détails de l'artiste.</returns>
-        public IActionResult Index()
-        {
-            Artiste artiste = this.artisteFactory.CreateArtiste();
-
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Artiste.
-            /// <summary>
             var artisteModel = new ArtisteModel
             {
-                Artiste = artiste,
+                Artiste = this.artisteRepository.Find(id),
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les détails de l'artiste.
-            /// <summary>
             return this.View(artisteModel);
         }
     }

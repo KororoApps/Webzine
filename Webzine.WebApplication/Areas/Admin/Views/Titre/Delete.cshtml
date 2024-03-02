@@ -15,15 +15,20 @@
     <div>
         <p>Etes-vous sûr de vouloir supprimer le titre "@Model.Titre.Libelle"" de @Model.Titre.Artiste.Nom ? </p>
 
-        @*Bouton de suppression.*@
-        <button type="button" class="btn btn-danger mb-5">
-            Supprimer
-        </button>
+        @* Formulaire pour soumettre la demande de suppression *@
+        <form method="post" asp-action="DeleteConfirmed" asp-controller="Titre" asp-route-id="@Model.Titre.IdTitre">
+            @* Utilisez un champ anti-forgery pour protéger le formulaire *@
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="btn btn-danger mb-5">
+                Supprimer
+            </button>
+        </form>
     </div>
 
     @*Lien vers le retour à l'administration du titre.*@
     <div>
-        <a class="text-decoration-none fw-normal" asp-area="Admin" asp-controller="Titre" asp-action="Index">
+        <a class=" fw-normal" asp-area="Admin" asp-controller="Titre" asp-action="Index">
             Retour à l'administration des titres
         </a>
     </div>

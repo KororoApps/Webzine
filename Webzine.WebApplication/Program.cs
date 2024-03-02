@@ -1,40 +1,91 @@
-// <copyright file="Program.cs" company="Diiage 2026">
-// Copyright (c) Diiage 2026. All rights reserved.
-// </copyright>
-using Bogus;
+using Microsoft.EntityFrameworkCore;
+using NLog.Web;
+using Webzine.EntitiesContext;
+using Webzine.Repository;
+using Webzine.Repository.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Ajoute les services nécessaires pour permettre l'utilisation des
-// controllers avec des vues.
+// Vérifie le type de SGBD à utiliser en fonction de la configuration.
+if (builder.Configuration.GetSection("AppSettings:SGBD").Value == "SQLite")
+{
+    // Utilise SQLite comme SGBD.
+    builder.Services.AddDbContext<WebzineDbContext>(options =>
+  options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
+}
+else if (builder.Configuration.GetSection("AppSettings:SGBD").Value == "PostgreSQL")
+{
+    // Utilise PostgreSQL comme SGBD.
+    builder.Services.AddDbContext<WebzineDbContext>(options =>
+   options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
+}
+
+// Configure le type de repository à utiliser en fonction de la configuration.
+if (builder.Configuration.GetSection("AppSettings:Repository").Value == "Local")
+{
+    // Utilise des repositories locaux.
+    builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
+    builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
+    builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
+    builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
+}
+else
+{
+    // Utilise des repositories de base de données.
+    builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
+    builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
+    builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
+    builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
+}
+
+// Configure les services nécessaires.
 builder.Services.AddControllersWithViews()
-    // Ajoute la compilation des vues lors de l'exécution de l'application.
-    // Cela nous évite de recompiler l'application à chaque modification de vue.
-    // Nécessite le package Nuget Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.
     .AddRazorRuntimeCompilation();
+
+// Initialise NLog.
+builder.Logging.ClearProviders();
+builder.Host.UseNLog();
 
 var app = builder.Build();
 
-// Active la possibilité de servir des fichiers statiques présents dans
-// le dossier wwwroot.
+// Redirection HTTPS si ce n'est pas en développement.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
+
+// Définit les routes pour les controllers.
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Utilise un scope pour gérer les services.
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    // Récupère le DbContext du service scope.
+    var context = services.GetRequiredService<WebzineDbContext>();
+
+    // Assure la suppression de la base de données.
+    context.Database.EnsureDeleted();
+
+    // Assure la création de la base de données.
+    context.Database.EnsureCreated();
+
+    // Opération de seeding
+    SeedData.Initialize(services, context);
+}
+
+// Active la possibilité de servir des fichiers statiques présents dans le dossier wwwroot.
 app.UseStaticFiles();
 
 // Active le middleware permettant le routage des requêtes entrantes.
 app.UseRouting();
 
-// Exercice : Définissez vos routes ci-dessous.
-// Ex 7.4
-
-// Ajoute un endpoint permettant de router les urls
-// avec la forme /controller/action/id(optionnel).
-// Equivalent à app.MapDefaultControllerRoute()
-app.MapControllerRoute(
-  name: "areas",
-  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-);
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+// Exécute l'application.
 app.Run();
-

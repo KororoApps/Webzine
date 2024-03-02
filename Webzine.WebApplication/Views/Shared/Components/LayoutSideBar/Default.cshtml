@@ -1,6 +1,6 @@
 ﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeStyleModel;
 
-<div class="position-sticky" style="top: 2rem;">
+<div class="position-sticky">
     <partial name="_AProposVuePartielle.cshtml" />
 
     <div class="p-2">
@@ -9,7 +9,8 @@
 
             @foreach (var style in Model.Styles)
             {
-                <li><a asp-area="" asp-controller="Titre" asp-action="Style" class="text-decoration-none dropdown-item text-primary">@style.Libelle</a></li>
+                <li><a asp-area="" asp-controller="Titre" asp-action="Style" asp-route-id="@style.Libelle" class="dropdown-item text-primary">@style.Libelle</a></li>
+
             }
         </ul>
     </div>

@@ -10,7 +10,7 @@
 
 @*Affichage du nom de la page.*@
 @{
-    ViewData["titrePage"] = Model.Artiste.Nom;
+    ViewData["titrePage"] = @Model.Artiste.Nom;
 }
 <hr>
 
@@ -22,11 +22,11 @@
 @*Affichage des titres.*@
 @foreach (var titre in Model.Artiste.Titres)
 {
-    <div class="row" style="margin-left: 10px">
+    <div class="row">
 
         <div class="row">
-            <div class="col-md-2" style="display: flex;">
-                <img src="@titre.UrlJaquette" alt="Image" class="img-fluid custom-shape ratio ratio1x1" style="width: 150px; height: 150px; object-fit: cover;">
+            <div class="col-md-2">
+                <img src="@titre.UrlJaquette" alt="Image" class="img-fluid custom-shape ratio ratio1x1">
             </div>
 
             <div class="col-md-10 mb-5">
@@ -49,18 +49,10 @@
                     </thead>
 
                     <tbody>
-                        @{
-                            Random random = new Random();
-                            int numberOfTitlesToShow = random.Next(2, 8);
-                            var randomTitles = Model.Artiste.Titres.OrderBy(x => random.Next()).Take(numberOfTitlesToShow).ToList();
-                        }
-                        @foreach (var titres in randomTitles)
-                        {
                             <tr>
-                                <td class="text-start">@titres.Duree.ToString(@"mm\:ss")</td>
-                                <td class="text-start"><a asp-controller="Titre" asp-action="" class="text-decoration-none">@titres.Libelle</a></td>
-                            </tr>
-                        }
+                            <td class="text-start">@TimeSpan.FromSeconds(double.Parse(titre.Duree)).ToString(@"mm\:ss")</td>
+                                <td class="text-start"><a asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">@titre.Libelle</a></td>
+                            </tr>                        
                     </tbody>
                 </table>
             </div>

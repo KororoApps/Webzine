@@ -1,11 +1,12 @@
-﻿// <copyright file="HomeController.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+﻿// <copyright file="RechercheController.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
 // Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
 // </copyright>
 
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Entity;
+    using Webzine.Entity.Fixtures;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -13,35 +14,39 @@ namespace Webzine.WebApplication.Controllers
     /// </summary>
     public class RechercheController : Controller
     {
-        private readonly TitreFactory titreFactory;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="RechercheController"/>.
-        /// </summary>
-        public RechercheController()
-        {
-            this.titreFactory = new TitreFactory();
-        }
-
         /// <summary>
         /// Affiche la page d'accueil avec des données générées aléatoirement.
         /// </summary>
+        /// <param name="recherche">Le terme de recherche saisi dans le formulaire.</param>
         /// <returns>Vue de la page d'accueil.</returns>
-        public IActionResult Index()
+        [HttpPost]
+        public IActionResult Index(string recherche)
         {
-            var titres = this.titreFactory.CreateTitres(20, 3);
+            // Génération d'une liste de titres.
+            List<Titre> titres = DataFactory.Titres;
 
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
-            /// <summary>
+            // Génération d'une liste d'artistes.
+            List<Artiste> artistes = DataFactory.Artistes;
+
+            // Filtrage des titres en fonction de la recherche.
+            List<Titre> titresFiltres = titres
+                .Where(t => t.Libelle.ToLower().Contains(recherche.ToLower()))
+                .ToList();
+
+            // Filtrage des artistes en fonction de la recherche.
+            List<Artiste> artisteFiltres = artistes
+                .Where(a => a.Nom.ToLower().Contains(recherche.ToLower()))
+                .ToList();
+
+            // Création du modèle de vue contenant la liste de titres filtrés.
             var titreModel = new GroupeTitreModel
             {
-                Titres = titres,
+                Artistes = artisteFiltres,
+                Titres = titresFiltres,
+                Recherche = recherche
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant les titres filtrés.
             return this.View(titreModel);
         }
     }

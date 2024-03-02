@@ -6,7 +6,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -19,14 +19,16 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class ArtisteController : Controller
     {
-        private readonly ArtisteFactory artisteFactory;
+
+        private readonly IArtisteRepository artisteRepository;
 
         /// <summary>
         /// Initialise une nouvelle instance de la classe <see cref="ArtisteController"/>.
         /// </summary>
-        public ArtisteController()
+        /// <param name="artisteRepository">Le repository des artistes à injecter.</param>
+        public ArtisteController(IArtisteRepository artisteRepository)
         {
-            this.artisteFactory = new ArtisteFactory();
+            this.artisteRepository = artisteRepository;
         }
 
         /// <summary>
@@ -35,42 +37,42 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue contenant la liste des artistes.</returns>
         public IActionResult Index()
         {
-            var artistes = this.artisteFactory.CreateArtistes(20);
-
-            /// <summary>
-            /// Création du modèle de vue contenant la liste d'Artistes.
-            /// <summary>
             var artisteModel = new GroupeArtisteModel
             {
-                Artistes = artistes,
+                Artistes = this.artisteRepository.FindAll(),
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les artistes générés.
-            /// <summary>
             return this.View(artisteModel);
         }
 
         /// <summary>
         /// Action pour afficher la vue de suppression d'un artiste.
         /// </summary>
+        /// <param name="id">L'identifiant de l'artiste à supprimer.</param>
         /// <returns>Vue de suppression d'un artiste.</returns>
-        public IActionResult Delete()
+        public IActionResult Delete(int id)
         {
-            Artiste artiste = this.artisteFactory.CreateArtiste();
+            var artiste = this.artisteRepository.Find(id);
 
-            /// <summary>
-            /// Création du modèle de vue contenant un Artiste.
-            /// <summary>
             var artisteModel = new ArtisteModel
             {
                 Artiste = artiste,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant l'artiste généré.
-            /// <summary>
             return this.View(artisteModel);
+        }
+
+        /// <summary>
+        /// Action HTTP POST pour confirmer la suppression d'un artiste.
+        /// </summary>
+        /// <param name="id">L'identifiant de l'artiste à supprimer.</param>
+        /// <returns>Redirection vers l'action Index après la suppression.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            this.artisteRepository.Delete(this.artisteRepository.Find(id));
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         /// <summary>
@@ -79,32 +81,50 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de création d'un artiste.</returns>
         public IActionResult Create()
         {
-            /// <summary>
-            /// Retour de la vue pour la création d'un artiste.
-            /// <summary>
             return this.View();
+        }
+
+        /// <summary>
+        /// Action HTTP POST pour confirmer la création d'un artiste.
+        /// </summary>
+        /// <param name="artiste">L'artiste à ajouter.</param>
+        /// <returns>Redirection vers l'action Index après la création.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateConfirmed(Artiste artiste)
+        {
+            this.artisteRepository.Add(artiste);
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         /// <summary>
         /// Action pour afficher la vue d'édition d'un artiste.
         /// </summary>
+        /// <param name="id">L'identifiant de l'artiste à éditer.</param>
         /// <returns>Vue d'édition d'un artiste.</returns>
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
-            Artiste artiste = this.artisteFactory.CreateArtiste();
+            var artiste = this.artisteRepository.Find(id);
 
-            /// <summary>
-            /// Création du modèle de vue contenant un Artiste.
-            /// <summary>
             var artisteModel = new ArtisteModel
             {
                 Artiste = artiste,
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant l'artiste généré.
-            /// <summary>
             return this.View(artisteModel);
+        }
+
+        /// <summary>
+        /// Action HTTP POST pour confirmer l'édition d'un artiste.
+        /// </summary>
+        /// <param name="artiste">L'artiste à éditer.</param>
+        /// <returns>Redirection vers l'action Index après l'édition.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditConfirmed(Artiste artiste)
+        {
+            this.artisteRepository.Update(artiste);
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

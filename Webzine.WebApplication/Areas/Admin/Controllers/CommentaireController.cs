@@ -6,7 +6,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -17,17 +17,10 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     /// Il utilise le générateur de fausses données Bogus pour simuler des données.
     /// </remarks>
     [Area("Admin")]
-    public class CommentaireController : Controller
+    public class CommentaireController(ICommentaireRepository commentaireRepository, ITitreRepository titreRepository) : Controller
     {
-        private readonly CommentaireFactory commentaireFactory;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="CommentaireController"/>.
-        /// </summary>
-        public CommentaireController()
-        {
-            this.commentaireFactory = new CommentaireFactory();
-        }
+        private readonly ICommentaireRepository commentaireRepository = commentaireRepository;
+        private readonly ITitreRepository titreRepository = titreRepository;
 
         /// <summary>
         /// Action pour afficher la liste des commentaires.
@@ -35,42 +28,62 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue contenant la liste des commentaires.</returns>
         public IActionResult Index()
         {
-            var commentaires = this.commentaireFactory.CreateCommentaires(20);
-
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Commentaires.
-            /// <summary>
+            // Création du modèle de vue contenant la liste de Commentaires.
             var commentaireModel = new GroupeCommentaireModel
             {
-                Commentaires = commentaires,
+                Commentaires = this.commentaireRepository.FindAll(),
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les commentaires générés.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant les commentaires générés.
             return this.View(commentaireModel);
+        }
+
+        /// <summary>
+        /// Action pour afficher la vue de création d'un artiste.
+        /// </summary>
+        /// <param name="commentaire">L'entité Commentaire à créer</param>
+        /// <param name="IdTitre">Id du titre lié au commentaire</param>
+        /// <returns>Vue de création d'un artiste.</returns>
+        public IActionResult Create(Commentaire commentaire, int IdTitre)
+        {
+            Titre titre = this.titreRepository.Find(IdTitre);
+
+            Console.WriteLine(commentaire.Auteur);
+            commentaire.DateCreation = DateTime.Now;
+            commentaire.Titre = titre;
+
+            this.commentaireRepository.Add(commentaire);
+            return this.RedirectToAction("Index", "Commentaire", new { area = "Admin"});
         }
 
         /// <summary>
         /// Action pour afficher la vue de suppression d'un commentaire.
         /// </summary>
+        /// <param name="id">L'identifiant du commentaire à supprimer.</param>
         /// <returns>Vue de suppression d'un commentaire.</returns>
-        public IActionResult Delete()
+        public IActionResult Delete(int id)
         {
-            Commentaire commentaire = this.commentaireFactory.CreateCommentaire();
-
-            /// <summary>
-            /// Création du modèle de vue contenant un commentaire.
-            /// <summary>
+            // Création du modèle de vue contenant un commentaire.
             var commentaireModel = new CommentaireModel
             {
-                Commentaire = commentaire,
+                Commentaire = this.commentaireRepository.Find(id),
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les commentaires générés.
-            /// <summary>
+            // Retour de la vue avec le modèle de vue contenant le commentaire généré.
             return this.View(commentaireModel);
+        }
+
+        /// <summary>
+        /// Action HTTP POST pour confirmer la suppression d'un commentaire.
+        /// </summary>
+        /// <param name="id">L'identifiant du commentaire à supprimer.</param>
+        /// <returns>Redirection vers l'action Index après la suppression.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            this.commentaireRepository.Delete(this.commentaireRepository.Find(id));
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

@@ -1,3 +1,33 @@
 ﻿.custom-no-border {
     border-color: transparent !important;
 }
+
+a{
+    text-decoration: none !important;
+}
+
+.required-label::after {
+    content: " *" !important;
+    color: red !important;
+}
+
+.justify-chronique {
+    text-align: justify;
+}
+
+.footer{
+    min-height:calc(100vh-100px)
+}
+
+.icone {
+    color: #74C0FC;
+}
+
+.button {
+    color: #ffffff;
+}
+
+.custom-textarea {
+    height: 100px;
+    width: 300px;
+}

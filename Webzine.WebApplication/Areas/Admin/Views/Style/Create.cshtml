@@ -12,26 +12,27 @@
 <hr />
 
 @*Formulaire d'ajout d'un style.*@
-<form asp-area="Admin" asp-controller="Style" asp-action="Create" method="post" class="col-6 d-flex">
+<form method="post" asp-action="CreateConfirmed" asp-controller="Style" class="col-6 d-flex">
     <div class="container">
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="row align-items-center mb-5">
             <div class="col-auto">
-                <label asp-for="@Model.Style.Libelle" class="form-label"></label><span class="text-danger">*</span>
+                <label asp-for="@Model.Style.Libelle" class="form-label required-label"></label>
             </div>
             <div class="col">
-                <input asp-for="@Model.Style.Libelle" type="text" class="form-control">
+                <input asp-for="@Model.Style.Libelle" class="form-control">
             </div>
 
             @*Bouton d'ajout du style.*@
             <div class="col-auto">
-                <a class="btn btn-primary" href="#">
-                    Sauvegarder
-                </a>
+                <button type="submit" class="btn btn-primary mb-5">
+                    Créer
+                </button>
             </div>
         </div>
 
         @*Bouton de retour à l'adminitration des styles.*@
-        <a class="text-decoration-none fw-normal" asp-area="Admin" asp-controller="Style" asp-action="Index">
+        <a class=" fw-normal" asp-area="Admin" asp-controller="Style" asp-action="Index">
             Retour à l'administration des styles
         </a>
     </div>

@@ -5,44 +5,37 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
     /// Contrôleur principal gérant les actions liées à la page d'accueil.
     /// </summary>
-    public class HomeController : Controller
+    /// <remarks>
+    /// Initialise une nouvelle instance de la classe <see cref="HomeController"/>.
+    /// </remarks>
+    /// <param name="titreRepository">Le repository des titres.</param>
+    public class HomeController(ITitreRepository titreRepository) : Controller
     {
-        private readonly TitreFactory titreFactory;
+        private readonly ITitreRepository titreRepository = titreRepository;
 
         /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="HomeController"/>.
-        /// </summary>
-        public HomeController()
-        {
-            this.titreFactory = new TitreFactory();
-        }
-
-        /// <summary>
-        /// Affiche la page d'accueil avec des données générées aléatoirement.
+        /// Affiche la page d'accueil.
         /// </summary>
         /// <returns>Vue de la page d'accueil.</returns>
         public IActionResult Index()
         {
-            var titres = this.titreFactory.CreateTitres(20, 3);
 
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
-            /// <summary>
-            var titreModel = new GroupeTitreModel
+            // Création du modèle de vue contenant la liste des titres.
+            GroupeTitreModel groupeTitreModel = new()
             {
-                Titres = titres,
+                Titres = this.titreRepository.FindAll(),
+                TitresPopulaires = this.titreRepository.FindTitresLesPlusLike(),
+                ParutionChroniqueTitre = this.titreRepository.ParutionChroniqueTitres(),
             };
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
-            /// <summary>
-            return this.View(titreModel);
+            // Retour de la vue avec le modèle de vue contenant les détails des titres.
+            return this.View(groupeTitreModel);
         }
     }
 }

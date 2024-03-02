@@ -13,7 +13,7 @@
     <div>
         @*Affichage du nom de l'artiste et du titre.*@
         <h3>
-            <a asp-controller="Artiste" asp-action="" class="text-decoration-none">
+            <a asp-area="" asp-controller="Artiste" asp-action="Index" asp-route-id="@Model.Titre.Artiste.IdArtiste">
                 <span class="text-primary">@Model.Titre.Artiste.Nom</span>
             </a>
             - @Model.Titre.Libelle
@@ -27,29 +27,36 @@
                         <p class="me-4 ">Le @Model.Titre.DateCreation.ToString("dd/MM/yyyy HH:mm")</p>
                     </div>
                     <div class="d-inline-flex">
-                        <i class="fa-solid fa-heart p-1"></i>
+                        <form>
+                            <button type="submit" class="btn m-0 p-0"><i class="fa-solid fa-heart p-1"></i></button>
+                        </form>
                         <p class="me-4 ">@Model.Titre.NbLikes</p>
                     </div>
                     <div class="d-inline-flex">
                         <i class="fa-solid fa-tags p-1"></i>
                         <p>
                             Styles :
+                            @{
+                                var random = new Random();
+                                var nombreDeStyles = random.Next(1, 4);
+                            }
+
                             @foreach (var style in Model.Titre.Styles)
                             {
-                                <a asp-controller="Titre" asp-action="Style"><span class="me-4 ">@style.Libelle</span></a>
+                                <a asp-area="" asp-controller="Titre" asp-action="Style" asp-route-id="@style.Libelle"><span class="me-4 ">@style.Libelle</span></a>
                             }
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="d-inline-flex">
                         <a class="btn btn-outline-primary">
-                            <i class="fa-solid fa-thumbs-up" style="color: #4995d0;"></i>
+                            <i class="fa-solid fa-thumbs-up icone"></i>
                             like
                         </a>
                     </div>
                     <div class="d-inline-flex">
-                        <a asp-area="Admin" asp-controller="Titre" asp-action="Edit" class="text-decoration-none">
-                            <i class="fa-solid fa-edit text-primary p-2" style="color: #74C0FC;"></i>
+                        <a asp-area="Admin" asp-controller="Titre" asp-action="Edit" asp-route-id="@Model.Titre.IdTitre">
+                            <i class="fa-solid fa-edit text-primary p-2 icone"></i>
                             Editer
                         </a>
                     </div>
@@ -59,14 +66,10 @@
     </div>
 
     @*Affichage de la chronique et de la jaquette.*@
-    <div class="row">
-        <div class="d-flex flex-column justify-content-start text-justify col-md-7">
-            <p>@Model.Titre.Chronique</p>
-        </div>
-        <div class="col-md-5">
-            <div class="d-flex flex-column align-items-center">
-                <img src="@Model.Titre.UrlJaquette" alt="Image" class="rounded img-fluid custom-shape w-100 h-100 ratio ratio-1x1 example-card-img-responsive p-3 object-fit-cover">
-            </div>
+    <div class="row mt-4">
+        <div class="col-lg-12 pt-4 pt-lg-0">
+            <img src="@Model.Titre.UrlJaquette" alt="Image" class="float-end imgshadow w-30 h-30 object-fit-cover example-card-img-responsive m-3">
+            <p class="justify-chronique">@Model.Titre.Chronique</p>
         </div>
     </div>
 
@@ -79,61 +82,61 @@
     <div class="mt-5">
         <h3>Donne ton avis sur le titre</h3>
 
-        <form asp-controller="Commentaire" asp-action="Index" method="post" class="d-flex">
+        <form method="post" asp-area="Admin" asp-controller="Commentaire" asp-action="Create" class="d-flex">
             <div class="container">
-                @foreach (var commentaire in Model.Titre.Commentaires.Take(1))
-                {
-                    <div class="form-group row mb-5">
-                        <div class="col-md-2">
-                            <label asp-for="@commentaire.Auteur" class="form-label"></label><span class="text-danger">*</span>
-                        </div>
-                        <div class="col-md-10">
-                            <input placeholder="Votre nom (exemple : Emmanuel)" type="text" id="nameInput" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="form-group row mb-5">
-                        <div class="col-md-2">
-                            <label asp-for="@commentaire.Contenu" for="commentsInput" class="form-label"></label><span class="text-danger">*</span>
-                        </div>
-                        <div class="col-md-10">
-                            <textarea placeholder="Votre commentaire..." class="form-control" id="commentsInput" rows="10" cols="10" required></textarea>
-                        </div>
-                    </div>
-                }
-
-                @*Bouton d'ajout du titre.*@
+                <input type="hidden" asp-for="@Model.Titre.IdTitre" name="IdTitre" />
                 <div class="form-group row mb-5">
                     <div class="col-md-2">
+                        <label asp-for="@Model.Commentaire.Auteur" class="form-label required-label"></label>
                     </div>
                     <div class="col-md-10">
-                        <div>
-                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                        <input asp-for="@Model.Commentaire.Auteur" class="form-control" id="nameInput" placeholder="Votre nom (exemple : Emmanuel)" required>
+                    </div>
+                </div>
+                <div class="form-group row mb-5">
+                    <div class="col-md-2">
+                        <div class="col-md-2">
+                            <label asp-for="@Model.Commentaire.Contenu" class="form-label required-label"></label>
+                        </div>
+                        <div class="col-md-10">
+                            <textarea asp-for="@Model.Commentaire.Contenu" placeholder="Votre commentaire..." class="form-control custom-textarea" id="commentsInput" required></textarea>
                         </div>
                     </div>
                 </div>
+
+            @*Bouton d'ajout du titre.*@
+            <div class="form-group row mb-5">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-10">
+                    <div>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </div>
+                </div>
             </div>
-        </form>
     </div>
+    </form>
+</div>
 
     @*Détails des commentaires.*@
     <div class="mt-5">
         <h3>Commentaires</h3>
         <div class="col-md-8">
-            @foreach (var commentaire in Model.Titre.Commentaires.OrderByDescending(c => c.DateCreation))
-            {
-                <div class="row p-3">
-                    <div class="col-md-2">
-                        <img src="/images/avatar.png" alt="Image du créateur" class="img-fluid rounded-circle">
+                @foreach (var commentaire in Model.Titre.Commentaires)
+                {
+                    <div class="row p-3">
+                        <div class="col-md-2">
+                            <img src="/images/avatar.png" alt="Image du créateur" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="col-md-10">
+                            <h5 class="card-title">
+                                @commentaire.Auteur
+                                <span class="text-secondary">le @commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm")</span>
+                            </h5>
+                            <p class="card-text">@commentaire.Contenu</p>
+                        </div>
                     </div>
-                    <div class="col-md-10">
-                        <h5 class="card-title">
-                            @commentaire.Auteur
-                            <span class="text-secondary">le @commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm")</span>
-                        </h5>
-                        <p class="card-text">@commentaire.Contenu</p>
-                    </div>
-                </div>
-            }
+                }
         </div>
     </div>
 </div>

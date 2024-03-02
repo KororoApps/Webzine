@@ -5,46 +5,38 @@
 namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.WebApplication.Shared.Factories;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
     /// Contrôleur responsable de la gestion du tableau de bord administratif.
     /// </summary>
     [Area("Admin")]
-    public class DashboardController : Controller
+    public class DashboardController(IArtisteRepository artisteRepository, IStyleRepository styleRepository, ITitreRepository titreRepository) : Controller
     {
-
-        private readonly TitreFactory titreFactory;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="DashboardController"/>.
-        /// </summary>
-        public DashboardController()
-        {
-            this.titreFactory = new TitreFactory();
-        }
+        private readonly IArtisteRepository artisteRepository = artisteRepository;
+        private readonly IStyleRepository styleRepository = styleRepository;
+        private readonly ITitreRepository titreRepository = titreRepository;
 
         /// <summary>
-        /// Affiche la page d'index du tableau de bord administratif.
+        /// Affiche le dashboard avec des données.
         /// </summary>
-        /// <returns>Vue avec le modèle de vue contenant les titres générés.</returns>
+        /// <returns>Vue du dashboard.</returns>
         public IActionResult Index()
         {
-            var titres = this.titreFactory.CreateTitres(15, 3);
+            var model = new DashboardModel();
 
-            /// <summary>
-            /// Création du modèle de vue contenant la liste de Titres.
-            /// <summary>
-            var titreModel = new GroupeTitreModel
-            {
-                Titres = titres,
-            };
+            model.TitrePlusLu = this.titreRepository.FindTitreLePlusLu();
+            model.NbTitres = this.titreRepository.NombreTitres();
+            model.NbStyles = this.styleRepository.NombreStyles();
+            model.NbArtistes = this.artisteRepository.NombreArtistes();
+            model.ArtistePlusDeTitres = this.artisteRepository.FindArtisteLePlusTitresAlbumDistinct();
+            model.NbBioArtiste = this.artisteRepository.NombreBioArtistes();
+            model.NbLikes = this.titreRepository.NombreLikes();
+            model.NbLectures = this.titreRepository.NombreLectures();
+            model.ArtistePlusChronique = this.artisteRepository.FindArtisteLePlusChronique();
 
-            /// <summary>
-            /// Retour de la vue avec le modèle de vue contenant les titres générés.
-            /// <summary>
-            return this.View(titreModel);
+            return this.View(model);
         }
     }
 }
