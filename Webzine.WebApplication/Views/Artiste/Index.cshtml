@@ -50,7 +50,7 @@
 
                     <tbody>
                             <tr>
-                                <td class="text-start">@titre.Duree.ToString(@"mm\:ss")</td>
+                            <td class="text-start">@TimeSpan.FromSeconds(double.Parse(titre.Duree)).ToString(@"mm\:ss")</td>
                                 <td class="text-start"><a asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">@titre.Libelle</a></td>
                             </tr>                        
                     </tbody>

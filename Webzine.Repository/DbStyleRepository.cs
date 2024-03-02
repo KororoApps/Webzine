@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Webzine.EntitiesContext;
 using Webzine.Entity;
+using Webzine.Entity.Fixtures;
 using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
@@ -70,6 +71,19 @@ namespace Webzine.Repository
                 .ToList();     
 
             return styles;
+        }
+
+        /// <summary>
+        /// Trouve les styles par leurs ids.
+        /// </summary>
+        /// <returns>Une liste de tous les styles.</returns>
+        public IEnumerable<Style> FindByIds(List<int> ids)
+        {
+            var filteredStyles = _context.Styles
+                .Where(s => ids.Contains(s.IdStyle))
+                .ToList();
+
+            return filteredStyles;
         }
 
         /// <summary>

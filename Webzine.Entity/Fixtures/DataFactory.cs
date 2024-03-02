@@ -89,7 +89,7 @@ namespace Webzine.Entity.Fixtures
             var titreFaker = new Faker<Titre>()
                 .RuleFor(t => t.IdTitre, f => f.IndexFaker + 1)
                 .RuleFor(t => t.Libelle, f => f.Random.Word().CapitalizeFirstLetter())
-                .RuleFor(t => t.Duree, f => f.Date.Timespan())
+                .RuleFor(t => t.Duree, f => f.Random.Number(1, 1200).ToString())
                 .RuleFor(t => t.DateSortie, f => f.Date.Past().ToUniversalTime())
                 .RuleFor(t => t.DateCreation, f => f.Date.Past().ToUniversalTime())
                 .RuleFor(t => t.NbLectures, f => f.Random.Number(1, 10000))

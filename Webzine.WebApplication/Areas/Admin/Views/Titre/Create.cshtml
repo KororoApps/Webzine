@@ -19,7 +19,9 @@
                 <label asp-for="@Model.Titre.Artiste.Nom" class="form-label required-label"></label>
             </div>
             <div class="col-md-10">
-                <input asp-for="@Model.Titre.Artiste.Nom" autocomplete="off" class="form-control">
+                <select asp-for="@Model.Titre.Artiste.IdArtiste" asp-items="@(new SelectList(Model.Artistes, "IdArtiste", "Nom"))" class="form-control">
+                    <option value="">Sélectionner un artiste</option>
+                </select>
             </div>
         </div>
         <div class="form-group row mb-5">
@@ -27,7 +29,7 @@
                 <label asp-for="@Model.Titre.Libelle" class="form-label required-label"></label>
             </div>
             <div class="col-md-10">
-                <input asp-for="@Model.Titre.Libelle" autocomplete="off" class="form-control">
+                <input asp-for="@Model.Titre.Libelle" class="form-control">
             </div>
         </div>
         <div class="form-group row mb-5">
@@ -35,7 +37,7 @@
                 <label asp-for="@Model.Titre.Album" class="form-label required-label"></label>
             </div>
             <div class="col-md-10">
-                <input asp-for="@Model.Titre.Album" autocomplete="off" class="form-control">
+                <input asp-for="@Model.Titre.Album" class="form-control">
             </div>
         </div>
         <div class="form-group row mb-5">
@@ -43,7 +45,7 @@
                 <label asp-for="@Model.Titre.Chronique" class="form-label required-label"></label>
             </div>
             <div class="col-md-10">
-                <textarea asp-for="@Model.Titre.Chronique" autocomplete="off" class="form-control"></textarea>
+                <textarea asp-for="@Model.Titre.Chronique" class="form-control"></textarea>
             </div>
         </div>
         <div class="form-group row mb-5">
@@ -51,14 +53,14 @@
                 <label asp-for="@Model.Titre.DateSortie" class="form-label required-label"></label>
             </div>
             <div class="col-md-4">
-                <input asp-for="@Model.Titre.DateSortie" autocomplete="off" value="@DateTime.Now.ToString("yyyy-MM-dd")" class=" form-control">
+                <input asp-for="@Model.Titre.DateSortie" value="@DateTime.Now.ToString("yyyy-MM-dd")" class=" form-control">
             </div>
             <div class="col-md-2">
                 <label asp-for="@Model.Titre.Duree" class="form-label required-label"></label>
             </div>
             <div class="col-md-4">
                 <div class=" input-group">
-                    <input asp-for="@Model.Titre.Duree" autocomplete="off" class="form-control">
+                    <input asp-for="@Model.Titre.Duree" class="form-control">
                     <span class="input-group-text">secondes</span>
                 </div>
             </div>
@@ -68,7 +70,7 @@
                 <label asp-for="@Model.Titre.UrlJaquette" class="form-label required-label"></label>
             </div>
             <div class="col-md-10">
-                <input asp-for="@Model.Titre.UrlJaquette" autocomplete="off" class="form-control">
+                <input asp-for="@Model.Titre.UrlJaquette" class="form-control">
             </div>
         </div>
         <div class="form-group row mb-5">
@@ -76,7 +78,7 @@
                 <label asp-for="@Model.Titre.UrlEcoute" class="form-label"></label>
             </div>
             <div class="col-md-10">
-                <input asp-for="@Model.Titre.UrlEcoute" autocomplete="off" class="form-control">
+                <input asp-for="@Model.Titre.UrlEcoute" class="form-control">
             </div>
         </div>
         <div class="row align-items-top">
@@ -85,11 +87,11 @@
             </div>
             <div class="col-md-10">
                 <div class="row">
-                    @foreach (var style in Model.Titre.Styles)
+                    @foreach (var style in Model.Styles)
                     {
                         <div class="col-md-4">
                             <div class="form-check align-top">
-                                <input class="form-check-input" autocomplete="off" value="@style.Libelle" asp-for="@Model.Titre.Styles">
+                                <input class="form-check-input" type="checkbox" value="@style.IdStyle" name="styleIds">
                                 <label class="form-check-label" asp-for="@style.Libelle">@style.Libelle</label>
                             </div>
                         </div>

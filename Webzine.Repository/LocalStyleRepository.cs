@@ -69,6 +69,21 @@ namespace Webzine.Repository
         }
 
         /// <summary>
+        /// Trouve les styles par leurs ids.
+        /// </summary>
+        /// <returns>Une liste de tous les styles.</returns>
+        public IEnumerable<Style> FindByIds(List<int> ids)
+        {
+            List<Style> styles = DataFactory.Styles;
+
+            var filteredStyles = styles
+                .Where(s => ids.Contains(s.IdStyle))
+                .ToList();
+
+            return filteredStyles;
+        }
+
+        /// <summary>
         /// Met à jour un style.
         /// </summary>
         /// <param name="style">Le style à mettre à jour.</param>

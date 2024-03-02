@@ -20,6 +20,10 @@ namespace Webzine.Repository.Contracts
         // Trouve tous les styles.
         IEnumerable<Style> FindAll();
 
+
+        // Trouve les styles par leurs ids.
+        IEnumerable<Style> FindByIds(List<int> ids);
+
         // Met à jour un style.
         void Update(Style style);
 

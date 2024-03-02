@@ -21,6 +21,7 @@ namespace Webzine.Repository
         {
             // Génère un nouvel identifiant
             titre.IdTitre = DataFactory.Titres.Count + 1;
+            titre.DateCreation = DateTime.Now;
 
             // Ajoute le nouveau titre à la liste
             DataFactory.Titres.Add(titre);
