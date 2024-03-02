@@ -66,9 +66,8 @@ namespace Webzine.Repository
         public IEnumerable<Style> FindAll()
         {
             var  styles = _context.Styles
-                .Include(s => s.Titres)
-                .OrderBy(s => s.IdStyle)
-                .ToList();     
+                .OrderBy(c => c.Libelle)
+                .ToList();
 
             return styles;
         }
