@@ -6,7 +6,7 @@
 
     <div class="container">
         <div class="row">
-            @foreach (var titre in Model.Titres.OrderBy(t => Guid.NewGuid()).Take(3))
+            @foreach (var titre in Model.TitresPopulaires)
             {
                 <div class="col-12 col-sm-12 col-md-4 mt-5">
                     <a asp-area="" asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">

@@ -30,6 +30,12 @@ namespace Webzine.Repository.Contracts
         // Renvoie tous le titre le plus lu.
         Titre FindTitreLePlusLu();
 
+        // Renvoie les titres du plus liké au moins liké  et en retourne un certain nombre.
+        List<Titre> FindTitresLesPlusLike();
+
+        // Renvoie la liste des titres du plus récent au plus ancien chroniqué et en retourne un certain nombre.
+        List<Titre> ParutionChroniqueTitres();
+
         // Renvoie le nombre de titres.
         int NombreTitres();
 

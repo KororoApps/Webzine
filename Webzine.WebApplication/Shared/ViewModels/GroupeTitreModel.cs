@@ -17,6 +17,16 @@ namespace Webzine.WebApplication.Shared.ViewModels
         public IEnumerable<Titre> Titres { get; set; } = new List<Titre>();
 
         /// <summary>
+        /// Obtient ou définit la liste des titres les plus populaires dans le groupe.
+        /// </summary>
+        public IEnumerable<Titre> TitresPopulaires { get; set; } = new List<Titre>();
+
+        /// <summary>
+        /// Obtient ou définit la liste des titres du plus récent au plus ancien chroniqué.
+        /// </summary>
+        public IEnumerable<Titre> ParutionChroniqueTitre { get; set; } = new List<Titre>();
+
+        /// <summary>
         /// Obtient ou définit le terme de recherche saisi dans le formulaire.
         /// </summary>
         public string? Recherche { get; set; }

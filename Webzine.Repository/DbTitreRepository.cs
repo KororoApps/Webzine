@@ -119,6 +119,34 @@ namespace Webzine.Repository
         }
 
         /// <summary>
+        /// Renvoie les titres du plus liké au moins liké  et en retourne un certain nombre.
+        /// </summary>
+        /// <returns></returns>
+        public List<Titre> FindTitresLesPlusLike()
+        {
+            var titres = _context.Titres
+                .OrderBy(t => t.NbLikes)
+                .Take(3)
+                .ToList();
+
+            return titres;
+        }
+
+        /// <summary>
+        /// Renvoie la liste des titres du plus récent au plus ancien chroniqué et en retourne un certain nombre.
+        /// </summary>
+        /// <returns></returns>
+        public List<Titre> ParutionChroniqueTitres()
+        {
+            var titres = _context.Titres
+                .OrderByDescending(t => t.DateCreation)
+                .Take(3)
+                .ToList();
+
+            return titres;
+        }
+
+        /// <summary>
         /// Renvoie le nombre de titres.
         /// </summary>
         /// <returns></returns>
