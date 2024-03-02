@@ -38,7 +38,7 @@ namespace Webzine.Repository
         /// <returns></returns>
         public int Count()
         {
-            var NombreTitres = _context.Titres 
+            var NombreTitres = _context.Titres
                 .Count();
 
             return NombreTitres;
@@ -176,8 +176,22 @@ namespace Webzine.Repository
         /// Recherche de manière insensible à la casse les titres contenant le style de musique cherchée.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Titre> SearchByStyle(string libelle)        {
-            throw new NotImplementedException();
+        public IEnumerable<Titre> SearchByStyle(string libelle)
+        {
+
+            List<Titre> titres = _context.Titres
+                .Include(t => t.Artiste)
+                .Where(t => t.Styles.Any(s => s.Libelle.Equals(libelle)))
+                .OrderByDescending(c => c.Libelle)
+                .ToList();
+
+            if (titres == null)
+            {
+                //Exception si on ne trouve pas d'artiste correspondant
+                throw new ArgumentNullException();
+            }
+
+            return titres;
         }
 
         /// <summary>
