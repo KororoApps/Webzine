@@ -20,7 +20,7 @@ Une fois établie, il nous a permis d'identifier les entités à créer pour not
 
 ![Logo](images/Camembert.png)
 
-Vous pouvez retrouver nos [Comptes Rendus d'Activité pour un détail précis du travail effectué](https://groupesbtest.sharepoint.com/:x:/s/DIIAGE2026DI1P4/EY5e9Z9cSJlNhY6EC677OKkBNBYJHpZv8_6OMtE7qLdtiQ?e=SJ8cjc&wdOrigin=TEAMS-MAGLEV.teams_ns.rwc&wdExp=TEAMS-TREATMENT&wdhostclicktime=1708886671961&web=1)
+Vous pouvez retrouver nos [Comptes Rendus d'Activité](https://groupesbtest.sharepoint.com/:x:/s/DIIAGE2026DI1P4/EY5e9Z9cSJlNhY6EC677OKkBNBYJHpZv8_6OMtE7qLdtiQ?e=SJ8cjc&wdOrigin=TEAMS-MAGLEV.teams_ns.rwc&wdExp=TEAMS-TREATMENT&wdhostclicktime=1708886671961&web=1) pour un détail précis du travail effectué
 
 ### 2.2.2. Lucas FERNANDEZ
 | TÂCHES												| TEMPS PASSE |
@@ -86,7 +86,7 @@ L'organisation des tâches et des fichiers a été réalisée à travers AzureDe
 
 Nous avons construit ensemble le squelette de l'application, en mettant en commun nos points de vue et méthodes. 
 
-Une fois cela accompli, nous nous sommes répartis les Users Stories, en débutant par les plus cruciales pour assurer une progression harmonieuse.
+Une fois cela accompli, nous nous sommes répartis les Users Stories, en débutant par les plus cruciales pour assurer une progression rapide.
 
 ## 2.3.2. Code review
 
@@ -96,10 +96,10 @@ Une fois tous les codes fusionnés sur la branche principale, nous avons réité
 
 ## 2.3.3. Comptes rendus d'activité et Daily meeting
 
-Tout comme pour la collaboration dev/ops, la mise à jour régulière de nos CRA et les daily meeting tous les matins nous ont permis de connaître régulièrement l'avancée individuel de chacun et part conséquent de l'application en générale.
+Tout comme pour la collaboration dev/ops, la mise à jour régulière de nos CRA et les daily meeting tous les matins nous ont permis de connaître régulièrement l'avancée individuel de chacun et par conséquent de l'application en général.
 
 ## 2.3.4. Discussions Teams
 
 En dehors des périodes d'école, il nous est difficile de nous rendre disponible aux mêmes moments.
 
-Nous avons utiliser les conversations Teams de notre Equipe pour se faire part de notre moindre avancée et demander des calls si nécessaires.
+Nous avons utilisé les conversations Teams de notre Equipe pour se faire part de notre avancée et demander des calls si nécessaire.
