@@ -24,7 +24,7 @@ namespace Webzine.WebApplication.Shared.ViewModels
         /// <summary>
         /// Obtient ou définit un commentaire.
         /// </summary>
-        public Commentaire Commentaire { get; set; }
+        public Commentaire? Commentaire { get; set; }
 
         /// <summary>
         /// Obtient ou définit les artistes.

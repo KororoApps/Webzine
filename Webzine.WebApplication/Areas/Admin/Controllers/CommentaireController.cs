@@ -46,12 +46,6 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de création d'un artiste.</returns>
         public IActionResult Create(Commentaire commentaire, int IdTitre)
         {
-            /*if (!this.ModelState.IsValid)
-            {
-                // Traitement en cas de modèle non valide
-                return this.RedirectToAction(nameof(this.Create));
-            }*/
-
             Titre titre = this.titreRepository.Find(IdTitre);
 
             Console.WriteLine(commentaire.Auteur);

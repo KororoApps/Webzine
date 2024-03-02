@@ -26,3 +26,8 @@ a{
 .button {
     color: #ffffff;
 }
+
+.custom-textarea {
+    height: 100px;
+    width: 300px;
+}

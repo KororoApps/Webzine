@@ -7,9 +7,8 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Entity.Fixtures;
-    using Webzine.WebApplication.Shared.ViewModels;
-    using Webzine.Repository;
     using Webzine.Repository.Contracts;
+    using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des opérations liées aux styles dans la zone d'administration.
@@ -58,14 +57,14 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateConfirmed(Style style)
         {
-           /* if (!this.ModelState.IsValid)
+           if (!this.ModelState.IsValid)
             {
                 // Traitement en cas de modèle non valide
-                return this.RedirectToAction(nameof(this.Create));
-            }*/
+                return this.RedirectToAction(nameof(this.Create), style);
+            }
 
-            this.styleRepository.Add(style);
-            return this.RedirectToAction(nameof(this.Index));
+           this.styleRepository.Add(style);
+           return this.RedirectToAction(nameof(this.Index));
         }
 
         /// <summary>
