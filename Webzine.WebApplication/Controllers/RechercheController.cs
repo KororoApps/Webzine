@@ -43,7 +43,7 @@ namespace Webzine.WebApplication.Controllers
             {
                 Artistes = artisteFiltres,
                 Titres = titresFiltres,
-                Recherche = recherche,
+                Recherche = recherche
             };
 
             // Retour de la vue avec le modèle de vue contenant les titres filtrés.

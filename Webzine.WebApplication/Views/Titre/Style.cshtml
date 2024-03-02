@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeStyleModel
+﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -9,17 +9,14 @@
 }
 
 @*Affichage du nom de la page.*@
-@foreach (var titre in Model.Styles.First().Titres)
-{
-    foreach (var style in Model.Styles)
-    {
-        ViewData["titrePage"] = "Titres ayant le style " + style.Libelle;
-    }
+@{
+        ViewData["titrePage"] = "Titres ayant le style " + Model.Libelle;
 }
 <hr />
 
 @*Affichage des titres.*@
-@foreach (var titre in Model.Styles.First().Titres)
+
+@foreach (var titre in Model.Titres)
 {
     <div class="row mb-2">
         <div class="col-md-1">
@@ -28,7 +25,7 @@
         <div class="col-md-6 mt-1">
             <a asp-controller="Artiste" asp-action="Index" asp-route-id="@titre.Artiste.IdArtiste">@titre.Artiste.Nom -</a>
             <a asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">@titre.Libelle</a>
-            <p>Durée : @titre.Duree.ToString(@"mm\:ss")</p>
+            <p>Durée : @TimeSpan.FromSeconds(double.Parse(titre.Duree)).ToString(@"mm\:ss")</p>
         </div>
     </div>
 }

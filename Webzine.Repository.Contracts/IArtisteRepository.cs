@@ -2,24 +2,39 @@
 
 namespace Webzine.Repository.Contracts
 {
+    /// <summary>
+    /// Interface définissant les opérations CRUD pour la gestion des artistes.
+    /// </summary>
     public interface IArtisteRepository
     {
-        // Ajoute un Artiste
+        // Ajoute un artiste.
         void Add(Artiste artiste);
 
-        // Supprimme un artiste
+        // Supprime un artiste.
         void Delete(Artiste artiste);
 
-        //Renvoie le premier Artiste ayant l'id mise en paramètre
+        // Renvoie le premier artiste ayant l'identifiant spécifié.
         Artiste Find(int idArtiste);
 
-        // Renvoie tous les Artistes
+        // Renvoie tous les artistes.
         IEnumerable<Artiste> FindAll();
 
-        // Retourne les artistes demandés (pour la pagination) triés selon  le nom(du plus récent à ancien)
+        // Renvoie les artistes demandés (pour la pagination) triés selon le nom (du plus récent à l'ancien).
         IEnumerable<Artiste> FindArtistes(int offset, int limit);
 
-        // Met à jour un Artiste
+        // Met à jour un artiste.
         void Update(Artiste artiste);
+
+        // Renvoie l'artiste le plus chroniqué.
+        Artiste FindArtisteLePlusChronique();
+
+        // Renvoie l'artiste ayant le plus de titres provenant d'albums distincts.
+        Artiste FindArtisteLePlusTitresAlbumDistinct();
+
+        // Renvoie le nombre de biographies d'artistes.
+        public int NombreBioArtistes();
+
+        // Renvoie le nombre d'artistes.
+        public int NombreArtistes();
     }
 }

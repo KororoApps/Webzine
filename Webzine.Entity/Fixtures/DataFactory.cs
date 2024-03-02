@@ -5,7 +5,6 @@
 namespace Webzine.Entity.Fixtures
 {
     using Bogus;
-    using Bogus.DataSets;
 
     /// <summary>
     /// Classe statique pour générer des données fictives avec Bogus pour les entités du projet.
@@ -15,14 +14,14 @@ namespace Webzine.Entity.Fixtures
         // Initialise les listes d'entités
         static DataFactory()
         {
-            Artistes = new List<Artiste>();
-            Titres = new List<Titre>();
-            Commentaires = new List<Commentaire>();
-            Styles = new List<Style>();
+            Artistes = [];
+            Titres = [];
+            Commentaires = [];
+            Styles = [];
 
             // Génère des données fictives pour les entités
             GenerateFakeArtiste();
-            GenerateFakeStyles();           
+            GenerateFakeStyles();
             GenerateFakeTitres();
             GenerateFakeCommentaires();
         }
@@ -54,11 +53,20 @@ namespace Webzine.Entity.Fixtures
         {
             var styleFaker = new Faker<Style>()
                 .RuleFor(t => t.IdStyle, f => f.IndexFaker + 1)
-                .RuleFor(s => s.Libelle, f => f.Lorem.Word());
+                .RuleFor(s => s.Libelle, f => f.Music.Genre());
 
-            Styles = styleFaker.Generate(25);
+            Styles = styleFaker.Generate(18);
+
+            // Assurer l'unicité des libellés
+            var libellesUniques = new HashSet<string>();
+            foreach (var style in Styles)
+            {
+                while (!libellesUniques.Add(style.Libelle))
+                {
+                    style.Libelle = styleFaker.Generate().Libelle;
+                }
+            }
         }
-
 
         /// <summary>
         /// Génère une liste d'artistes fictifs.
@@ -68,10 +76,9 @@ namespace Webzine.Entity.Fixtures
             var artisteFaker = new Faker<Artiste>()
                 .RuleFor(t => t.IdArtiste, f => f.IndexFaker + 1)
                 .RuleFor(a => a.Nom, f => f.Name.FullName())
-                .RuleFor(a => a.Biographie, f => f.Lorem.Paragraph());
+                .RuleFor(a => a.Biographie, f => f.Random.Bool() ? f.Lorem.Paragraph() : null);
 
-
-            Artistes = artisteFaker.Generate(300);
+            Artistes = artisteFaker.Generate(150);
         }
 
         /// <summary>
@@ -81,8 +88,8 @@ namespace Webzine.Entity.Fixtures
         {
             var titreFaker = new Faker<Titre>()
                 .RuleFor(t => t.IdTitre, f => f.IndexFaker + 1)
-                .RuleFor(t => t.Libelle, f => f.Name.FullName())
-                .RuleFor(t => t.Duree, f => f.Date.Timespan())
+                .RuleFor(t => t.Libelle, f => f.Random.Word().CapitalizeFirstLetter())
+                .RuleFor(t => t.Duree, f => f.Random.Number(1, 1200).ToString())
                 .RuleFor(t => t.DateSortie, f => f.Date.Past().ToUniversalTime())
                 .RuleFor(t => t.DateCreation, f => f.Date.Past().ToUniversalTime())
                 .RuleFor(t => t.NbLectures, f => f.Random.Number(1, 10000))
@@ -91,14 +98,12 @@ namespace Webzine.Entity.Fixtures
                 .RuleFor(t => t.Chronique, f => f.Lorem.Paragraphs(10))
                 .RuleFor(t => t.UrlJaquette, f => f.Image.PicsumUrl().ToString())
                 .RuleFor(t => t.UrlEcoute, f => f.Internet.Url())
-                .RuleFor(t => t.Album, f => f.Commerce.ProductName())
                 .RuleFor(t => t.Artiste, f => f.PickRandom(Artistes))
-                //.RuleFor(t => t.Commentaires, f => f.PickRandom(Commentaires, 10).ToList())
-                .RuleFor(t => t.Styles, f => f.PickRandom(Styles, 15).ToList());
+                .RuleFor(t => t.Styles, f => f.PickRandom(Styles, f.Random.Int(1, 3)).ToList());
 
             Titres = titreFaker.Generate(400);
-
         }
+
         /// <summary>
         /// Génère une liste de commentaires fictifs.
         /// </summary>
@@ -112,6 +117,21 @@ namespace Webzine.Entity.Fixtures
                 .RuleFor(c => c.Titre, f => f.PickRandom(Titres));
 
             Commentaires = commentaireFaker.Generate(1000);
+        }
+
+        /// <summary>
+        /// Met la première lettre d'une chaîne de caractères en majuscule.
+        /// </summary>
+        /// <param name="input">La chaîne de caractères en entrée.</param>
+        /// <returns>La chaîne de caractères en entrée avec la première lettre en majuscule.</returns>
+        public static string CapitalizeFirstLetter(this string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return input;
+            }
+
+            return char.ToUpper(input[0]) + input[1..];
         }
     }
 }

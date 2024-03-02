@@ -1,20 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Webzine.EntitiesContext;
 using Webzine.Entity;
+using Webzine.Entity.Fixtures;
 using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
 {
-    public class DbCommentaireRepository : ICommentaireRepository
+
+    /// <summary>
+    /// Implémente l'interface ICommentaireRepository en utilisant une base de données.
+    /// </summary>
+    public class DbCommentaireRepository(WebzineDbContext context) : ICommentaireRepository
     {
-        private readonly WebzineDbContext _context;
-        public DbCommentaireRepository(WebzineDbContext context)
-        {
-            _context = context;
-        }
+        private readonly WebzineDbContext _context = context;
 
         /// <summary>
-        /// Ajoute un Commentaire à base de donnée
+        /// Ajoute un Commentaire.
         /// </summary>
         /// <param name="commentaire"></param>
         public void Add(Commentaire commentaire)
@@ -24,15 +25,16 @@ namespace Webzine.Repository
                 throw new ArgumentNullException(nameof(commentaire));
             }
 
-            _context.Commentaires
-                .Add(commentaire);
+            commentaire.DateCreation = DateTime.Now;
+
+            _context.Add<Commentaire>(commentaire);
 
             _context
                 .SaveChanges();
         }
 
         /// <summary>
-        /// Supprimme un commentaire de la base de donnée
+        /// Supprimme un commentaire.
         /// </summary>
         /// <param name="commentaire"></param>
         public void Delete(Commentaire commentaire)
@@ -50,7 +52,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        ///Renvoie le premier commentaire ayant l'id mise en paramètre
+        ///Renvoie le premier commentaire ayant l'id mise en paramètre.
         /// </summary>
         /// <param name="idCommentaire"></param>
         /// <returns></returns>
@@ -71,7 +73,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Renvoie tout les commentaires
+        /// Renvoie tout les commentaires.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Commentaire> FindAll()
@@ -86,7 +88,23 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Retourne les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent à ancien)
+        /// Renvoie une liste de commentaire par ordre de creation.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
+        {
+            List<Commentaire> commentaires = DataFactory.Commentaires;
+
+            var orderedCommentaires = commentaires
+                 .Where(c => c.Titre != null && c.Titre.IdTitre == id)
+                 .OrderByDescending(c => c.DateCreation)
+                 .ToList();
+
+            return orderedCommentaires;
+        }
+
+        /// <summary>
+        /// Retourne les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Commentaire> FindCommentaires(int offset, int limit)

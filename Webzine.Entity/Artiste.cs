@@ -25,7 +25,7 @@
         /// <summary>
         /// Obtient ou définit la biographie de l'artiste.
         /// </summary>
-        public required string Biographie { get; set; }
+        public string? Biographie { get; set; }
 
         /// <summary>
         /// Obtient ou définit la liste des titres associés à cet artiste.

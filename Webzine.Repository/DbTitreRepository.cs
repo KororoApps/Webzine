@@ -5,12 +5,20 @@ using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
 {
+
+    /// <summary>
+    /// Implémente l'interface ITitreRepository pour les opérations liées à la gestion des titres dans la base de données.
+    /// </summary>
+    /// <remarks>
+    /// Initialise une nouvelle instance de la classe DbTitreRepository.
+    /// </remarks>
+    /// <param name="context">Le contexte de base de données.</param>
     public class DbTitreRepository(WebzineDbContext context) : ITitreRepository
     {
         private readonly WebzineDbContext _context = context;
 
         /// <summary>
-        /// Ajoute un Titre à base de donnée
+        /// Ajoute un Titre.
         /// </summary>
         /// <param name="titre"></param>
         public void Add(Titre titre)
@@ -20,27 +28,28 @@ namespace Webzine.Repository
                 throw new ArgumentNullException(nameof(titre));
             }
 
-            _context.Titres
-                .Add(titre);
+            titre.DateCreation = DateTime.Now;
+
+            _context.Add<Titre>(titre);
 
             _context
                 .SaveChanges();
         }
 
         /// <summary>
-        /// Compte le nombre de titre
+        /// Compte le nombre de titre.
         /// </summary>
         /// <returns></returns>
         public int Count()
         {
-            var NombreTitres = _context.Titres 
+            var NombreTitres = _context.Titres
                 .Count();
 
             return NombreTitres;
         }
 
         /// <summary>
-        /// Supprimme un Titre de la base de donnée
+        /// Supprimme un Titre.
         /// </summary>
         /// <param name="titre"></param>
         public void Delete(Titre titre)
@@ -50,15 +59,19 @@ namespace Webzine.Repository
                 throw new ArgumentNullException(nameof(titre));
             }
 
-            _context.Titres
-                .Remove(titre);
+            try
+            {
+                _context.Titres
+                    .Remove(titre);
 
-            _context
-                .SaveChanges();
+                _context
+                    .SaveChanges();
+
+            } catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
 
         /// <summary>
-        ///Renvoie le premier Titre ayant l'id mise en paramètre
+        ///Renvoie le premier Titre ayant l'id mise en paramètre.
         /// </summary>
         /// <param name="idTitre"></param>
         /// <returns></returns>
@@ -80,7 +93,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Retourne les titres demandés (pour la pagination) triés selon la date de création (du plus récent à ancien)
+        /// Retourne les titres demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Titre> FindTitres(int offset, int limit)
@@ -89,7 +102,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Renvoie tous les Titres
+        /// Renvoie tous les Titres.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Titre> FindAll()
@@ -98,14 +111,97 @@ namespace Webzine.Repository
                 .Include(t => t.Artiste)
                 .Include(t => t.Commentaires)
                 .Include(t => t.Styles)
-                .OrderBy(t => t.Libelle)
+                .OrderByDescending(t => t.DateCreation)
                 .ToList();
 
             return allTitres;
         }
 
         /// <summary>
-        /// Incrémente le nombre de lecture d'un titre
+        /// Renvoie tous le titre le plus lu.
+        /// </summary>
+        /// <returns></returns>
+        public Titre FindTitreLePlusLu()
+        {
+            var titre = _context.Titres
+                .OrderByDescending(t => t.NbLectures)
+                .FirstOrDefault();
+
+            if (titre == null)
+            {
+                //Exception si on ne trouve pas d'artiste correspondant
+                throw new ArgumentNullException();
+            }
+
+            return titre;
+        }
+
+        /// <summary>
+        /// Renvoie les titres du plus liké au moins liké  et en retourne un certain nombre.
+        /// </summary>
+        /// <returns></returns>
+        public List<Titre> FindTitresLesPlusLike()
+        {
+            var titres = _context.Titres
+                .OrderByDescending(t => t.NbLikes)
+                .Take(3)
+                .ToList();
+
+            return titres;
+        }
+
+        /// <summary>
+        /// Renvoie la liste des titres du plus récent au plus ancien chroniqué et en retourne un certain nombre.
+        /// </summary>
+        /// <returns></returns>
+        public List<Titre> ParutionChroniqueTitres()
+        {
+            var titres = _context.Titres
+                .OrderByDescending(t => t.DateCreation)
+                .Take(3)
+                .ToList();
+
+            return titres;
+        }
+
+        /// <summary>
+        /// Renvoie le nombre de titres.
+        /// </summary>
+        /// <returns></returns>
+        public int NombreTitres()
+        {
+            var nombreTitres = _context.Titres
+                .Count();
+
+            return nombreTitres;
+        }
+
+        /// <summary>
+        /// Renvoie le nombre de likes totals.
+        /// </summary>
+        /// <returns></returns>
+        public int NombreLikes()
+        {
+            var nombreLikes = _context.Titres
+                .Sum(t => t.NbLikes);
+
+            return nombreLikes;
+        }
+
+        /// <summary>
+        /// Renvoie le nombre de lectures totales.
+        /// </summary>
+        /// <returns></returns>
+        public int NombreLectures()
+        {
+            var nombreLectures = _context.Titres
+                .Sum(t => t.NbLectures);
+
+            return nombreLectures;
+        }
+
+        /// <summary>
+        /// Incrémente le nombre de lecture d'un titre.
         /// </summary>
         /// <returns></returns>
         public void IncrementNbLectures(Titre titre)
@@ -114,7 +210,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Incrémente le nombre de like d'un titre
+        /// Incrémente le nombre de like d'un titre.
         /// </summary>
         /// <returns></returns>
         public void IncrementNbLikes(Titre titre)
@@ -123,7 +219,7 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Recherche de manière insensible à la casse les titres contenant le mot recherché
+        /// Recherche de manière insensible à la casse les titres contenant le mot recherché.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Titre> Search(string mot)
@@ -132,15 +228,29 @@ namespace Webzine.Repository
         }
 
         /// <summary>
-        /// Recherche de manière insensible à la casse les titres contenant le style de musique cherchée
+        /// Recherche de manière insensible à la casse les titres contenant le style de musique cherchée.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Titre> SearchByStyle(string libelle)        {
-            throw new NotImplementedException();
+        public IEnumerable<Titre> SearchByStyle(string libelle)
+        {
+
+            List<Titre> titres = _context.Titres
+                .Include(t => t.Artiste)
+                .Where(t => t.Styles.Any(s => s.Libelle.Equals(libelle)))
+                .OrderByDescending(c => c.Libelle)
+                .ToList();
+
+            if (titres == null)
+            {
+                //Exception si on ne trouve pas d'artiste correspondant
+                throw new ArgumentNullException();
+            }
+
+            return titres;
         }
 
         /// <summary>
-        /// Met à jour un titre
+        /// Met à jour un titre.
         /// </summary>
         /// <returns></returns>
         public void Update(Titre titre)

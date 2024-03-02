@@ -4,37 +4,26 @@ using Webzine.EntitiesContext;
 using Webzine.Repository;
 using Webzine.Repository.Contracts;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
-/*// Charge la configuration en fonction de l'environnement.
-if (builder.Environment.IsDevelopment())
+// Vérifie le type de SGBD à utiliser en fonction de la configuration.
+if (builder.Configuration.GetSection("AppSettings:SGBD").Value == "SQLite")
 {
-    //builder.Configuration.AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
-
-    builder.Services.AddDbContext<WebzineDbContext>(options =>
-   options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
-}
-else
-{
-    //builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-    builder.Services.AddDbContext<WebzineDbContext>(options =>
-   options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
-}*/
-
-if ((builder.Configuration.GetSection("AppSettings:SGBD").Value == "SQLite"))
-{
+    // Utilise SQLite comme SGBD.
     builder.Services.AddDbContext<WebzineDbContext>(options =>
   options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
 }
-else if ((builder.Configuration.GetSection("AppSettings:SGBD").Value == "PostgreSQL"))
+else if (builder.Configuration.GetSection("AppSettings:SGBD").Value == "PostgreSQL")
 {
+    // Utilise PostgreSQL comme SGBD.
     builder.Services.AddDbContext<WebzineDbContext>(options =>
    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
 }
 
-if ((builder.Configuration.GetSection("AppSettings:Repository").Value == "Local")){
+// Configure le type de repository à utiliser en fonction de la configuration.
+if (builder.Configuration.GetSection("AppSettings:Repository").Value == "Local")
+{
+    // Utilise des repositories locaux.
     builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
     builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
     builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
@@ -42,6 +31,7 @@ if ((builder.Configuration.GetSection("AppSettings:Repository").Value == "Local"
 }
 else
 {
+    // Utilise des repositories de base de données.
     builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
     builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
     builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
@@ -73,6 +63,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// Utilise un scope pour gérer les services.
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -82,6 +73,7 @@ using (var scope = app.Services.CreateScope())
 
     // Assure la suppression de la base de données.
     context.Database.EnsureDeleted();
+
     // Assure la création de la base de données.
     context.Database.EnsureCreated();
 
@@ -91,6 +83,7 @@ using (var scope = app.Services.CreateScope())
 
 // Active la possibilité de servir des fichiers statiques présents dans le dossier wwwroot.
 app.UseStaticFiles();
+
 // Active le middleware permettant le routage des requêtes entrantes.
 app.UseRouting();
 

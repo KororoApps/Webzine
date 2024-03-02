@@ -1,7 +1,7 @@
 ﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
 
 @*Affiche 3 titres*@
-@foreach (var titre in Model.Titres.Take(3))
+@foreach (var titre in Model.ParutionChroniqueTitre)
 {
     <div class="container">
         <div class="row">
@@ -41,12 +41,8 @@
                                 </p>
                                 <p class="mb-0">
                                     <i class="fa-solid fa-tags ps-3"></i>
-                                    @{
-                                        var random = new Random();
-                                        var nombreDeStyles = random.Next(1, 4);
-                                    }
 
-                                    @foreach (var style in titre.Styles.Take(nombreDeStyles))
+                                    @foreach (var style in titre.Styles)
                                     {
                                         <a asp-area="" asp-controller="Titre" asp-action="Style" asp-route-id="@style.Libelle">
                                             @style.Libelle

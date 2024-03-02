@@ -2,21 +2,27 @@
 
 namespace Webzine.Repository.Contracts
 {
+    /// <summary>
+    /// Interface définissant les opérations CRUD pour la gestion des commentaires.
+    /// </summary>
     public interface ICommentaireRepository
     {
-        // Ajoute un commentaire à la base de données
+        // Ajoute un Commentaire.
         void Add(Commentaire commentaire);
 
-        // Supprime un commentaire de la base de données
+        // Supprimme un commentaire.
         void Delete(Commentaire commentaire);
 
-        // Recherche un commentaire par son ID
+        // Renvoie le premier commentaire ayant l'id mise en paramètre.
         Commentaire Find(int idCommentaire);
 
-        //Retourne les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent à ancien)
+        // Retourne les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
         IEnumerable<Commentaire> FindCommentaires(int offset, int limit);
 
-        //Retourne tous les commentaires
+        // Renvoie tout les commentaires.
         IEnumerable<Commentaire> FindAll();
+
+        // Renvoie une liste de commentaire par ordre de creation.
+        IEnumerable<Commentaire> FindCommentairesByIdTitre(int id);
     }
 }

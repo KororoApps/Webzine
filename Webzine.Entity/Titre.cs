@@ -50,7 +50,7 @@
         /// </summary>
         [Display(Name = "Durée en secondes")]
 
-        public TimeSpan Duree { get; set; }
+        public string Duree { get; set; }
 
         /// <summary>
         /// Obtient ou définit la date de sortie du morceau.

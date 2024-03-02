@@ -27,8 +27,8 @@
         {
             <tr>
                 <td>
-                    <a asp-area="" asp-controller="Artiste" asp-action="" >@commentaire.Titre.Artiste.Nom</a>
-                    - <a asp-area="" asp-controller="Titre" asp-action="" >@commentaire.Titre.Libelle</a>
+                    <a asp-area="" asp-controller="Artiste" asp-action="" asp-route-id="@commentaire.Titre.Artiste.IdArtiste" >@commentaire.Titre.Artiste.Nom</a>
+                    - <a asp-area="" asp-controller="Titre" asp-action="" asp-route-id="@commentaire.Titre.IdTitre">@commentaire.Titre.Libelle</a>
                 </td>
                 <td>@commentaire.Auteur</td>
                 <td>@commentaire.Contenu</td>

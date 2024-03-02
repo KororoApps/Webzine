@@ -4,12 +4,15 @@ using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
 {
+    /// <summary>
+    /// Implémente l'interface IStyleRepository pour la gestion des styles  en mémoire locale.
+    /// </summary>
     public class LocalStyleRepository : IStyleRepository
     {
         /// <summary>
-        /// 
+        /// Ajoute un style.
         /// </summary>
-        /// <param name="style"></param>
+        /// <param name="style">Le style à ajouter.</param>
         public void Add(Style style)
         {
             // Génère un nouvel identifiant
@@ -18,10 +21,11 @@ namespace Webzine.Repository
             // Ajoute le nouveau style à la liste
             DataFactory.Styles.Add(style);
         }
+
         /// <summary>
-        /// Méthode pour supprimer un style
+        /// Supprime un style.
         /// </summary>
-        /// <param name="style"></param>
+        /// <param name="style">Le style à supprimer.</param>
         public void Delete(Style style)
         {
            
@@ -35,11 +39,12 @@ namespace Webzine.Repository
                     .Remove(styleASupprimer);
             }
         }
+
         /// <summary>
-        /// Méthode pour trouver un style par son identifiant
+        /// Trouve un style par son identifiant.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns> Retourne le style trouvé</returns>
+        /// <param name="id">L'identifiant du style.</param>
+        /// <returns>Le style correspondant à l'identifiant.</returns>
         public Style Find(int id)
         {
             var style = DataFactory.Styles
@@ -47,10 +52,11 @@ namespace Webzine.Repository
 
             return style;
         }
+
         /// <summary>
-        /// Méthode pour trouver tous les styles
+        /// Trouve tous les styles.
         /// </summary>
-        /// <returns>Retourne tous les styles</returns>
+        /// <returns>Une liste de tous les styles.</returns>
         public IEnumerable<Style> FindAll()
         {
             List<Style> styles = DataFactory.Styles ;
@@ -61,14 +67,41 @@ namespace Webzine.Repository
 
             return orderedStyle;
         }
+
         /// <summary>
-        /// Méthode pour mettre à jour un style (non implémentée)
+        /// Trouve les styles par leurs ids.
         /// </summary>
-        /// <param name="style"></param>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <returns>Une liste de tous les styles.</returns>
+        public IEnumerable<Style> FindByIds(List<int> ids)
+        {
+            List<Style> styles = DataFactory.Styles;
+
+            var filteredStyles = styles
+                .Where(s => ids.Contains(s.IdStyle))
+                .ToList();
+
+            return filteredStyles;
+        }
+
+        /// <summary>
+        /// Met à jour un style.
+        /// </summary>
+        /// <param name="style">Le style à mettre à jour.</param>
         public void Update(Style style)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Retourne le nombre de styles.
+        /// </summary>
+        /// <returns>Le nombre total de styles.</returns>
+        public int NombreStyles()
+        {
+            var nombreStyle = DataFactory.Styles
+                .Count;
+
+            return nombreStyle;
         }
     }
 }

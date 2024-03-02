@@ -2,6 +2,10 @@
 
 namespace Webzine.Repository.Contracts
 {
+
+    /// <summary>
+    /// Interface définissant les opérations liées à la gestion des titres dans la base de données.
+    /// </summary>
     public interface ITitreRepository
     {
 
@@ -22,6 +26,24 @@ namespace Webzine.Repository.Contracts
 
         //Retourne tous les titres
         IEnumerable<Titre> FindAll();
+
+        // Renvoie tous le titre le plus lu.
+        Titre FindTitreLePlusLu();
+
+        // Renvoie les titres du plus liké au moins liké  et en retourne un certain nombre.
+        List<Titre> FindTitresLesPlusLike();
+
+        // Renvoie la liste des titres du plus récent au plus ancien chroniqué et en retourne un certain nombre.
+        List<Titre> ParutionChroniqueTitres();
+
+        // Renvoie le nombre de titres.
+        int NombreTitres();
+
+        // Renvoie le nombre de likes totals.
+        int NombreLikes();
+
+        // Renvoie le nombre de lectures totales.
+        int NombreLectures();
 
         //Incrémente le nombre de lecture d'un titre
         void IncrementNbLectures(Titre titre);

@@ -19,14 +19,10 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     /// Il utilise le générateur de fausses données Bogus pour simuler des données.
     /// </remarks>
     [Area("Admin")]
-    public class StyleController : Controller
+    public class StyleController(IStyleRepository styleRepository) : Controller
     {
-        private IStyleRepository _styleRepository;
+        private IStyleRepository styleRepository = styleRepository;
 
-        public StyleController(IStyleRepository styleRepository)
-        {
-            _styleRepository = styleRepository;
-        }
         /// <summary>
         /// Affiche la liste des styles.
         /// </summary>
@@ -36,7 +32,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             // Création du modèle de vue contenant la liste de Styles.
             var styleModel = new GroupeStyleModel
             {
-                Styles = _styleRepository.FindAll(),
+                Styles = this.styleRepository.FindAll(),
             };
 
             // Retour de la vue avec le modèle de vue contenant les styles générés.
@@ -56,17 +52,26 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action HTTP POST pour confirmer la création d'un style.
         /// </summary>
+        /// <param name="style">Le style à ajouter.</param>
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateConfirmed()
+        public IActionResult CreateConfirmed(Style style)
         {
+           /* if (!this.ModelState.IsValid)
+            {
+                // Traitement en cas de modèle non valide
+                return this.RedirectToAction(nameof(this.Create));
+            }*/
+
+            this.styleRepository.Add(style);
             return this.RedirectToAction(nameof(this.Index));
         }
 
         /// <summary>
         /// Affiche la vue de suppression d'un style.
         /// </summary>
+        /// <param name="id">L'identifiant du style à supprimer.</param>
         /// <returns>Vue de suppression d'un style.</returns>
         public IActionResult Delete(int id)
         {
@@ -74,7 +79,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             // Création du modèle de vue contenant le style à supprimer.
             var styleModel = new StyleModel
             {
-                Style = _styleRepository.Find(id),
+                Style = this.styleRepository.Find(id),
             };
 
             // Retour de la vue avec le modèle de vue contenant le style généré.
@@ -90,7 +95,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            _styleRepository.Delete(_styleRepository.Find(id));
+            this.styleRepository.Delete(this.styleRepository.Find(id));
 
             return this.RedirectToAction(nameof(this.Index));
         }
