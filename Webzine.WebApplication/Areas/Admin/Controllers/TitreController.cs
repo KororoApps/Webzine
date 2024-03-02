@@ -127,6 +127,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Affiche la vue d'édition d'un titre.
         /// </summary>
+        /// <param name="id">L'identifiant du titre à éditer.</param>
         /// <returns>Vue d'édition d'un titre.</returns>
         public IActionResult Edit(int id)
         {

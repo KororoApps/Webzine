@@ -10,10 +10,18 @@ namespace Webzine.Repository
     /// <summary>
     /// Implémente l'interface ITitreRepository pour les opérations liées à la gestion des titres dans la base de données.
     /// </summary>
-    public class DbTitreRepository(WebzineDbContext context) : ITitreRepository
+    public class DbTitreRepository : ITitreRepository
     {
-        private readonly WebzineDbContext _context = context;
+        private readonly WebzineDbContext _context;
 
+        /// <summary>
+        /// Initialise une nouvelle instance de la classe DbTitreRepository.
+        /// </summary>
+        /// <param name="context">Le contexte de base de données.</param>
+        public DbTitreRepository(WebzineDbContext context)
+        {
+            _context = context;
+        }
         /// <summary>
         /// Ajoute un Titre.
         /// </summary>
@@ -117,7 +125,17 @@ namespace Webzine.Repository
         /// <returns></returns>
         public Titre FindTitreLePlusLu()
         {
-            throw new NotImplementedException();
+            var titre = _context.Titres
+                .OrderByDescending(t => t.NbLectures)
+                .FirstOrDefault();
+
+            if (titre == null)
+            {
+                //Exception si on ne trouve pas d'artiste correspondant
+                throw new ArgumentNullException();
+            }
+
+            return titre;
         }
 
         /// <summary>
@@ -127,7 +145,7 @@ namespace Webzine.Repository
         public List<Titre> FindTitresLesPlusLike()
         {
             var titres = _context.Titres
-                .OrderBy(t => t.NbLikes)
+                .OrderByDescending(t => t.NbLikes)
                 .Take(3)
                 .ToList();
 
@@ -154,7 +172,10 @@ namespace Webzine.Repository
         /// <returns></returns>
         public int NombreTitres()
         {
-            throw new NotImplementedException();
+            var nombreTitres = _context.Titres
+                .Count();
+
+            return nombreTitres;
         }
 
         /// <summary>
@@ -163,7 +184,10 @@ namespace Webzine.Repository
         /// <returns></returns>
         public int NombreLikes()
         {
-            throw new NotImplementedException();
+            var nombreLikes = _context.Titres
+                .Sum(t => t.NbLikes);
+
+            return nombreLikes;
         }
 
         /// <summary>
@@ -172,7 +196,10 @@ namespace Webzine.Repository
         /// <returns></returns>
         public int NombreLectures()
         {
-            throw new NotImplementedException();
+            var nombreLectures = _context.Titres
+                .Sum(t => t.NbLectures);
+
+            return nombreLectures;
         }
 
         /// <summary>

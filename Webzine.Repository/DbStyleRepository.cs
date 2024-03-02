@@ -101,7 +101,10 @@ namespace Webzine.Repository
         /// <returns>Le nombre total de styles.</returns>
         public int NombreStyles()
         {
-            throw new NotImplementedException();
+            var nombreStyle = _context.Styles
+                .Count();
+
+            return nombreStyle;
         }
     }
 }

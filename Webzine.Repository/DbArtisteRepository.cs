@@ -121,7 +121,19 @@ namespace Webzine.Repository
         /// <returns>L'artiste le plus chroniqué.</returns>
         public Artiste FindArtisteLePlusChronique()
         {
-            throw new NotImplementedException();
+            var artiste = _context.Artistes
+                .Where(a => a.Titres != null && a.Titres.Count != 0)
+                .OrderByDescending(a => a.Titres.Sum(t => t.Chronique != null ? 1 : 0))
+                .FirstOrDefault();
+
+            if (artiste != null)
+            {
+                return artiste;
+            }
+            else
+            {
+                throw new Exception("Il n'y a pas d'artiste avec des chroniques");
+            }
         }
 
         /// <summary>
@@ -130,7 +142,23 @@ namespace Webzine.Repository
         /// <returns>L'artiste ayant le plus de titres provenant d'albums distincts.</returns>
         public Artiste FindArtisteLePlusTitresAlbumDistinct()
         {
-            throw new NotImplementedException();
+            var artiste = _context.Artistes
+                .Include(a => a.Titres)
+                .Where(a => a.Titres != null && a.Titres.Any())
+                .OrderByDescending(a => a.Titres
+                .Select(t => new { t.Album, t.Artiste })
+                .Distinct()
+                .Count())
+                .FirstOrDefault();
+
+            if (artiste != null)
+            {
+                return artiste;
+            }
+            else
+            {
+                throw new Exception("Il n'y a pas d'artiste avec des titres dans des albums distincts");
+            }
         }
 
         /// <summary>
@@ -139,7 +167,10 @@ namespace Webzine.Repository
         /// <returns>Le nombre total de biographies d'artistes.</returns>
         public int NombreBioArtistes()
         {
-            throw new NotImplementedException();
+            var nombreArtiste = _context.Artistes
+                .Count(a => !string.IsNullOrEmpty(a.Biographie));
+
+            return nombreArtiste;
         }
 
         /// <summary>
@@ -148,7 +179,10 @@ namespace Webzine.Repository
         /// <returns>Le nombre total d'artistes.</returns>
         public int NombreArtistes()
         {
-            throw new NotImplementedException();
+            var nombreArtiste = _context.Artistes
+                .Count();
+
+            return nombreArtiste;
         }
     }
 }
