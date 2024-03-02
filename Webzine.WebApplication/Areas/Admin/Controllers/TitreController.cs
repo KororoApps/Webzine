@@ -128,8 +128,10 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// Affiche la vue d'édition d'un titre.
         /// </summary>
         /// <returns>Vue d'édition d'un titre.</returns>
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
+            var titre = this.titreRepository.Find(id);
+
             // Génération d'une liste d'artistes.
             var styles = this.styleRepository.FindAll();
 
@@ -137,6 +139,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             var titreModel = new TitreModel
             {
                 Styles = styles,
+                Titre = titre,
             };
 
             // Retour de la vue avec le modèle de vue contenant le titre généré.
