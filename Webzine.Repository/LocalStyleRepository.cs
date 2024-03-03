@@ -89,7 +89,13 @@ namespace Webzine.Repository
         /// <param name="style">Le style à mettre à jour.</param>
         public void Update(Style style)
         {
-            throw new NotImplementedException();
+            var styleAEditer = DataFactory.Styles
+                .FirstOrDefault(s => s.IdStyle == style.IdStyle);
+
+            if (styleAEditer != null)
+            {
+                styleAEditer.Libelle = style.Libelle;
+            }
         }
 
         /// <summary>

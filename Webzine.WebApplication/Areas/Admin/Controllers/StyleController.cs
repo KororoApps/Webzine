@@ -74,7 +74,6 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue de suppression d'un style.</returns>
         public IActionResult Delete(int id)
         {
-
             // Création du modèle de vue contenant le style à supprimer.
             var styleModel = new StyleModel
             {
@@ -102,17 +101,14 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Affiche la vue d'édition d'un style.
         /// </summary>
+        /// /// <param name="id">L'identifiant du style à éditer.</param>
         /// <returns>Vue d'édition d'un style.</returns>
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
-            // Génération d'un style.
-            List<Style> styles = DataFactory.Styles;
-            Style style = styles.OrderBy(t => Guid.NewGuid()).FirstOrDefault();
-
-            // Création du modèle de vue contenant le style à éditer.
+            // Création du modèle de vue contenant le style à supprimer.
             var styleModel = new StyleModel
             {
-                Style = style,
+                Style = this.styleRepository.Find(id),
             };
 
             // Retour de la vue avec le modèle de vue contenant le style généré.
@@ -122,12 +118,19 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action HTTP POST pour confirmer l'édition d'un style.
         /// </summary>
-        /// <param name="id">L'identifiant du style à éditer.</param>
+        /// <param name="Style">Le style à éditer.</param>
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditConfirmed(int id)
+        public IActionResult EditConfirmed(Style Style)
         {
+            if (!this.ModelState.IsValid)
+            {
+                // Traitement en cas de modèle non valide
+                return this.View("Create");
+            }
+
+            this.styleRepository.Update(Style);
             return this.RedirectToAction(nameof(this.Index));
         }
     }
