@@ -15,10 +15,6 @@ a{
     text-align: justify;
 }
 
-.footer{
-    min-height:calc(100vh-100px)
-}
-
 .icone {
     color: #74C0FC;
 }
