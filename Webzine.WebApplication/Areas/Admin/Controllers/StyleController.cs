@@ -59,8 +59,10 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         {
            if (!this.ModelState.IsValid)
             {
+                
                 // Traitement en cas de modèle non valide
-                return this.RedirectToAction(nameof(this.Create), style);
+                //return this.RedirectToAction(nameof(this.Create));
+                return this.View("Create");
             }
 
            this.styleRepository.Add(style);
