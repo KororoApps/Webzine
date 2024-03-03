@@ -21,6 +21,7 @@
             </div>
             <div class="col">
                 <input asp-for="@Model.Style.Libelle" type="text" class="form-control" placeholder="@Model.Style.Libelle">
+                <span asp-validation-for="@Model.Style.Libelle" class="text-danger"></span>
             </div>
 
             @*Bouton d'ajout du style.*@
