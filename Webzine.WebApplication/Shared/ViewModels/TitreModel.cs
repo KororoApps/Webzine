@@ -29,11 +29,16 @@ namespace Webzine.WebApplication.Shared.ViewModels
         /// <summary>
         /// Obtient ou définit les artistes.
         /// </summary>
-        public IEnumerable<Artiste>? Artistes { get; set; }
+        public IEnumerable<Artiste> Artistes { get; set; }
 
         /// <summary>
         /// Obtient ou définit les commentaires.
         /// </summary>
         public IEnumerable<Commentaire>? Commentaires { get; set; }
+
+        /// <summary>
+        /// Obtient ou définit l'artiste.
+        /// </summary>
+        public Artiste Artiste { get; set; }
     }
 }

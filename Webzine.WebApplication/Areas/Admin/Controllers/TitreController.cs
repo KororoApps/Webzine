@@ -6,7 +6,6 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.Entity.Fixtures;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
@@ -152,11 +151,15 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             // Génération d'une liste d'artistes.
             var styles = this.styleRepository.FindAll();
 
+            // Génération d'une liste d'artistes.
+            var artistes = this.artisteRepository.FindAll();
+
             // Création du modèle de vue contenant un Titre.
             var titreModel = new TitreModel
             {
                 Styles = styles,
                 Titre = titre,
+                Artistes = artistes,
             };
 
             // Retour de la vue avec le modèle de vue contenant le titre généré.
