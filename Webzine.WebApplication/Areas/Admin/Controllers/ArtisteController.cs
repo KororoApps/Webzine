@@ -93,6 +93,12 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateConfirmed(Artiste artiste)
         {
+            if (!this.ModelState.IsValid)
+            {
+                // Traitement en cas de modèle non valide
+                return this.View("Create");
+            }
+
             this.artisteRepository.Add(artiste);
             return this.RedirectToAction(nameof(this.Index));
         }
