@@ -21,8 +21,8 @@
         [Required(ErrorMessage = "Votre prénom ou pseudonyme est obligatoire.")]
         [ReadOnly(true)]
         [Display(Name = "Nom")]
-        [MinLength(2, ErrorMessage = "Votre prénom/pseudonyme doit comprendre au minimum 2 caractères.")]
-        [MaxLength(30, ErrorMessage = "Votre prénom/pseudonyme doit comprendre au minimum 2 caractères.")]
+        [MinLength(2, ErrorMessage = "Votre prénom/pseudonyme doit faire au minimum 2 caractères.")]
+        [MaxLength(30, ErrorMessage = "Votre prénom/pseudonyme doit faire au minimum 2 caractères.")]
         public required string Auteur { get; set; }
 
         /// <summary>
