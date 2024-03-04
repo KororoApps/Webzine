@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\Webzine.Documentation\styleCop\stylecop.json" Link="stylecop.json" />
+    <Compile Remove="LocalTitreRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\Webzine.Documentation\styleCop\stylecop.json" Link="stylecop.json" />
+    <AdditionalFiles Include="LocalTitreRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>
