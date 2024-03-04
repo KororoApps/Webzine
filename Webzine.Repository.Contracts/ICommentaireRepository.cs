@@ -8,6 +8,7 @@ namespace Webzine.Repository.Contracts
     public interface ICommentaireRepository
     {
         // Ajoute un Commentaire.
+        //!TODO : FAIRE LE SUUMMARY !!!!!!!!!!!!!!!!!!!
         void Add(Commentaire commentaire);
 
         // Supprimme un commentaire.
