@@ -16,10 +16,7 @@ namespace Webzine.Repository
     {
         private readonly WebzineDbContext _context = context;
 
-        /// <summary>
-        /// Ajoute un artiste.
-        /// </summary>
-        /// <param name="artiste">L'artiste à ajouter.</param>
+        /// <inheritdoc />
         public void Add(Artiste artiste)
         {
             if (artiste == null)
@@ -32,10 +29,7 @@ namespace Webzine.Repository
             _context.SaveChanges();
         }
 
-        /// <summary>
-        /// Supprime un artiste.
-        /// </summary>
-        /// <param name="artiste">L'artiste à supprimer.</param>
+        /// <inheritdoc />
         public void Delete(Artiste artiste)
         {
             if (artiste == null)
@@ -49,11 +43,7 @@ namespace Webzine.Repository
             _context.SaveChanges();
         }
 
-        /// <summary>
-        /// Renvoie le premier artiste ayant l'identifiant spécifié.
-        /// </summary>
-        /// <param name="idArtiste">L'identifiant de l'artiste.</param>
-        /// <returns>L'artiste correspondant à l'identifiant.</returns>
+        /// <inheritdoc />
         public Artiste Find(int idArtiste)
         {
             var artiste = _context.Artistes
@@ -69,11 +59,7 @@ namespace Webzine.Repository
             return artiste;
         }
 
-        /// <summary>
-        /// Renvoie le premier artiste ayant le nom spécifié.
-        /// </summary>
-        /// <param name="nomArtiste">Nom de l'artiste.</param>
-        /// <returns>L'artiste correspondant au nom fourni.</returns>
+        /// <inheritdoc />
         public Artiste FindByName(string nomArtiste)
         {
             var artiste = _context.Artistes
@@ -89,10 +75,7 @@ namespace Webzine.Repository
             return artiste;
         }
 
-        /// <summary>
-        /// Renvoie tous les artistes.
-        /// </summary>
-        /// <returns>Une liste de tous les artistes.</returns>
+        /// <inheritdoc />
         public IEnumerable<Artiste> FindAll()
         {
             var allArtistes = _context.Artistes
@@ -103,21 +86,13 @@ namespace Webzine.Repository
             return allArtistes;
         }
 
-        /// <summary>
-        /// Renvoie les artistes demandés (pour la pagination) triés selon le nom (du plus récent à l'ancien).
-        /// </summary>
-        /// <param name="offset">La position de départ pour la pagination.</param>
-        /// <param name="limit">Le nombre maximum d'artistes à renvoyer.</param>
-        /// <returns>Une liste d'artistes paginée et triée.</returns>
+        /// <inheritdoc />
         public IEnumerable<Artiste> FindArtistes(int offset, int limit)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Met à jour un artiste.
-        /// </summary>
-        /// <param name="artiste">L'artiste à mettre à jour.</param>
+        /// <inheritdoc />
         public void Update(Artiste artiste)
         {
             if (artiste == null)
@@ -126,10 +101,7 @@ namespace Webzine.Repository
             }
         }
 
-        /// <summary>
-        /// Renvoie l'artiste le plus chroniqué.
-        /// </summary>
-        /// <returns>L'artiste le plus chroniqué.</returns>
+        /// <inheritdoc />
         public Artiste FindArtisteLePlusChronique()
         {
             var artiste = _context.Artistes
@@ -147,10 +119,7 @@ namespace Webzine.Repository
             }
         }
 
-        /// <summary>
-        /// Renvoie l'artiste ayant le plus de titres provenant d'albums distincts.
-        /// </summary>
-        /// <returns>L'artiste ayant le plus de titres provenant d'albums distincts.</returns>
+        /// <inheritdoc />
         public Artiste FindArtisteLePlusTitresAlbumDistinct()
         {
             var artiste = _context.Artistes
@@ -172,10 +141,7 @@ namespace Webzine.Repository
             }
         }
 
-        /// <summary>
-        /// Renvoie le nombre de biographies d'artistes.
-        /// </summary>
-        /// <returns>Le nombre total de biographies d'artistes.</returns>
+        /// <inheritdoc />
         public int NombreBioArtistes()
         {
             var nombreArtiste = _context.Artistes
@@ -184,10 +150,7 @@ namespace Webzine.Repository
             return nombreArtiste;
         }
 
-        /// <summary>
-        /// Renvoie le nombre d'artistes.
-        /// </summary>
-        /// <returns>Le nombre total d'artistes.</returns>
+        /// <inheritdoc />
         public int NombreArtistes()
         {
             var nombreArtiste = _context.Artistes
