@@ -2,6 +2,7 @@
 {
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
     /// Représente un commentaire associé à un titre dans le système.
