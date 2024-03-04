@@ -15,10 +15,6 @@ a{
     text-align: justify;
 }
 
-.footer{
-    min-height:calc(100vh-100px)
-}
-
 .icone {
     color: #74C0FC;
 }
@@ -30,4 +26,8 @@ a{
 .custom-textarea {
     height: 100px;
     width: 300px;
+}
+
+.footer-fixed{
+    min-height:calc(100vh-100px);
 }

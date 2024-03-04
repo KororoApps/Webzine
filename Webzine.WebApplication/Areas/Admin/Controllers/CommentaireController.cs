@@ -39,13 +39,32 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// Action pour afficher la vue de création d'un artiste.
+        /// Action HTTP POST pour confirmer la création d'un commentaire.
         /// </summary>
-        /// <param name="commentaire">L'entité Commentaire à créer</param>
-        /// <param name="IdTitre">Id du titre lié au commentaire</param>
-        /// <returns>Vue de création d'un artiste.</returns>
-        public IActionResult Create(Commentaire commentaire, int IdTitre)
+        /// <param name="commentaire">L'entité Commentaire à créer.</param>
+        /// <param name="IdTitre">Id du titre lié au commentaire.</param>
+        /// <returns>Redirection vers l'action Index après la création.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateConfirmed(Commentaire commentaire, int IdTitre)
         {
+            // En cas de modèle non valide, récupérez les informations nécessaires pour la vue
+
+            // Génération d'une liste de styles.
+            var commentaires = this.commentaireRepository.FindCommentairesByIdTitre(IdTitre);
+
+            // Création du modèle de vue contenant un titre.
+            var titreModel = new TitreModel
+            {
+                Titre = this.titreRepository.Find(IdTitre),
+                Commentaires = commentaires,
+            };
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View("~/Views/Titre/Index.cshtml", titreModel);
+            }
+
             Titre titre = this.titreRepository.Find(IdTitre);
 
             Console.WriteLine(commentaire.Auteur);
@@ -53,7 +72,10 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             commentaire.Titre = titre;
 
             this.commentaireRepository.Add(commentaire);
-            return this.RedirectToAction("Index", "Commentaire", new { area = "Admin"});
+
+            this.ModelState.Clear();
+
+            return this.View("~/Views/Titre/Index.cshtml", titreModel);
         }
 
         /// <summary>

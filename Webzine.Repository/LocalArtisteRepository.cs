@@ -55,6 +55,25 @@ namespace Webzine.Repository
         }
 
         /// <summary>
+        /// Renvoie le premier artiste ayant le nom spécifié.
+        /// </summary>
+        /// <param name="nomArtiste">Nom de l'artiste.</param>
+        /// <returns>L'artiste correspondant au nom fourni.</returns>
+        public Artiste FindByName(string nomArtiste)
+        {
+            var artiste = DataFactory.Artistes
+                 .FirstOrDefault(a => a.Nom == nomArtiste);
+
+            if (artiste == null)
+            {
+                //Exception si on ne trouve pas d'artiste correspondant
+                throw new ArgumentNullException();
+            }
+
+            return artiste;
+        }
+
+        /// <summary>
         /// Renvoie tous les artistes.
         /// </summary>
         /// <returns>Une liste de tous les artistes.</returns>

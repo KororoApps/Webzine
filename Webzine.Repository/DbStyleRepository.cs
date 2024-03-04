@@ -35,15 +35,17 @@ namespace Webzine.Repository
         /// <param name="style">Le style à supprimer.</param>
         public void Delete(Style style)
         {
+            // Recherchez le style existant dans le contexte de données
+            var styleASupprimer = _context.Styles.Find(style.IdStyle);
 
-            if (style == null)
+            if (styleASupprimer == null)
             {
-                throw new ArgumentNullException(nameof(style));
+                throw new ArgumentNullException(nameof(styleASupprimer));
             }
             else
             {
                 _context.Styles
-                     .Remove(style);
+                     .Remove(styleASupprimer);
 
                 _context.SaveChanges();
             }          
@@ -97,7 +99,9 @@ namespace Webzine.Repository
         /// <param name="style">Le style à mettre à jour.</param>
         public void Update(Style style)
         {
-            throw new NotImplementedException();
+            _context.Update<Style>(style);
+
+            _context.SaveChanges();
         }
 
         /// <summary>

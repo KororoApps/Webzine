@@ -77,17 +77,20 @@ namespace Webzine.Repository
         /// <returns></returns>
         public Titre Find(int idTitre)
         {
+            //TODO : A CHANGER SINGLE AU LIEU DE SINGLEORDEFAULT pour attraper erreur plus tard
             var titre = _context.Titres
                 .Include(t => t.Artiste)
                 .Include(t => t.Commentaires)
                 .Include(t => t.Styles)
                 .SingleOrDefault(t => t.IdTitre == idTitre);
 
+            //TODO : A SUPPRIMER ET FAIRE GESTION D'ERREUR AVANT
             if (titre == null)
             {
                 //Exception si on ne trouve pas d'artiste correspondant
                 throw new ArgumentNullException();
             }
+            
 
             return titre;
         }
@@ -107,6 +110,11 @@ namespace Webzine.Repository
         /// <returns></returns>
         public IEnumerable<Titre> FindAll()
         {
+            //TODO : Les titres sont reliés avec tout ici
+            //Retourner que le nécessaire
+            //Enlever style
+            //Faire passer que le nombre de commentaires
+            //Voir peut-être pour plutôt utiliser le FindTitres car il vaut mieux paginer.
             var allTitres = _context.Titres
                 .Include(t => t.Artiste)
                 .Include(t => t.Commentaires)
@@ -168,8 +176,14 @@ namespace Webzine.Repository
         /// Renvoie le nombre de titres.
         /// </summary>
         /// <returns></returns>
+        /// 
+        /// <inheritdoc/> !!!!!!!!!!!!!!!!!!!!!!!
         public int NombreTitres()
         {
+            //TODO !! Retourner directement  sans passer par une variable
+            //FAIRE CA PARTOUT !!
+            //EVITER D'ALLER TROP A LA LIGNE !!
+            //REMPLIR LES <return> !!!!! </return> !!!!
             var nombreTitres = _context.Titres
                 .Count();
 

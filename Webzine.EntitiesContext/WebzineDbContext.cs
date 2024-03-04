@@ -36,7 +36,7 @@ namespace Webzine.EntitiesContext
             }
             );
 
-            modelBuilder.Entity<Commentaire>(entity =>
+           modelBuilder.Entity<Commentaire>(entity =>
             {
                 entity.ToTable("Commentaire");
 
@@ -47,7 +47,7 @@ namespace Webzine.EntitiesContext
                 entity.Property(c => c.Contenu);
                 entity.Property(c => c.DateCreation);
 
-                entity.HasOne(c => c.Titre).WithMany(t => t.Commentaires);
+                entity.HasOne(c => c.Titre);
             }
             );
 
@@ -83,7 +83,7 @@ namespace Webzine.EntitiesContext
                 entity.Property(t => t.UrlEcoute);
 
                 entity.HasOne(t => t.Artiste);
-                entity.HasMany(t => t.Commentaires).WithOne(c => c.Titre);
+                entity.HasMany(t => t.Commentaires);
                 entity.HasMany(t => t.Styles);
             }
             );

@@ -6,7 +6,6 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.Entity.Fixtures;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
@@ -108,11 +107,35 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreateConfirmed(Titre titre, List<int> styleIds)
         {
-            IEnumerable<Style> styles = this.styleRepository.FindByIds(styleIds);
-            Artiste artiste = this.artisteRepository.Find(titre.Artiste.IdArtiste);
-            titre.Styles = styles.ToList();
+
+            if (!this.ModelState.IsValid)
+            {
+                // Génération d'une liste de styles.
+                var styles = this.styleRepository.FindAll();
+
+                // Génération d'une liste d'artistes.
+                var artistes = this.artisteRepository.FindAll();
+
+                // Création du modèle de vue contenant un Titre.
+                var titreModel = new TitreModel
+                {
+                    Styles = styles,
+                    Artistes = artistes,
+                };
+
+                // Traitement en cas de modèle non valide
+                return this.View("Create", titreModel);
+            }
+
+            IEnumerable<Style> stylesById = this.styleRepository.FindByIds(styleIds);
+
+            Artiste artiste = this.artisteRepository.FindByName(titre.Artiste.Nom);
+
+            titre.Styles = stylesById.ToList();
             titre.Artiste = artiste;
+
             this.titreRepository.Add(titre);
+
             return this.RedirectToAction(nameof(this.Index));
         }
 
@@ -128,11 +151,15 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             // Génération d'une liste d'artistes.
             var styles = this.styleRepository.FindAll();
 
+            // Génération d'une liste d'artistes.
+            var artistes = this.artisteRepository.FindAll();
+
             // Création du modèle de vue contenant un Titre.
             var titreModel = new TitreModel
             {
                 Styles = styles,
                 Titre = titre,
+                Artistes = artistes,
             };
 
             // Retour de la vue avec le modèle de vue contenant le titre généré.

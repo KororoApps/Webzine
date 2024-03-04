@@ -17,8 +17,9 @@
         /// <summary>
         /// Obtient ou définit le nom de l'artiste.
         /// </summary>
-        [MinLength(2)]
-        [MaxLength(50)]
+        [Required(ErrorMessage ="Le nom de l'artiste est obligatoire.")]
+        [MinLength(2, ErrorMessage = "Le nom de l'artiste doit faire au minimum 2 caractères.")]
+        [MaxLength(50, ErrorMessage = "Le nom de l'artiste doit faire au maximum 50 caractères.")]
         [Display(Name = "Nom de l'artiste")]
         public required string Nom { get; set; }
 
@@ -30,6 +31,6 @@
         /// <summary>
         /// Obtient ou définit la liste des titres associés à cet artiste.
         /// </summary>
-        public List<Titre> Titres { get; set; }
+        public List<Titre>? Titres { get; set; }
     }
 }

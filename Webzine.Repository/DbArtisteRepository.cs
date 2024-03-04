@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Webzine.EntitiesContext;
 using Webzine.Entity;
-using Webzine.Entity.Fixtures;
 using Webzine.Repository.Contracts;
 
 namespace Webzine.Repository
@@ -60,6 +59,26 @@ namespace Webzine.Repository
             var artiste = _context.Artistes
                 .Include(c => c.Titres)
                 .SingleOrDefault(t => t.IdArtiste == idArtiste);
+
+            if (artiste == null)
+            {
+                //Exception si on ne trouve pas d'artiste correspondant
+                throw new ArgumentNullException();
+            }
+
+            return artiste;
+        }
+
+        /// <summary>
+        /// Renvoie le premier artiste ayant le nom spécifié.
+        /// </summary>
+        /// <param name="nomArtiste">Nom de l'artiste.</param>
+        /// <returns>L'artiste correspondant au nom fourni.</returns>
+        public Artiste FindByName(string nomArtiste)
+        {
+            var artiste = _context.Artistes
+                .Include(c => c.Titres)
+                .SingleOrDefault(t => t.Nom == nomArtiste);
 
             if (artiste == null)
             {

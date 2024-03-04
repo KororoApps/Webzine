@@ -14,13 +14,14 @@
 @*Formulaire d'ajout d'un style.*@
 <form method="post" asp-action="EditConfirmed" asp-controller="Style" asp-route-id="@Model.Style.IdStyle" class="col-6 d-flex">
     <div class="container">
-        <div asp-validation-summary="All" class="text-danger"></div>
+        <input type="hidden" asp-for="@Model.Style.IdStyle" />
         <div class="row align-items-center mb-5">
             <div class="col-auto">
                 <label asp-for="@Model.Style.Libelle" class="form-label required-label"></label>
             </div>
             <div class="col">
                 <input asp-for="@Model.Style.Libelle" type="text" class="form-control" placeholder="@Model.Style.Libelle">
+                <span asp-validation-for="@Model.Style.Libelle" class="text-danger"></span>
             </div>
 
             @*Bouton d'ajout du style.*@
