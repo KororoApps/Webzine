@@ -3,7 +3,7 @@ using Webzine.Entity;
 
 namespace Webzine.EntitiesContext
 {
-    public class WebzineDbContext : DbContext
+    public partial class WebzineDbContext : DbContext
     {
         public WebzineDbContext()
         {
@@ -36,7 +36,7 @@ namespace Webzine.EntitiesContext
             }
             );
 
-            modelBuilder.Entity<Commentaire>(entity =>
+           modelBuilder.Entity<Commentaire>(entity =>
             {
                 entity.ToTable("Commentaire");
 
