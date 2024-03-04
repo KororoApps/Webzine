@@ -3,7 +3,7 @@ using Webzine.Entity;
 
 namespace Webzine.EntitiesContext
 {
-    public partial class WebzineDbContext : DbContext
+    public class WebzineDbContext : DbContext
     {
         public WebzineDbContext()
         {
