@@ -13,10 +13,7 @@ namespace Webzine.Repository
         // Contexte de base de données pour accéder aux données
         private readonly WebzineDbContext _context = context;
 
-        /// <summary>
-        /// Ajoute un style.
-        /// </summary>
-        /// <param name="style">Le style à ajouter.</param>
+        /// <inheritdoc />
         public void Add(Style style)
         {
             if (style == null)
@@ -29,10 +26,7 @@ namespace Webzine.Repository
             _context.SaveChanges();
         }
 
-        /// <summary>
-        /// Supprime un style.
-        /// </summary>
-        /// <param name="style">Le style à supprimer.</param>
+        /// <inheritdoc />
         public void Delete(Style style)
         {
             // Recherchez le style existant dans le contexte de données
@@ -51,11 +45,7 @@ namespace Webzine.Repository
             }          
         }
 
-        /// <summary>
-        /// Trouve un style par son identifiant.
-        /// </summary>
-        /// <param name="id">L'identifiant du style.</param>
-        /// <returns>Le style correspondant à l'identifiant.</returns>
+        /// <inheritdoc />
         public Style Find(int id)
         {
              var  style = _context.Styles
@@ -67,10 +57,7 @@ namespace Webzine.Repository
 
         }
 
-        /// <summary>
-        /// Trouve tous les styles.
-        /// </summary>
-        /// <returns>Une liste de tous les styles.</returns>
+        /// <inheritdoc />
         public IEnumerable<Style> FindAll()
         {
             var  styles = _context.Styles
@@ -80,10 +67,7 @@ namespace Webzine.Repository
             return styles;
         }
 
-        /// <summary>
-        /// Trouve les styles par leurs ids.
-        /// </summary>
-        /// <returns>Une liste de tous les styles.</returns>
+        /// <inheritdoc />
         public IEnumerable<Style> FindByIds(List<int> ids)
         {
             var filteredStyles = _context.Styles
@@ -93,10 +77,7 @@ namespace Webzine.Repository
             return filteredStyles;
         }
 
-        /// <summary>
-        /// Met à jour un style.
-        /// </summary>
-        /// <param name="style">Le style à mettre à jour.</param>
+        /// <inheritdoc />
         public void Update(Style style)
         {
             _context.Update<Style>(style);
@@ -104,10 +85,7 @@ namespace Webzine.Repository
             _context.SaveChanges();
         }
 
-        /// <summary>
-        /// Retourne le nombre de styles.
-        /// </summary>
-        /// <returns>Le nombre total de styles.</returns>
+        /// <inheritdoc />
         public int NombreStyles()
         {
             var nombreStyle = _context.Styles

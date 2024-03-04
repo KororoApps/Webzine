@@ -9,10 +9,7 @@ namespace Webzine.Repository
     /// </summary>
     public class LocalStyleRepository : IStyleRepository
     {
-        /// <summary>
-        /// Ajoute un style.
-        /// </summary>
-        /// <param name="style">Le style à ajouter.</param>
+        /// <inheritdoc />
         public void Add(Style style)
         {
             // Génère un nouvel identifiant
@@ -22,10 +19,7 @@ namespace Webzine.Repository
             DataFactory.Styles.Add(style);
         }
 
-        /// <summary>
-        /// Supprime un style.
-        /// </summary>
-        /// <param name="style">Le style à supprimer.</param>
+        /// <inheritdoc />
         public void Delete(Style style)
         {
            
@@ -40,11 +34,7 @@ namespace Webzine.Repository
             }
         }
 
-        /// <summary>
-        /// Trouve un style par son identifiant.
-        /// </summary>
-        /// <param name="id">L'identifiant du style.</param>
-        /// <returns>Le style correspondant à l'identifiant.</returns>
+        /// <inheritdoc />
         public Style Find(int id)
         {
             var style = DataFactory.Styles
@@ -53,10 +43,7 @@ namespace Webzine.Repository
             return style;
         }
 
-        /// <summary>
-        /// Trouve tous les styles.
-        /// </summary>
-        /// <returns>Une liste de tous les styles.</returns>
+        /// <inheritdoc />
         public IEnumerable<Style> FindAll()
         {
             List<Style> styles = DataFactory.Styles ;
@@ -68,10 +55,7 @@ namespace Webzine.Repository
             return orderedStyle;
         }
 
-        /// <summary>
-        /// Trouve les styles par leurs ids.
-        /// </summary>
-        /// <returns>Une liste de tous les styles.</returns>
+        /// <inheritdoc />
         public IEnumerable<Style> FindByIds(List<int> ids)
         {
             List<Style> styles = DataFactory.Styles;
@@ -83,10 +67,7 @@ namespace Webzine.Repository
             return filteredStyles;
         }
 
-        /// <summary>
-        /// Met à jour un style.
-        /// </summary>
-        /// <param name="style">Le style à mettre à jour.</param>
+        /// <inheritdoc />
         public void Update(Style style)
         {
             var styleAEditer = DataFactory.Styles
@@ -98,10 +79,7 @@ namespace Webzine.Repository
             }
         }
 
-        /// <summary>
-        /// Retourne le nombre de styles.
-        /// </summary>
-        /// <returns>Le nombre total de styles.</returns>
+        /// <inheritdoc />
         public int NombreStyles()
         {
             var nombreStyle = DataFactory.Styles
