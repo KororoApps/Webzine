@@ -27,3 +27,7 @@ a{
     height: 100px;
     width: 300px;
 }
+
+.footer-fixed{
+    min-height:calc(100vh-100px);
+}
