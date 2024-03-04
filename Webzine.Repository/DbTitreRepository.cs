@@ -17,10 +17,7 @@ namespace Webzine.Repository
     {
         private readonly WebzineDbContext _context = context;
 
-        /// <summary>
-        /// Ajoute un Titre.
-        /// </summary>
-        /// <param name="titre"></param>
+        /// <inheritdoc />
         public void Add(Titre titre)
         {
             if (titre == null)
@@ -36,10 +33,7 @@ namespace Webzine.Repository
                 .SaveChanges();
         }
 
-        /// <summary>
-        /// Compte le nombre de titre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public int Count()
         {
             var NombreTitres = _context.Titres
@@ -48,10 +42,7 @@ namespace Webzine.Repository
             return NombreTitres;
         }
 
-        /// <summary>
-        /// Supprimme un Titre.
-        /// </summary>
-        /// <param name="titre"></param>
+        /// <inheritdoc />
         public void Delete(Titre titre)
         {
             if (titre == null)
@@ -70,11 +61,7 @@ namespace Webzine.Repository
             } catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
 
-        /// <summary>
-        ///Renvoie le premier Titre ayant l'id mise en paramètre.
-        /// </summary>
-        /// <param name="idTitre"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public Titre Find(int idTitre)
         {
             //TODO : A CHANGER SINGLE AU LIEU DE SINGLEORDEFAULT pour attraper erreur plus tard
@@ -95,19 +82,13 @@ namespace Webzine.Repository
             return titre;
         }
 
-        /// <summary>
-        /// Retourne les titres demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Renvoie tous les Titres.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Titre> FindAll()
         {
             //TODO : Les titres sont reliés avec tout ici
@@ -125,10 +106,7 @@ namespace Webzine.Repository
             return allTitres;
         }
 
-        /// <summary>
-        /// Renvoie tous le titre le plus lu.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public Titre FindTitreLePlusLu()
         {
             var titre = _context.Titres
@@ -144,10 +122,7 @@ namespace Webzine.Repository
             return titre;
         }
 
-        /// <summary>
-        /// Renvoie les titres du plus liké au moins liké  et en retourne un certain nombre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public List<Titre> FindTitresLesPlusLike()
         {
             var titres = _context.Titres
@@ -158,10 +133,7 @@ namespace Webzine.Repository
             return titres;
         }
 
-        /// <summary>
-        /// Renvoie la liste des titres du plus récent au plus ancien chroniqué et en retourne un certain nombre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public List<Titre> ParutionChroniqueTitres()
         {
             var titres = _context.Titres
@@ -172,12 +144,7 @@ namespace Webzine.Repository
             return titres;
         }
 
-        /// <summary>
-        /// Renvoie le nombre de titres.
-        /// </summary>
-        /// <returns></returns>
-        /// 
-        /// <inheritdoc/> !!!!!!!!!!!!!!!!!!!!!!!
+        /// <inheritdoc />
         public int NombreTitres()
         {
             //TODO !! Retourner directement  sans passer par une variable
@@ -190,10 +157,7 @@ namespace Webzine.Repository
             return nombreTitres;
         }
 
-        /// <summary>
-        /// Renvoie le nombre de likes totals.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public int NombreLikes()
         {
             var nombreLikes = _context.Titres
@@ -202,10 +166,7 @@ namespace Webzine.Repository
             return nombreLikes;
         }
 
-        /// <summary>
-        /// Renvoie le nombre de lectures totales.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public int NombreLectures()
         {
             var nombreLectures = _context.Titres
@@ -214,37 +175,25 @@ namespace Webzine.Repository
             return nombreLectures;
         }
 
-        /// <summary>
-        /// Incrémente le nombre de lecture d'un titre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public void IncrementNbLectures(Titre titre)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Incrémente le nombre de like d'un titre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public void IncrementNbLikes(Titre titre)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Recherche de manière insensible à la casse les titres contenant le mot recherché.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Titre> Search(string mot)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Recherche de manière insensible à la casse les titres contenant le style de musique cherchée.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
 
@@ -263,10 +212,7 @@ namespace Webzine.Repository
             return titres;
         }
 
-        /// <summary>
-        /// Met à jour un titre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public void Update(Titre titre)
         {
             throw new NotImplementedException();
