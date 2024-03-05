@@ -144,11 +144,14 @@ namespace Webzine.Repository
 
         /// <summary>
         /// Renvoie les résultats de la recherche coté artistes.
-        public List<Artiste> Search(string mot)
+        public IEnumerable<Artiste> Search(string mot)
         {
-            List<Artiste> titres = DataFactory.Artistes;
+            IEnumerable<Artiste> artistes = DataFactory.Artistes;
 
-            var orderedArtistes = titres.Where(t => t.Nom.Contains(mot)).ToList().OrderBy(t => t.Nom).ToList();
+            var orderedArtistes = artistes
+                .Where(t => t.Nom.ToUpper().Contains(mot.ToUpper()))
+                .OrderBy(t => t.Nom)
+                .ToList();
 
             return orderedArtistes;
         }
