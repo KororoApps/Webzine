@@ -178,5 +178,16 @@ namespace Webzine.Repository
 
             return nombreArtiste;
         }
+
+        /// <summary>
+        /// Renvoie les résultats de la recherche coté artistes.
+        public List<Artiste> Search(string mot)
+        {
+            List<Artiste> titres = DataFactory.Artistes;
+
+            var orderedArtistes = titres.Where(t => t.Nom.Contains(mot)).ToList().OrderBy(t => t.Nom).ToList();
+
+            return orderedArtistes;
+        }
     }
 }

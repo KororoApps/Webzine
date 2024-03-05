@@ -7,13 +7,17 @@ namespace Webzine.WebApplication.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Entity.Fixtures;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
     /// Contrôleur principal gérant les actions liées à la page d'accueil.
     /// </summary>
-    public class RechercheController : Controller
+    public class RechercheController(ITitreRepository titreRepository, IArtisteRepository artisteRepository) : Controller
     {
+        private readonly ITitreRepository titreRepository = titreRepository;
+        private readonly IArtisteRepository artisteRepository = artisteRepository;
+
         /// <summary>
         /// Affiche la page d'accueil avec des données générées aléatoirement.
         /// </summary>
@@ -22,27 +26,12 @@ namespace Webzine.WebApplication.Controllers
         [HttpPost]
         public IActionResult Index(string recherche)
         {
-            // Génération d'une liste de titres.
-            List<Titre> titres = DataFactory.Titres;
-
-            // Génération d'une liste d'artistes.
-            List<Artiste> artistes = DataFactory.Artistes;
-
-            // Filtrage des titres en fonction de la recherche.
-            List<Titre> titresFiltres = titres
-                .Where(t => t.Libelle.ToLower().Contains(recherche.ToLower()))
-                .ToList();
-
-            // Filtrage des artistes en fonction de la recherche.
-            List<Artiste> artisteFiltres = artistes
-                .Where(a => a.Nom.ToLower().Contains(recherche.ToLower()))
-                .ToList();
 
             // Création du modèle de vue contenant la liste de titres filtrés.
             var titreModel = new GroupeTitreModel
             {
-                Artistes = artisteFiltres,
-                Titres = titresFiltres,
+                Artistes = this.artisteRepository.Search(recherche),
+                Titres = this.titreRepository.Search(recherche),
                 Recherche = recherche
             };
 

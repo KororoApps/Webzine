@@ -236,10 +236,13 @@ namespace Webzine.Repository
         /// Recherche de manière insensible à la casse les titres contenant le mot recherché.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Titre> Search(string mot)
+        public List<Titre> Search(string mot)
         {
-            throw new NotImplementedException();
+            List<Titre> titres = _context.Titres.Include(t=>t.Artiste).Where(t => t.Libelle.Contains(mot)).OrderBy(c => c.Libelle).ToList();
+
+            return titres;
         }
+
 
         /// <summary>
         /// Recherche de manière insensible à la casse les titres contenant le style de musique cherchée.

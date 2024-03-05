@@ -39,5 +39,7 @@ namespace Webzine.Repository.Contracts
 
         // Renvoie le premier artiste ayant le nom spécifié.
         Artiste FindByName(string nomArtiste);
+
+        List<Artiste> Search(string mot);
     }
 }

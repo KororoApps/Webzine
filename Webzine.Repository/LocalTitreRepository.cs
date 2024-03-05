@@ -189,10 +189,27 @@ namespace Webzine.Repository
         /// Recherche de manière insensible à la casse les titres contenant le mot recherché.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Titre> Search(string mot)
+        public List<Titre> Search(string mot)
         {
-            throw new NotImplementedException();
+            List<Titre> titres = DataFactory.Titres;
+
+            var results = titres
+                .Where(t => t.Libelle.Contains(mot))
+                .OrderBy(t => t.Libelle)
+                .Select(t => new
+                {
+                    Titre = t,
+                    Artiste = DataFactory.Artistes.FirstOrDefault(a => a.IdArtiste == t.Artiste.IdArtiste) // Supposons que ArtisteId soit la clé étrangère
+                })
+                .ToList();
+
+            // Maintenant, 'results' contient des objets anonymes avec les titres et les artistes associés
+            // Vous pouvez ensuite extraire les titres si nécessaire
+            var orderedTitres = results.Select(r => r.Titre).ToList();
+
+            return orderedTitres;
         }
+
 
         /// <summary>
         /// Recherche de manière insensible à la casse les titres contenant le style de musique cherchée.
