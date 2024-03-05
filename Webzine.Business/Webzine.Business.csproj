@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Include="..\Webzine.Documentation\styleCop\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Webzine.Business.Contracts\Webzine.Business.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
