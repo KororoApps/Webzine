@@ -5,26 +5,16 @@
 namespace Webzine.WebApplication.Controllers.Component
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.Entity;
-    using Webzine.Entity.Fixtures;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
     /// Initialise une nouvelle instance de la classe <see cref="LayoutSideBarViewComponent"/>.
     /// </summary>
-    public class LayoutSideBarViewComponent : ViewComponent
+    /// <param name="styleRepository">Le repository de styles.</param>
+    public class LayoutSideBarViewComponent(IStyleRepository styleRepository) : ViewComponent
     {
-        private readonly IStyleRepository styleRepository;
-
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="LayoutSideBarViewComponent"/>.
-        /// </summary>
-        /// <param name="styleRepository">Le repository de styles.</param>
-        public LayoutSideBarViewComponent(IStyleRepository styleRepository)
-        {
-            this.styleRepository = styleRepository ?? throw new ArgumentNullException(nameof(styleRepository));
-        }
+        private readonly IStyleRepository styleRepository = styleRepository ?? throw new ArgumentNullException(nameof(styleRepository));
 
         /// <summary>
         /// Méthode invoquée lors de l'exécution du composant de vue.
@@ -43,7 +33,7 @@ namespace Webzine.WebApplication.Controllers.Component
             // Passage du modèle à la vue
             var vm = styleModel;
 
-            return View(vm);
+            return this.View(vm);
         }
     }
 }
