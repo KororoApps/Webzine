@@ -58,7 +58,7 @@
                 <label asp-for="@Model.Titre.DateSortie" class="form-label required-label"></label>
             </div>
             <div class="col-md-4">
-                <input asp-for="@Model.Titre.DateSortie" value="@DateTime.Now.ToString("yyyy-MM-dd")" class=" form-control">
+                <input asp-for="@Model.Titre.DateSortie" type="date"  class=" form-control">
                 <span asp-validation-for="@Model.Titre.DateSortie" class="text-danger"></span>
             </div>
             <div class="col-md-2">
