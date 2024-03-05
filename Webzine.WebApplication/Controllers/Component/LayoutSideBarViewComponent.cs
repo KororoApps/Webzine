@@ -7,6 +7,7 @@ namespace Webzine.WebApplication.Controllers.Component
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Entity.Fixtures;
+    using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
@@ -14,14 +15,24 @@ namespace Webzine.WebApplication.Controllers.Component
     /// </summary>
     public class LayoutSideBarViewComponent : ViewComponent
     {
+        private readonly IStyleRepository styleRepository;
+
+        /// <summary>
+        /// Initialise une nouvelle instance de la classe <see cref="LayoutSideBarViewComponent"/>.
+        /// </summary>
+        /// <param name="styleRepository">Le repository de styles.</param>
+        public LayoutSideBarViewComponent(IStyleRepository styleRepository)
+        {
+            this.styleRepository = styleRepository ?? throw new ArgumentNullException(nameof(styleRepository));
+        }
+
         /// <summary>
         /// Méthode invoquée lors de l'exécution du composant de vue.
         /// </summary>
         /// <returns>Une tâche asynchrone représentant l'opération.</returns>
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            // Récupération des styles depuis la factory.
-            List<Style> styles = DataFactory.Styles;
+            var styles = this.styleRepository.FindAll();
 
             // Création du modèle de vue contenant la liste de Titres.
             var styleModel = new GroupeStyleModel
