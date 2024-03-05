@@ -13,10 +13,7 @@ namespace Webzine.Repository
     public class LocalTitreRepository : ITitreRepository
     {
 
-        /// <summary>
-        /// Ajoute un Titre.
-        /// </summary>
-        /// <param name="titre"></param>
+        /// <inheritdoc />
         public void Add(Titre titre)
         {
             // Génère un nouvel identifiant
@@ -27,18 +24,13 @@ namespace Webzine.Repository
             DataFactory.Titres.Add(titre);
         }
 
-        /// <summary>
-        /// Compte le nombre de titre.
-        /// </summary>
+        /// <inheritdoc />
         public int Count()
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Supprimme un Titre.
-        /// </summary>
-        /// <param name="Titre"></param>
+        /// <inheritdoc />
         public void Delete(Titre titre)
         {
             // Recherche le titre dans la liste
@@ -53,11 +45,7 @@ namespace Webzine.Repository
             }
         }
 
-        /// <summary>
-        ///Renvoie le premier Titre ayant l'id mise en paramètre.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public Titre Find(int id)
         {
             var titre =  DataFactory.Titres
@@ -66,10 +54,7 @@ namespace Webzine.Repository
             return titre;
         }
 
-        /// <summary>
-        /// Renvoie tous les Titres.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Titre> FindAll()
         {
             List<Titre> titres = DataFactory.Titres;
@@ -81,10 +66,7 @@ namespace Webzine.Repository
             return orderedTitres;
         }
 
-        /// <summary>
-        /// Renvoie tous le titre le plus lu.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public Titre FindTitreLePlusLu()
         {
             var titre = DataFactory.Titres
@@ -94,10 +76,7 @@ namespace Webzine.Repository
             return titre;
         }
 
-        /// <summary>
-        /// Renvoie les titres du plus liké au moins liké  et en retourne un certain nombre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public List<Titre> FindTitresLesPlusLike()
         {
             var titres = DataFactory.Titres
@@ -108,10 +87,7 @@ namespace Webzine.Repository
             return titres;
         }
 
-        /// <summary>
-        /// Renvoie la liste des titres du plus récent au plus ancien chroniqué et en retourne un certain nombre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public List<Titre> ParutionChroniqueTitres()
         {
             var titres = DataFactory.Titres
@@ -122,10 +98,7 @@ namespace Webzine.Repository
             return titres;
         }
 
-        /// <summary>
-        /// Renvoie le nombre de titres.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public int NombreTitres()
         {
             var nombreTitres = DataFactory.Titres
@@ -134,10 +107,7 @@ namespace Webzine.Repository
             return nombreTitres;
         }
 
-        /// <summary>
-        /// Renvoie le nombre de likes totals.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public int NombreLikes()
         {
             var nombreLikes = DataFactory.Titres
@@ -146,10 +116,7 @@ namespace Webzine.Repository
             return nombreLikes;
         }
 
-        /// <summary>
-        /// Renvoie le nombre de lectures totales.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public int NombreLectures()
         {
             var nombreLectures = DataFactory.Titres
@@ -158,37 +125,25 @@ namespace Webzine.Repository
             return nombreLectures;
         }
 
-        /// <summary>
-        /// Retourne les titres demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Incrémente le nombre de lecture d'un titre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public void IncrementNbLectures(Titre titre)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Incrémente le nombre de like d'un titre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public void IncrementNbLikes(Titre titre)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Recherche de manière insensible à la casse les titres contenant le mot recherché.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public List<Titre> Search(string mot)
         {
             List<Titre> titres = DataFactory.Titres;
@@ -211,10 +166,7 @@ namespace Webzine.Repository
         }
 
 
-        /// <summary>
-        /// Recherche de manière insensible à la casse les titres contenant le style de musique cherchée.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
             List<Titre> titres = DataFactory.Titres;
@@ -227,10 +179,7 @@ namespace Webzine.Repository
             return orderedTitres;
         }
 
-        /// <summary>
-        /// Met à jour un titre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public void Update(Titre titre)
         {
             throw new NotImplementedException();
