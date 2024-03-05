@@ -3,7 +3,7 @@
 <div class="mt-5">
     <h3>Donne ton avis sur le titre</h3>
 
-    <form method="post" asp-area="Admin" asp-controller="Commentaire" asp-action="CreateConfirmed" class="d-flex">
+    <form method="post" asp-controller="Titre" asp-action="Commenter" class="d-flex">
         <div class="container">
             <input type="hidden" asp-for="@Model.Titre.IdTitre" name="IdTitre" />
             <div class="form-group row mb-5">

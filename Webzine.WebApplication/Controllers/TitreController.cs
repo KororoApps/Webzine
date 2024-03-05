@@ -5,6 +5,7 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Webzine.Entity;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
@@ -45,6 +46,20 @@ namespace Webzine.WebApplication.Controllers
             return this.View(titreModel);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult IncrementLike(int idTitre)
+        {
+            // Récupérez le titre à partir de la base de données
+            var titre = this.titreRepository.Find(idTitre);
+
+            // Incrémentez le nombre de likes
+            this.titreRepository.IncrementNbLikes(titre);
+
+            // Redirigez ou retournez à la vue selon vos besoins
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
         /// <summary>
         /// Action permettant d'afficher les titres liés à un style.
         /// </summary>
@@ -61,6 +76,49 @@ namespace Webzine.WebApplication.Controllers
 
             // Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.
             return this.View(titreModel);
+        }
+
+        /// <summary>
+        /// Action HTTP POST pour confirmer la création d'un commentaire.
+        /// </summary>
+        /// <param name="commentaire">L'entité Commentaire à créer.</param>
+        /// <param name="IdTitre">Id du titre lié au commentaire.</param>
+        /// <returns>Redirection vers l'action Index après la création.</returns>
+        /// 
+        //TODO : Metre la création d'un commentaire dans TItreController. Voir les routes.
+        //TODO : Appeler la méthode "Commenter"
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Commenter(Commentaire commentaire, int IdTitre)
+        {
+            // En cas de modèle non valide, récupérez les informations nécessaires pour la vue
+
+            // Génération d'une liste de styles.
+            var commentaires = this.commentaireRepository.FindCommentairesByIdTitre(IdTitre);
+
+            // Création du modèle de vue contenant un titre.
+            var titreModel = new TitreModel
+            {
+                Titre = this.titreRepository.Find(IdTitre),
+                Commentaires = commentaires,
+            };
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View("~/Views/Titre/Index.cshtml", titreModel);
+            }
+
+            Titre titre = this.titreRepository.Find(IdTitre);
+
+            Console.WriteLine(commentaire.Auteur);
+            commentaire.DateCreation = DateTime.Now;
+            commentaire.Titre = titre;
+
+            this.commentaireRepository.Add(commentaire);
+
+            this.ModelState.Clear();
+
+            return this.View("~/Views/Titre/Index.cshtml", titreModel);
         }
     }
 }
