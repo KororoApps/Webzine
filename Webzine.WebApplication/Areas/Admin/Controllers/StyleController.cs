@@ -87,13 +87,14 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action HTTP POST pour confirmer la suppression d'un style.
         /// </summary>
-        /// <param name="id">L'identifiant du style à supprimer.</param>
+        /// <param name="style">Le style à supprimer.</param>
         /// <returns>Redirection vers l'action Index après la suppression.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult Delete(Style style)
         {
-            this.styleRepository.Delete(this.styleRepository.Find(id));
+
+            this.styleRepository.Delete(style);
 
             return this.RedirectToAction(nameof(this.Index));
         }
@@ -118,25 +119,25 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action HTTP POST pour confirmer l'édition d'un style.
         /// </summary>
-        /// <param name="Style">Le style à éditer.</param>
+        /// <param name="style">Le style à éditer.</param>
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Style Style)
+        public IActionResult Edit(Style style)
         {
             if (!this.ModelState.IsValid)
             {
                 // Création du modèle de vue contenant le style à éditer.
                 var styleModel = new StyleModel
                 {
-                    Style = this.styleRepository.Find(Style.IdStyle),
+                    Style = this.styleRepository.Find(style.IdStyle),
                 };
 
                 // Traitement en cas de modèle non valide
                 return this.View(styleModel);
             }
 
-            this.styleRepository.Update(Style);
+            this.styleRepository.Update(style);
             return this.RedirectToAction(nameof(this.Index));
         }
     }
