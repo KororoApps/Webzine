@@ -107,12 +107,14 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Titre titre, List<int> styleIds)
         {
+            // Styles sélectionnés pour le titre
+            IEnumerable<Style> stylesById = this.styleRepository.FindByIds(styleIds);
 
             if (!this.ModelState.IsValid)
             {
 
                 // Génération d'une liste de styles.
-                var styles = this.styleRepository.FindAll();
+                var styles = this.styleRepository.FindAll();                
 
                 // Génération d'une liste d'artistes.
                 var artistes = this.artisteRepository.FindAll();
@@ -123,13 +125,12 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
                     Styles = styles,
                     Artistes = artistes,
                     Titre = titre,
+                    StylesIds = stylesById,
                 };
 
                 // Traitement en cas de modèle non valide
                 return this.View(titreModel);
             }
-
-            IEnumerable<Style> stylesById = this.styleRepository.FindByIds(styleIds);
 
             Artiste artiste = this.artisteRepository.FindByName(titre.Artiste.Nom);
 

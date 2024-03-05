@@ -100,7 +100,14 @@
                     {
                         <div class="col-md-4">
                             <div class="form-check align-top">
-                                <input class="form-check-input" type="checkbox" value="@style.IdStyle" name="styleIds">
+                                
+                                @if (Model.StylesIds != null)
+                                {
+                                    <input class="form-check-input" type="checkbox" value="@style.IdStyle" name="styleIds" 
+                                    @(Model.StylesIds.Any(s => s.IdStyle == style.IdStyle) ? "checked" : "") />
+                                } else {
+                                    <input class="form-check-input" type="checkbox" value="@style.IdStyle" name="styleIds"/>
+                                }
                                 <span asp-validation-for="@style.Libelle" class="text-danger"></span>
                                 <label class="form-check-label" asp-for="@style.Libelle">@style.Libelle</label>
                             </div>
