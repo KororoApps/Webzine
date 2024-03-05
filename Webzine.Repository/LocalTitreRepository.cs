@@ -194,20 +194,20 @@ namespace Webzine.Repository
             List<Titre> titres = DataFactory.Titres;
 
             var results = titres
-                .Where(t => t.Libelle.Contains(mot))
+                .Where(t => t.Libelle.ToUpper().Contains(mot.ToUpper()))
                 .OrderBy(t => t.Libelle)
                 .Select(t => new
                 {
                     Titre = t,
-                    Artiste = DataFactory.Artistes.FirstOrDefault(a => a.IdArtiste == t.Artiste.IdArtiste) // Supposons que ArtisteId soit la clé étrangère
+                    Artiste = DataFactory.Artistes.FirstOrDefault(a => a.IdArtiste == t.Artiste.IdArtiste)
                 })
                 .ToList();
 
             // Maintenant, 'results' contient des objets anonymes avec les titres et les artistes associés
             // Vous pouvez ensuite extraire les titres si nécessaire
             var orderedTitres = results.Select(r => r.Titre).ToList();
-
             return orderedTitres;
+
         }
 
 
