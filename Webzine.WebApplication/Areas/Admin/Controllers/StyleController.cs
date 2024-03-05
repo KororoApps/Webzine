@@ -60,7 +60,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
            if (!this.ModelState.IsValid)
             {
                 // Traitement en cas de modèle non valide
-                return this.View("Create");
+                return this.View();
             }
 
            this.styleRepository.Add(style);
