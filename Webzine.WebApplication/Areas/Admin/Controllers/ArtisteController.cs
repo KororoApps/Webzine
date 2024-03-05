@@ -65,13 +65,14 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action HTTP POST pour confirmer la suppression d'un artiste.
         /// </summary>
-        /// <param name="id">L'identifiant de l'artiste à supprimer.</param>
+        /// <param name="artiste">L'artiste à supprimer.</param>
         /// <returns>Redirection vers l'action Index après la suppression.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult Delete(Artiste artiste)
         {
-            this.artisteRepository.Delete(this.artisteRepository.Find(id));
+            this.artisteRepository.Delete(artiste);
+
             return this.RedirectToAction(nameof(this.Index));
         }
 
