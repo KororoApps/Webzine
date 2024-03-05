@@ -77,6 +77,11 @@ namespace Webzine.Repository.Contracts
         /// <returns>L'artiste correspondant au nom spécifié.</returns>
         Artiste FindByName(string nomArtiste);
 
+        /// <summary>
+        /// Recherche des artistes dont le nom contient le mot spécifié.
+        /// </summary>
+        /// <param name="mot">Le mot clé à rechercher.</param>
+        /// <returns>Une collection d'artistes contenant le mot spécifié.</returns>
         List<Artiste> Search(string mot);
     }
 }

@@ -142,8 +142,7 @@ namespace Webzine.Repository
             return nombreArtiste;
         }
 
-        /// <summary>
-        /// Renvoie les résultats de la recherche coté artistes.
+        /// <inheritdoc />
         public List<Artiste> Search(string mot)
         {
             List<Artiste> titres = DataFactory.Artistes;

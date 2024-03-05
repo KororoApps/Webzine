@@ -159,8 +159,7 @@ namespace Webzine.Repository
             return nombreArtiste;
         }
 
-        /// <summary>
-        /// Renvoie les résultats de la recherche coté artistes.
+        /// <inheritdoc />
         public List<Artiste> Search(string mot)
         {
             List<Artiste> artistes = _context.Artistes.Where(t => t.Nom.Contains(mot)).OrderBy(c => c.Nom).ToList();
