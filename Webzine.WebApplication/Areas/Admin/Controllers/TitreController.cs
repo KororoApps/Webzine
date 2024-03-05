@@ -190,7 +190,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
                 {
                     Styles = styles,
                     Artistes = artistes,
-                    Titre = this.titreRepository.Find(titre.IdTitre),
+                    Titre = titre,
                 };
 
                 // Traitement en cas de modèle non valide
