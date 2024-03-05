@@ -55,7 +55,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateConfirmed(Style style)
+        public IActionResult Create(Style style)
         {
            if (!this.ModelState.IsValid)
             {
