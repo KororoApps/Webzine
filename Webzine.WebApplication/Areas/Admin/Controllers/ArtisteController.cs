@@ -91,12 +91,12 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateConfirmed(Artiste artiste)
+        public IActionResult Create(Artiste artiste)
         {
             if (!this.ModelState.IsValid)
             {
                 // Traitement en cas de modèle non valide
-                return this.View("Create");
+                return this.View();
             }
 
             this.artisteRepository.Add(artiste);
