@@ -91,26 +91,24 @@ namespace Webzine.WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Commenter(Commentaire commentaire, int IdTitre)
         {
-            // En cas de modèle non valide, récupérez les informations nécessaires pour la vue
-
             // Génération d'une liste de styles.
             var commentaires = this.commentaireRepository.FindCommentairesByIdTitre(IdTitre);
+
+            var titre = this.titreRepository.Find(IdTitre);
 
             // Création du modèle de vue contenant un titre.
             var titreModel = new TitreModel
             {
-                Titre = this.titreRepository.Find(IdTitre),
+                Titre = titre,
                 Commentaires = commentaires,
             };
 
             if (!this.ModelState.IsValid)
             {
+                //return this.RedirectToAction(nameof(this.Index), titreModel);
                 return this.View("~/Views/Titre/Index.cshtml", titreModel);
             }
 
-            Titre titre = this.titreRepository.Find(IdTitre);
-
-            Console.WriteLine(commentaire.Auteur);
             commentaire.DateCreation = DateTime.Now;
             commentaire.Titre = titre;
 
@@ -118,6 +116,7 @@ namespace Webzine.WebApplication.Controllers
 
             this.ModelState.Clear();
 
+            //return this.RedirectToAction(nameof(this.Index), titreModel);
             return this.View("~/Views/Titre/Index.cshtml", titreModel);
         }
     }

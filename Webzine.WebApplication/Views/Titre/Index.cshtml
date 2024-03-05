@@ -27,7 +27,7 @@
                         <p class="me-4 ">Le @Model.Titre.DateCreation.ToString("dd/MM/yyyy HH:mm")</p>
                     </div>
                     <div class="d-inline-flex">
-                        <form>
+                        <form method="post" asp-controller="Titre" asp-action="Index" asp-route-id="@Model.Titre.IdTitre">
                             <button type="submit" class="btn m-0 p-0"><i class="fa-solid fa-heart p-1"></i></button>
                         </form>
                         <p class="me-4 ">@Model.Titre.NbLikes</p>
@@ -79,13 +79,13 @@
     </div>
 
     @*Formulaire pour émettre un commentaire.*@
-     <partial name="~/Areas/Admin/Views/Commentaire/_CreateVuePartielle.cshtml"/>
+    <partial name="~/Areas/Admin/Views/Commentaire/_CreateVuePartielle.cshtml" />
 
     @*Détails des commentaires.*@
     <div class="mt-5">
         <h3>Commentaires</h3>
         <div class="col-md-8">
-            @foreach (var commentaire in Model.Titre.Commentaires)
+            @foreach (var commentaire in Model.Commentaires)
             {
                 <div class="row p-3">
                     <div class="col-md-2">
