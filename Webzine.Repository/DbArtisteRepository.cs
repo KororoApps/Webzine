@@ -95,10 +95,9 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Update(Artiste artiste)
         {
-            if (artiste == null)
-            {
-                throw new ArgumentNullException(nameof(artiste));
-            }
+            _context.Update<Artiste>(artiste);
+
+            _context.SaveChanges();
         }
 
         /// <inheritdoc />

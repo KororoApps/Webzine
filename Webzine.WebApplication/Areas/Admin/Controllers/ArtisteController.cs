@@ -128,9 +128,22 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditConfirmed(Artiste artiste)
+        public IActionResult Edit(Artiste artiste)
         {
+            if (!this.ModelState.IsValid)
+            {
+                // Création du modèle de vue contenant le style à éditer.
+                var artisteModel = new ArtisteModel
+                {
+                    Artiste = this.artisteRepository.Find(artiste.IdArtiste),
+                };
+
+                // Traitement en cas de modèle non valide
+                return this.View(artisteModel);
+            }
+
             this.artisteRepository.Update(artiste);
+
             return this.RedirectToAction(nameof(this.Index));
         }
     }
