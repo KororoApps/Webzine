@@ -161,9 +161,9 @@ namespace Webzine.Repository
 
         /// <summary>
         /// Renvoie les résultats de la recherche coté artistes.
-        public List<Artiste> Search(string mot)
+        public IEnumerable<Artiste> Search(string mot)
         {
-            List<Artiste> artistes = _context.Artistes
+            IEnumerable<Artiste> artistes = _context.Artistes
                 .Where(t => t.Nom.ToUpper().Contains(mot.ToUpper()))
                 .OrderBy(c => c.Nom)
                 .ToList();

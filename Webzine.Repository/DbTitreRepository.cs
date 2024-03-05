@@ -236,9 +236,9 @@ namespace Webzine.Repository
         /// Recherche de manière insensible à la casse les titres contenant le mot recherché.
         /// </summary>
         /// <returns></returns>
-        public List<Titre> Search(string mot)
+        public IEnumerable<Titre> Search(string mot)
         {
-            List<Titre> titres = _context.Titres
+            IEnumerable<Titre> titres = _context.Titres
                 .Include(t => t.Artiste)
                 .Where(t => t.Libelle.ToUpper().Contains(mot.ToUpper()))
                 .OrderBy(c => c.Libelle)

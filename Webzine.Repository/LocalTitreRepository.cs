@@ -189,7 +189,7 @@ namespace Webzine.Repository
         /// Recherche de manière insensible à la casse les titres contenant le mot recherché.
         /// </summary>
         /// <returns></returns>
-        public List<Titre> Search(string mot)
+        public IEnumerable<Titre> Search(string mot)
         {
             List<Titre> titres = DataFactory.Titres;
 
@@ -203,11 +203,9 @@ namespace Webzine.Repository
                 })
                 .ToList();
 
-            // Maintenant, 'results' contient des objets anonymes avec les titres et les artistes associés
-            // Vous pouvez ensuite extraire les titres si nécessaire
-            var orderedTitres = results.Select(r => r.Titre).ToList();
-            return orderedTitres;
+            var orderedTitres = results.Select(r => r.Titre);
 
+            return orderedTitres;
         }
 
 

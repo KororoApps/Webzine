@@ -52,7 +52,7 @@ namespace Webzine.Repository.Contracts
         void IncrementNbLikes(Titre titre);
         
         //Recherche de manière insensible à la casse les titres contenant le mot recherché
-        List<Titre> Search(string mot);
+        IEnumerable<Titre> Search(string mot);
 
         //Recherche de manière insensible à la casse les titres contenant le style de musique cherchée
         IEnumerable<Titre> SearchByStyle(string libelle);
