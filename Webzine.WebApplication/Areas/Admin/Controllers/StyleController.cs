@@ -105,7 +105,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Vue d'édition d'un style.</returns>
         public IActionResult Edit(int id)
         {
-            // Création du modèle de vue contenant le style à supprimer.
+            // Création du modèle de vue contenant le style à éditer.
             var styleModel = new StyleModel
             {
                 Style = this.styleRepository.Find(id),
@@ -122,12 +122,18 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditConfirmed(Style Style)
+        public IActionResult Edit(Style Style)
         {
             if (!this.ModelState.IsValid)
             {
+                // Création du modèle de vue contenant le style à éditer.
+                var styleModel = new StyleModel
+                {
+                    Style = this.styleRepository.Find(Style.IdStyle),
+                };
+
                 // Traitement en cas de modèle non valide
-                return this.View("Create");
+                return this.View(styleModel);
             }
 
             this.styleRepository.Update(Style);

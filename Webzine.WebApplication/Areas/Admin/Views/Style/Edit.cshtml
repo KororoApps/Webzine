@@ -11,8 +11,8 @@
 }
 <hr />
 
-@*Formulaire d'ajout d'un style.*@
-<form method="post" asp-action="EditConfirmed" asp-controller="Style" asp-route-id="@Model.Style.IdStyle" class="col-6 d-flex">
+@*Formulaire d'édition d'un style.*@
+<form method="post" asp-action="Edit" asp-controller="Style" asp-route-id="@Model.Style.IdStyle" class="col-6 d-flex">
     <div class="container">
         <input type="hidden" asp-for="@Model.Style.IdStyle" />
         <div class="row align-items-center mb-5">
