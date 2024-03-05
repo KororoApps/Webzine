@@ -20,7 +20,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             var versionInfo = new
             {
                 nom = "webzine",
-                version = "2.0",
+                version = "3.0",
             };
 
             return this.Ok(versionInfo);
