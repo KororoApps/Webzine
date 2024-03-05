@@ -80,9 +80,13 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Update(Artiste artiste)
         {
-            if (artiste == null)
+            var artisteAEditer = DataFactory.Artistes
+                .FirstOrDefault(s => s.IdArtiste == artiste.IdArtiste);
+
+            if (artisteAEditer != null)
             {
-                throw new ArgumentNullException(nameof(artiste));
+                artisteAEditer.Nom = artiste.Nom;
+                artisteAEditer.Biographie = artiste.Biographie;
             }
         }
 
@@ -110,8 +114,8 @@ namespace Webzine.Repository
             var artiste = DataFactory.Artistes
                 .Where(a => a.Titres != null && a.Titres.Count != 0)
                 .OrderByDescending(a => a.Titres
-                .GroupBy(t => new { t.Album, t.Artiste }) 
-                .Count()) 
+                .GroupBy(t => new { t.Album, t.Artiste })
+                .Count())
                 .FirstOrDefault();
 
             if (artiste != null)
