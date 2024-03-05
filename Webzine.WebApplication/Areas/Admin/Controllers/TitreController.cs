@@ -4,7 +4,6 @@
 
 namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
@@ -106,7 +105,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateConfirmed(Titre titre, List<int> styleIds)
+        public IActionResult Create(Titre titre, List<int> styleIds)
         {
 
             if (!this.ModelState.IsValid)
@@ -127,7 +126,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
                 };
 
                 // Traitement en cas de modèle non valide
-                return this.View("Create", titreModel);
+                return this.View(titreModel);
             }
 
             IEnumerable<Style> stylesById = this.styleRepository.FindByIds(styleIds);
