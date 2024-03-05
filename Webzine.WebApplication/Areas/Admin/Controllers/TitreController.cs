@@ -4,6 +4,7 @@
 
 namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
@@ -110,6 +111,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
 
             if (!this.ModelState.IsValid)
             {
+
                 // Génération d'une liste de styles.
                 var styles = this.styleRepository.FindAll();
 
@@ -121,6 +123,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
                 {
                     Styles = styles,
                     Artistes = artistes,
+                    Titre = titre,
                 };
 
                 // Traitement en cas de modèle non valide
