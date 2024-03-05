@@ -182,7 +182,21 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Update(Titre titre)
         {
-            throw new NotImplementedException();
+            var titreAEditer = DataFactory.Titres
+                .FirstOrDefault(s => s.IdTitre == titre.IdTitre);
+
+            if (titreAEditer != null)
+            {
+                titreAEditer.Artiste = titre.Artiste;
+                titreAEditer.Libelle = titre.Libelle;
+                titreAEditer.Album = titre.Album;
+                titreAEditer.Chronique = titre.Chronique;
+                titreAEditer.DateSortie = titre.DateSortie;
+                titreAEditer.Duree = titre.Duree;
+                titreAEditer.UrlJaquette = titre.UrlJaquette;
+                titreAEditer.UrlEcoute = titre.UrlEcoute;
+                titre.Styles = titre.Styles;
+            }
         }
     }
 }

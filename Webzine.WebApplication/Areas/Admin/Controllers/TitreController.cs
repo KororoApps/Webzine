@@ -150,7 +150,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         {
             var titre = this.titreRepository.Find(id);
 
-            // Génération d'une liste d'artistes.
+            // Génération d'une liste de styles.
             var styles = this.styleRepository.FindAll();
 
             // Génération d'une liste d'artistes.
@@ -171,12 +171,34 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action HTTP POST pour confirmer l'édition d'un titre.
         /// </summary>
-        /// <param name="id">L'identifiant du titre à éditer.</param>
+        /// <param name="titre">Le titre à éditer.</param>
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditConfirmed(int id)
+        public IActionResult Edit(Titre titre)
         {
+            if (!this.ModelState.IsValid)
+            {
+                // Génération d'une liste de styles.
+                var styles = this.styleRepository.FindAll();
+
+                // Génération d'une liste d'artistes.
+                var artistes = this.artisteRepository.FindAll();
+
+                // Création du modèle de vue contenant le style à éditer.
+                var titreModel = new TitreModel
+                {
+                    Styles = styles,
+                    Artistes = artistes,
+                    Titre = this.titreRepository.Find(titre.IdTitre),
+                };
+
+                // Traitement en cas de modèle non valide
+                return this.View(titreModel);
+            }
+
+            this.titreRepository.Update(titre);
+
             return this.RedirectToAction(nameof(this.Index));
         }
     }

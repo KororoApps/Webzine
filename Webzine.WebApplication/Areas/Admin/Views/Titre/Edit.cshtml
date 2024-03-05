@@ -13,7 +13,8 @@
 
 @*Formulaire d'édition' de la page.*@
 <div>
-    <form method="post" asp-area="Admin" asp-action="EditConfirmed" asp-controller="Titre" asp-route-id="@Model.Titre.IdTitre" class="d-flex">
+    <form method="post" asp-area="Admin" asp-action="Edit" asp-controller="Titre" class="d-flex">
+        <input type="hidden" asp-for="@Model.Titre.IdTitre" />
         <div class="container">
             <div class="form-group row mb-5">
                 <div class="col-md-2">
@@ -101,7 +102,8 @@
                             {
                                 <div class="col-md-4">
                                     <div class="form-check align-top">
-                                        <input class="form-check-input" type="checkbox" value="@style.IdStyle" name="styleIds">
+                                        <input class="form-check-input" type="checkbox" value="@style.IdStyle" name="styleIds"
+                                        @(Model.Titre.Styles.Any(s => s.IdStyle == style.IdStyle) ? "checked" : "") />
                                         <span asp-validation-for="@style.Libelle" class="text-danger"></span>
                                         <label class="form-check-label" asp-for="@style.Libelle">@style.Libelle</label>
                                     </div>

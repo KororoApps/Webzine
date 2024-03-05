@@ -217,7 +217,10 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Update(Titre titre)
         {
-            throw new NotImplementedException();
+
+            _context.Update<Titre>(titre);
+
+            _context.SaveChanges();
         }
     }
 }
