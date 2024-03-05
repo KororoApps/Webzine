@@ -64,13 +64,13 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action HTTP POST pour confirmer la suppression d'un titre.
         /// </summary>
-        /// <param name="id">L'identifiant du titre à supprimer.</param>
+        /// <param name="titre">Le titre à supprimer.</param>
         /// <returns>Redirection vers l'action Index après la suppression.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult Delete(Titre titre)
         {
-            this.titreRepository.Delete(this.titreRepository.Find(id));
+            this.titreRepository.Delete(this.titreRepository.Find(titre.IdTitre));
             return this.RedirectToAction(nameof(this.Index));
         }
 
