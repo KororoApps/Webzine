@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 using Webzine.EntitiesContext;
+using Webzine.EntitiesContext.Seeders;
 using Webzine.Repository;
 using Webzine.Repository.Contracts;
 
@@ -78,7 +79,7 @@ using (var scope = app.Services.CreateScope())
     context.Database.EnsureCreated();
 
     // Opération de seeding
-    SeedData.Initialize(services, context);
+    SeedDataLocal.Initialize(services, context);
 }
 
 // Active la possibilité de servir des fichiers statiques présents dans le dossier wwwroot.

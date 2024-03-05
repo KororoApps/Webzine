@@ -6,11 +6,7 @@ namespace Webzine.Repository
 {
     public class LocalCommentaireRepository : ICommentaireRepository
     {
-
-        /// <summary>
-        /// Ajoute un Commentaire.
-        /// </summary>
-        /// <param name="commentaire"></param>
+        /// <inheritdoc />
         public void Add(Commentaire commentaire)
         {
             // Génère un nouvel identifiant
@@ -20,10 +16,7 @@ namespace Webzine.Repository
             DataFactory.Commentaires.Add(commentaire);
         }
 
-        /// <summary>
-        /// Supprimme un commentaire.
-        /// </summary>
-        /// <param name="commentaire"></param>
+        /// <inheritdoc />
         public void Delete(Commentaire commentaire)
         {
             // Recherche le commentaire dans la liste
@@ -38,11 +31,7 @@ namespace Webzine.Repository
             }
         }
 
-        /// <summary>
-        /// Renvoie le premier commentaire ayant l'id mise en paramètre.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public Commentaire Find(int id)
         {
             var commentaire = DataFactory.Commentaires
@@ -51,10 +40,7 @@ namespace Webzine.Repository
             return commentaire;
         }
 
-        /// <summary>
-        /// Renvoie une liste de commentaire par ordre de creation.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Commentaire> FindAll()
         {
             List<Commentaire> commentaires = DataFactory.Commentaires;
@@ -66,10 +52,7 @@ namespace Webzine.Repository
             return orderedCommentaires;
         }
 
-        /// <summary>
-        /// Renvoie une liste de commentaire par ordre de creation.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
         {
             List<Commentaire> commentaires = DataFactory.Commentaires;
@@ -82,10 +65,7 @@ namespace Webzine.Repository
             return orderedCommentaires;
         }
 
-        /// <summary>
-        /// Retourne les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Commentaire> FindCommentaires(int offset, int limit)
         {
             throw new NotImplementedException();

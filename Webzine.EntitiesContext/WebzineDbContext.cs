@@ -32,7 +32,7 @@ namespace Webzine.EntitiesContext
                 entity.Property(a => a.Nom);
                 entity.Property(a => a.Biographie);
 
-                entity.HasMany(a => a.Titres);
+                entity.HasMany(a => a.Titres).WithOne(c => c.Artiste).HasForeignKey(t => t.IdArtiste).IsRequired();
             }
             );
 
@@ -47,7 +47,7 @@ namespace Webzine.EntitiesContext
                 entity.Property(c => c.Contenu);
                 entity.Property(c => c.DateCreation);
 
-                entity.HasOne(c => c.Titre);
+                entity.HasOne(c => c.Titre).WithMany(c => c.Commentaires).HasForeignKey(c => c.IdTitre).IsRequired();
             }
             );
 
@@ -82,8 +82,8 @@ namespace Webzine.EntitiesContext
                 entity.Property(t => t.UrlJaquette);
                 entity.Property(t => t.UrlEcoute);
 
-                entity.HasOne(t => t.Artiste);
-                entity.HasMany(t => t.Commentaires);
+                entity.HasOne(t => t.Artiste).WithMany(a => a.Titres).HasForeignKey(t => t.IdArtiste).IsRequired();
+                entity.HasMany(t => t.Commentaires).WithOne(c => c.Titre).HasForeignKey(c => c.IdTitre).IsRequired();
                 entity.HasMany(t => t.Styles);
             }
             );

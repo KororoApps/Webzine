@@ -13,10 +13,7 @@ namespace Webzine.Repository
     {
         private readonly WebzineDbContext _context = context;
 
-        /// <summary>
-        /// Ajoute un Commentaire.
-        /// </summary>
-        /// <param name="commentaire"></param>
+        /// <inheritdoc />
         public void Add(Commentaire commentaire)
         {
             if (commentaire == null)
@@ -32,10 +29,7 @@ namespace Webzine.Repository
                 .SaveChanges();
         }
 
-        /// <summary>
-        /// Supprimme un commentaire.
-        /// </summary>
-        /// <param name="commentaire"></param>
+        /// <inheritdoc />
         public void Delete(Commentaire commentaire)
         {
             if (commentaire == null)
@@ -50,11 +44,7 @@ namespace Webzine.Repository
                 .SaveChanges();
         }
 
-        /// <summary>
-        ///Renvoie le premier commentaire ayant l'id mise en paramètre.
-        /// </summary>
-        /// <param name="idCommentaire"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public Commentaire Find(int idCommentaire)
         {
             var commentaie = _context.Commentaires
@@ -71,10 +61,7 @@ namespace Webzine.Repository
             return commentaie;
         }
 
-        /// <summary>
-        /// Renvoie tout les commentaires.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Commentaire> FindAll()
         {
             var allCommentaires = _context.Commentaires
@@ -86,10 +73,7 @@ namespace Webzine.Repository
             return allCommentaires;
         }
 
-        /// <summary>
-        /// Renvoie une liste de commentaire par ordre de creation.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
         {
             var orderedCommentaires = _context.Commentaires
@@ -100,10 +84,7 @@ namespace Webzine.Repository
             return orderedCommentaires;
         }
 
-        /// <summary>
-        /// Retourne les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Commentaire> FindCommentaires(int offset, int limit)
         {
             throw new NotImplementedException();
