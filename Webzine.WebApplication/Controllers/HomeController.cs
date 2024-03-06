@@ -30,8 +30,9 @@ namespace Webzine.WebApplication.Controllers
             GroupeTitreModel groupeTitreModel = new()
             {
                 Titres = this.titreRepository.FindAll(),
-                TitresPopulaires = this.titreRepository.FindTitresLesPlusLike(),
                 ParutionChroniqueTitre = this.titreRepository.ParutionChroniqueTitres(),
+                TitresPopulaires = this.titreRepository.FindTitresLesPlusLike(),
+                
             };
 
             // Retour de la vue avec le modèle de vue contenant les détails des titres.
