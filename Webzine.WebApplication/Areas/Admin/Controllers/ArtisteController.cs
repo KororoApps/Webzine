@@ -65,13 +65,14 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action HTTP POST pour confirmer la suppression d'un artiste.
         /// </summary>
-        /// <param name="id">L'identifiant de l'artiste à supprimer.</param>
+        /// <param name="artiste">L'artiste à supprimer.</param>
         /// <returns>Redirection vers l'action Index après la suppression.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult Delete(Artiste artiste)
         {
-            this.artisteRepository.Delete(this.artisteRepository.Find(id));
+            this.artisteRepository.Delete(artiste);
+
             return this.RedirectToAction(nameof(this.Index));
         }
 
@@ -91,12 +92,12 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateConfirmed(Artiste artiste)
+        public IActionResult Create(Artiste artiste)
         {
             if (!this.ModelState.IsValid)
             {
                 // Traitement en cas de modèle non valide
-                return this.View("Create");
+                return this.View();
             }
 
             this.artisteRepository.Add(artiste);
@@ -127,9 +128,22 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditConfirmed(Artiste artiste)
+        public IActionResult Edit(Artiste artiste)
         {
+            if (!this.ModelState.IsValid)
+            {
+                // Création du modèle de vue contenant le style à éditer.
+                var artisteModel = new ArtisteModel
+                {
+                    Artiste = this.artisteRepository.Find(artiste.IdArtiste),
+                };
+
+                // Traitement en cas de modèle non valide
+                return this.View(artisteModel);
+            }
+
             this.artisteRepository.Update(artiste);
+
             return this.RedirectToAction(nameof(this.Index));
         }
     }

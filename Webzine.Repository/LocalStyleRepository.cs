@@ -22,15 +22,13 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Style style)
         {
-           
-            var styleASupprimer = DataFactory.Styles
-                .FirstOrDefault(t => t.IdStyle == style.IdStyle);
+            // Recherche de l'objet Style à supprimer dans la liste
+            var styleASupprimer = DataFactory.Styles.FirstOrDefault(s => s.IdStyle == style.IdStyle);
 
-          
             if (styleASupprimer != null)
             {
-                DataFactory.Styles
-                    .Remove(styleASupprimer);
+                // Suppression de l'objet Style de la liste
+                DataFactory.Styles.Remove(styleASupprimer);
             }
         }
 
@@ -49,7 +47,7 @@ namespace Webzine.Repository
             List<Style> styles = DataFactory.Styles ;
 
             var orderedStyle = styles
-                .OrderByDescending(c => c.Libelle)
+                .OrderBy(c => c.Libelle)
                 .ToList();
 
             return orderedStyle;

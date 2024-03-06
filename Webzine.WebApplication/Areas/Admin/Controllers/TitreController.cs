@@ -64,13 +64,13 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action HTTP POST pour confirmer la suppression d'un titre.
         /// </summary>
-        /// <param name="id">L'identifiant du titre à supprimer.</param>
+        /// <param name="titre">Le titre à supprimer.</param>
         /// <returns>Redirection vers l'action Index après la suppression.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult Delete(Titre titre)
         {
-            this.titreRepository.Delete(this.titreRepository.Find(id));
+            this.titreRepository.Delete(this.titreRepository.Find(titre.IdTitre));
             return this.RedirectToAction(nameof(this.Index));
         }
 
@@ -105,13 +105,16 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateConfirmed(Titre titre, List<int> styleIds)
+        public IActionResult Create(Titre titre, List<int> styleIds)
         {
+            // Styles sélectionnés pour le titre
+            IEnumerable<Style> stylesById = this.styleRepository.FindByIds(styleIds);
 
             if (!this.ModelState.IsValid)
             {
+
                 // Génération d'une liste de styles.
-                var styles = this.styleRepository.FindAll();
+                var styles = this.styleRepository.FindAll();                
 
                 // Génération d'une liste d'artistes.
                 var artistes = this.artisteRepository.FindAll();
@@ -121,13 +124,13 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
                 {
                     Styles = styles,
                     Artistes = artistes,
+                    Titre = titre,
+                    StylesIds = stylesById,
                 };
 
                 // Traitement en cas de modèle non valide
-                return this.View("Create", titreModel);
+                return this.View(titreModel);
             }
-
-            IEnumerable<Style> stylesById = this.styleRepository.FindByIds(styleIds);
 
             Artiste artiste = this.artisteRepository.FindByName(titre.Artiste.Nom);
 
@@ -148,7 +151,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         {
             var titre = this.titreRepository.Find(id);
 
-            // Génération d'une liste d'artistes.
+            // Génération d'une liste de styles.
             var styles = this.styleRepository.FindAll();
 
             // Génération d'une liste d'artistes.
@@ -160,6 +163,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
                 Styles = styles,
                 Titre = titre,
                 Artistes = artistes,
+                StylesIds = titre.Styles,
             };
 
             // Retour de la vue avec le modèle de vue contenant le titre généré.
@@ -169,12 +173,43 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <summary>
         /// Action HTTP POST pour confirmer l'édition d'un titre.
         /// </summary>
-        /// <param name="id">L'identifiant du titre à éditer.</param>
+        /// <param name="titre">Le titre à éditer.</param>
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditConfirmed(int id)
+        public IActionResult Edit(Titre titre, List<int> styleIds)
         {
+            // Styles sélectionnés pour le titre
+            IEnumerable<Style> stylesById = this.styleRepository.FindByIds(styleIds);
+
+            if (!this.ModelState.IsValid)
+            {
+                // Génération d'une liste de styles.
+                var styles = this.styleRepository.FindAll();
+
+                // Génération d'une liste d'artistes.
+                var artistes = this.artisteRepository.FindAll();
+
+                // Création du modèle de vue contenant le style à éditer.
+                var titreModel = new TitreModel
+                {
+                    Styles = styles,
+                    Artistes = artistes,
+                    Titre = titre,
+                    StylesIds = stylesById,
+                };
+
+                // Traitement en cas de modèle non valide
+                return this.View(titreModel);
+            }
+
+            Artiste artiste = this.artisteRepository.FindByName(titre.Artiste.Nom);
+
+            titre.Styles = stylesById.ToList();
+            titre.Artiste = artiste;
+
+            this.titreRepository.Update(titre);
+
             return this.RedirectToAction(nameof(this.Index));
         }
     }
