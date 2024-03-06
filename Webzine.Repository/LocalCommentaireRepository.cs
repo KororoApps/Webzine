@@ -19,50 +19,33 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Commentaire commentaire)
         {
-            // Recherche le commentaire dans la liste
-            var commentaireASupprimer = DataFactory.Commentaires
-                .FirstOrDefault(t => t.IdCommentaire == commentaire.IdCommentaire);
 
-            // Supprime le commentaire s'il existe
-            if (commentaireASupprimer != null)
-            {
                 DataFactory.Commentaires
-                    .Remove(commentaireASupprimer);
-            }
+                    .Remove(commentaire);
         }
 
         /// <inheritdoc />
         public Commentaire Find(int id)
         {
-            var commentaire = DataFactory.Commentaires
-                .FirstOrDefault(t => t.IdCommentaire == id);
+            return DataFactory.Commentaires
+                .First(t => t.IdCommentaire == id);
 
-            return commentaire;
         }
 
         /// <inheritdoc />
         public IEnumerable<Commentaire> FindAll()
         {
-            List<Commentaire> commentaires = DataFactory.Commentaires;
-
-            var orderedCommentaires = commentaires
-                .OrderByDescending(c => c.DateCreation)
+            return DataFactory.Commentaires.OrderByDescending(c => c.DateCreation)
                 .ToList();
 
-            return orderedCommentaires;
         }
 
         /// <inheritdoc />
         public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
         {
-            List<Commentaire> commentaires = DataFactory.Commentaires;
-
-            var orderedCommentaires = commentaires
-                .Where(c => c.Titre != null && c.Titre.IdTitre == id)
+            return DataFactory.Commentaires.Where(c => c.Titre != null && c.Titre.IdTitre == id)
                 .OrderBy(c => c.DateCreation)
                 .ToList();
-
-            return orderedCommentaires;
         }
 
         /// <inheritdoc />

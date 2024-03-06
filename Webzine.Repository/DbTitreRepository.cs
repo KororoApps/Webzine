@@ -23,11 +23,6 @@ namespace Webzine.Repository
         /// <param name="titre"></param>
         public void Add(Titre titre)
         {
-            if (titre == null)
-            {
-                throw new ArgumentNullException(nameof(titre));
-            }
-
             titre.DateCreation = DateTime.Now;
 
             _context.Add<Titre>(titre);
@@ -42,10 +37,9 @@ namespace Webzine.Repository
         /// <returns></returns>
         public int Count()
         {
-            var NombreTitres = _context.Titres
+            return _context.Titres
                 .Count();
 
-            return NombreTitres;
         }
 
         /// <summary>
@@ -54,20 +48,12 @@ namespace Webzine.Repository
         /// <param name="titre"></param>
         public void Delete(Titre titre)
         {
-            if (titre == null)
-            {
-                throw new ArgumentNullException(nameof(titre));
-            }
-
-            try
-            {
                 _context.Titres
                     .Remove(titre);
 
                 _context
                     .SaveChanges();
 
-            } catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
 
         /// <summary>
@@ -77,22 +63,12 @@ namespace Webzine.Repository
         /// <returns></returns>
         public Titre Find(int idTitre)
         {
-            //TODO : A CHANGER SINGLE AU LIEU DE SINGLEORDEFAULT pour attraper erreur plus tard
-            var titre = _context.Titres
+            return _context.Titres.AsNoTracking()
                 .Include(t => t.Artiste)
                 .Include(t => t.Commentaires)
                 .Include(t => t.Styles)
-                .SingleOrDefault(t => t.IdTitre == idTitre);
+                .Single(t => t.IdTitre == idTitre);
 
-            //TODO : A SUPPRIMER ET FAIRE GESTION D'ERREUR AVANT
-            if (titre == null)
-            {
-                //Exception si on ne trouve pas d'artiste correspondant
-                throw new ArgumentNullException();
-            }
-            
-
-            return titre;
         }
 
         /// <summary>
@@ -115,14 +91,13 @@ namespace Webzine.Repository
             //Enlever style
             //Faire passer que le nombre de commentaires
             //Voir peut-être pour plutôt utiliser le FindTitres car il vaut mieux paginer.
-            var allTitres = _context.Titres
+            return _context.Titres.AsNoTracking()
                 .Include(t => t.Artiste)
                 .Include(t => t.Commentaires)
                 .Include(t => t.Styles)
                 .OrderByDescending(t => t.DateCreation)
                 .ToList();
 
-            return allTitres;
         }
 
         /// <summary>
@@ -131,17 +106,10 @@ namespace Webzine.Repository
         /// <returns></returns>
         public Titre FindTitreLePlusLu()
         {
-            var titre = _context.Titres
+            return _context.Titres.AsNoTracking()
                 .OrderByDescending(t => t.NbLectures)
-                .FirstOrDefault();
+                .First();
 
-            if (titre == null)
-            {
-                //Exception si on ne trouve pas d'artiste correspondant
-                throw new ArgumentNullException();
-            }
-
-            return titre;
         }
 
         /// <summary>
@@ -150,12 +118,11 @@ namespace Webzine.Repository
         /// <returns></returns>
         public List<Titre> FindTitresLesPlusLike()
         {
-            var titres = _context.Titres
+            return _context.Titres.AsNoTracking()
                 .OrderByDescending(t => t.NbLikes)
                 .Take(3)
                 .ToList();
 
-            return titres;
         }
 
         /// <summary>
@@ -164,12 +131,11 @@ namespace Webzine.Repository
         /// <returns></returns>
         public List<Titre> ParutionChroniqueTitres()
         {
-            var titres = _context.Titres
+            return _context.Titres.AsNoTracking()
                 .OrderByDescending(t => t.DateCreation)
                 .Take(3)
                 .ToList();
 
-            return titres;
         }
 
         /// <summary>
@@ -184,10 +150,9 @@ namespace Webzine.Repository
             //FAIRE CA PARTOUT !!
             //EVITER D'ALLER TROP A LA LIGNE !!
             //REMPLIR LES <return> !!!!! </return> !!!!
-            var nombreTitres = _context.Titres
+            return _context.Titres
                 .Count();
 
-            return nombreTitres;
         }
 
         /// <summary>
@@ -196,10 +161,9 @@ namespace Webzine.Repository
         /// <returns></returns>
         public int NombreLikes()
         {
-            var nombreLikes = _context.Titres
+            return _context.Titres
                 .Sum(t => t.NbLikes);
 
-            return nombreLikes;
         }
 
         /// <summary>
@@ -208,10 +172,9 @@ namespace Webzine.Repository
         /// <returns></returns>
         public int NombreLectures()
         {
-            var nombreLectures = _context.Titres
+            return _context.Titres
                 .Sum(t => t.NbLectures);
 
-            return nombreLectures;
         }
 
         /// <summary>
@@ -238,13 +201,12 @@ namespace Webzine.Repository
         /// <returns></returns>
         public IEnumerable<Titre> Search(string mot)
         {
-            IEnumerable<Titre> titres = _context.Titres
+            return _context.Titres.AsNoTracking()
                 .Include(t => t.Artiste)
                 .Where(t => t.Libelle.ToUpper().Contains(mot.ToUpper()))
                 .OrderBy(c => c.Libelle)
                 .ToList();
 
-            return titres;
         }
 
 
@@ -255,19 +217,12 @@ namespace Webzine.Repository
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
 
-            List<Titre> titres = _context.Titres
+            return _context.Titres.AsNoTracking()
                 .Include(t => t.Artiste)
                 .Where(t => t.Styles.Any(s => s.Libelle.Equals(libelle)))
                 .OrderByDescending(c => c.Libelle)
                 .ToList();
 
-            if (titres == null)
-            {
-                //Exception si on ne trouve pas d'artiste correspondant
-                throw new ArgumentNullException();
-            }
-
-            return titres;
         }
 
         /// <summary>

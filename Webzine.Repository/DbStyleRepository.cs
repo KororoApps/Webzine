@@ -16,10 +16,6 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Add(Style style)
         {
-            if (style == null)
-            {
-                throw new ArgumentNullException(nameof(style));
-            }
 
             _context.Add<Style>(style);
 
@@ -29,52 +25,39 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Style style)
         {
-            // Recherchez le style existant dans le contexte de données
-            var styleASupprimer = _context.Styles.Find(style.IdStyle);
 
-            if (styleASupprimer == null)
-            {
-                throw new ArgumentNullException(nameof(styleASupprimer));
-            }
-            else
-            {
-                _context.Styles
-                     .Remove(styleASupprimer);
+            _context.Styles.Remove(style);
 
-                _context.SaveChanges();
-            }          
+            _context.SaveChanges();
+
         }
 
         /// <inheritdoc />
         public Style Find(int id)
         {
-             var  style = _context.Styles
-                 .Include(s => s.Titres)
+             return _context.Styles
+                 .Include(s => s.Titres).AsNoTracking()
                  .Where(s => s.IdStyle == id)
                  .First();
                 
-            return style;
-
         }
 
         /// <inheritdoc />
         public IEnumerable<Style> FindAll()
         {
-            var  styles = _context.Styles
+            return _context.Styles.AsNoTracking()
                 .OrderBy(c => c.Libelle.ToLower())
                 .ToList();
 
-            return styles;
         }
 
         /// <inheritdoc />
         public IEnumerable<Style> FindByIds(List<int> ids)
         {
-            var filteredStyles = _context.Styles
+            return _context.Styles.AsNoTracking()
                 .Where(s => ids.Contains(s.IdStyle))
                 .ToList();
 
-            return filteredStyles;
         }
 
         /// <inheritdoc />
@@ -88,10 +71,9 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public int NombreStyles()
         {
-            var nombreStyle = _context.Styles
+            return _context.Styles
                 .Count();
 
-            return nombreStyle;
         }
     }
 }

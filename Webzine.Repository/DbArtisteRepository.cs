@@ -46,44 +46,29 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public Artiste Find(int idArtiste)
         {
-            var artiste = _context.Artistes
+            return _context.Artistes
                 .Include(c => c.Titres)
-                .SingleOrDefault(t => t.IdArtiste == idArtiste);
-
-            if (artiste == null)
-            {
-                //Exception si on ne trouve pas d'artiste correspondant
-                throw new ArgumentNullException();
-            }
-
-            return artiste;
+                .AsNoTracking()
+                .Single(t => t.IdArtiste == idArtiste);
         }
 
         /// <inheritdoc />
         public Artiste FindByName(string nomArtiste)
         {
-            var artiste = _context.Artistes
-                .Include(c => c.Titres)
-                .SingleOrDefault(t => t.Nom == nomArtiste);
-
-            if (artiste == null)
-            {
-                //Exception si on ne trouve pas d'artiste correspondant
-                throw new ArgumentNullException();
-            }
-
-            return artiste;
+            return _context.Artistes
+                .Include(c => c.Titres).AsNoTracking()
+                .Single(t => t.Nom == nomArtiste);
         }
 
         /// <inheritdoc />
         public IEnumerable<Artiste> FindAll()
         {
-            var allArtistes = _context.Artistes
+            return _context.Artistes
                 .Include(c => c.Titres)
+                .AsNoTracking()  // Ajout de AsNoTracking ici
                 .OrderBy(t => t.Nom.ToLower())
                 .ToList();
 
-            return allArtistes;
         }
 
         /// <inheritdoc />
@@ -104,71 +89,53 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public Artiste FindArtisteLePlusChronique()
         {
-            var artiste = _context.Artistes
+            return _context.Artistes.AsNoTracking()
                 .Where(a => a.Titres != null && a.Titres.Count != 0)
                 .OrderByDescending(a => a.Titres.Sum(t => t.Chronique != null ? 1 : 0))
-                .FirstOrDefault();
+                .First();
 
-            if (artiste != null)
-            {
-                return artiste;
-            }
-            else
-            {
-                throw new Exception("Il n'y a pas d'artiste avec des chroniques");
-            }
         }
 
         /// <inheritdoc />
         public Artiste FindArtisteLePlusTitresAlbumDistinct()
         {
-            var artiste = _context.Artistes
-                .Include(a => a.Titres)
+            return _context.Artistes
+                .Include(a => a.Titres).AsNoTracking()
                 .Where(a => a.Titres != null && a.Titres.Any())
                 .OrderByDescending(a => a.Titres
                 .Select(t => new { t.Album, t.Artiste })
                 .Distinct()
                 .Count())
-                .FirstOrDefault();
+                .First();
 
-            if (artiste != null)
-            {
-                return artiste;
-            }
-            else
-            {
-                throw new Exception("Il n'y a pas d'artiste avec des titres dans des albums distincts");
-            }
         }
 
         /// <inheritdoc />
         public int NombreBioArtistes()
         {
-            var nombreArtiste = _context.Artistes
+            return _context.Artistes
                 .Count(a => !string.IsNullOrEmpty(a.Biographie));
 
-            return nombreArtiste;
         }
 
         /// <inheritdoc />
         public int NombreArtistes()
         {
-            var nombreArtiste = _context.Artistes
+            return _context.Artistes
                 .Count();
 
-            return nombreArtiste;
-        }
+       }
 
         /// <summary>
         /// Renvoie les résultats de la recherche coté artistes.
         public IEnumerable<Artiste> Search(string mot)
         {
-            IEnumerable<Artiste> artistes = _context.Artistes
+            return _context.Artistes
                 .Where(t => t.Nom.ToUpper().Contains(mot.ToUpper()))
                 .OrderBy(c => c.Nom)
+                .AsNoTracking()  // Ajout de AsNoTracking ici
                 .ToList();
 
-            return artistes;
         }
     }
 }
