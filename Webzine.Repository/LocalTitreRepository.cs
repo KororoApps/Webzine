@@ -33,96 +33,76 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Titre titre)
         {
-            // Recherche le titre dans la liste
-            var titreASupprimer = DataFactory.Titres
-                .FirstOrDefault(t => t.IdTitre == titre.IdTitre);
-
-            // Supprime le titre s'il existe
-            if (titreASupprimer != null)
-            {
-                DataFactory.Titres
-                    .Remove(titreASupprimer);
-            }
+            DataFactory.Titres.Remove(titre);
         }
 
         /// <inheritdoc />
         public Titre Find(int id)
         {
-            var titre =  DataFactory.Titres
-                .FirstOrDefault(t => t.IdTitre == id);
-
-            return titre;
+            return  DataFactory.Titres
+                .First(t => t.IdTitre == id);
         }
 
         /// <inheritdoc />
         public IEnumerable<Titre> FindAll()
         {
-            List<Titre> titres = DataFactory.Titres;
-
-            var orderedTitres = titres
+            return DataFactory.Titres
                 .OrderByDescending(c => c.DateCreation)
                 .ToList();
 
-            return orderedTitres;
         }
 
         /// <inheritdoc />
         public Titre FindTitreLePlusLu()
         {
-            var titre = DataFactory.Titres
+            return DataFactory.Titres
                 .OrderByDescending(t => t.NbLectures)
-                .FirstOrDefault();
+                .First();
 
-            return titre;
         }
 
         /// <inheritdoc />
         public List<Titre> FindTitresLesPlusLike()
         {
-            var titres = DataFactory.Titres
+            return DataFactory.Titres
                 .OrderByDescending(t => t.NbLikes)
                 .Take(3)
                 .ToList ();
 
-            return titres;
         }
 
         /// <inheritdoc />
         public List<Titre> ParutionChroniqueTitres()
         {
-            var titres = DataFactory.Titres
+            return DataFactory.Titres
                 .OrderByDescending(t => t.DateCreation)
                 .Take(3)
                 .ToList();
 
-            return titres;
         }
 
         /// <inheritdoc />
         public int NombreTitres()
         {
-            var nombreTitres = DataFactory.Titres
+            return DataFactory.Titres
                 .Count;
 
-            return nombreTitres;
         }
 
         /// <inheritdoc />
         public int NombreLikes()
         {
-            var nombreLikes = DataFactory.Titres
+            return DataFactory.Titres
                 .Sum(t => t.NbLikes);
 
-            return nombreLikes;
         }
 
         /// <inheritdoc />
         public int NombreLectures()
         {
-            var nombreLectures = DataFactory.Titres
+            return DataFactory.Titres
                 .Sum(t => t.NbLectures);
 
-            return nombreLectures;
         }
 
         /// <inheritdoc />
@@ -169,14 +149,11 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
-            List<Titre> titres = DataFactory.Titres;
-
-            var orderedTitres = titres
+            return DataFactory.Titres
                 .Where(t => t.Styles.Any(s => s.Libelle.Equals(libelle)))
                 .OrderByDescending(c => c.Libelle)
                 .ToList();
 
-            return orderedTitres;
         }
 
         /// <inheritdoc />

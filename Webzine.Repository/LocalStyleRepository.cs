@@ -22,54 +22,42 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Style style)
         {
-            // Recherche de l'objet Style à supprimer dans la liste
-            var styleASupprimer = DataFactory.Styles.FirstOrDefault(s => s.IdStyle == style.IdStyle);
+           
+            DataFactory.Styles.Remove(style);
 
-            if (styleASupprimer != null)
-            {
-                // Suppression de l'objet Style de la liste
-                DataFactory.Styles.Remove(styleASupprimer);
-            }
         }
 
         /// <inheritdoc />
         public Style Find(int id)
         {
-            var style = DataFactory.Styles
-                 .FirstOrDefault(t => t.IdStyle == id);
+            return DataFactory.Styles
+                 .First(t => t.IdStyle == id);
 
-            return style;
         }
 
         /// <inheritdoc />
         public IEnumerable<Style> FindAll()
         {
-            List<Style> styles = DataFactory.Styles ;
-
-            var orderedStyle = styles
-                .OrderBy(c => c.Libelle)
+            return DataFactory.Styles
+                .OrderByDescending(c => c.Libelle)
                 .ToList();
 
-            return orderedStyle;
         }
 
         /// <inheritdoc />
         public IEnumerable<Style> FindByIds(List<int> ids)
         {
-            List<Style> styles = DataFactory.Styles;
-
-            var filteredStyles = styles
+            return DataFactory.Styles
                 .Where(s => ids.Contains(s.IdStyle))
                 .ToList();
 
-            return filteredStyles;
         }
 
         /// <inheritdoc />
         public void Update(Style style)
         {
             var styleAEditer = DataFactory.Styles
-                .FirstOrDefault(s => s.IdStyle == style.IdStyle);
+                .First(s => s.IdStyle == style.IdStyle);
 
             if (styleAEditer != null)
             {
@@ -80,10 +68,9 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public int NombreStyles()
         {
-            var nombreStyle = DataFactory.Styles
+            return DataFactory.Styles
                 .Count;
 
-            return nombreStyle;
         }
     }
 }
