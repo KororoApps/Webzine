@@ -163,6 +163,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
                 Styles = styles,
                 Titre = titre,
                 Artistes = artistes,
+                StylesIds = titre.Styles,
             };
 
             // Retour de la vue avec le modèle de vue contenant le titre généré.
@@ -176,8 +177,11 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Titre titre)
+        public IActionResult Edit(Titre titre, List<int> styleIds)
         {
+            // Styles sélectionnés pour le titre
+            IEnumerable<Style> stylesById = this.styleRepository.FindByIds(styleIds);
+
             if (!this.ModelState.IsValid)
             {
                 // Génération d'une liste de styles.
@@ -192,11 +196,17 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
                     Styles = styles,
                     Artistes = artistes,
                     Titre = titre,
+                    StylesIds = stylesById,
                 };
 
                 // Traitement en cas de modèle non valide
                 return this.View(titreModel);
             }
+
+            Artiste artiste = this.artisteRepository.FindByName(titre.Artiste.Nom);
+
+            titre.Styles = stylesById.ToList();
+            titre.Artiste = artiste;
 
             this.titreRepository.Update(titre);
 
