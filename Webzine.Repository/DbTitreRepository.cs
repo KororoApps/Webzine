@@ -188,9 +188,13 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public List<Titre> Search(string mot)
+        public IEnumerable<Titre> Search(string mot)
         {
-            List<Titre> titres = _context.Titres.Include(t=>t.Artiste).Where(t => t.Libelle.Contains(mot)).OrderBy(c => c.Libelle).ToList();
+            IEnumerable<Titre> titres = _context.Titres
+                .Include(t => t.Artiste)
+                .Where(t => t.Libelle.ToUpper().Contains(mot.ToUpper()))
+                .OrderBy(c => c.Libelle)
+                .ToList();
 
             return titres;
         }

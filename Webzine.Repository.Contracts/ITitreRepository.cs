@@ -101,7 +101,7 @@ namespace Webzine.Repository.Contracts
         /// </summary>
         /// <param name="mot">Le mot clé à rechercher.</param>
         /// <returns>Une liste de titres contenant le mot spécifié.</returns>
-        List<Titre> Search(string mot);
+        IEnumerable<Titre> Search(string mot);
 
         /// <summary>
         /// Recherche de manière insensible à la casse les titres contenant le style de musique cherché.
