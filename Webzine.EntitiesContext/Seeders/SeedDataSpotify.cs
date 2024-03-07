@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using NLog.Targets.Wrappers;
-using SpotifyAPI.Web;
+﻿using SpotifyAPI.Web;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection; // Ajout de cette référence pour IServiceScopeFactory
+using Microsoft.Extensions.Configuration;
 using Webzine.Entity;
-using Webzine.Entity.Fixtures;
+using static SpotifyAPI.Web.SearchRequest;
+using Microsoft.AspNetCore.Http;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Webzine.EntitiesContext.Seeders
 {
@@ -14,106 +17,195 @@ namespace Webzine.EntitiesContext.Seeders
         public static async Task Request(IServiceProvider serviceProvider, WebzineDbContext context, IConfigurationSection spotifyConnexion)
         {
             var config = SpotifyClientConfig.CreateDefault();
-
             var request = new ClientCredentialsRequest(spotifyConnexion.GetSection("ClientId").Value, spotifyConnexion.GetSection("ClientSecret").Value);
             var response = await new OAuthClient(config).RequestToken(request);
-
             var spotify = new SpotifyClient(config.WithToken(response.AccessToken));
 
-            /*//context.Artistes.AddRange((IEnumerable<Artiste>)spotify.Artists);
-            var searchResults = await spotify.Search.Item(new SearchRequest(SearchRequest.Types.Artist, "Muse"));
-            var limitedArtists = searchResults.Artists.Items.Take(100);
+            //TODO : ATTENTION BIEN VERIFIER LA TAILLE DES STRING APPORTES
 
-            foreach (var artist in limitedArtists)
+
+            ////////////TROUVER LES STYLES////////////////////////
+            // Obtenir la liste des genres recommandés
+            var genres = await spotify.Browse.GetRecommendationGenres();
+
+            var compteur = 0;
+            //  Pour chaque genre...            
+            foreach (var genre in genres.Genres)
             {
-                // Ajoute l'artiste à ta base de données
-                context.Artistes.Add(new Artiste
+                //AJOUTER DES STYLES
+                var genreEntity = new Style { Libelle = genre };
+                context.Styles.Add(genreEntity);
+
+            }
+            // Enregistrez les modifications dans la base de données
+            context.SaveChanges();
+            ///////////
+
+
+
+            List<string> artistesRecuperesSpotify = new List<string>();
+            /////////////TROUVER LES ARTISTES////////////////////////////
+            foreach (var genre in genres.Genres)
+            {
+
+                compteur++;
+                if (compteur > 5)
                 {
-                    Nom = artist.Name,
-                    // Ajoute d'autres propriétés d'artiste si nécessaire
+                    break;
+                }
+                Thread.Sleep(100);
+
+                SearchResponse artistesSearchResponse = await spotify.Search.Item(new SearchRequest(Types.Artist, "genre:" + genre)
+                {
+                    // Limitez le nombre de résultats
+                    Limit = 10
                 });
-            }*/
-
-            //context.Artistes.AddRange((IEnumerable<Artiste>)spotify.Artists);F
-            //var searchResultsPlaylist = await spotify.Search.Item(new SearchRequest(SearchRequest.Types.Playlist, "pop"));
-
-            var searchResultsPlaylist = await spotify.Search.Item(new SearchRequest(SearchRequest.Types.Playlist, "\"Pop Culture: \""));
 
 
-            var limitedPlaylist = searchResultsPlaylist.Playlists.Items.Take(1).ToList();
-            //var limitedPlaylist = searchResultsPlaylist.Playlists.Items.First();
-            foreach (var playlist in limitedPlaylist)
-            {
-                //var playlistId = limitedPlaylist.Id;
-                var playlistId = playlist.Id;
-
-                var getPlaylist = await spotify.Playlists.Get(playlistId);
-
-                // Accédez à la liste des pistes (pagination prise en compte)
-                var tracks = await spotify.Playlists.GetItems(playlistId);
-
-                foreach (var playlistTrack in tracks.Items)
+                foreach (var artiste in artistesSearchResponse.Artists.Items)
                 {
-
-
-
-                    // Accédez aux informations de la piste
-                    var track = playlistTrack.Track as FullTrack; // Utilisez FullTrack pour obtenir toutes les informations
-
-                    var album = track.Album.Id;
-                    // Obtenez des informations détaillées sur l'album, y compris les genres
-                    var albumDetails = await spotify.Albums.Get(album);
-
-                    foreach(var genre in albumDetails.Genres)
+                    if (!artistesRecuperesSpotify.Contains(artiste.Name))
                     {
+                        //Initialisation d'une liste de style vide pour récupérer les styles qui existent dans le context et déjà sauvegardé
+                        //en comparant aux genres de l'artiste
+                        List<Style> listeStyles = new List<Style>();
 
-                        context.Styles.Add(new Style
+                        foreach (var genreArtiste in artiste.Genres)
                         {
-                            Libelle = genre,
+                            foreach (var genreContextStyles in context.Styles)
+                            {
+                                if (genreArtiste == genreContextStyles.Libelle)
+                                {
+
+                                    listeStyles.Add(genreContextStyles);
+                                }
+
+
+                            }
+                        }
+
+
+
+
+                        var newArtiste = new Artiste { Nom = artiste.Name };
+
+
+                        context.Artistes.Add(newArtiste);
+                        artistesRecuperesSpotify.Add(artiste.Name);
+
+
+
+                        /////////////AJOUTER DES TITRES
+                        SearchResponse titresSearchResponse = await spotify.Search.Item(new SearchRequest(Types.Track, "artits:" + artiste.Name)
+                        {
+                            Limit = 2
                         });
 
-                    }
 
 
-
-
-
-                        var artiste = track.Artists.First();
-
-                    context.Titres.Add(new Titre
-                    {
-                        Libelle = track.Name,
-                        Duree = track.DurationMs.ToString(),
-                        Artiste = new Artiste
+                        foreach (var titre in titresSearchResponse.Tracks.Items)
                         {
-                            Nom = artiste.Name
-                        },
-                        Album = track.Album.Name,
-                        Chronique = "emoisfmsodvi",
-                        UrlJaquette = track.Album.Images.First().Url,
-                    });
+                            DateTime dateSortie;
+
+                            //Conversion de la date de Sortie qui peut-être soir nulle, soit au format yyyy- soit au format yyyy-MM soit au format yyyy-MM-dd
+                            // Vérifier si la chaîne est vide
+
+
+                            if (DateTime.TryParseExact(titre.Album.ReleaseDate, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out DateTime dateObject))
+                            {
+                                dateSortie = dateObject.ToUniversalTime();
+                            }
+                            else if (DateTime.TryParseExact(titre.Album.ReleaseDate, "yyyy-MM", null, System.Globalization.DateTimeStyles.None, out DateTime dateObjectAnneeMois))
+                            {
+                                dateSortie = dateObjectAnneeMois.ToUniversalTime();
+                            }
+                            else if (DateTime.TryParseExact(titre.Album.ReleaseDate, "yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dateObjectAnnee))
+                            {
+                                dateSortie = dateObjectAnnee.ToUniversalTime();
+                            }
+                            else
+                            {
+                                dateSortie = DateTime.ParseExact("1950-01-01", "yyyy-MM-dd", null);
+                            }
+
+
+                            context.Titres.Add(new Titre
+                            {
+                                Libelle = titre.Name,
+                                Artiste = newArtiste,
+                                //TODO :  A CONVERTIR
+                                Duree = (titre.DurationMs / 1000).ToString(),
+                                Album = titre.Album.Name,
+                                Chronique = "Merci d'ajouter cette information :)",
+                                UrlJaquette = titre.Album.Images.First().Url,
+                                UrlEcoute = titre.PreviewUrl,
+                                Styles = listeStyles,
+                                NbLikes = (titre.Popularity) * 500,
+                                NbLectures = (titre.Popularity) * 5000,
+                                DateSortie = dateSortie,
+                                DateCreation = DateTime.Now.ToUniversalTime(),
+                            });
+                        }
+                        {
+
+                        }
+                    }
                 }
-
-
-                /*if (playlist.Name != null && playlist.Name.Length > 2 && playlist.Name.Length < 50)
-                {
-                    //Ajoute l'artiste à ta base de données
-                    context.Styles.Add(new Style
-                    {
-                       // Libelle = playlist.Name.ToString()
-                        Libelle = playlist.Name.ToString()
-                        // Ajoute d'autres propriétés d'artiste si nécessaire
-                    }); ;
-                    //context.Styles.Add(new Style(playlist.Name.ToString()));
-                }*/
             }
-            // SaveChanges après le seeding
             context.SaveChanges();
+
+
+
+
+            /*var searchRequest = new SearchRequest(SearchRequest.Types.Track, $"genre:\"{genre}\"")
+            {
+                // Limitez le nombre de résultats
+                Limit = 10
+            };
+
+            var searchResponse = await spotify.Search.Item(searchRequest);
+
+
+            foreach (var track in searchResponse.Tracks.Items)
+            {
+                var artistEntity = new Artiste
+                {
+                    Nom = track.Artists.FirstOrDefault()?.Name
+                };
+
+                context.Artistes.Add(artistEntity);
+
+                var titreEntity = new Titre
+                {
+                    Libelle = track.Name,
+                    Duree = track.DurationMs.ToString(),
+                    Artiste = artistEntity,
+                    Album = track.Album.Name,
+                    Chronique = "emoisfmsodvi",
+                    UrlJaquette = track.Album.Images.First().Url,
+                    UrlEcoute = track.PreviewUrl,
+                    Styles = new List<Style>()
+
+
+
+                };
+                //titreEntity.Styles.Add(new Style { Libelle = genre });
+
+                context.Titres.Add(titreEntity);
+
+
+            }
+*/
+
+
+
+
 
         }
 
 
     }
+
+
+
 }
-
-
