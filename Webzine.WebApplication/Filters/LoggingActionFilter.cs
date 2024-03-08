@@ -21,15 +21,15 @@ namespace Webzine.WebApplication.Filters
         }
 
         /// <inheritdoc/>
-        public void OnActionExecuted(ActionExecutedContext context)
+        public void OnActionExecuting(ActionExecutingContext context)
         {
-            Logger.Info("debutAction");
+            Logger.Info("finAction");
         }
 
         /// <inheritdoc/>
-        public void OnActionExecuting(ActionExecutingContext context)
+        public void OnActionExecuted(ActionExecutedContext context)
         {
-            Logger.Debug("finAction");
+            Logger.Debug("debutAction");
         }
 
         /// <inheritdoc/>
