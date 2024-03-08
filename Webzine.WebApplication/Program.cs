@@ -64,6 +64,73 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+/*Routes specifiques */
+
+// Page d'un artiste
+app.MapControllerRoute(
+    name: "artiste",
+    pattern: "artiste/{Nom}",
+    defaults: new { controller = "Artiste", action = "Index" });
+
+// Titre par Id
+app.MapControllerRoute(
+    name: "titre",
+    pattern: "titre/{Id}",
+    defaults: new { controller = "Titre", action = "Index" });
+// Titre id
+app.MapControllerRoute(
+    name: "consulterTitre",
+    pattern: "titre/{id}/{artiste}/{titre}",
+    defaults: new { controller = "Titre", action = "Index" });
+
+// titre selon le style de musique démandée
+app.MapControllerRoute(
+    name: "style",
+    pattern: "titres/style/{style}",
+    defaults: new { controller = "Titres", action = "Index" });
+
+// Admin ArtistesSupprimer
+app.MapControllerRoute(
+    name: "adminArtistesSupprimer",
+    pattern: "/administration/artiste/delete/{id}",
+    defaults: new { controller = "Artiste", action = "Delete" });
+
+// Admin ArtistesEdit
+app.MapControllerRoute(
+    name: "adminArtistesEdit",
+    pattern: "/administration/artiste/edit/{id}",
+    defaults: new { controller = "Artiste", action = "Edit" });
+
+// Admin TitreSuprimer
+app.MapControllerRoute(
+    name: "adminTitreEdit",
+    pattern: "/administration/titre/delete/{id}",
+    defaults: new { controller = "Titre", action = "Delete"});
+
+// Admin TitreEdit
+app.MapControllerRoute(
+    name: "adminTitreEdit",
+    pattern: "/administration/titre/edit/{id}",
+    defaults: new { controller = "Titre", action = "Edit" });
+
+// Admin StyleSuprimer
+app.MapControllerRoute(
+    name: "adminStyleEdit",
+    pattern: "/administration/style/delete/{id}",
+    defaults: new { controller = "Style", action = "Delete" });
+
+// Admin StyleEdit
+app.MapControllerRoute(
+    name: "adminStyleEdit",
+    pattern: "/administration/style/edit/{id}",
+    defaults: new { controller = "Style", action = "Edit" });
+
+// Admin CommentaireSuprimer
+app.MapControllerRoute(
+    name: "adminCommentaireEdit",
+    pattern: "/administration/commentaire/delete/{id}",
+    defaults: new { controller = "Commentaire", action = "Delete" });
+
 // Utilise un scope pour gérer les services.
 using (var scope = app.Services.CreateScope())
 {
