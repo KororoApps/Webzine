@@ -1,67 +1,56 @@
 ﻿using SpotifyAPI.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection; // Ajout de cette référence pour IServiceScopeFactory
 using Microsoft.Extensions.Configuration;
 using Webzine.Entity;
 using static SpotifyAPI.Web.SearchRequest;
-using Microsoft.AspNetCore.Http;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Bogus;
+using NLog.Layouts;
 
 namespace Webzine.EntitiesContext.Seeders
 {
     public static class SeedDataSpotify
     {
+        //TODO : ATTENTION BIEN VERIFIER LA TAILLE DES STRING APPORTES
         public static async Task Request(IServiceProvider serviceProvider, WebzineDbContext context, IConfigurationSection spotifyConnexion)
         {
+            // Création de la configuration du client Spotify
             var config = SpotifyClientConfig.CreateDefault();
+            // Création de la demande d'octroi de client (Client Credentials Grant)
             var request = new ClientCredentialsRequest(spotifyConnexion.GetSection("ClientId").Value, spotifyConnexion.GetSection("ClientSecret").Value);
+            // Obtention du jeton d'accès OAuth en utilisant la demande d'octroi de client
             var response = await new OAuthClient(config).RequestToken(request);
+            // Configuration du client Spotify avec le jeton d'accès obtenu
             var spotify = new SpotifyClient(config.WithToken(response.AccessToken));
 
-            //TODO : ATTENTION BIEN VERIFIER LA TAILLE DES STRING APPORTES
-
-
-            ////////////TROUVER LES STYLES////////////////////////
-            // Obtenir la liste des genres recommandés
-            var genres = await spotify.Browse.GetRecommendationGenres();
-
-            var compteur = 0;
-            //  Pour chaque genre...            
-            foreach (var genre in genres.Genres)
-            {
-                //AJOUTER DES STYLES
-                var genreEntity = new Style { Libelle = genre };
-                context.Styles.Add(genreEntity);
-
-            }
-            // Enregistrez les modifications dans la base de données
-            context.SaveChanges();
-            ///////////
+            // Création d'un objet Faker pour la génération de données aléatoires
+            var faker = new Faker();
 
 
 
+            // Initialisation d'une liste de styles pour les genres récupérés
+            List<Style> stylesContext = new List<Style>();
+
+
+            // Initialisation d'une liste pour stocker les noms d'artistes récupérés de Spotify
             List<string> artistesRecuperesSpotify = new List<string>();
-            /////////////TROUVER LES ARTISTES////////////////////////////
-            foreach (var genre in genres.Genres)
-            {
 
-                compteur++;
-                if (compteur > 5)
-                {
-                    break;
-                }
+            // Obtenir 6 genre de la liste des genres recommandés
+            var genres = (await spotify.Browse.GetRecommendationGenres()).Genres.OrderBy(genre => Guid.NewGuid()).Take(6).ToList();
+
+            // Pour chaque genre dans la liste des genres recommandés...
+            foreach (var genre in genres)
+            {
+                //Pause entre chaque recherche pour éviter les limitations de l'API
                 Thread.Sleep(100);
 
+                // Recherche des artistes liés au genre actuel
                 SearchResponse artistesSearchResponse = await spotify.Search.Item(new SearchRequest(Types.Artist, "genre:" + genre)
                 {
-                    // Limitez le nombre de résultats
-                    Limit = 10
+                    // Limiter le nombre de résultats à 3 artistes par genre
+                    Limit = 3
                 });
 
 
+                // Pour chaque artiste dans les résultats de la recherche
                 foreach (var artiste in artistesSearchResponse.Artists.Items)
                 {
                     if (!artistesRecuperesSpotify.Contains(artiste.Name))
@@ -70,46 +59,59 @@ namespace Webzine.EntitiesContext.Seeders
                         //en comparant aux genres de l'artiste
                         List<Style> listeStyles = new List<Style>();
 
-                        foreach (var genreArtiste in artiste.Genres)
+                        // Pour chaque genre de l'artiste...
+                        foreach (var genreArtiste in artiste.Genres.Take(3)) // Limiter le nombre de styles à 3 par artiste
                         {
-                            foreach (var genreContextStyles in context.Styles)
+                            // Recherche du style correspondant dans la liste des styles déjà existants
+                            var styleArtiste = stylesContext.SingleOrDefault(s => s.Libelle == genreArtiste);
+
+
+                            if (styleArtiste == null)
                             {
-                                if (genreArtiste == genreContextStyles.Libelle)
+                                styleArtiste = new Style
                                 {
+                                    Libelle = genreArtiste
 
-                                    listeStyles.Add(genreContextStyles);
-                                }
-
-
+                                };
+                                // AJOUT DES STYLES DANS LA BDD
+                                stylesContext.Add(styleArtiste);
                             }
+                            // Ajout du style à la liste de styles de l'artiste
+                            //Liste qui est ajoutée aux titres
+                            //Ainsi, le Titre fait référence aux styles de son artiste
+                            listeStyles.Add(styleArtiste);
                         }
 
+                        // Création d'un nouvel objet Artiste
+                        var newArtiste = new Artiste
+                        {
+                            Nom = artiste.Name,
+                            // Génération d'une biographie nulle avec 20% de probabilité
+                            Biographie = faker.Random.Bool(0.8f) ? faker.Lorem.Paragraphs() : null
+                        };
 
-
-
-                        var newArtiste = new Artiste { Nom = artiste.Name };
-
-
+                        //AJOUT D'ARTISTES DANS LA BDD
                         context.Artistes.Add(newArtiste);
+
+                        // Ajout du nom de l'artiste à la liste pour éviter les doublons
                         artistesRecuperesSpotify.Add(artiste.Name);
 
 
-
-                        /////////////AJOUTER DES TITRES
+                        // Recherche des titres associés à l'artiste actuel
                         SearchResponse titresSearchResponse = await spotify.Search.Item(new SearchRequest(Types.Track, "artits:" + artiste.Name)
                         {
-                            Limit = 2
+                            // Limiter le nombre de résultats à 10 titres par artiste
+                            Limit = 10
                         });
 
 
-
+                        // Pour chaque titre dans les résultats de la recherche de titres
                         foreach (var titre in titresSearchResponse.Tracks.Items)
                         {
                             DateTime dateSortie;
 
                             //Conversion de la date de Sortie qui peut-être soir nulle, soit au format yyyy- soit au format yyyy-MM soit au format yyyy-MM-dd
                             // Vérifier si la chaîne est vide
-
 
                             if (DateTime.TryParseExact(titre.Album.ReleaseDate, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out DateTime dateObject))
                             {
@@ -128,84 +130,29 @@ namespace Webzine.EntitiesContext.Seeders
                                 dateSortie = DateTime.ParseExact("1950-01-01", "yyyy-MM-dd", null);
                             }
 
-
+                            //AJOUT DE TITRES DANS LA BDD
                             context.Titres.Add(new Titre
                             {
                                 Libelle = titre.Name,
                                 Artiste = newArtiste,
-                                //TODO :  A CONVERTIR
                                 Duree = (titre.DurationMs / 1000).ToString(),
                                 Album = titre.Album.Name,
-                                Chronique = "Merci d'ajouter cette information :)",
+                                Chronique = faker.Lorem.Paragraph(),
                                 UrlJaquette = titre.Album.Images.First().Url,
                                 UrlEcoute = titre.PreviewUrl,
                                 Styles = listeStyles,
                                 NbLikes = (titre.Popularity) * 500,
                                 NbLectures = (titre.Popularity) * 5000,
                                 DateSortie = dateSortie,
-                                DateCreation = DateTime.Now.ToUniversalTime(),
+                                DateCreation = faker.Date.Recent().ToUniversalTime(),
                             });
                         }
                         {
-
                         }
                     }
                 }
             }
             context.SaveChanges();
-
-
-
-
-            /*var searchRequest = new SearchRequest(SearchRequest.Types.Track, $"genre:\"{genre}\"")
-            {
-                // Limitez le nombre de résultats
-                Limit = 10
-            };
-
-            var searchResponse = await spotify.Search.Item(searchRequest);
-
-
-            foreach (var track in searchResponse.Tracks.Items)
-            {
-                var artistEntity = new Artiste
-                {
-                    Nom = track.Artists.FirstOrDefault()?.Name
-                };
-
-                context.Artistes.Add(artistEntity);
-
-                var titreEntity = new Titre
-                {
-                    Libelle = track.Name,
-                    Duree = track.DurationMs.ToString(),
-                    Artiste = artistEntity,
-                    Album = track.Album.Name,
-                    Chronique = "emoisfmsodvi",
-                    UrlJaquette = track.Album.Images.First().Url,
-                    UrlEcoute = track.PreviewUrl,
-                    Styles = new List<Style>()
-
-
-
-                };
-                //titreEntity.Styles.Add(new Style { Libelle = genre });
-
-                context.Titres.Add(titreEntity);
-
-
-            }
-*/
-
-
-
-
-
         }
-
-
     }
-
-
-
 }
