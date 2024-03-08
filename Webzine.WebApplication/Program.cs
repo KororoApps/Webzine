@@ -86,10 +86,10 @@ using (var scope = app.Services.CreateScope())
     // Assure la création de la base de données.
     context.Database.EnsureCreated();
 
-    if ((builder.Configuration.GetSection("AppSettings:Seeder").Value != " ") &&
+    if ((builder.Configuration.GetSection("AppSettings:Seeder").Value != "") &&
        (builder.Configuration.GetSection("AppSettings:Repository").Value == "db"))
     {
-        await SeedDataSpotify.Request(services, context, builder.Configuration.GetSection("Spotify"));
+        await SeedDataSpotify.Request(services, context, builder.Configuration.GetSection("AppSettings:Spotify"));
     }
     else
     {
