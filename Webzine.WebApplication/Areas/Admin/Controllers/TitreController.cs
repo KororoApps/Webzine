@@ -114,7 +114,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
             {
 
                 // Génération d'une liste de styles.
-                var styles = this.styleRepository.FindAll();                
+                var styles = this.styleRepository.FindAll();
 
                 // Génération d'une liste d'artistes.
                 var artistes = this.artisteRepository.FindAll();
