@@ -23,19 +23,37 @@ namespace Webzine.WebApplication.Filters
         /// <inheritdoc/>
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            Logger.Info("finAction");
+            string actionName = context.ActionDescriptor.DisplayName
+                .Replace(" (Webzine.WebApplication)", "()")
+                .Replace("Webzine.WebApplication.", "")
+                .Replace("Controllers.", "")
+                .Replace("Areas.Admin.", "")
+                .Replace(".", "/");
+            Logger.Info("Debut de l'action : {actionName}", actionName);
         }
 
         /// <inheritdoc/>
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            Logger.Debug("debutAction");
+            string actionName = context.ActionDescriptor.DisplayName
+                .Replace(" (Webzine.WebApplication)", "()")
+                .Replace("Webzine.WebApplication.", "")
+                .Replace("Controllers.", "")
+                .Replace("Areas.Admin.", "")
+                .Replace(".", "/");
+            Logger.Debug("Fin de l'action : {actionName}", actionName);
         }
 
         /// <inheritdoc/>
         public void OnException(ExceptionContext context)
         {
-            Logger.Error("exception");
+            string actionName = context.ActionDescriptor.DisplayName
+                .Replace(" (Webzine.WebApplication)", "()")
+                .Replace("Webzine.WebApplication.", "")
+                .Replace("Controllers.", "")
+                .Replace("Areas.Admin.", "")
+                .Replace(".", "/");
+            Logger.Error("Exception à : {actionName}", actionName);
         }
     }
 }
