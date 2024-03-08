@@ -4,6 +4,7 @@ using Webzine.EntitiesContext;
 using Webzine.EntitiesContext.Seeders;
 using Webzine.Repository;
 using Webzine.Repository.Contracts;
+using Webzine.WebApplication.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,12 @@ else if (builder.Configuration.GetSection("AppSettings:Repository").Value == "db
 // Configure les services nécessaires.
 builder.Services.AddControllersWithViews()
     .AddRazorRuntimeCompilation();
+
+//Injecting Filters
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(typeof(LoggingActionFilter));
+});
 
 // Initialise NLog.
 builder.Logging.ClearProviders();
