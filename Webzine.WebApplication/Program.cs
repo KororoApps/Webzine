@@ -8,23 +8,25 @@ using Webzine.WebApplication.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Vérifie le type de SGBD à utiliser en fonction de la configuration.
-if (builder.Configuration.GetSection("AppSettings:SGBD").Value == "SQLite")
+if (builder.Configuration.GetSection("SGBD").Value == "SQLite")
 {
-    // Utilise SQLite comme SGBD.
-    builder.Services.AddDbContext<WebzineDbContext>(options =>
-  options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")), ServiceLifetime.Scoped);
+    // Utilise SQLite comme SGBD par défaut.
+builder.Services.AddDbContext<WebzineDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")), ServiceLifetime.Scoped);
 }
-else if (builder.Configuration.GetSection("AppSettings:SGBD").Value == "PostgreSQL")
+
+// Vérifie le type de SGBD à utiliser en fonction de la configuration.
+if (builder.Configuration.GetSection("SGBD").Value == "PostgreSQL")
 {
     // Utilise PostgreSQL comme SGBD.
     builder.Services.AddDbContext<WebzineDbContext>(options =>
-   options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
-
+        options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")), ServiceLifetime.Scoped);
 }
 
 // Configure le type de repository à utiliser en fonction de la configuration.
-if (builder.Configuration.GetSection("AppSettings:Repository").Value == "Local")
+if (builder.Configuration.GetSection("Repository").Value == "Local")
 {
     // Utilise des repositories locaux.
     builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
@@ -32,7 +34,7 @@ if (builder.Configuration.GetSection("AppSettings:Repository").Value == "Local")
     builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
     builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
 }
-else if (builder.Configuration.GetSection("AppSettings:Repository").Value == "db")
+else if (builder.Configuration.GetSection("Repository").Value == "db")
 {
     // Utilise des repositories de base de données.
     builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
@@ -86,16 +88,19 @@ using (var scope = app.Services.CreateScope())
     // Assure la création de la base de données.
     context.Database.EnsureCreated();
 
-    if ((builder.Configuration.GetSection("AppSettings:Seeder").Value != "") &&
-       (builder.Configuration.GetSection("AppSettings:Repository").Value == "db"))
+    var seederValue = builder.Configuration.GetSection("Seeder").Value;
+    var repositoryValue = builder.Configuration.GetSection("Repository").Value;
+
+    if (!string.IsNullOrWhiteSpace(seederValue) && repositoryValue == "db")
     {
-        await SeedDataSpotify.Request(services, context, builder.Configuration.GetSection("AppSettings:Spotify"));
+        await SeedDataSpotify.Request(services, context, builder.Configuration.GetSection("Spotify"));
     }
     else
     {
         // Opération de seeding
         SeedDataLocal.Initialize(services, context);
     }
+
 }
 
 // Active la possibilité de servir des fichiers statiques présents dans le dossier wwwroot.

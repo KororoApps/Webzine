@@ -19,6 +19,8 @@ namespace Webzine.EntitiesContext.Seeders
             // SaveChanges après le seeding
             context.SaveChanges();
 
+
+
         }
 
     }

@@ -94,6 +94,8 @@ namespace Webzine.Repository
         public List<Titre> FindTitresLesPlusLike()
         {
             return _context.Titres.AsNoTracking()
+                .Include(t => t.Artiste)
+                .Include(t => t.Styles)
                 .OrderByDescending(t => t.NbLikes)
                 .Take(3)
                 .ToList();
@@ -104,6 +106,8 @@ namespace Webzine.Repository
         public List<Titre> ParutionChroniqueTitres()
         {
             return _context.Titres.AsNoTracking()
+                .Include(t => t.Artiste)
+                .Include(t => t.Styles)
                 .OrderByDescending(t => t.DateCreation)
                 .Take(3)
                 .ToList();
