@@ -39,11 +39,11 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Titre titre)
         {
-                _context.Titres
-                    .Remove(titre);
+            _context.Titres
+                .Remove(titre);
 
-                _context
-                    .SaveChanges();
+            _context
+                .SaveChanges();
 
         }
 
@@ -62,7 +62,7 @@ namespace Webzine.Repository
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
             return _context.Titres.AsNoTracking()
-                .Include(t => t.Artiste)
+                .Include(t => t.Artiste) 
                 .Include(t => t.Styles)
                 .Include(t => t.Commentaires)
                 .OrderByDescending(t => t.DateCreation)

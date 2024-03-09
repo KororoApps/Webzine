@@ -26,15 +26,16 @@ namespace Webzine.WebApplication.Controllers
         /// Affiche la page d'accueil.
         /// </summary>
         /// <returns>Vue de la page d'accueil.</returns>
-        public IActionResult Index(int NumeroPage)
+        /// <param name="numeroPage">Indique le nunméro de page sur lequel nous sommes.</param>
+        public IActionResult Index(int numeroPage)
         {
-            var titreToSkip = NumeroPage * int.Parse(this.configuration["NbDernierTitreChronique"]);
+            var titreToSkip = numeroPage * int.Parse(this.configuration["NbDernierTitreChronique"]);
             // Création du modèle de vue contenant la liste des titres.
             GroupeTitreModel groupeTitreModel = new()
             {
                 ParutionChroniqueTitre = this.titreRepository.FindTitres(titreToSkip, int.Parse(this.configuration["NbDernierTitreChronique"])),
                 TitresPopulaires = this.titreRepository.FindTitresLesPlusLike(),
-                NumeroPage = NumeroPage,
+                NumeroPage = numeroPage,
             };
 
             // Retour de la vue avec le modèle de vue contenant les détails des titres.
