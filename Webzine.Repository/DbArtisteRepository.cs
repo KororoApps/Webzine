@@ -74,7 +74,12 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Artiste> FindArtistes(int offset, int limit)
         {
-            throw new NotImplementedException();
+            return _context.Artistes
+                .AsNoTracking()  // Ajout de AsNoTracking ici
+                .OrderBy(t => t.Nom.ToLower())
+                .Skip(offset)
+                .Take(limit)
+                .ToList();
         }
 
         /// <inheritdoc />

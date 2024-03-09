@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
+using SpotifyAPI.Web;
 using Webzine.Entity;
 using Webzine.Entity.Fixtures;
 using Webzine.Repository.Contracts;
@@ -53,7 +54,11 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Artiste> FindArtistes(int offset, int limit)
         {
-            throw new NotImplementedException();
+            return DataFactory.Artistes
+                .OrderBy(t => t.Nom.ToLower())
+                .Skip(offset)
+                .Take(limit)
+                .ToList();
         }
 
         /// <inheritdoc />

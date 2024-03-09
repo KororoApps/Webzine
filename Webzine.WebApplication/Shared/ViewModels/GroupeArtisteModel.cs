@@ -15,5 +15,10 @@ namespace Webzine.WebApplication.Shared.ViewModels
         /// Obtient ou définit un groupe de d'artistes.
         /// </summary>
         public IEnumerable<Artiste> Artistes { get; set; } = new List<Artiste>();
+
+        /// <summary>
+        /// Obtient ou définit un le numéro de la page.
+        /// </summary>
+        public int NumeroPage { get; set; } = 0;
     }
 }
