@@ -32,7 +32,7 @@ namespace Webzine.WebApplication.Controllers
             // Création du modèle de vue contenant la liste des titres.
             GroupeTitreModel groupeTitreModel = new()
             {
-                ParutionChroniqueTitre = this.titreRepository.ParutionChroniqueTitres(titreToSkip, int.Parse(this.configuration["NbDernierTitreChronique"])),
+                ParutionChroniqueTitre = this.titreRepository.FindTitres(titreToSkip, int.Parse(this.configuration["NbDernierTitreChronique"])),
                 TitresPopulaires = this.titreRepository.FindTitresLesPlusLike(),
                 NumeroPage = NumeroPage,
             };

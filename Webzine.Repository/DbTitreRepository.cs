@@ -61,15 +61,10 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public List<Titre> ParutionChroniqueTitres(int offset, int limit)
-        {
             return _context.Titres.AsNoTracking()
                 .Include(t => t.Artiste)
                 .Include(t => t.Styles)
+                .Include(t => t.Commentaires)
                 .OrderByDescending(t => t.DateCreation)
                 .Skip(offset)
                 .Take(limit)
