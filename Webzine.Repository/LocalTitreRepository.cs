@@ -42,15 +42,14 @@ namespace Webzine.Repository
             return  DataFactory.Titres
                 .First(t => t.IdTitre == id);
         }
-
         /// <inheritdoc />
-        public List<Titre> ParutionChroniqueTitres(int offset, int limit)
+        public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
             return DataFactory.Titres
                 .OrderByDescending(t => t.DateCreation)
-                .Take(3)
+                .Skip(offset)
+                .Take(limit)
                 .ToList();
-
         }
 
         /// <inheritdoc />
@@ -104,12 +103,6 @@ namespace Webzine.Repository
             return DataFactory.Titres
                 .Sum(t => t.NbLectures);
 
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<Titre> FindTitres(int offset, int limit)
-        {
-            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
