@@ -65,6 +65,19 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
+        public List<Titre> ParutionChroniqueTitres(int offset, int limit)
+        {
+            return _context.Titres.AsNoTracking()
+                .Include(t => t.Artiste)
+                .Include(t => t.Styles)
+                .OrderByDescending(t => t.DateCreation)
+                .Skip(offset)
+                .Take(limit)
+                .ToList();
+
+        }
+
+        /// <inheritdoc />
         public IEnumerable<Titre> FindAll()
         {
             //TODO : Les titres sont reliés avec tout ici
@@ -97,18 +110,6 @@ namespace Webzine.Repository
                 .Include(t => t.Artiste)
                 .Include(t => t.Styles)
                 .OrderByDescending(t => t.NbLikes)
-                .Take(3)
-                .ToList();
-
-        }
-
-        /// <inheritdoc />
-        public List<Titre> ParutionChroniqueTitres()
-        {
-            return _context.Titres.AsNoTracking()
-                .Include(t => t.Artiste)
-                .Include(t => t.Styles)
-                .OrderByDescending(t => t.DateCreation)
                 .Take(3)
                 .ToList();
 

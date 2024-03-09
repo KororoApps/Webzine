@@ -42,6 +42,13 @@ namespace Webzine.Repository.Contracts
         /// <returns>Une collection de titres paginée et triée par date de création.</returns>
         IEnumerable<Titre> FindTitres(int offset, int limit);
 
+
+        /// <summary>
+        /// Renvoie la liste des titres du plus récent au plus ancien chroniqué et en retourne un certain nombre.
+        /// </summary>
+        /// <returns>Une liste de titres triés par date de publication de la chronique.</returns>
+        List<Titre> ParutionChroniqueTitres(int offset, int limit);
+
         /// <summary>
         /// Retourne tous les titres.
         /// </summary>
@@ -60,11 +67,6 @@ namespace Webzine.Repository.Contracts
         /// <returns>Une liste de titres triés par likes.</returns>
         List<Titre> FindTitresLesPlusLike();
 
-        /// <summary>
-        /// Renvoie la liste des titres du plus récent au plus ancien chroniqué et en retourne un certain nombre.
-        /// </summary>
-        /// <returns>Une liste de titres triés par date de publication de la chronique.</returns>
-        List<Titre> ParutionChroniqueTitres();
 
         /// <summary>
         /// Renvoie le nombre de titres.

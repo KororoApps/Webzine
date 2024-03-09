@@ -44,6 +44,16 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
+        public List<Titre> ParutionChroniqueTitres(int offset, int limit)
+        {
+            return DataFactory.Titres
+                .OrderByDescending(t => t.DateCreation)
+                .Take(3)
+                .ToList();
+
+        }
+
+        /// <inheritdoc />
         public IEnumerable<Titre> FindAll()
         {
             return DataFactory.Titres
@@ -71,15 +81,6 @@ namespace Webzine.Repository
 
         }
 
-        /// <inheritdoc />
-        public List<Titre> ParutionChroniqueTitres()
-        {
-            return DataFactory.Titres
-                .OrderByDescending(t => t.DateCreation)
-                .Take(3)
-                .ToList();
-
-        }
 
         /// <inheritdoc />
         public int NombreTitres()
