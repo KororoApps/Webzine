@@ -15,5 +15,10 @@ namespace Webzine.WebApplication.Shared.ViewModels
         /// Obtient ou définit la liste des commentaires associés au groupe.
         /// </summary>
         public IEnumerable<Commentaire> Commentaires { get; set; } = new List<Commentaire>();
+
+        /// <summary>
+        /// Obtient ou définit un le numéro de la page.
+        /// </summary>
+        public int NumeroPage { get; set; } = 0;
     }
 }

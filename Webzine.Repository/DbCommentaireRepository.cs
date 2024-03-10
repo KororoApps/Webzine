@@ -69,7 +69,14 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Commentaire> FindCommentaires(int offset, int limit)
         {
-            throw new NotImplementedException();
+            return _context.Commentaires
+                .Include(c => c.Titre)
+                .Include(c => c.Titre.Artiste).AsNoTracking()
+                .AsNoTracking()  // Ajout de AsNoTracking ici
+                .OrderByDescending(t => t.DateCreation)
+                .Skip(offset)
+                .Take(limit)
+                .ToList();
         }
     }
 }

@@ -46,7 +46,14 @@
 </table>
 
 <div class="d-flex  justify-content-end">
-    <a class="btn btn-secondary p-2" asp-area="" asp-controller="Commentaire" asp-action="">
+    @if (Model.NumeroPage > 0)
+    {
+        <a class="btn btn-secondary p-2 m-4" asp-area="Admin" asp-controller="Commentaire" asp-action="" asp-route-NumeroPage="@(Model.NumeroPage - 1)">
+            &lt;&lt; Commentaires plus récents
+        </a>
+    }
+
+    <a class="btn btn-secondary p-2 m-4" asp-area="Admin" asp-controller="Commentaire" asp-action="" asp-route-NumeroPage="@(Model.NumeroPage + 1)">
         Commentaires plus anciens >>
     </a>
 </div>
