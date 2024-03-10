@@ -29,6 +29,9 @@ namespace Webzine.WebApplication.Controllers
         /// <param name="numeroPage">Indique le nunméro de page sur lequel nous sommes.</param>
         public IActionResult Index(int numeroPage)
         {
+            // Charger la valeur MaxDescriptionTitre depuis la configuration
+            int maxDescriptionTitre = int.Parse(this.configuration["MaxDescriptionTitre"]);
+
             var titreToSkip = numeroPage * int.Parse(this.configuration["NbDernierTitreChronique"]);
             // Création du modèle de vue contenant la liste des titres.
             GroupeTitreModel groupeTitreModel = new()
@@ -36,6 +39,7 @@ namespace Webzine.WebApplication.Controllers
                 ParutionChroniqueTitre = this.titreRepository.FindTitres(titreToSkip, int.Parse(this.configuration["NbDernierTitreChronique"])),
                 TitresPopulaires = this.titreRepository.FindTitresLesPlusLike(int.Parse(this.configuration["NbMoisDernierTitrePopulaire"])),
                 NumeroPage = numeroPage,
+                MaxDescriptionTitre = maxDescriptionTitre,
             };
 
             // Retour de la vue avec le modèle de vue contenant les détails des titres.

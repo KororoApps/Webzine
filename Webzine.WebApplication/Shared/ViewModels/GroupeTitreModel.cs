@@ -45,5 +45,10 @@ namespace Webzine.WebApplication.Shared.ViewModels
         /// Obtient ou définit un le numéro de la page.
         /// </summary>
         public int NumeroPage { get; set; } = 0;
+
+        /// <summary>
+        /// Obtient ou définit un la longueur de la chronique en page d'accueil.
+        /// </summary>
+        public int MaxDescriptionTitre { get; set; }
     }
 }
