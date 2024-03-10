@@ -55,7 +55,7 @@ Vous pouvez retrouver nos [Comptes Rendus d'Activité](https://groupesbtest.shar
 
 ### 2.2.5. Elodie SPONTON
 
-| TÂCHES																						| TEMPS PASSE |
+| TÂCHES JALON 1																						| TEMPS PASSE |
 |-----------------------------------------------------------------------------------------------|:-----------:|
 | Création des fausses données pour l'entité Titre												|    4h00     |
 | Création des fausses données pour l'entité Commentaire										|    1h00     |
@@ -65,7 +65,7 @@ Vous pouvez retrouver nos [Comptes Rendus d'Activité](https://groupesbtest.shar
 | Création de la page Titre																		|    6h00     |
 | Création de la page Recherche																	|    0h30     | 
 | Création de la page API Version																|    0h10     |
-| Création des pages administration (CRUD) des commentaires										|             |
+| Création des pages administration (CRUD) des commentaires										|             2h00 |
 | Création des pages administration (CRUD)  des titres											|    8h00     |
 | Création des pages administration (CRUD)  des styles											|    3h00     | 
 | Création des pages administration (CRUD)  des commentaires									|    2h30     |
@@ -73,6 +73,28 @@ Vous pouvez retrouver nos [Comptes Rendus d'Activité](https://groupesbtest.shar
 | Mise en place des fausses données pour l'ensemble de l'application dans un fichier commun     |    11h00    |
 | Création d'un View Component et d'une View Partial pour la colonne à droite de l'application  |    3h30     | 
 | Mise au propre du code																		|    7h00     |
+
+</br>
+
+| TÂCHES JALON 2																						| TEMPS PASSE |
+|-----------------------------------------------------------------------------------------------|:-----------:|
+| Corrections Jalon 1												|    7h00     |
+| Création de la BDD avec SQLite et la seeder avec les fausses données										|    4h00     |
+| Mise en place des Repositories pour les Titres									|    3h00     |
+| Ajout de certaines fonctionnalités qui n'étaient pas présentes dans l'application ou qui fonctionnaient mal										|    12h00     |
+| Entité Style : Mise en place de la validation du formulaire de création d'un style										|    1h15     |
+| Entité Artiste : Mise en place de la validation du formulaire de création d'un artiste 										|    0h15     |
+| Entité Commentaire : Mise en place de la validation du formulaire de création d'un commentaire 									|    1h30     |
+| Entité Titre : Mise en place de la validation du formulaire de création d'un titre 			|    1h00     |
+| Entité Style : Mise en place de la validation du formulaire de l'édition d'un style 			|    00h45     |
+| Correction de la création de la BDD		|    1h00     |
+
+</br>
+
+| TÂCHES JALON 3																						| TEMPS PASSE |
+|-----------------------------------------------------------------------------------------------|:-----------:|
+| Seeder la BDD avec les données de Spotify												|    19h00     |
+| Pagination des pages Accueil, Liste des titres, Listes des commentaires et Liste des artistes										|    4h30     |
 
 ## 2.2. Fonctionnement de l'équipe
 
