@@ -15,6 +15,8 @@ namespace Webzine.Business
             _styleRepository = styleRepository;
             _artisteRepository = artisteRepository;
         }
+
+        /// <inheritdoc />
         public Artiste FindArtisteLePlusChronique()
         {
             return _artisteRepository.FindAll().Where(a => a.Titres != null && a.Titres.Count != 0)
@@ -22,6 +24,7 @@ namespace Webzine.Business
                 .First();
         }
 
+        /// <inheritdoc />
         public Artiste FindArtisteLePlusTitresAlbumDistinct()
         {
             return _artisteRepository.FindAll().Where(a => a.Titres != null && a.Titres.Count != 0)
@@ -31,6 +34,7 @@ namespace Webzine.Business
                 .First();
         }
 
+        /// <inheritdoc />
         public Titre FindTitreLePlusLu()
         {
             return _titreRepository.FindAll()
@@ -38,31 +42,38 @@ namespace Webzine.Business
                 .First();
         }
 
+        /// <inheritdoc />
         public int NombreArtistes()
         {
             return _artisteRepository.FindAll().Count();
         }
 
+        /// <inheritdoc />
         public int NombreBiographiesArtistes()
         {
             return _artisteRepository.FindAll().Count(a => !string.IsNullOrEmpty(a.Biographie));
         }
+
+        /// <inheritdoc />
         public int NombreLectures()
         {
             return _titreRepository.FindAll().Sum(t => t.NbLectures);
         }
 
+        /// <inheritdoc />
         public int NombreLikes()
         {
             return _titreRepository.FindAll()
                 .Sum(t => t.NbLikes);
         }
 
+        /// <inheritdoc />
         public int NombreStyles()
         {
             return _styleRepository.FindAll().Count();
         }
 
+        /// <inheritdoc />
         public int NombreTitres()
         {
             return _titreRepository.FindAll()
