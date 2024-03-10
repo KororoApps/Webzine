@@ -99,11 +99,15 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public List<Titre> FindTitresLesPlusLike()
+        public List<Titre> FindTitresLesPlusLike(int longueurPeriode)
         {
+            // Calcule de la date à partir de laquelle les titres doivent être récupérés
+            var dateDebutPeriode = DateTime.Now.AddMonths(-longueurPeriode);
+
             return _context.Titres.AsNoTracking()
                 .Include(t => t.Artiste)
                 .Include(t => t.Styles)
+                .Where(t => t.DateCreation >= dateDebutPeriode) //Filtrer les titres créés pendant cette période
                 .OrderByDescending(t => t.NbLikes)
                 .Take(3)
                 .ToList();

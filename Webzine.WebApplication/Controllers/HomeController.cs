@@ -34,7 +34,7 @@ namespace Webzine.WebApplication.Controllers
             GroupeTitreModel groupeTitreModel = new()
             {
                 ParutionChroniqueTitre = this.titreRepository.FindTitres(titreToSkip, int.Parse(this.configuration["NbDernierTitreChronique"])),
-                TitresPopulaires = this.titreRepository.FindTitresLesPlusLike(),
+                TitresPopulaires = this.titreRepository.FindTitresLesPlusLike(int.Parse(this.configuration["NbMoisDernierTitrePopulaire"])),
                 NumeroPage = numeroPage,
             };
 

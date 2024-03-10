@@ -58,7 +58,7 @@ namespace Webzine.Repository.Contracts
         /// Renvoie les titres du plus liké au moins liké et en retourne un certain nombre.
         /// </summary>
         /// <returns>Une liste de titres triés par likes.</returns>
-        List<Titre> FindTitresLesPlusLike();
+        List<Titre> FindTitresLesPlusLike(int longueurPeriode);
 
 
         /// <summary>
