@@ -56,18 +56,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Titre> FindAll()
         {
-            return DataFactory.Titres
-                .OrderByDescending(c => c.DateCreation)
-                .ToList();
-
-        }
-
-        /// <inheritdoc />
-        public Titre FindTitreLePlusLu()
-        {
-            return DataFactory.Titres
-                .OrderByDescending(t => t.NbLectures)
-                .First();
+            return DataFactory.Titres;
 
         }
 
@@ -82,31 +71,6 @@ namespace Webzine.Repository
                 .OrderByDescending(t => t.NbLikes)
                 .Take(3)
                 .ToList ();
-
-        }
-
-
-        /// <inheritdoc />
-        public int NombreTitres()
-        {
-            return DataFactory.Titres
-                .Count;
-
-        }
-
-        /// <inheritdoc />
-        public int NombreLikes()
-        {
-            return DataFactory.Titres
-                .Sum(t => t.NbLikes);
-
-        }
-
-        /// <inheritdoc />
-        public int NombreLectures()
-        {
-            return DataFactory.Titres
-                .Sum(t => t.NbLectures);
 
         }
 

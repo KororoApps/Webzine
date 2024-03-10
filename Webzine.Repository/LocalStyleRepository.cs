@@ -38,10 +38,18 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Style> FindAll()
         {
-            return DataFactory.Styles
-                .OrderByDescending(c => c.Libelle)
-                .ToList();
+            return DataFactory.Styles;
 
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Style> FindStyles(int offset, int limit)
+        {
+            return DataFactory.Styles
+                .OrderBy(c => c.Libelle.ToLower())
+                .Skip(offset)
+                .Take(limit)
+                .ToList();
         }
 
         /// <inheritdoc />
@@ -63,14 +71,6 @@ namespace Webzine.Repository
             {
                 styleAEditer.Libelle = style.Libelle;
             }
-        }
-
-        /// <inheritdoc />
-        public int NombreStyles()
-        {
-            return DataFactory.Styles
-                .Count;
-
         }
     }
 }

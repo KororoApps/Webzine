@@ -80,21 +80,7 @@ namespace Webzine.Repository
             //Enlever style
             //Faire passer que le nombre de commentaires
             //Voir peut-être pour plutôt utiliser le FindTitres car il vaut mieux paginer.
-            return _context.Titres.AsNoTracking()
-                .Include(t => t.Artiste)
-                .Include(t => t.Commentaires)
-                .Include(t => t.Styles)
-                .OrderByDescending(t => t.DateCreation)
-                .ToList();
-
-        }
-
-        //// <inheritdoc />
-        public Titre FindTitreLePlusLu()
-        {
-            return _context.Titres.AsNoTracking()
-                .OrderByDescending(t => t.NbLectures)
-                .First();
+            return _context.Titres.AsNoTracking();
 
         }
 
@@ -111,34 +97,6 @@ namespace Webzine.Repository
                 .OrderByDescending(t => t.NbLikes)
                 .Take(3)
                 .ToList();
-
-        }
-
-        /// <inheritdoc />
-        public int NombreTitres()
-        {
-            //TODO !! Retourner directement  sans passer par une variable
-            //FAIRE CA PARTOUT !!
-            //EVITER D'ALLER TROP A LA LIGNE !!
-            //REMPLIR LES <return> !!!!! </return> !!!!
-            return _context.Titres
-                .Count();
-
-        }
-
-        /// <inheritdoc />
-        public int NombreLikes()
-        {
-            return _context.Titres
-                .Sum(t => t.NbLikes);
-
-        }
-
-        /// <inheritdoc />
-        public int NombreLectures()
-        {
-            return _context.Titres
-                .Sum(t => t.NbLectures);
 
         }
 

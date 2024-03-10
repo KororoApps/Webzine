@@ -4,7 +4,9 @@ using Webzine.EntitiesContext;
 using Webzine.EntitiesContext.Seeders;
 using Webzine.Repository;
 using Webzine.Repository.Contracts;
+using Webzine.Business.Contracts;
 using Webzine.WebApplication.Filters;
+using Webzine.Business;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +35,7 @@ if (builder.Configuration.GetSection("Repository").Value == "Local")
     builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
     builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
     builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 }
 else if (builder.Configuration.GetSection("Repository").Value == "db")
 {
@@ -40,7 +43,7 @@ else if (builder.Configuration.GetSection("Repository").Value == "db")
     builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
     builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
     builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
-    builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
+    builder.Services.AddScoped<IDashboardService, DashboardService>();
 }
 
 // Configure les services nécessaires.

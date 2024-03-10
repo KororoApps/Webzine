@@ -67,17 +67,7 @@ namespace Webzine.Repository
 
         }
 
-        /// <inheritdoc />
-        public Artiste FindArtisteLePlusChronique()
-        {
-            return DataFactory.Artistes
-                .Where(a => a.Titres != null && a.Titres.Count != 0)
-                .OrderByDescending(a => a.Titres.Sum(t => t.Chronique != null ? 1 : 0))
-                .First();
-
-        }
-
-        /// <inheritdoc />
+        /*/ <inheritdoc />
         public Artiste FindArtisteLePlusTitresAlbumDistinct()
         {
             return DataFactory.Artistes
@@ -87,23 +77,7 @@ namespace Webzine.Repository
                 .Count()) 
                 .First();
 
-        }
-
-        /// <inheritdoc />
-        public int NombreBioArtistes()
-        {
-            return DataFactory.Artistes
-                .Count(a => !string.IsNullOrEmpty(a.Biographie));
-
-        }
-
-        /// <inheritdoc />
-        public int NombreArtistes()
-        {
-            return DataFactory.Artistes
-                .Count;
-
-        }
+        }*/
 
         /// <summary>
         /// Renvoie les résultats de la recherche coté artistes.

@@ -48,36 +48,7 @@ namespace Webzine.Repository.Contracts
         /// <returns>Une collection de tous les titres.</returns>
         IEnumerable<Titre> FindAll();
 
-        /// <summary>
-        /// Renvoie le titre le plus lu.
-        /// </summary>
-        /// <returns>Le titre le plus lu.</returns>
-        Titre FindTitreLePlusLu();
-
-        /// <summary>
-        /// Renvoie les titres du plus liké au moins liké et en retourne un certain nombre.
-        /// </summary>
-        /// <returns>Une liste de titres triés par likes.</returns>
         List<Titre> FindTitresLesPlusLike(int longueurPeriode);
-
-
-        /// <summary>
-        /// Renvoie le nombre de titres.
-        /// </summary>
-        /// <returns>Le nombre total de titres.</returns>
-        int NombreTitres();
-
-        /// <summary>
-        /// Renvoie le nombre de likes totaux.
-        /// </summary>
-        /// <returns>Le nombre total de likes.</returns>
-        int NombreLikes();
-
-        /// <summary>
-        /// Renvoie le nombre de lectures totales.
-        /// </summary>
-        /// <returns>Le nombre total de lectures.</returns>
-        int NombreLectures();
 
         /// <summary>
         /// Incrémente le nombre de lectures d'un titre.

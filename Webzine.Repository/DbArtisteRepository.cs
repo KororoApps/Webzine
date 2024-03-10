@@ -65,9 +65,7 @@ namespace Webzine.Repository
         {
             return _context.Artistes
                 .Include(c => c.Titres)
-                .AsNoTracking()  // Ajout de AsNoTracking ici
-                .OrderBy(t => t.Nom.ToLower())
-                .ToList();
+                .AsNoTracking();
 
         }
 
@@ -91,17 +89,7 @@ namespace Webzine.Repository
         }
 
 
-        /// <inheritdoc />
-        public Artiste FindArtisteLePlusChronique()
-        {
-            return _context.Artistes.AsNoTracking()
-                .Where(a => a.Titres != null && a.Titres.Count != 0)
-                .OrderByDescending(a => a.Titres.Sum(t => t.Chronique != null ? 1 : 0))
-                .First();
-
-        }
-
-        /// <inheritdoc />
+       /*// <inheritdoc />
         public Artiste FindArtisteLePlusTitresAlbumDistinct()
         {
             return _context.Artistes
@@ -113,23 +101,7 @@ namespace Webzine.Repository
                 .Count())
                 .First();
 
-        }
-
-        /// <inheritdoc />
-        public int NombreBioArtistes()
-        {
-            return _context.Artistes
-                .Count(a => !string.IsNullOrEmpty(a.Biographie));
-
-        }
-
-        /// <inheritdoc />
-        public int NombreArtistes()
-        {
-            return _context.Artistes
-                .Count();
-
-       }
+        }*/
 
         /// <summary>
         /// Renvoie les résultats de la recherche coté artistes.
