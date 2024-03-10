@@ -43,6 +43,7 @@ else if (builder.Configuration.GetSection("Repository").Value == "db")
     builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
     builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
     builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
+ builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
     builder.Services.AddScoped<IDashboardService, DashboardService>();
 }
 
