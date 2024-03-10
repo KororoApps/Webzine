@@ -64,20 +64,15 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Update(Artiste artiste)
         {
+            var artisteAEditer = DataFactory.Artistes
+                .First(a => a.IdArtiste  == artiste.IdArtiste);
 
+            if (artisteAEditer != null)
+            {
+                artisteAEditer.Nom = artiste.Nom;
+                artisteAEditer.Biographie = artiste.Biographie;
+            }
         }
-
-        /*/ <inheritdoc />
-        public Artiste FindArtisteLePlusTitresAlbumDistinct()
-        {
-            return DataFactory.Artistes
-                .Where(a => a.Titres != null && a.Titres.Count != 0)
-                .OrderByDescending(a => a.Titres
-                .GroupBy(t => new { t.Album, t.Artiste }) 
-                .Count()) 
-                .First();
-
-        }*/
 
         /// <summary>
         /// Renvoie les résultats de la recherche coté artistes.
