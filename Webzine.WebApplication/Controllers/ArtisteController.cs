@@ -34,4 +34,10 @@ namespace Webzine.WebApplication.Controllers
             return this.View(artisteModel);
         }
     }
+
+
+   
 }
+
+
+
