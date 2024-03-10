@@ -46,12 +46,24 @@ Vous pouvez retrouver nos [Comptes Rendus d'Activité](https://groupesbtest.shar
 
 ### 2.2.4. Antoine COUVERT
 
-| TÂCHES																										| TEMPS PASSE |
+| JALON 1																										| TEMPS PASSE |
 |---------------------------------------------------------------------------------------------------------------|:-----------:|
 | Création de la page Contact et de ses données																	|     3h15    |
 | Test de l'application et listing des bugs et des points ne correspondant pas exactement à la demande client   |     2h30    |
 | Création des fausses données pour l'entité Style																|     4h00    | 
 |  Création de l'entité Style																					|     1h00    |
+
+| JALON 2																										| TEMPS PASSE |
+|---------------------------------------------------------------------------------------------------------------|:-----------:|
+|  Mise en place du Webzine.EntitiesContext																				|     3h00    |
+|  Complétion des controllers et correction des bugs																					|     2h30    |
+|  Correction de bugs																				|     4h00    |
+
+| JALON 3																										| TEMPS PASSE |
+|---------------------------------------------------------------------------------------------------------------|:-----------:|
+|  Review de la documentaion |     1h30    |
+|  Logs et Filtres																					|     5h00    |
+|  Début de la couche Service																				|     4h00    |
 
 ### 2.2.5. Elodie SPONTON
 
