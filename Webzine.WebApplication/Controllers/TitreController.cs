@@ -35,10 +35,14 @@ namespace Webzine.WebApplication.Controllers
             // Génération d'une liste de styles.
             var commentaires = this.commentaireRepository.FindCommentairesByIdTitre(id);
 
+            Titre titre = this.titreRepository.Find(id);
+
+            this.titreRepository.IncrementNbLectures(titre);
+
             // Création du modèle de vue contenant un titre.
             var titreModel = new TitreModel
             {
-                Titre = this.titreRepository.Find(id),
+                Titre = titre,
                 Commentaires = commentaires,
             };
 
