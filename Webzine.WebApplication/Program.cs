@@ -69,14 +69,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-// Définit les routes pour les controllers.
-app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 /*Routes specifiques */
 
@@ -144,6 +137,21 @@ app.MapControllerRoute(
     name: "adminCommentaireEdit",
     pattern: "/administration/commentaire/delete/{id}",
     defaults: new { controller = "Commentaire", action = "Delete" });
+
+// Route pour les pages à l'accueil
+    app.MapControllerRoute(
+        name: "accueilPage",
+        pattern: "page/{NumeroPage}",
+        defaults: new { controller = "Home", action = "Index" });
+
+// Définit les routes pour les controllers.
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 // Utilise un scope pour gérer les services.
 using (var scope = app.Services.CreateScope())
