@@ -138,6 +138,12 @@ app.MapControllerRoute(
     pattern: "/administration/commentaire/delete/{id}",
     defaults: new { controller = "Commentaire", action = "Delete" });
 
+// Route pour la page Contact
+    app.MapControllerRoute(
+        name: "contactPage",
+        pattern: "contact/",
+        defaults: new { controller = "Contact", action = "Index" });
+
 // Route pour les pages à l'accueil
     app.MapControllerRoute(
         name: "accueilPage",
