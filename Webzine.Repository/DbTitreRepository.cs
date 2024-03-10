@@ -151,7 +151,13 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void IncrementNbLikes(Titre titre)
         {
-            throw new NotImplementedException();
+            // Charger le titre depuis la base de données avec suivi des modifications
+            Titre existingTitre = _context.Titres.Find(titre.IdTitre);
+
+            existingTitre.NbLikes++;
+            // Attacher et mettre à jour
+            _context.Attach(existingTitre).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         /// <inheritdoc />

@@ -48,16 +48,14 @@ namespace Webzine.WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult IncrementLike(int idTitre)
+        public IActionResult IncrementLike(Titre titre)
         {
-            // Récupérez le titre à partir de la base de données
-            var titre = this.titreRepository.Find(idTitre);
 
             // Incrémentez le nombre de likes
             this.titreRepository.IncrementNbLikes(titre);
 
             // Redirigez ou retournez à la vue selon vos besoins
-            return this.RedirectToAction(nameof(this.Index));
+            return this.RedirectToAction(nameof(this.Index), new { id = titre.IdTitre });
         }
 
         /// <summary>

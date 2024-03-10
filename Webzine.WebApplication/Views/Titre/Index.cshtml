@@ -27,7 +27,8 @@
                         <p class="me-4 ">Le @Model.Titre.DateCreation.ToString("dd/MM/yyyy HH:mm")</p>
                     </div>
                     <div class="d-inline-flex">
-                        <form method="post" asp-controller="Titre" asp-action="Index" asp-route-id="@Model.Titre.IdTitre">
+                        <form method="post" asp-controller="Titre" asp-action="IncrementLike" asp-route-id="@Model.Titre.IdTitre">
+                            <input type="hidden" asp-for="@Model.Titre.IdTitre" />
                             <button type="submit" class="btn m-0 p-0"><i class="fa-solid fa-heart p-1"></i></button>
                         </form>
                         <p class="me-4 ">@Model.Titre.NbLikes</p>

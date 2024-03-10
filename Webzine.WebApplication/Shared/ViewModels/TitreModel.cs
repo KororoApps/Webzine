@@ -42,5 +42,7 @@ namespace Webzine.WebApplication.Shared.ViewModels
         public Artiste Artiste { get; set; }
 
         public IEnumerable<Style> StylesIds { get; set; } = [];
+
+        public int IncrementationLikes;
     }
 }
