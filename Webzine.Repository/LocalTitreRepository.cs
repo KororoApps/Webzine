@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SpotifyAPI.Web;
 using Webzine.EntitiesContext;
 using Webzine.Entity;
 using Webzine.Entity.Fixtures;
@@ -112,13 +113,20 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void IncrementNbLectures(Titre titre)
         {
-            throw new NotImplementedException();
+
+            Titre existingTitre = DataFactory.Titres
+                .First(t => t.IdTitre == titre.IdTitre);
+
+            existingTitre.NbLectures++;
         }
 
         /// <inheritdoc />
         public void IncrementNbLikes(Titre titre)
         {
-            throw new NotImplementedException();
+            Titre existingTitre = DataFactory.Titres
+                .First(t => t.IdTitre == titre.IdTitre);
+
+            existingTitre.NbLikes++;
         }
 
         /// <inheritdoc />
