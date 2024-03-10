@@ -15,5 +15,10 @@ namespace Webzine.WebApplication.Shared.ViewModels
         /// Obtient ou définit une collection de styles.
         /// </summary>
         public IEnumerable<Style> Styles { get; set; } = new List<Style>();
+
+        /// <summary>
+        /// Obtient ou définit un le numéro de la page.
+        /// </summary>
+        public int NumeroPage { get; set; } = 0;
     }
 }
