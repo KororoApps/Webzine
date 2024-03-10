@@ -5,6 +5,7 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Webzine.Business.Contracts;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
@@ -35,10 +36,14 @@ namespace Webzine.WebApplication.Controllers
             // Génération d'une liste de styles.
             var commentaires = this.commentaireRepository.FindCommentairesByIdTitre(id);
 
+            Titre titre = this.titreRepository.Find(id);
+
+            this.titreRepository.IncrementNbLectures(titre);
+
             // Création du modèle de vue contenant un titre.
             var titreModel = new TitreModel
             {
-                Titre = this.titreRepository.Find(id),
+                Titre = titre,
                 Commentaires = commentaires,
             };
 
@@ -48,16 +53,14 @@ namespace Webzine.WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult IncrementLike(int idTitre)
+        public IActionResult IncrementLike(Titre titre)
         {
-            // Récupérez le titre à partir de la base de données
-            var titre = this.titreRepository.Find(idTitre);
 
             // Incrémentez le nombre de likes
             this.titreRepository.IncrementNbLikes(titre);
 
             // Redirigez ou retournez à la vue selon vos besoins
-            return this.RedirectToAction(nameof(this.Index));
+            return this.RedirectToAction(nameof(this.Index), new { id = titre.IdTitre });
         }
 
         /// <summary>

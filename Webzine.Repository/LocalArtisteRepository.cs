@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
+using SpotifyAPI.Web;
 using Webzine.Entity;
 using Webzine.Entity.Fixtures;
 using Webzine.Repository.Contracts;
@@ -53,51 +54,24 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Artiste> FindArtistes(int offset, int limit)
         {
-            throw new NotImplementedException();
+            return DataFactory.Artistes
+                .OrderBy(t => t.Nom.ToLower())
+                .Skip(offset)
+                .Take(limit)
+                .ToList();
         }
 
         /// <inheritdoc />
         public void Update(Artiste artiste)
         {
+            var artisteAEditer = DataFactory.Artistes
+                .First(a => a.IdArtiste  == artiste.IdArtiste);
 
-        }
-
-        /// <inheritdoc />
-        public Artiste FindArtisteLePlusChronique()
-        {
-            return DataFactory.Artistes
-                .Where(a => a.Titres != null && a.Titres.Count != 0)
-                .OrderByDescending(a => a.Titres.Sum(t => t.Chronique != null ? 1 : 0))
-                .First();
-
-        }
-
-        /// <inheritdoc />
-        public Artiste FindArtisteLePlusTitresAlbumDistinct()
-        {
-            return DataFactory.Artistes
-                .Where(a => a.Titres != null && a.Titres.Count != 0)
-                .OrderByDescending(a => a.Titres
-                .GroupBy(t => new { t.Album, t.Artiste }) 
-                .Count()) 
-                .First();
-
-        }
-
-        /// <inheritdoc />
-        public int NombreBioArtistes()
-        {
-            return DataFactory.Artistes
-                .Count(a => !string.IsNullOrEmpty(a.Biographie));
-
-        }
-
-        /// <inheritdoc />
-        public int NombreArtistes()
-        {
-            return DataFactory.Artistes
-                .Count;
-
+            if (artisteAEditer != null)
+            {
+                artisteAEditer.Nom = artiste.Nom;
+                artisteAEditer.Biographie = artiste.Biographie;
+            }
         }
 
         /// <summary>

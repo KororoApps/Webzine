@@ -46,10 +46,6 @@ namespace Webzine.Repository.Contracts
         /// <param name="style">Le style à mettre à jour.</param>
         void Update(Style style);
 
-        /// <summary>
-        /// Retourne le nombre de styles.
-        /// </summary>
-        /// <returns>Le nombre total de styles.</returns>
-        public int NombreStyles();
+        IEnumerable<Style> FindStyles(int offset, int limit);
     }
 }

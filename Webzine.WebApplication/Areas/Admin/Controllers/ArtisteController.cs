@@ -35,11 +35,14 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// Action pour afficher la liste des artistes.
         /// </summary>
         /// <returns>Vue contenant la liste des artistes.</returns>
-        public IActionResult Index()
+        public IActionResult Index(int numeroPage)
         {
+            var titreToSkip = numeroPage * 15;
+
             var artisteModel = new GroupeArtisteModel
             {
-                Artistes = this.artisteRepository.FindAll(),
+                Artistes = this.artisteRepository.FindArtistes(titreToSkip, 15),
+                NumeroPage = numeroPage,
             };
 
             return this.View(artisteModel);

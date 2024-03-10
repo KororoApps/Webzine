@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SpotifyAPI.Web;
 using Webzine.EntitiesContext;
 using Webzine.Entity;
 using Webzine.Entity.Fixtures;
@@ -42,29 +43,31 @@ namespace Webzine.Repository
             return  DataFactory.Titres
                 .First(t => t.IdTitre == id);
         }
+        /// <inheritdoc />
+        public IEnumerable<Titre> FindTitres(int offset, int limit)
+        {
+            return DataFactory.Titres
+                .OrderByDescending(t => t.DateCreation)
+                .Skip(offset)
+                .Take(limit)
+                .ToList();
+        }
 
         /// <inheritdoc />
         public IEnumerable<Titre> FindAll()
         {
-            return DataFactory.Titres
-                .OrderByDescending(c => c.DateCreation)
-                .ToList();
+            return DataFactory.Titres;
 
         }
 
         /// <inheritdoc />
-        public Titre FindTitreLePlusLu()
+        public List<Titre> FindTitresLesPlusLike(int longueurPeriode)
         {
-            return DataFactory.Titres
-                .OrderByDescending(t => t.NbLectures)
-                .First();
+            // Calcule de la date à partir de laquelle les titres doivent être récupérés
+            var dateDebutPeriode = DateTime.Now.AddMonths(-longueurPeriode);
 
-        }
-
-        /// <inheritdoc />
-        public List<Titre> FindTitresLesPlusLike()
-        {
             return DataFactory.Titres
+                .Where(t => t.DateCreation >= dateDebutPeriode) //Filtrer les titres créés pendant cette période
                 .OrderByDescending(t => t.NbLikes)
                 .Take(3)
                 .ToList ();
@@ -72,55 +75,22 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public List<Titre> ParutionChroniqueTitres()
-        {
-            return DataFactory.Titres
-                .OrderByDescending(t => t.DateCreation)
-                .Take(3)
-                .ToList();
-
-        }
-
-        /// <inheritdoc />
-        public int NombreTitres()
-        {
-            return DataFactory.Titres
-                .Count;
-
-        }
-
-        /// <inheritdoc />
-        public int NombreLikes()
-        {
-            return DataFactory.Titres
-                .Sum(t => t.NbLikes);
-
-        }
-
-        /// <inheritdoc />
-        public int NombreLectures()
-        {
-            return DataFactory.Titres
-                .Sum(t => t.NbLectures);
-
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<Titre> FindTitres(int offset, int limit)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         public void IncrementNbLectures(Titre titre)
         {
-            throw new NotImplementedException();
+
+            Titre existingTitre = DataFactory.Titres
+                .First(t => t.IdTitre == titre.IdTitre);
+
+            existingTitre.NbLectures++;
         }
 
         /// <inheritdoc />
         public void IncrementNbLikes(Titre titre)
         {
-            throw new NotImplementedException();
+            Titre existingTitre = DataFactory.Titres
+                .First(t => t.IdTitre == titre.IdTitre);
+
+            existingTitre.NbLikes++;
         }
 
         /// <inheritdoc />

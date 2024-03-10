@@ -52,7 +52,11 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Commentaire> FindCommentaires(int offset, int limit)
         {
-            throw new NotImplementedException();
+            return DataFactory.Commentaires
+                .OrderBy(t => t.DateCreation)
+                .Skip(offset)
+                .Take(limit)
+                .ToList();
         }
     }
 }

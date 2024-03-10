@@ -39,11 +39,11 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Titre titre)
         {
-                _context.Titres
-                    .Remove(titre);
+            _context.Titres
+                .Remove(titre);
 
-                _context
-                    .SaveChanges();
+            _context
+                .SaveChanges();
 
         }
 
@@ -61,7 +61,15 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
-            throw new NotImplementedException();
+            return _context.Titres.AsNoTracking()
+                .Include(t => t.Artiste) 
+                .Include(t => t.Styles)
+                .Include(t => t.Commentaires)
+                .OrderByDescending(t => t.DateCreation)
+                .Skip(offset)
+                .Take(limit)
+                .ToList();
+
         }
 
         /// <inheritdoc />
@@ -72,30 +80,20 @@ namespace Webzine.Repository
             //Enlever style
             //Faire passer que le nombre de commentaires
             //Voir peut-être pour plutôt utiliser le FindTitres car il vaut mieux paginer.
-            return _context.Titres.AsNoTracking()
-                .Include(t => t.Artiste)
-                .Include(t => t.Commentaires)
-                .Include(t => t.Styles)
-                .OrderByDescending(t => t.DateCreation)
-                .ToList();
-
-        }
-
-        //// <inheritdoc />
-        public Titre FindTitreLePlusLu()
-        {
-            return _context.Titres.AsNoTracking()
-                .OrderByDescending(t => t.NbLectures)
-                .First();
+            return _context.Titres.AsNoTracking();
 
         }
 
         /// <inheritdoc />
-        public List<Titre> FindTitresLesPlusLike()
+        public List<Titre> FindTitresLesPlusLike(int longueurPeriode)
         {
+            // Calcule de la date à partir de laquelle les titres doivent être récupérés
+            var dateDebutPeriode = DateTime.Now.AddMonths(-longueurPeriode);
+
             return _context.Titres.AsNoTracking()
                 .Include(t => t.Artiste)
                 .Include(t => t.Styles)
+                .Where(t => t.DateCreation >= dateDebutPeriode) //Filtrer les titres créés pendant cette période
                 .OrderByDescending(t => t.NbLikes)
                 .Take(3)
                 .ToList();
@@ -103,55 +101,27 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public List<Titre> ParutionChroniqueTitres()
-        {
-            return _context.Titres.AsNoTracking()
-                .Include(t => t.Artiste)
-                .Include(t => t.Styles)
-                .OrderByDescending(t => t.DateCreation)
-                .Take(3)
-                .ToList();
-
-        }
-
-        /// <inheritdoc />
-        public int NombreTitres()
-        {
-            //TODO !! Retourner directement  sans passer par une variable
-            //FAIRE CA PARTOUT !!
-            //EVITER D'ALLER TROP A LA LIGNE !!
-            //REMPLIR LES <return> !!!!! </return> !!!!
-            return _context.Titres
-                .Count();
-
-        }
-
-        /// <inheritdoc />
-        public int NombreLikes()
-        {
-            return _context.Titres
-                .Sum(t => t.NbLikes);
-
-        }
-
-        /// <inheritdoc />
-        public int NombreLectures()
-        {
-            return _context.Titres
-                .Sum(t => t.NbLectures);
-
-        }
-
-        /// <inheritdoc />
         public void IncrementNbLectures(Titre titre)
         {
-            throw new NotImplementedException();
+            // Charger le titre depuis la base de données avec suivi des modifications
+            Titre existingTitre = _context.Titres.Find(titre.IdTitre);
+
+            existingTitre.NbLectures++;
+            // Attacher et mettre à jour
+            _context.Attach(existingTitre).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         /// <inheritdoc />
         public void IncrementNbLikes(Titre titre)
         {
-            throw new NotImplementedException();
+            // Charger le titre depuis la base de données avec suivi des modifications
+            Titre existingTitre = _context.Titres.Find(titre.IdTitre);
+
+            existingTitre.NbLikes++;
+            // Attacher et mettre à jour
+            _context.Attach(existingTitre).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         /// <inheritdoc />

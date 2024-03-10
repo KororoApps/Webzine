@@ -26,15 +26,16 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// Action pour afficher la liste des commentaires.
         /// </summary>
         /// <returns>Vue contenant la liste des commentaires.</returns>
-        public IActionResult Index()
+        public IActionResult Index(int numeroPage)
         {
-            // Création du modèle de vue contenant la liste de Commentaires.
+            var titreToSkip = numeroPage * 10;
+
             var commentaireModel = new GroupeCommentaireModel
             {
-                Commentaires = this.commentaireRepository.FindAll(),
+                Commentaires = this.commentaireRepository.FindCommentaires(titreToSkip, 10),
+                NumeroPage = numeroPage,
             };
 
-            // Retour de la vue avec le modèle de vue contenant les commentaires générés.
             return this.View(commentaireModel);
         }
 

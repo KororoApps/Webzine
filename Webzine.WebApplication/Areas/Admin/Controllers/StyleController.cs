@@ -26,17 +26,22 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// Affiche la liste des styles.
         /// </summary>
         /// <returns>Vue avec la liste des styles.</returns>
-        public IActionResult Index()
+        public IActionResult Index(int numeroPage)
         {
+            var titreToSkip = numeroPage * 15;
+
             // Création du modèle de vue contenant la liste de Styles.
             var styleModel = new GroupeStyleModel
             {
-                Styles = this.styleRepository.FindAll(),
+                Styles = this.styleRepository.FindStyles(titreToSkip, 15),
             };
 
             // Retour de la vue avec le modèle de vue contenant les styles générés.
             return this.View(styleModel);
+
         }
+
+
 
         /// <summary>
         /// Affiche la vue de création d'un nouveau style.

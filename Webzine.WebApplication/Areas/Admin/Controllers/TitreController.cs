@@ -33,11 +33,15 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         /// Affiche la liste des titres.
         /// </summary>
         /// <returns>Vue avec la liste des titres générés.</returns>
-        public IActionResult Index()
+        /// <param name="numeroPage">Indique le nunméro de page sur lequel nous sommes.</param>
+        public IActionResult Index(int numeroPage)
         {
+            var titreToSkip = numeroPage * 15;
+
             var titreModel = new GroupeTitreModel
             {
-                Titres = this.titreRepository.FindAll(),
+                Titres = this.titreRepository.FindTitres(titreToSkip, 15),
+                NumeroPage = numeroPage,
             };
 
             return this.View(titreModel);

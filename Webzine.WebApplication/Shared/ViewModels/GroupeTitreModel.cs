@@ -40,5 +40,15 @@ namespace Webzine.WebApplication.Shared.ViewModels
         /// Obtient ou définit un style dans le groupe.
         /// </summary>
         public string? Libelle { get; set; }
+
+        /// <summary>
+        /// Obtient ou définit un le numéro de la page.
+        /// </summary>
+        public int NumeroPage { get; set; } = 0;
+
+        /// <summary>
+        /// Obtient ou définit un la longueur de la chronique en page d'accueil.
+        /// </summary>
+        public int MaxDescriptionTitre { get; set; }
     }
 }

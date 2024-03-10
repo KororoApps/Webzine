@@ -5,18 +5,16 @@
 namespace Webzine.WebApplication.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.Repository.Contracts;
+    using Webzine.Business.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
     /// Contrôleur responsable de la gestion du tableau de bord administratif.
     /// </summary>
     [Area("Admin")]
-    public class DashboardController(IArtisteRepository artisteRepository, IStyleRepository styleRepository, ITitreRepository titreRepository) : Controller
+    public class DashboardController(IDashboardService dashboardService) : Controller
     {
-        private readonly IArtisteRepository artisteRepository = artisteRepository;
-        private readonly IStyleRepository styleRepository = styleRepository;
-        private readonly ITitreRepository titreRepository = titreRepository;
+        private readonly IDashboardService dashboardService = dashboardService;
 
         /// <summary>
         /// Affiche le dashboard avec des données.
@@ -26,15 +24,15 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
         {
             var model = new DashboardModel();
 
-            model.TitrePlusLu = this.titreRepository.FindTitreLePlusLu();
-            model.NbTitres = this.titreRepository.NombreTitres();
-            model.NbStyles = this.styleRepository.NombreStyles();
-            model.NbArtistes = this.artisteRepository.NombreArtistes();
-            model.ArtistePlusDeTitres = this.artisteRepository.FindArtisteLePlusTitresAlbumDistinct();
-            model.NbBioArtiste = this.artisteRepository.NombreBioArtistes();
-            model.NbLikes = this.titreRepository.NombreLikes();
-            model.NbLectures = this.titreRepository.NombreLectures();
-            model.ArtistePlusChronique = this.artisteRepository.FindArtisteLePlusChronique();
+            model.TitrePlusLu = this.dashboardService.FindTitreLePlusLu();
+            model.NbTitres = this.dashboardService.NombreTitres();
+            model.NbStyles = this.dashboardService.NombreStyles();
+            model.NbArtistes = this.dashboardService.NombreArtistes();
+            model.ArtistePlusDeTitres = this.dashboardService.FindArtisteLePlusTitresAlbumDistinct();
+            model.NbBioArtiste = this.dashboardService.NombreBiographiesArtistes();
+            model.NbLikes = this.dashboardService.NombreLikes();
+            model.NbLectures = this.dashboardService.NombreLectures();
+            model.ArtistePlusChronique = this.dashboardService.FindArtisteLePlusChronique();
 
             return this.View(model);
         }

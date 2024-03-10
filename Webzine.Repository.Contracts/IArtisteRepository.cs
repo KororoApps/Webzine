@@ -46,29 +46,6 @@ namespace Webzine.Repository.Contracts
         /// <param name="artiste">L'artiste à mettre à jour.</param>
         void Update(Artiste artiste);
 
-        /// <summary>
-        /// Renvoie l'artiste le plus chroniqué.
-        /// </summary>
-        /// <returns>L'artiste le plus chroniqué.</returns>
-        Artiste FindArtisteLePlusChronique();
-
-        /// <summary>
-        /// Renvoie l'artiste ayant le plus de titres provenant d'albums distincts.
-        /// </summary>
-        /// <returns>L'artiste avec le plus de titres d'albums distincts.</returns>
-        Artiste FindArtisteLePlusTitresAlbumDistinct();
-
-        /// <summary>
-        /// Renvoie le nombre de biographies d'artistes.
-        /// </summary>
-        /// <returns>Le nombre de biographies d'artistes.</returns>
-        public int NombreBioArtistes();
-
-        /// <summary>
-        /// Renvoie le nombre d'artistes.
-        /// </summary>
-        /// <returns>Le nombre total d'artistes.</returns>
-        public int NombreArtistes();
 
         /// <summary>
         /// Renvoie le premier artiste ayant le nom spécifié.
