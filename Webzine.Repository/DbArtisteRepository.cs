@@ -88,21 +88,6 @@ namespace Webzine.Repository
             _context.SaveChanges();
         }
 
-
-       /*// <inheritdoc />
-        public Artiste FindArtisteLePlusTitresAlbumDistinct()
-        {
-            return _context.Artistes
-                .Include(a => a.Titres).AsNoTracking()
-                .Where(a => a.Titres != null && a.Titres.Any())
-                .OrderByDescending(a => a.Titres
-                .Select(t => new { t.Album, t.Artiste })
-                .Distinct()
-                .Count())
-                .First();
-
-        }*/
-
         /// <summary>
         /// Renvoie les résultats de la recherche coté artistes.
         public IEnumerable<Artiste> Search(string mot)
