@@ -8,6 +8,8 @@ using Webzine.Business.Contracts;
 using Webzine.WebApplication.Filters;
 using Webzine.Business;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -69,58 +71,31 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
+
+
+
 /*Routes specifiques administration */
 
 // Admin Commentaire Create/Delete/Edit
 app.MapControllerRoute(
-    name: "adminCommentaire",
-    pattern: "/administration/commentaire/delete/{id?}",
-    defaults: new { area = "Admin", controller = "Commentaire", action="Delete" });
+    name: "commentaires",
+    pattern: "administration/commentaires/{action=Index}/{id?}",
+    defaults: new { area = "Admin", controller = "Commentaire" });
 
-// Admin CommentairesListe
 app.MapControllerRoute(
-    name: "adminCommentairessList",
-    pattern: "/administration/commentaires/",
-    defaults: new { area = "Admin", controller = "Commentaire", action = "Index" });
-
-// Admin Style Create/Delete/Edit
+    name: "artistes",
+    pattern: "administration/artistes/{action=Index}/{id?}",
+    defaults: new { area = "Admin", controller = "Artiste" });
+ 
 app.MapControllerRoute(
-    name: "adminStyle",
-    pattern: "/administration/style/{action}/{id?}",
-    defaults: new { area = "Admin", controller = "Style" },
-    constraints: new { action = "create|delete|edit" });
-
-// Admin StylesListe
+    name: "titres",
+    pattern: "administration/titres/{action=Index}/{id?}",
+    defaults: new { area = "Admin", controller = "Titre" });
+ 
 app.MapControllerRoute(
-    name: "adminStylesList",
-    pattern: "/administration/styles/",
-    defaults: new { area = "Admin", controller = "Style", action = "Index" });
-
-// Admin Titre Create/Delete/Edit
-app.MapControllerRoute(
-    name: "adminTitre",
-    pattern: "/administration/titre/{action}/{id?}",
-    defaults: new { area = "Admin", controller = "Titre" },
-    constraints: new { action = "create|delete|edit" });
-
-// Admin TitresListe
-app.MapControllerRoute(
-    name: "adminTitresList",
-    pattern: "/administration/titres/",
-    defaults: new { area = "Admin", controller = "Titre", action = "Index" });
-
-// Admin Artiste Create/Delete/Edit
-app.MapControllerRoute(
-    name: "adminArtistes",
-    pattern: "/administration/artiste/{action}/{id?}",
-    defaults: new { area = "Admin", controller = "Artiste" },
-    constraints: new { action = "create|delete|edit" });
-
-// Admin ArtistesListe
-app.MapControllerRoute(
-    name: "adminArtistesList",
-    pattern: "/administration/artistes/",
-    defaults: new { area = "Admin", controller = "Artiste", action = "Index" });
+    name: "styles",
+    pattern: "administration/styles/{action=Index}/{id?}",
+    defaults: new { area = "Admin", controller = "Style" });
 
 
 // Admin CommentaireSuprimer
@@ -150,7 +125,6 @@ app.MapControllerRoute(
     pattern: "titre/commenter",
     defaults: new { controller = "Titre", action = "Commenter" });
 
-
 // titre selon le style de musique démandée
 app.MapControllerRoute(
     name: "style",
@@ -171,15 +145,16 @@ app.MapControllerRoute(
 
 // Route pour la page Contact
 app.MapControllerRoute(
-        name: "contactPage",
-        pattern: "contact/",
-        defaults: new { controller = "Contact", action = "Index" });
+    name: "contactPage",
+    pattern: "contact/",
+    defaults: new { controller = "Contact", action = "Index" });
 
 // Route pour les pages à l'accueil
-    app.MapControllerRoute(
-        name: "accueilPage",
-        pattern: "page/{NumeroPage}",
-        defaults: new { controller = "Home", action = "Index" });
+app.MapControllerRoute(
+    name: "accueilPage",
+    pattern: "page/{NumeroPage}",
+    defaults: new { controller = "Home", action = "Index" },
+    constraints: new { page = @"\d+" });
 
 // Définit les routes pour les controllers.
 app.MapControllerRoute(
@@ -189,6 +164,7 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 // Utilise un scope pour gérer les services.
 using (var scope = app.Services.CreateScope())
