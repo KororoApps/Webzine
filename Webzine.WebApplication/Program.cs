@@ -69,71 +69,13 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-
-
 /*Routes specifiques */
-
-
-
-// Titre id
-/*app.MapControllerRoute(
-    name: "consulterTitre",
-    pattern: "titre/{id}/{artiste}/{titre}",
-    defaults: new { controller = "Titre", action = "Index" });*/
-
-
-// Admin ArtistesSupprimer
-app.MapControllerRoute(
-    name: "adminArtistesSupprimer",
-    pattern: "/administration/artiste/delete/{id}",
-    defaults: new { controller = "Artiste", action = "Delete" });
-
-// Admin ArtistesEdit
-app.MapControllerRoute(
-    name: "adminArtistesEdit",
-    pattern: "/administration/artiste/edit/{id}",
-    defaults: new { controller = "Artiste", action = "Edit" });
-
-// Admin TitreSuprimer
-app.MapControllerRoute(
-    name: "adminTitreEdit",
-    pattern: "/administration/titre/delete/{id}",
-    defaults: new { controller = "Titre", action = "Delete"});
-
-// Admin TitreEdit
-app.MapControllerRoute(
-    name: "adminTitreEdit",
-    pattern: "/administration/titre/edit/{id}",
-    defaults: new { controller = "Titre", action = "Edit" });
-
-// Admin StyleSuprimer
-app.MapControllerRoute(
-    name: "adminStyleEdit",
-    pattern: "/administration/style/delete/{id}",
-    defaults: new { controller = "Style", action = "Delete" });
-
-// Admin StyleEdit
-app.MapControllerRoute(
-    name: "adminStyleEdit",
-    pattern: "/administration/style/edit/{id}",
-    defaults: new { controller = "Style", action = "Edit" });
-
-// Admin CommentaireSuprimer
-app.MapControllerRoute(
-    name: "adminCommentaireEdit",
-    pattern: "/administration/commentaire/delete/{id}",
-    defaults: new { controller = "Commentaire", action = "Delete" });
-
-
-
-
 
 // titre selon le style de musique démandée
 app.MapControllerRoute(
     name: "style",
     pattern: "titres/style/{style}",
-    defaults: new { controller = "Titre", action = "Index" });
-
+    defaults: new { controller = "Titre", action = "Style" });
 
 // Titre par Id
 app.MapControllerRoute(
@@ -202,13 +144,6 @@ app.UseStaticFiles();
 
 // Active le middleware permettant le routage des requêtes entrantes.
 app.UseRouting();
-
-/*app.Use(async asyc (context, next) =>
-{
-
-    // TODO : slugify it
-    await next.Invoke();
-});*/
 
 // Exécute l'application.
 app.Run();
