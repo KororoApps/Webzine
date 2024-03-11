@@ -71,6 +71,19 @@ if (!app.Environment.IsDevelopment())
 
 /*Routes specifiques administration */
 
+// Admin Style Create/Delete/Edit
+app.MapControllerRoute(
+    name: "adminStyle",
+    pattern: "/administration/style/{action}/{id?}",
+    defaults: new { area = "Admin", controller = "Style" },
+    constraints: new { action = "create|delete|edit" });
+
+// Admin StylesListe
+app.MapControllerRoute(
+    name: "adminStylesList",
+    pattern: "/administration/styles/",
+    defaults: new { area = "Admin", controller = "Style", action = "Index" });
+
 // Admin Titre Create/Delete/Edit
 app.MapControllerRoute(
     name: "adminTitre",
