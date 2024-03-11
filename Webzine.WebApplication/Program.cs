@@ -71,6 +71,25 @@ if (!app.Environment.IsDevelopment())
 
 /*Routes specifiques */
 
+// Rechercher un titre ou un artiste
+app.MapControllerRoute(
+    name: "recherche",
+    pattern: "recherche",
+    defaults: new { controller = "Recherche", action = "Index" });
+
+// Liker un titre
+app.MapControllerRoute(
+    name: "liker",
+    pattern: "titre/liker",
+    defaults: new { controller = "Titre", action = "Liker" });
+
+// Commenter un titre
+app.MapControllerRoute(
+    name: "commenter",
+    pattern: "titre/commenter",
+    defaults: new { controller = "Titre", action = "Commenter" });
+
+
 // titre selon le style de musique démandée
 app.MapControllerRoute(
     name: "style",

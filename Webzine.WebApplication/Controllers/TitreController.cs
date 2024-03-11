@@ -53,7 +53,7 @@ namespace Webzine.WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult IncrementLike(Titre titre)
+        public IActionResult Liker(Titre titre)
         {
 
             // Incrémentez le nombre de likes
@@ -87,9 +87,6 @@ namespace Webzine.WebApplication.Controllers
         /// <param name="commentaire">L'entité Commentaire à créer.</param>
         /// <param name="IdTitre">Id du titre lié au commentaire.</param>
         /// <returns>Redirection vers l'action Index après la création.</returns>
-        /// 
-        //TODO : Metre la création d'un commentaire dans TItreController. Voir les routes.
-        //TODO : Appeler la méthode "Commenter"
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Commenter(Commentaire commentaire, int IdTitre)
