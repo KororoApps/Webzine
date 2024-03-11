@@ -71,6 +71,20 @@ if (!app.Environment.IsDevelopment())
 
 /*Routes specifiques administration */
 
+// Admin Artiste Create/Delete/Edit
+app.MapControllerRoute(
+    name: "adminArtistes",
+    pattern: "/administration/artiste/{action}/{id?}",
+    defaults: new { area = "Admin", controller = "Artiste" },
+    constraints: new { action = "create|delete|edit" });
+
+// Admin ArtistesListe
+app.MapControllerRoute(
+    name: "adminArtistesEdit",
+    pattern: "/administration/artistes/",
+    defaults: new { area = "Admin", controller = "Artiste", action = "Index" });
+
+
 // Admin CommentaireSuprimer
 app.MapControllerRoute(
     name: "dashboard",
@@ -83,7 +97,7 @@ app.MapControllerRoute(
 // Rechercher un titre ou un artiste
 app.MapControllerRoute(
     name: "recherche",
-    pattern: "recherche",
+    pattern: "recherche/",
     defaults: new { controller = "Recherche", action = "Index" });
 
 // Liker un titre
@@ -102,7 +116,7 @@ app.MapControllerRoute(
 // titre selon le style de musique démandée
 app.MapControllerRoute(
     name: "style",
-    pattern: "titres/style/{style}",
+    pattern: "titres/style/{style}/",
     defaults: new { controller = "Titre", action = "Style" });
 
 // Titre par Id
