@@ -23,7 +23,7 @@
         </p>
 
         @* Formulaire pour soumettre la demande de suppression *@
-        <form method="post" asp-action="DeleteConfirmed" asp-controller="Commentaire" asp-route-id="@Model.Commentaire.IdCommentaire">
+        <form method="post" asp-action="DeleteConfirmed" asp-controller="commentaire" asp-route-id="@Model.Commentaire.IdCommentaire">
             @* Utilisez un champ anti-forgery pour protéger le formulaire *@
             @Html.AntiForgeryToken()
 
@@ -33,10 +33,10 @@
         </form>
     </div>
 
-    @*Lien vers le retour à l'administration des commentaires.*@
+    @*Lien vers le retour à l'Administrationistration des commentaires.*@
     <div>
-        <a class=" fw-normal" asp-area="Admin" asp-controller="Commentaire" asp-action="Index">
-            Retour à l'administration des commentaires
+        <a class=" fw-normal" asp-area="administration" asp-controller="commentaire" asp-action="index">
+            Retour à l'Administrationistration des commentaires
         </a>
     </div>
 </div>

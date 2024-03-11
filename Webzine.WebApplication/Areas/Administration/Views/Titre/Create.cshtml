@@ -12,7 +12,7 @@
 <hr />
 
 @*Formulaire de création de la page.*@
-<form method="post" asp-area="Admin" asp-action="Create" asp-controller="Titre" class="d-flex">
+<form method="post" asp-area="administration" asp-action="create" asp-controller="titre" class="d-flex">
     <div class="container">
         @*<div asp-validation-summary="All" class="text-danger"></div>*@
         <div class="form-group row mb-5">
@@ -130,9 +130,9 @@
             </div>
         </div>
 
-        @*Bouton de retour à l'adminitration des titres.*@
-        <a class=" fw-normal" asp-area="Admin" asp-controller="Titre" asp-action="Index">
-            Retour à l'administration des titres
+        @*Bouton de retour à l'Administrationitration des titres.*@
+        <a class=" fw-normal" asp-area="administration" asp-controller="titre" asp-action="index">
+            Retour à l'Administrationistration des titres
         </a>
     </div>
 </form>

@@ -13,7 +13,7 @@
 
 @*Formulaire d'édition' de la page.*@
 <div>
-    <form method="post" asp-area="Admin" asp-action="Edit" asp-controller="Titre" class="d-flex">
+    <form method="post" asp-area="administration" asp-action="edit" asp-controller="titre" class="d-flex">
         <input type="hidden" asp-for="@Model.Titre.IdTitre" />
         <div class="container">
             <div class="form-group row mb-5">
@@ -144,9 +144,9 @@
                     </div>
                 </div>
 
-                @*Bouton de retour à l'adminitration des titres.*@
-                <a class=" fw-normal" asp-area="Admin" asp-controller="Titre" asp-action="Index">
-                    Retour à l'administration des titres
+                @*Bouton de retour à l'Administrationitration des titres.*@
+                <a class=" fw-normal" asp-area="administration" asp-controller="titre" asp-action="index">
+                    Retour à l'Administrationistration des titres
                 </a>
             </div>
         </div>

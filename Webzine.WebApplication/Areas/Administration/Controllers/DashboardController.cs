@@ -2,16 +2,16 @@
 // Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
 // </copyright>
 
-namespace Webzine.WebApplication.Areas.Admin.Controllers
+namespace Webzine.WebApplication.Areas.Administration.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Business.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
-    /// Contrôleur responsable de la gestion du tableau de bord administratif.
+    /// Contrôleur responsable de la gestion du tableau de bord Administrationistratif.
     /// </summary>
-    [Area("Admin")]
+    [Area("Administration")]
     public class DashboardController(IDashboardService dashboardService) : Controller
     {
         private readonly IDashboardService dashboardService = dashboardService;

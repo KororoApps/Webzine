@@ -2,7 +2,7 @@
 // Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
 // </copyright>
 
-namespace Webzine.WebApplication.Areas.Admin.Controllers
+namespace Webzine.WebApplication.Areas.Administration.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
@@ -10,7 +10,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
-    /// Contrôleur responsable de la gestion des opérations liées aux titres dans la zone d'administration.
+    /// Contrôleur responsable de la gestion des opérations liées aux titres dans la zone d'Administrationistration.
     /// </summary>
     /// <remarks>
     /// Ce contrôleur gère l'affichage de la liste des titres, la création, la suppression et l'édition d'un titre.
@@ -22,7 +22,7 @@ namespace Webzine.WebApplication.Areas.Admin.Controllers
     /// <param name="titreRepository">Le repository des titres utilisé par le contrôleur.</param>
     /// <param name="styleRepository">Le repository des styles utilisé par le contrôleur.</param>
     /// <param name="artisteRepository">Le repository des artistes utilisé par le contrôleur.</param>
-    [Area("Admin")]
+    [Area("Administration")]
     public class TitreController(ITitreRepository titreRepository, IStyleRepository styleRepository, IArtisteRepository artisteRepository) : Controller
     {
         private readonly ITitreRepository titreRepository = titreRepository;

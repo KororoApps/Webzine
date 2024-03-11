@@ -7,6 +7,7 @@ using Webzine.Repository.Contracts;
 using Webzine.Business.Contracts;
 using Webzine.WebApplication.Filters;
 using Webzine.Business;
+using Webzine.WebApplication.Middlewares;
 
 
 
@@ -72,58 +73,42 @@ if (!app.Environment.IsDevelopment())
 }
 
 
+// Active la possibilité de servir des fichiers statiques présents dans le dossier wwwroot.
+app.UseStaticFiles();
+
+// Active le middleware permettant le routage des requêtes entrantes.
+app.UseRouting();
+
+app.UseMiddleware<SingularizeMiddleware>();
 
 
-/*Routes specifiques administration */
+/*Routes specifiques Administrationistration */
 
-// Admin Commentaire Create/Delete/Edit
-app.MapControllerRoute(
-    name: "commentaires",
-    pattern: "administration/commentaires/{action=Index}/{id?}",
-    defaults: new { area = "Admin", controller = "Commentaire" });
-
+// Liste des artistes
 app.MapControllerRoute(
     name: "artistes",
-    pattern: "administration/artistes/{action=Index}/{id?}",
-    defaults: new { area = "Admin", controller = "Artiste" });
- 
+    pattern: "administration/artistes/{id?}",
+    defaults: new { area = "Administration", controller = "Artiste", action = "Index" });
+
+// Liste des titres
 app.MapControllerRoute(
     name: "titres",
-    pattern: "administration/titres/{action=Index}/{id?}",
-    defaults: new { area = "Admin", controller = "Titre" });
- 
+    pattern: "administration/titres/{id?}",
+    defaults: new { area = "Administration", controller = "Titre", action = "Index" });
+
+// Liste des styles
 app.MapControllerRoute(
     name: "styles",
-    pattern: "administration/styles/{action=Index}/{id?}",
-    defaults: new { area = "Admin", controller = "Style" });
-
-
-// Admin CommentaireSuprimer
-app.MapControllerRoute(
-    name: "dashboard",
-    pattern: "/administration/dashboard/",
-    defaults: new { area = "Admin", controller = "Dashboard", action = "Index" });
-
+    pattern: "administration/styles/{id?}",
+    defaults: new { area = "Administration", controller = "Style", action = "Index" });
 
 /*Routes specifiques consultation */
 
-// Rechercher un titre ou un artiste
+// Liste des commentaires
 app.MapControllerRoute(
-    name: "recherche",
-    pattern: "recherche/",
-    defaults: new { controller = "Recherche", action = "Index" });
-
-// Liker un titre
-app.MapControllerRoute(
-    name: "liker",
-    pattern: "titre/liker",
-    defaults: new { controller = "Titre", action = "Liker" });
-
-// Commenter un titre
-app.MapControllerRoute(
-    name: "commenter",
-    pattern: "titre/commenter",
-    defaults: new { controller = "Titre", action = "Commenter" });
+    name: "commentaires",
+    pattern: "administration/commentaires/{id}",
+    defaults: new { area = "Administration", controller = "Commentaire", action = "Index" });
 
 // titre selon le style de musique démandée
 app.MapControllerRoute(
@@ -142,12 +127,6 @@ app.MapControllerRoute(
     name: "artiste",
     pattern: "artiste/{nom}",
     defaults: new { controller = "Artiste", action = "Index" });
-
-// Route pour la page Contact
-app.MapControllerRoute(
-    name: "contactPage",
-    pattern: "contact/",
-    defaults: new { controller = "Contact", action = "Index" });
 
 // Route pour les pages à l'accueil
 app.MapControllerRoute(
@@ -195,11 +174,8 @@ using (var scope = app.Services.CreateScope())
 
 }
 
-// Active la possibilité de servir des fichiers statiques présents dans le dossier wwwroot.
-app.UseStaticFiles();
 
-// Active le middleware permettant le routage des requêtes entrantes.
-app.UseRouting();
+
 
 // Exécute l'application.
 app.Run();

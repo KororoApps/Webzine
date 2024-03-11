@@ -23,7 +23,7 @@
     {
         <div class="d-inline">
             <i class="fa-solid fa-user"></i>
-            <a asp-area="" asp-controller="Artiste" asp-action="Index" asp-route-id="@artiste.IdArtiste">@artiste.Nom</a>
+            <a asp-area="" asp-controller="artiste" asp-action="index" asp-route-id="@artiste.IdArtiste">@artiste.Nom</a>
         </div>
     }
 }
@@ -43,7 +43,7 @@ else
                 <img src="@titre.UrlJaquette" alt="Image" class="img-fluid custom-shape w-100 h-100 object-fit-cover">
             </div>
             <div class="col-md-6 mt-1">
-                <a asp-area="" asp-controller="Titre" asp-action="Index" asp-route-id="@titre.IdTitre">@titre.Artiste.Nom - @titre.Album - @titre.Libelle</a>
+                <a asp-area="" asp-controller="titre" asp-action="index" asp-route-id="@titre.IdTitre">@titre.Artiste.Nom - @titre.Album - @titre.Libelle</a>
                 <p>Durée : @TimeSpan.FromSeconds(double.Parse(titre.Duree)).ToString(@"mm\:ss")</p>
             </div>
         </div>

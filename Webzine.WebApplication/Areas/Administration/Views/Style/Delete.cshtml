@@ -16,7 +16,7 @@
         <p>Etes-vous sûr de vouloir supprimer le style de musique <span>"@Model.Style.Libelle"</span> ?</p>
 
         @* Formulaire pour soumettre la demande de suppression *@
-        <form method="post" asp-action="Delete" asp-controller="Style">
+        <form method="post" asp-action="delete" asp-controller="style">
             <input type="hidden" asp-for="Style.IdStyle" />
 
 
@@ -26,10 +26,10 @@
         </form>
     </div>
 
-    @*Lien vers le retour à l'administration du artiste.*@
+    @*Lien vers le retour à l'Administrationistration du artiste.*@
     <div>
-        <a class=" fw-normal" asp-area="Admin" asp-controller="Style" asp-action="Index">
-            Retour à l'administration des styles
+        <a class=" fw-normal" asp-area="administration" asp-controller="style" asp-action="index">
+            Retour à l'Administrationistration des styles
         </a>
     </div>
 </div>

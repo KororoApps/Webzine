@@ -27,15 +27,15 @@
         {
             <tr>
                 <td>
-                    <a asp-area="" asp-controller="Artiste" asp-action="Index" asp-route-id="@commentaire.Titre.Artiste.IdArtiste" >@commentaire.Titre.Artiste.Nom</a>
-                    - <a asp-area="" asp-controller="Titre" asp-action="Index" asp-route-id="@commentaire.Titre.IdTitre">@commentaire.Titre.Libelle</a>
+                    <a asp-area="" asp-controller="artiste" asp-action="index" asp-route-id="@commentaire.Titre.Artiste.IdArtiste" >@commentaire.Titre.Artiste.Nom</a>
+                    - <a asp-area="" asp-controller="titre" asp-action="index" asp-route-id="@commentaire.Titre.IdTitre">@commentaire.Titre.Libelle</a>
                 </td>
                 <td>@commentaire.Auteur</td>
                 <td>@commentaire.Contenu</td>
                 <td>@commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm:ss")</td>
                 <td class="text-center">
                     <div class="d-flex justify-content-center">
-                        <a asp-area="Admin" asp-controller="Commentaire" asp-action="Delete" asp-route-id="@commentaire.IdCommentaire">
+                        <a asp-area="administration" asp-controller="commentaire" asp-action="delete" asp-route-id="@commentaire.IdCommentaire">
                             <i class="fa-solid fa-trash text-primary icone"></i>
                         </a>
                     </div>
@@ -48,12 +48,12 @@
 <div class="d-flex  justify-content-end">
     @if (Model.NumeroPage > 0)
     {
-        <a class="btn btn-secondary p-2 m-4" asp-area="Admin" asp-controller="Commentaire" asp-action="Index" asp-route-NumeroPage="@(Model.NumeroPage - 1)">
+        <a class="btn btn-secondary p-2 m-4" asp-area="administration" asp-controller="commentaire" asp-action="index" asp-route-NumeroPage="@(Model.NumeroPage - 1)">
             &lt;&lt; Commentaires plus récents
         </a>
     }
 
-    <a class="btn btn-secondary p-2 m-4" asp-area="Admin" asp-controller="Commentaire" asp-action="Index" asp-route-NumeroPage="@(Model.NumeroPage + 1)">
+    <a class="btn btn-secondary p-2 m-4" asp-area="administration" asp-controller="commentaire" asp-action="index" asp-route-NumeroPage="@(Model.NumeroPage + 1)">
         Commentaires plus anciens >>
     </a>
 </div>

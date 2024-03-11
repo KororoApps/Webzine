@@ -13,7 +13,7 @@
     <div>
         @*Affichage du nom de l'artiste et du titre.*@
         <h3>
-            <a asp-area="" asp-controller="Artiste" asp-action="Index" asp-route-nom="@Model.Titre.Artiste.Nom">
+            <a asp-area="" asp-controller="artiste" asp-action="index" asp-route-nom="@Model.Titre.Artiste.Nom">
                 <span class="text-primary">@Model.Titre.Artiste.Nom</span>
             </a>
             - @Model.Titre.Libelle
@@ -27,7 +27,7 @@
                         <p class="me-4 ">Le @Model.Titre.DateCreation.ToString("dd/MM/yyyy HH:mm")</p>
                     </div>
                     <div class="d-inline-flex">
-                        <form method="post" asp-controller="Titre" asp-action="Liker" asp-route-id="@Model.Titre.IdTitre">
+                        <form method="post" asp-controller="titre" asp-action="liker" asp-route-id="@Model.Titre.IdTitre">
                             <input type="hidden" asp-for="@Model.Titre.IdTitre" />
                             <button type="submit" class="btn m-0 p-0"><i class="fa-solid fa-heart p-1"></i></button>
                         </form>
@@ -44,7 +44,7 @@
 
                             @foreach (var style in Model.Titre.Styles)
                             {
-                                <a asp-area="" asp-controller="Titre" asp-action="Style" asp-route-style="@style.Libelle"><span class="me-4 ">@style.Libelle</span></a>
+                                <a asp-area="" asp-controller="titre" asp-action="style" asp-route-style="@style.Libelle"><span class="me-4 ">@style.Libelle</span></a>
                             }
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                         </a>
                     </div>
                     <div class="d-inline-flex">
-                        <a asp-area="Admin" asp-controller="Titre" asp-action="Edit" asp-route-id="@Model.Titre.IdTitre">
+                        <a asp-area="administration" asp-controller="titre" asp-action="edit" asp-route-id="@Model.Titre.IdTitre">
                             <i class="fa-solid fa-edit text-primary p-2 icone"></i>
                             Editer
                         </a>

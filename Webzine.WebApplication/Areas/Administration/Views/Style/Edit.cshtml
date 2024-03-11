@@ -12,7 +12,7 @@
 <hr />
 
 @*Formulaire d'édition d'un style.*@
-<form method="post" asp-action="Edit" asp-controller="Style" asp-route-id="@Model.Style.IdStyle" class="col-6 d-flex">
+<form method="post" asp-action="edit" asp-controller="style" asp-route-id="@Model.Style.IdStyle" class="col-6 d-flex">
     <div class="container">
         <input type="hidden" asp-for="@Model.Style.IdStyle" />
         <div class="row align-items-center mb-5">
@@ -32,9 +32,9 @@
             </div>
         </div>
 
-        @*Bouton de retour à l'adminitration des styles.*@
-        <a class=" fw-normal" asp-area="Admin" asp-controller="Style" asp-action="Index">
-            Retour à l'administration des styles
+        @*Bouton de retour à l'Administrationitration des styles.*@
+        <a class=" fw-normal" asp-area="administration" asp-controller="style" asp-action="index">
+            Retour à l'Administrationistration des styles
         </a>
     </div>
 </form>

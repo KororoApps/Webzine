@@ -27,7 +27,7 @@ namespace Webzine.WebApplication.Filters
                 .Replace(" (Webzine.WebApplication)", "()")
                 .Replace("Webzine.WebApplication.", "")
                 .Replace("Controllers.", "")
-                .Replace("Areas.Admin.", "")
+                .Replace("Areas.Administration.", "")
                 .Replace(".", "/");
             Logger.Info("Debut de l'action : {actionName}", actionName);
         }
@@ -39,7 +39,7 @@ namespace Webzine.WebApplication.Filters
                 .Replace(" (Webzine.WebApplication)", "()")
                 .Replace("Webzine.WebApplication.", "")
                 .Replace("Controllers.", "")
-                .Replace("Areas.Admin.", "")
+                .Replace("Areas.Administration.", "")
                 .Replace(".", "/");
             Logger.Debug("Fin de l'action : {actionName}", actionName);
         }
@@ -51,7 +51,7 @@ namespace Webzine.WebApplication.Filters
                 .Replace(" (Webzine.WebApplication)", "()")
                 .Replace("Webzine.WebApplication.", "")
                 .Replace("Controllers.", "")
-                .Replace("Areas.Admin.", "")
+                .Replace("Areas.Administration.", "")
                 .Replace(".", "/");
             Logger.Error("Exception à : {actionName}", actionName);
         }
