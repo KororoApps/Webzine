@@ -16,12 +16,12 @@
             var path = context.Request.Path.Value;
             var action = context.Request.RouteValues["action"]?.ToString()?.ToLower();
 
-            if (path.Contains("/Administrationistration/artistes"))
+            if (path.Contains("/administration/artistes"))
             {
                 // Remplacer "artistes" par "artiste" uniquement pour les actions delete, create, edit
                 if (action == "Delete" || action == "Create" || action == "Edit")
                 {
-                    path = path.Replace("/Administrationistration/artistes", "/Administrationistration/artiste");
+                    path = path.Replace("/administration/artistes", "/administration/artiste");
                     context.Request.Path = path;
                 }
             }

@@ -10,7 +10,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
-    /// Contrôleur responsable de la gestion des opérations liées aux commentaires dans la zone d'Administrationistration.
+    /// Contrôleur responsable de la gestion des opérations liées aux commentaires dans la zone d'administration.
     /// </summary>
     /// <remarks>
     /// Ce contrôleur gère l'affichage de la liste des commentaires et leur suppression.

@@ -81,7 +81,7 @@ app.UseRouting();
 
 app.UseMiddleware<SingularizeMiddleware>();
 
-/*Routes specifiques Administrationistration */
+/*Routes specifiques administration */
 
 // Liste des artistes
 app.MapControllerRoute(
