@@ -73,28 +73,14 @@ if (!app.Environment.IsDevelopment())
 
 /*Routes specifiques */
 
-// Page d'un artiste
-app.MapControllerRoute(
-    name: "artiste",
-    pattern: "artiste/{Nom}",
-    defaults: new { controller = "Artiste", action = "Index" });
 
-// Titre par Id
-app.MapControllerRoute(
-    name: "titre",
-    pattern: "titre/{Id}",
-    defaults: new { controller = "Titre", action = "Index" });
+
 // Titre id
-app.MapControllerRoute(
+/*app.MapControllerRoute(
     name: "consulterTitre",
     pattern: "titre/{id}/{artiste}/{titre}",
-    defaults: new { controller = "Titre", action = "Index" });
+    defaults: new { controller = "Titre", action = "Index" });*/
 
-// titre selon le style de musique démandée
-app.MapControllerRoute(
-    name: "style",
-    pattern: "titres/style/{style}",
-    defaults: new { controller = "Titres", action = "Index" });
 
 // Admin ArtistesSupprimer
 app.MapControllerRoute(
@@ -138,8 +124,31 @@ app.MapControllerRoute(
     pattern: "/administration/commentaire/delete/{id}",
     defaults: new { controller = "Commentaire", action = "Delete" });
 
+
+
+
+
+// titre selon le style de musique démandée
+app.MapControllerRoute(
+    name: "style",
+    pattern: "titres/style/{style}",
+    defaults: new { controller = "Titre", action = "Index" });
+
+
+// Titre par Id
+app.MapControllerRoute(
+    name: "titre",
+    pattern: "titre/{Id}",
+    defaults: new { controller = "Titre", action = "Index" });
+
+// Page d'un artiste
+app.MapControllerRoute(
+    name: "artiste",
+    pattern: "artiste/{Nom}",
+    defaults: new { controller = "Artiste", action = "Index" });
+
 // Route pour la page Contact
-    app.MapControllerRoute(
+app.MapControllerRoute(
         name: "contactPage",
         pattern: "contact/",
         defaults: new { controller = "Contact", action = "Index" });
@@ -193,6 +202,13 @@ app.UseStaticFiles();
 
 // Active le middleware permettant le routage des requêtes entrantes.
 app.UseRouting();
+
+/*app.Use(async asyc (context, next) =>
+{
+
+    // TODO : slugify it
+    await next.Invoke();
+});*/
 
 // Exécute l'application.
 app.Run();

@@ -24,11 +24,12 @@ namespace Webzine.WebApplication.Controllers
         /// </summary>
         /// <param name="id">Identifiant du groupe d'artistes.</param>
         /// <returns>Vue contenant la liste des artistes liés au groupe.</returns>
-        public IActionResult Index(int id)
+        public IActionResult Index(string nom)
         {
+
             var artisteModel = new ArtisteModel
             {
-                Artiste = this.artisteRepository.Find(id),
+                Artiste = this.artisteRepository.FindByName(nom),
             };
 
             return this.View(artisteModel);

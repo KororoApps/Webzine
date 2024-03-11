@@ -1,7 +1,7 @@
 ﻿<header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-3 fixed-top">
         <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="">Webzine</a>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Webzine</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -10,7 +10,7 @@
 
                     @*Lien vers l'Accueil*@
                     <li class="nav-item">
-                        <a asp-area="" asp-controller="Home" asp-action="" class="nav-link  dropdown-item">
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link  dropdown-item">
                             <i class="fa-solid fa-house m-1"></i>
                             Accueil
                         </a>
@@ -26,33 +26,33 @@
                         <ul class="dropdown-menu">
 
                             <li>
-                                <a asp-area="Admin" asp-controller="Dashboard" asp-action="" class=" dropdown-item">
+                                <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class=" dropdown-item">
                                     <i class="fa-solid fa-gauge"></i>
                                     Tableau de bord
                                 </a>
                             </li>
                             <li class="dropdown-divider"></li> @*Trait ici*@
                             <li>
-                                <a asp-area="Admin" asp-controller="Artiste" asp-action="" class=" dropdown-item">
+                                <a asp-area="Admin" asp-controller="Artiste" asp-action="Index" class=" dropdown-item">
                                     <i class="fa-solid fa-users"></i>
                                     Artistes
                                 </a>
                             </li>
                             <li>
-                                <a asp-area="Admin" asp-controller="Commentaire" asp-action="" class=" dropdown-item">
+                                <a asp-area="Admin" asp-controller="Commentaire" asp-action="Index" class=" dropdown-item">
                                     <i class="fa-solid fa-comments"></i>
                                     Commentaires
                                 </a>
                             </li>
 
                             <li>
-                                <a asp-area="Admin" asp-controller="Style" asp-action="" class=" dropdown-item">
+                                <a asp-area="Admin" asp-controller="Style" asp-action="Index" class=" dropdown-item">
                                     <i class="fa-solid fa-tags"></i>
                                     Styles
                                 </a>
                             </li>
                             <li>
-                                <a asp-area="Admin" asp-controller="Titre" asp-action="" class=" dropdown-item">
+                                <a asp-area="Admin" asp-controller="Titre" asp-action="Index" class=" dropdown-item">
                                     <i class="fa-solid fa-music"></i>
                                     Titres
                                 </a>
@@ -67,7 +67,7 @@
                 </ul>
 
                 @*Barre de recherche*@
-                <form class="d-flex" asp-area="" asp-action="" asp-controller="Recherche" asp-action="" method="POST">
+                <form class="d-flex" asp-area="" asp-action="Index" asp-controller="Recherche" asp-action="Index" method="POST">
                     <div class="input-group">
                         <input class="form-control " type="text" name="recherche" placeholder="Trouver un artiste/titre">
                         <button type="submit" class="btn btn-primary rounded-end"><i class="fa-solid fa-search"></i></button>

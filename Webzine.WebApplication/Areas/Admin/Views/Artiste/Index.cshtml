@@ -52,12 +52,12 @@
 <div class="d-flex  justify-content-end">
     @if (Model.NumeroPage > 0)
     {
-        <a class="btn btn-secondary p-2 m-4" asp-area="Admin" asp-controller="Artiste" asp-action="" asp-route-NumeroPage="@(Model.NumeroPage - 1)">
+        <a class="btn btn-secondary p-2 m-4" asp-area="Admin" asp-controller="Artiste" asp-action="Index" asp-route-NumeroPage="@(Model.NumeroPage - 1)">
             &lt;&lt; Artistes plus récents
         </a>
     }
 
-    <a class="btn btn-secondary p-2 m-4" asp-area="Admin" asp-controller="Artiste" asp-action="" asp-route-NumeroPage="@(Model.NumeroPage + 1)">
+    <a class="btn btn-secondary p-2 m-4" asp-area="Admin" asp-controller="Artiste" asp-action="Index" asp-route-NumeroPage="@(Model.NumeroPage + 1)">
         Artistes plus anciens >>
     </a>
 </div>

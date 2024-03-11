@@ -63,12 +63,12 @@
 <div class="d-flex  justify-content-end">
     @if (Model.NumeroPage > 0)
     {
-        <a class="btn btn-secondary p-2 m-4" asp-area="Admin" asp-controller="Titre" asp-action="" asp-route-NumeroPage="@(Model.NumeroPage - 1)">
+        <a class="btn btn-secondary p-2 m-4" asp-area="Admin" asp-controller="Titre" asp-action="Index" asp-route-NumeroPage="@(Model.NumeroPage - 1)">
             &lt;&lt; Titres plus récents
         </a>
     }
 
-    <a class="btn btn-secondary p-2 m-4" asp-area="Admin" asp-controller="Titre" asp-action="" asp-route-NumeroPage="@(Model.NumeroPage + 1)">
+    <a class="btn btn-secondary p-2 m-4" asp-area="Admin" asp-controller="Titre" asp-action="Index" asp-route-NumeroPage="@(Model.NumeroPage + 1)">
         Titres plus anciens >>
     </a>
 </div>
