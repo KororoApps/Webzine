@@ -9,7 +9,7 @@
         <div class="col-sm-12">
             <div class="d-flex justify-content-around">
                 @*Nombre d'artistes.*@
-                <a href="https://diiage.cucdb.fr/" class="container w-75 ">
+                <a asp-area="administration" asp-controller="artiste" asp-action="index" class="container w-75 ">
                     <div class="bg-light mt-4 p-5 text-white text-center">
                         <div class="text-primary ">
                             <i class="fa-solid fa-users fa-5x mb-2"></i>
@@ -23,7 +23,7 @@
                     </div>
                 </a>
                 @*Artiste le plus chroniqué.*@
-                <a href="https://www.facebook.com/diiage/" class="container w-75 ">
+                <a asp-area="" asp-controller="artiste" asp-action="index" asp-route-nom="@Model.ArtistePlusChronique.Nom" class="container w-75 ">
                     <div class="bg-light mt-4 p-5 text-white text-center">
                         <div class="text-primary">
                             <i class="fa-solid fa-user fa-5x mb-2"></i>
@@ -37,7 +37,7 @@
                     </div>
                 </a>
                 @*Artiste avec le plus de titres.*@
-                <a href="https://www.instagram.com/diiage.cucdb/?hl=en" class="container w-75 ">
+                <a asp-area="" asp-controller="artiste" asp-action="index" asp-route-nom="@Model.ArtistePlusDeTitres.Nom" class="container w-75 ">
                     <div class="bg-light mt-4 p-5 text-white text-center">
                         <div class="text-primary">
                             <i class="fa-solid fa-trophy fa-5x mb-2"></i>
@@ -56,7 +56,7 @@
     <div class="row">
         <div class="d-flex justify-content-around">
             @*Nombre de briographies d'artistes.*@
-            <a href="https://fr.linkedin.com/company/diiage" class="container w-75 ">
+            <a asp-area="administration" asp-controller="artiste" asp-action="index" class="container w-75">
                 <div class="bg-light mt-4 p-5 text-white text-center">
                     <div class="text-primary">
                         <i class="fa-solid fa-book fa-5x mb-2"></i>
@@ -70,12 +70,12 @@
                 </div>
             </a>
             @*Titre le plus lu.*@
-            <a href="https://www.google.com/maps/place/C.U.C.D.B.+Centre+Universitaire+Catholique+De+Bourgogne/@@47.3348851,5.0514213,17z/data=!3m1!4b1!4m6!3m5!1s0x47f29dfee14743ed:0x7d1348ede68455cb!8m2!3d47.3348851!4d5.0540016!16s%2Fg%2F1td04cy3?entry=ttu" class="container w-75 ">
+            <a asp-area="=" asp-controller="titre" asp-action="index" asp-route-id="@Model.TitrePlusLu.IdTitre" class="container w-75">
                 <div class="bg-light mt-4 p-5 text-white text-center">
                     <div class="text-primary">
                         <i class="fa-solid fa-compact-disc fa-5x mb-2"></i>
                     </div>
-                    <p class="fs-2 text-primary text-capitalize" ">
+                    <p class="fs-2 text-primary text-capitalize">
                     @Model.TitrePlusLu.Libelle
                     </p>
                     <p class="text-primary">
@@ -83,14 +83,16 @@
                     </p>
                 </div>
             </a>
+
+
                     @*Nombre de titres.*@
-            <a href="https://twitter.com/DiiageCucdb" class="container w-75 ">
+            <a asp-area="administration" asp-controller="titre" asp-action="index" class="container w-75 ">
                 <div class="bg-light mt-4 p-5 text-white text-center">
                     <div class="text-primary">
                         <i class="fa-solid fa-music fa-5x mb-2"></i>
                     </div>
                     <p class="fs-2 text-primary">
-                                @Model.NbTitres
+                    @Model.NbTitres
                     </p>
                     <p class="text-primary">
                         Titres
@@ -101,56 +103,52 @@
     </div>
     <div class="row">
         <div class="d-flex justify-content-around">
-            @*Nombre de styles de musique.*@
-            <a href="https://twitter.com/DiiageCucdb" class="container w-75 ">
+                    @*Nombre de styles de musique.*@
+            <a asp-area="administration" asp-controller="style" asp-action="index" class="container w-75 ">
                 <div class="bg-light mt-4 p-5 text-white text-center">
                     <div class="text-primary">
                         <i class="fa-solid fa-tags fa-5x mb-2"></i>
                     </div>
                     <p class="fs-2 text-primary">
-                        @Model.NbStyles
+                    @Model.NbStyles
                     </p>
                     <p class="text-primary">
                         Styles de musique
                     </p>
                 </div>
             </a>
-            @*Nombre de lectures.*@
-            <a href="https://twitter.com/DiiageCucdb" class="container w-75 ">
-                <div class="bg-light mt-4 p-5 text-white text-center">
-                    <div class="text-dark font-size-3">
-                        <i class="fa-solid fa-eye fa-5x mb-2"></i>
-                    </div>
-                    <p class="fs-2 text-dark">
-                        @Model.NbLectures
-                    </p>
-                    <p class="text-dark">
-                        Lectures
-                    </p>
+                    @*Nombre de lectures.*@
+            <div class="bg-light mt-4 p-5 text-white text-center container w-75 ">
+                <div class="text-dark font-size-3">
+                    <i class="fa-solid fa-eye fa-5x mb-2"></i>
                 </div>
-            </a>
-            @*Nombre de likes.*@
-            <a href="https://twitter.com/DiiageCucdb" class="container w-75 ">
-                <div class="bg-light mt-4 p-5 text-white text-center">
-                    <div class="text-dark w-5">
-                        <i class="fa-solid fa-thumbs-up fa-5x mb-2"></i>
-                    </div>
-                    <p class="fs-2 text-dark">
-                        @Model.NbLikes
-                    </p>
-                    <p class="text-dark">
-                        Likes
-                    </p>
+                <p class="fs-2 text-dark">
+                    @Model.NbLectures
+                </p>
+                <p class="text-dark">
+                    Lectures
+                </p>
+            </div>
+                    @*Nombre de likes.*@
+            <div class="bg-light mt-4 p-5 text-white text-center container w-75 ">
+                <div class="text-dark w-5">
+                    <i class="fa-solid fa-thumbs-up fa-5x mb-2"></i>
                 </div>
-            </a>
+                <p class="fs-2 text-dark">
+                    @Model.NbLikes
+                </p>
+                <p class="text-dark">
+                    Likes
+                </p>
+            </div>
         </div>
     </div>
 </div>
 
-@functions {
-    public int GenerateRandomNumber()
-    {
-        Random random = new Random();
-        return random.Next(100, 1001);
-    }
+                    @functions {
+                        public int GenerateRandomNumber()
+                        {
+                            Random random = new Random();
+                            return random.Next(100, 1001);
+                        }
 }
