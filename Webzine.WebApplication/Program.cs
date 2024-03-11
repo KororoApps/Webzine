@@ -1,52 +1,50 @@
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
+using Webzine.Business;
+using Webzine.Business.Contracts;
 using Webzine.EntitiesContext;
 using Webzine.EntitiesContext.Seeders;
 using Webzine.Repository;
 using Webzine.Repository.Contracts;
-using Webzine.Business.Contracts;
 using Webzine.WebApplication.Filters;
-using Webzine.Business;
-using Microsoft.Extensions.Logging;
 
-
-
+// Créer un nouveau builder pour l'application web.
 var builder = WebApplication.CreateBuilder(args);
 
-
-// Vérifie le type de SGBD à utiliser en fonction de la configuration.
-if (builder.Configuration.GetSection("SGBD").Value == "SQLite")
-{
-    // Utilise SQLite comme SGBD par défaut.
-builder.Services.AddDbContext<WebzineDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")), ServiceLifetime.Scoped);
-}
-
-// Vérifie le type de SGBD à utiliser en fonction de la configuration.
-if (builder.Configuration.GetSection("SGBD").Value == "PostgreSQL")
-{
-    // Utilise PostgreSQL comme SGBD.
-    builder.Services.AddDbContext<WebzineDbContext>(options =>
-        options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")), ServiceLifetime.Scoped);
-}
-
-// Configure le type de repository à utiliser en fonction de la configuration.
+// Choix de l'utilisateur : Configure le type de Repository à utiliser en fonction de la configuration.
 if (builder.Configuration.GetSection("Repository").Value == "Local")
 {
-    // Utilise des repositories locaux.
+    // Ne pas utiliser de base de données.
     builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
     builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
     builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
     builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
-builder.Services.AddScoped<IDashboardService, DashboardService>();
+    builder.Services.AddScoped<IDashboardService, DashboardService>();
 }
 else if (builder.Configuration.GetSection("Repository").Value == "db")
 {
-    // Utilise des repositories de base de données.
+    if (builder.Environment.IsDevelopment())
+    {
+        // Si environnement de développement : SGBD SQLite utilisé
+        builder.Services.AddDbContext<WebzineDbContext>(
+            options =>
+            options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")),
+            ServiceLifetime.Scoped);
+    }
+    else
+    {
+        // Si environnement de production : SGBD Postgre utilisé
+        builder.Services.AddDbContext<WebzineDbContext>(
+            options =>
+            options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")),
+            ServiceLifetime.Scoped);
+    }
+
+    // Créer une base de données.
     builder.Services.AddScoped<IArtisteRepository, DbArtisteRepository>();
     builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
     builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
- builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
+    builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
     builder.Services.AddScoped<IDashboardService, DashboardService>();
 }
 
@@ -54,7 +52,7 @@ else if (builder.Configuration.GetSection("Repository").Value == "db")
 builder.Services.AddControllersWithViews()
     .AddRazorRuntimeCompilation();
 
-//Injecting Filters
+// Injecter les filtres
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add(typeof(LoggingActionFilter));
@@ -70,6 +68,7 @@ builder.Services.AddLogging(builder =>
     builder.AddConsole();
 });
 
+// Construit l'application en utilisant les configurations précédemment définies.
 var app = builder.Build();
 
 // Redirection HTTPS si ce n'est pas en développement.
@@ -78,15 +77,18 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-
 // Active la possibilité de servir des fichiers statiques présents dans le dossier wwwroot.
 app.UseStaticFiles();
 
 // Active le middleware permettant le routage des requêtes entrantes.
 app.UseRouting();
 
+// Utilise le middleware personnalisé pour la journalisation des requêtes entrantes.
 app.UseMiddleware<RequestLoggingMiddleware>();
-/*Routes specifiques administration */
+
+// Mise en forme des routes
+
+// Routes specifiques de l'administration :
 
 // Liste des artistes
 app.MapControllerRoute(
@@ -106,7 +108,7 @@ app.MapControllerRoute(
     pattern: "administration/styles/{id?}",
     defaults: new { area = "Administration", controller = "Style", action = "Index" });
 
-/*Routes specifiques consultation */
+// Routes specifiques de la consultation :
 
 // Liste des commentaires
 app.MapControllerRoute(
@@ -114,7 +116,7 @@ app.MapControllerRoute(
     pattern: "administration/commentaires/{id}",
     defaults: new { area = "Administration", controller = "Commentaire", action = "Index" });
 
-// titre selon le style de musique démandée
+// Titres selon le style de musique démandé
 app.MapControllerRoute(
     name: "style",
     pattern: "titres/style/{style}/",
@@ -126,6 +128,7 @@ app.MapControllerRoute(
     pattern: "titre/{Id}",
     defaults: new { controller = "Titre", action = "Index" });
 
+// Formulaire pour ajouter un commentaire au titre
 app.MapControllerRoute(
     name: "commenter",
     pattern: "commenter/",
@@ -153,38 +156,41 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-
-// Utilise un scope pour gérer les services.
-using (var scope = app.Services.CreateScope())
+if (builder.Configuration.GetSection("Repository").Value == "db")
 {
+    // Si le choix est d'avoir une Base de donnée, la seeder :
+    // Utilise un scope pour gérer les services.
+    using var scope = app.Services.CreateScope();
     var services = scope.ServiceProvider;
 
     // Récupère le DbContext du service scope.
     var context = services.GetRequiredService<WebzineDbContext>();
 
-        // Assure la suppression de la base de données.
+    if (!app.Environment.IsDevelopment())
+    {
+        // Environnement de prod : Pas de supression de la BDD, Création de la BDD
+        context.Database.EnsureCreated();
+    }
+    else if (app.Environment.IsDevelopment())
+    {
+        // Environnement de dev : Suppression de la BDD puis Création de la BDD
         context.Database.EnsureDeleted();
-
-    // Assure la création de la base de données.
-    context.Database.EnsureCreated();
+        context.Database.EnsureCreated();
+    }
 
     var seederValue = builder.Configuration.GetSection("Seeder").Value;
-    var repositoryValue = builder.Configuration.GetSection("Repository").Value;
 
-    if (!string.IsNullOrWhiteSpace(seederValue) && repositoryValue == "db")
+    if (!string.IsNullOrWhiteSpace(seederValue))
     {
+        // Si la configuration "Seeder" n'est pas vide, seeder la BDD avec les données de Spotify
         await SeedDataSpotify.Request(services, context, builder.Configuration.GetSection("Spotify"));
     }
     else
     {
-        // Opération de seeding
+        // Sinon seeder la BDD avec des fausses données
         SeedDataLocal.Initialize(services, context);
     }
-
 }
-
-
-
 
 // Exécute l'application.
 app.Run();
