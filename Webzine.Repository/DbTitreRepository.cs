@@ -88,7 +88,7 @@ namespace Webzine.Repository
         public List<Titre> FindTitresLesPlusLike(int longueurPeriode)
         {
             // Calcule de la date à partir de laquelle les titres doivent être récupérés
-            var dateDebutPeriode = DateTime.Now.AddMonths(-longueurPeriode);
+            var dateDebutPeriode = DateTime.UtcNow.AddMonths(-longueurPeriode);
 
             return _context.Titres.AsNoTracking()
                 .Include(t => t.Artiste)
