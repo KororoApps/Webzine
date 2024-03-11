@@ -81,7 +81,6 @@ app.UseRouting();
 
 app.UseMiddleware<SingularizeMiddleware>();
 
-
 /*Routes specifiques Administrationistration */
 
 // Liste des artistes
@@ -121,6 +120,11 @@ app.MapControllerRoute(
     name: "titre",
     pattern: "titre/{Id}",
     defaults: new { controller = "Titre", action = "Index" });
+
+app.MapControllerRoute(
+    name: "commenter",
+    pattern: "commenter/",
+    defaults: new { controller = "Titre", action = "Commenter" });
 
 // Page d'un artiste
 app.MapControllerRoute(
