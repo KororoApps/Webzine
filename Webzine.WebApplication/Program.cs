@@ -7,7 +7,7 @@ using Webzine.Repository.Contracts;
 using Webzine.Business.Contracts;
 using Webzine.WebApplication.Filters;
 using Webzine.Business;
-using Webzine.WebApplication.Middlewares;
+using Microsoft.Extensions.Logging;
 
 
 
@@ -64,6 +64,12 @@ builder.Services.AddControllersWithViews(options =>
 builder.Logging.ClearProviders();
 builder.Host.UseNLog();
 
+// Ajoutez la configuration du système de journalisation ici.
+builder.Services.AddLogging(builder =>
+{
+    builder.AddConsole();
+});
+
 var app = builder.Build();
 
 // Redirection HTTPS si ce n'est pas en développement.
@@ -79,8 +85,7 @@ app.UseStaticFiles();
 // Active le middleware permettant le routage des requêtes entrantes.
 app.UseRouting();
 
-app.UseMiddleware<SingularizeMiddleware>();
-
+app.UseMiddleware<RequestLoggingMiddleware>();
 /*Routes specifiques administration */
 
 // Liste des artistes
@@ -157,8 +162,8 @@ using (var scope = app.Services.CreateScope())
     // Récupère le DbContext du service scope.
     var context = services.GetRequiredService<WebzineDbContext>();
 
-    // Assure la suppression de la base de données.
-    context.Database.EnsureDeleted();
+        // Assure la suppression de la base de données.
+        context.Database.EnsureDeleted();
 
     // Assure la création de la base de données.
     context.Database.EnsureCreated();
