@@ -1,0 +1,42 @@
+﻿@model Webzine.WebApplication.Shared.ViewModels.CommentaireModel
+
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["title"] = "Supprimer un commentaire";
+}
+
+@*Affichage du nom de la page.*@
+@{
+    ViewData["titrePage"] = "Supprimer un commentaire";
+}
+<hr />
+
+<div>
+    <div>
+        <p>Etes-vous sûr de vouloir supprimer le commentaire suivant ? </p>
+
+        <p class="fs-5">@Model.Commentaire.Contenu</p>
+        <p class="blockquote-footer">
+            <span class="fw-bold">@Model.Commentaire.Auteur</span>
+            le @Model.Commentaire.DateCreation.ToString("dd/MM/yyyy HH:mm:ss") sur
+            <span class="fst-italic">@Model.Commentaire.Titre.Libelle</span>
+        </p>
+
+        @* Formulaire pour soumettre la demande de suppression *@
+        <form method="post" asp-action="DeleteConfirmed" asp-controller="commentaire" asp-route-id="@Model.Commentaire.IdCommentaire">
+            @* Utilisez un champ anti-forgery pour protéger le formulaire *@
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="btn btn-danger mb-5">
+                Supprimer
+            </button>
+        </form>
+    </div>
+
+    @*Lien vers le retour à l'administration des commentaires.*@
+    <div>
+        <a class=" fw-normal" asp-area="administration" asp-controller="commentaire" asp-action="index">
+            Retour à l'administration des commentaires
+        </a>
+    </div>
+</div>

@@ -53,7 +53,7 @@ namespace Webzine.WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult IncrementLike(Titre titre)
+        public IActionResult Liker(Titre titre)
         {
 
             // Incrémentez le nombre de likes
@@ -68,13 +68,13 @@ namespace Webzine.WebApplication.Controllers
         /// </summary>
         /// /// <param name="id">Libellé du style.</param>
         /// <returns>Vue contenant la liste des titres liés au style.</returns>
-        public IActionResult Style(string id)
+        public IActionResult Style(string style)
         {
             // Création du modèle de vue contenant un titre.
             var titreModel = new GroupeTitreModel
             {
-                Titres = this.titreRepository.SearchByStyle(id),
-                Libelle = id,
+                Titres = this.titreRepository.SearchByStyle(style),
+                Libelle = style,
             };
 
             // Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.
@@ -87,9 +87,6 @@ namespace Webzine.WebApplication.Controllers
         /// <param name="commentaire">L'entité Commentaire à créer.</param>
         /// <param name="IdTitre">Id du titre lié au commentaire.</param>
         /// <returns>Redirection vers l'action Index après la création.</returns>
-        /// 
-        //TODO : Metre la création d'un commentaire dans TItreController. Voir les routes.
-        //TODO : Appeler la méthode "Commenter"
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Commenter(Commentaire commentaire, int IdTitre)

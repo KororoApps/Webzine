@@ -7,6 +7,9 @@ using Webzine.Repository.Contracts;
 using Webzine.Business.Contracts;
 using Webzine.WebApplication.Filters;
 using Webzine.Business;
+using Webzine.WebApplication.Middlewares;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,6 +72,73 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
+
+// Active la possibilité de servir des fichiers statiques présents dans le dossier wwwroot.
+app.UseStaticFiles();
+
+// Active le middleware permettant le routage des requêtes entrantes.
+app.UseRouting();
+
+app.UseMiddleware<SingularizeMiddleware>();
+
+/*Routes specifiques administration */
+
+// Liste des artistes
+app.MapControllerRoute(
+    name: "artistes",
+    pattern: "administration/artistes/{id?}",
+    defaults: new { area = "Administration", controller = "Artiste", action = "Index" });
+
+// Liste des titres
+app.MapControllerRoute(
+    name: "titres",
+    pattern: "administration/titres/{id?}",
+    defaults: new { area = "Administration", controller = "Titre", action = "Index" });
+
+// Liste des styles
+app.MapControllerRoute(
+    name: "styles",
+    pattern: "administration/styles/{id?}",
+    defaults: new { area = "Administration", controller = "Style", action = "Index" });
+
+/*Routes specifiques consultation */
+
+// Liste des commentaires
+app.MapControllerRoute(
+    name: "commentaires",
+    pattern: "administration/commentaires/{id}",
+    defaults: new { area = "Administration", controller = "Commentaire", action = "Index" });
+
+// titre selon le style de musique démandée
+app.MapControllerRoute(
+    name: "style",
+    pattern: "titres/style/{style}/",
+    defaults: new { controller = "Titre", action = "Style" });
+
+// Titre par Id
+app.MapControllerRoute(
+    name: "titre",
+    pattern: "titre/{Id}",
+    defaults: new { controller = "Titre", action = "Index" });
+
+app.MapControllerRoute(
+    name: "commenter",
+    pattern: "commenter/",
+    defaults: new { controller = "Titre", action = "Commenter" });
+
+// Page d'un artiste
+app.MapControllerRoute(
+    name: "artiste",
+    pattern: "artiste/{nom}",
+    defaults: new { controller = "Artiste", action = "Index" });
+
+// Route pour les pages à l'accueil
+app.MapControllerRoute(
+    name: "accueilPage",
+    pattern: "page/{NumeroPage}",
+    defaults: new { controller = "Home", action = "Index" },
+    constraints: new { page = @"\d+" });
+
 // Définit les routes pour les controllers.
 app.MapControllerRoute(
     name: "areas",
@@ -78,72 +148,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-/*Routes specifiques */
-
-// Page d'un artiste
-app.MapControllerRoute(
-    name: "artiste",
-    pattern: "artiste/{Nom}",
-    defaults: new { controller = "Artiste", action = "Index" });
-
-// Titre par Id
-app.MapControllerRoute(
-    name: "titre",
-    pattern: "titre/{Id}",
-    defaults: new { controller = "Titre", action = "Index" });
-// Titre id
-app.MapControllerRoute(
-    name: "consulterTitre",
-    pattern: "titre/{id}/{artiste}/{titre}",
-    defaults: new { controller = "Titre", action = "Index" });
-
-// titre selon le style de musique démandée
-app.MapControllerRoute(
-    name: "style",
-    pattern: "titres/style/{style}",
-    defaults: new { controller = "Titres", action = "Index" });
-
-// Admin ArtistesSupprimer
-app.MapControllerRoute(
-    name: "adminArtistesSupprimer",
-    pattern: "/administration/artiste/delete/{id}",
-    defaults: new { controller = "Artiste", action = "Delete" });
-
-// Admin ArtistesEdit
-app.MapControllerRoute(
-    name: "adminArtistesEdit",
-    pattern: "/administration/artiste/edit/{id}",
-    defaults: new { controller = "Artiste", action = "Edit" });
-
-// Admin TitreSuprimer
-app.MapControllerRoute(
-    name: "adminTitreEdit",
-    pattern: "/administration/titre/delete/{id}",
-    defaults: new { controller = "Titre", action = "Delete"});
-
-// Admin TitreEdit
-app.MapControllerRoute(
-    name: "adminTitreEdit",
-    pattern: "/administration/titre/edit/{id}",
-    defaults: new { controller = "Titre", action = "Edit" });
-
-// Admin StyleSuprimer
-app.MapControllerRoute(
-    name: "adminStyleEdit",
-    pattern: "/administration/style/delete/{id}",
-    defaults: new { controller = "Style", action = "Delete" });
-
-// Admin StyleEdit
-app.MapControllerRoute(
-    name: "adminStyleEdit",
-    pattern: "/administration/style/edit/{id}",
-    defaults: new { controller = "Style", action = "Edit" });
-
-// Admin CommentaireSuprimer
-app.MapControllerRoute(
-    name: "adminCommentaireEdit",
-    pattern: "/administration/commentaire/delete/{id}",
-    defaults: new { controller = "Commentaire", action = "Delete" });
 
 // Utilise un scope pour gérer les services.
 using (var scope = app.Services.CreateScope())
@@ -174,11 +178,8 @@ using (var scope = app.Services.CreateScope())
 
 }
 
-// Active la possibilité de servir des fichiers statiques présents dans le dossier wwwroot.
-app.UseStaticFiles();
 
-// Active le middleware permettant le routage des requêtes entrantes.
-app.UseRouting();
+
 
 // Exécute l'application.
 app.Run();

@@ -1,0 +1,40 @@
+﻿@model Webzine.WebApplication.Shared.ViewModels.StyleModel
+
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["Title"] = "Editer un style";
+}
+
+@*Affichage du nom de la page.*@
+@{
+    ViewData["titrePage"] = "Editer un style";
+}
+<hr />
+
+@*Formulaire d'édition d'un style.*@
+<form method="post" asp-action="edit" asp-controller="style" asp-route-id="@Model.Style.IdStyle" class="col-6 d-flex">
+    <div class="container">
+        <input type="hidden" asp-for="@Model.Style.IdStyle" />
+        <div class="row align-items-center mb-5">
+            <div class="col-auto">
+                <label asp-for="@Model.Style.Libelle" class="form-label required-label"></label>
+            </div>
+            <div class="col">
+                <input asp-for="@Model.Style.Libelle" type="text" class="form-control" placeholder="@Model.Style.Libelle">
+                <span asp-validation-for="@Model.Style.Libelle" class="text-danger"></span>
+            </div>
+
+            @*Bouton d'ajout du style.*@
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">
+                    Sauvegarder
+                </button>
+            </div>
+        </div>
+
+        @*Bouton de retour à l'Administrationitration des styles.*@
+        <a class=" fw-normal" asp-area="administration" asp-controller="style" asp-action="index">
+            Retour à l'administration des styles
+        </a>
+    </div>
+</form>

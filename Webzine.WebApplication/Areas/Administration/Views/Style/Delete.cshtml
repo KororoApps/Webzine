@@ -1,0 +1,35 @@
+﻿@model Webzine.WebApplication.Shared.ViewModels.StyleModel
+
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["Title"] = "Supprimer un style";
+}
+
+@*Affichage du nom de la page.*@
+@{
+    ViewData["titrePage"] = "Supprimer un style";
+}
+<hr />
+
+<div>
+    <div>
+        <p>Etes-vous sûr de vouloir supprimer le style de musique <span>"@Model.Style.Libelle"</span> ?</p>
+
+        @* Formulaire pour soumettre la demande de suppression *@
+        <form method="post" asp-action="delete" asp-controller="style">
+            <input type="hidden" asp-for="Style.IdStyle" />
+
+
+            <button type="submit" class="btn btn-danger mb-5">
+                Supprimer
+            </button>
+        </form>
+    </div>
+
+    @*Lien vers le retour à l'administration du artiste.*@
+    <div>
+        <a class=" fw-normal" asp-area="administration" asp-controller="style" asp-action="index">
+            Retour à l'administration des styles
+        </a>
+    </div>
+</div>
