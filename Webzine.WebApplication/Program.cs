@@ -71,6 +71,19 @@ if (!app.Environment.IsDevelopment())
 
 /*Routes specifiques administration */
 
+// Admin Titre Create/Delete/Edit
+app.MapControllerRoute(
+    name: "adminTitre",
+    pattern: "/administration/titre/{action}/{id?}",
+    defaults: new { area = "Admin", controller = "Titre" },
+    constraints: new { action = "create|delete|edit" });
+
+// Admin TitresListe
+app.MapControllerRoute(
+    name: "adminTitresList",
+    pattern: "/administration/titres/",
+    defaults: new { area = "Admin", controller = "Titre", action = "Index" });
+
 // Admin Artiste Create/Delete/Edit
 app.MapControllerRoute(
     name: "adminArtistes",
@@ -80,7 +93,7 @@ app.MapControllerRoute(
 
 // Admin ArtistesListe
 app.MapControllerRoute(
-    name: "adminArtistesEdit",
+    name: "adminArtistesList",
     pattern: "/administration/artistes/",
     defaults: new { area = "Admin", controller = "Artiste", action = "Index" });
 
