@@ -68,13 +68,13 @@ namespace Webzine.WebApplication.Controllers
         /// </summary>
         /// /// <param name="id">Libellé du style.</param>
         /// <returns>Vue contenant la liste des titres liés au style.</returns>
-        public IActionResult Style(string id)
+        public IActionResult Style(string style)
         {
             // Création du modèle de vue contenant un titre.
             var titreModel = new GroupeTitreModel
             {
-                Titres = this.titreRepository.SearchByStyle(id),
-                Libelle = id,
+                Titres = this.titreRepository.SearchByStyle(style),
+                Libelle = style,
             };
 
             // Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.
