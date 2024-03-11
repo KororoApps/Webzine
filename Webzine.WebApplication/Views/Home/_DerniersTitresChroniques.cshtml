@@ -16,7 +16,7 @@
                         <div class="card-body">
                             <h4 class="card-title">
                                 <span>
-                                    <a asp-area="" asp-controller="Artiste" asp-action="Index" asp-route-Nom="@titre.Artiste.Nom">
+                                    <a asp-area="" asp-controller="Artiste" asp-action="Index" asp-route-nom="@titre.Artiste.Nom">
                                         @titre.Artiste.Nom
                                     </a>
                                 </span>
@@ -44,7 +44,7 @@
 
                                     @foreach (var style in titre.Styles)
                                     {
-                                        <a asp-area="" asp-controller="Titre" asp-action="Style" asp-route-id="@style.Libelle">
+                                        <a asp-area="" asp-controller="Titre" asp-action="Style" asp-route-style="@style.Libelle">
                                             @style.Libelle
                                         </a>
                                     }

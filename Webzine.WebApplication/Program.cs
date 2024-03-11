@@ -86,7 +86,7 @@ app.MapControllerRoute(
 // Page d'un artiste
 app.MapControllerRoute(
     name: "artiste",
-    pattern: "artiste/{Nom}",
+    pattern: "artiste/{nom}",
     defaults: new { controller = "Artiste", action = "Index" });
 
 // Route pour la page Contact
