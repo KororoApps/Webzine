@@ -71,6 +71,18 @@ if (!app.Environment.IsDevelopment())
 
 /*Routes specifiques administration */
 
+// Admin Commentaire Create/Delete/Edit
+app.MapControllerRoute(
+    name: "adminCommentaire",
+    pattern: "/administration/commentaire/delete/{id?}",
+    defaults: new { area = "Admin", controller = "Commentaire", action="Delete" });
+
+// Admin CommentairesListe
+app.MapControllerRoute(
+    name: "adminCommentairessList",
+    pattern: "/administration/commentaires/",
+    defaults: new { area = "Admin", controller = "Commentaire", action = "Index" });
+
 // Admin Style Create/Delete/Edit
 app.MapControllerRoute(
     name: "adminStyle",
