@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Business", "..\Webz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Business.Contracts", "..\Webzine.Business.Contracts\Webzine.Business.Contracts.csproj", "{A3D61CFA-6050-42A4-B2BA-D507D886ABC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webzine.Business.Tests", "..\Webzine.Business.Tests\Webzine.Business.Tests.csproj", "{8D41840F-7BF8-49F7-A603-63AC89FD8F6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webzine.Business.Tests", "..\Webzine.Business.Tests\Webzine.Business.Tests.csproj", "{8D41840F-7BF8-49F7-A603-63AC89FD8F6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
