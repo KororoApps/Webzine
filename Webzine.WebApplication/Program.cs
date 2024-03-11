@@ -69,7 +69,16 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-/*Routes specifiques */
+/*Routes specifiques administration */
+
+// Admin CommentaireSuprimer
+app.MapControllerRoute(
+    name: "dashboard",
+    pattern: "/administration/dashboard/",
+    defaults: new { area = "Admin", controller = "Dashboard", action = "Index" });
+
+
+/*Routes specifiques consultation */
 
 // Rechercher un titre ou un artiste
 app.MapControllerRoute(
