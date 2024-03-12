@@ -11,8 +11,10 @@ using Webzine.WebApplication.Filters;
 // Créer un nouveau builder pour l'application web.
 var builder = WebApplication.CreateBuilder(args);
 
+var seederValue = builder.Configuration.GetSection("Seeder").Value;
+
 // Choix de l'utilisateur : Configure le type de Repository à utiliser en fonction de la configuration.
-if (builder.Configuration.GetSection("Repository").Value == "Local")
+if (string.IsNullOrWhiteSpace(seederValue))
 {
     // Ne pas utiliser de base de données.
     builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
@@ -178,14 +180,12 @@ if (builder.Configuration.GetSection("Repository").Value == "db")
         context.Database.EnsureCreated();
     }
 
-    var seederValue = builder.Configuration.GetSection("Seeder").Value;
-
-    if (!string.IsNullOrWhiteSpace(seederValue))
+    if (builder.Configuration.GetSection("Seeder").Value == "spotify")
     {
         // Si la configuration "Seeder" n'est pas vide, seeder la BDD avec les données de Spotify
-        await SeedDataSpotify.Request(services, context, builder.Configuration.GetSection("Spotify"));
+        await SeedDataSpotify.Request(services, context, builder.Configuration.GetSection("spotify"));
     }
-    else
+    else if (builder.Configuration.GetSection("Seeder").Value == "local")
     {
         // Sinon seeder la BDD avec des fausses données
         SeedDataLocal.Initialize(services, context);
