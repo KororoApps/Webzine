@@ -13,13 +13,6 @@ namespace Webzine.WebApplication.Filters
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="LoggingActionFilter"/>.
-        /// </summary>
-        public LoggingActionFilter()
-        {
-        }
-
         /// <inheritdoc/>
         public void OnActionExecuting(ActionExecutingContext context)
         {
