@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SpotifyAPI.Web;
-using Webzine.EntitiesContext;
-using Webzine.Entity;
-using Webzine.Entity.Fixtures;
-using Webzine.Repository.Contracts;
+﻿// <copyright file="LocalTitreRepository.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Repository
 {
+    using Webzine.Entity;
+    using Webzine.Entity.Fixtures;
+    using Webzine.Repository.Contracts;
 
     /// <summary>
     /// Implémente l'interface ITitreRepository pour les opérations liées à la gestion des titres dans une source de données locale.
@@ -43,6 +43,7 @@ namespace Webzine.Repository
             return  DataFactory.Titres
                 .First(t => t.IdTitre == id);
         }
+
         /// <inheritdoc />
         public IEnumerable<Titre> FindTitres(int offset, int limit)
         {
@@ -57,7 +58,6 @@ namespace Webzine.Repository
         public IEnumerable<Titre> FindAll()
         {
             return DataFactory.Titres;
-
         }
 
         /// <inheritdoc />
@@ -70,14 +70,12 @@ namespace Webzine.Repository
                 .Where(t => t.DateCreation >= dateDebutPeriode) //Filtrer les titres créés pendant cette période
                 .OrderByDescending(t => t.NbLikes)
                 .Take(3)
-                .ToList ();
-
+                .ToList();
         }
 
         /// <inheritdoc />
         public void IncrementNbLectures(Titre titre)
         {
-
             Titre existingTitre = DataFactory.Titres
                 .First(t => t.IdTitre == titre.IdTitre);
 
@@ -104,7 +102,7 @@ namespace Webzine.Repository
                 .Select(t => new
                 {
                     Titre = t,
-                    Artiste = DataFactory.Artistes.FirstOrDefault(a => a.IdArtiste == t.Artiste.IdArtiste)
+                    Artiste = DataFactory.Artistes.FirstOrDefault(a => a.IdArtiste == t.Artiste.IdArtiste),
                 })
                 .ToList();
 
@@ -113,9 +111,6 @@ namespace Webzine.Repository
             return orderedTitres;
         }
 
-
-
-
         /// <inheritdoc />
         public IEnumerable<Titre> SearchByStyle(string libelle)
         {
@@ -123,7 +118,6 @@ namespace Webzine.Repository
                 .Where(t => t.Styles.Any(s => s.Libelle.Equals(libelle)))
                 .OrderByDescending(c => c.Libelle)
                 .ToList();
-
         }
 
         /// <inheritdoc />
