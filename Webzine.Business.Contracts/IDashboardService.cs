@@ -1,7 +1,14 @@
-﻿using Webzine.Entity;
+﻿// <copyright file="IDashboardService.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Business.Contracts
 {
+    using Webzine.Entity;
+
+    /// <summary>
+    /// Interface décrivant les opérations du service de tableau de bord.
+    /// </summary>
     public interface IDashboardService
     {
         /// <summary>
@@ -11,7 +18,7 @@ namespace Webzine.Business.Contracts
         Titre FindTitreLePlusLu();
 
         /// <summary>
-        /// Renvoie le nombre de titres.
+        /// Renvoie le nombre total de titres.
         /// </summary>
         /// <returns>Le nombre total de titres.</returns>
         int NombreTitres();
@@ -29,13 +36,13 @@ namespace Webzine.Business.Contracts
         int NombreLectures();
 
         /// <summary>
-        /// Renvoie le nombre de biographies d'artistes.
+        /// Renvoie le nombre total de biographies d'artistes.
         /// </summary>
-        /// <returns>Le nombre de biographies d'artistes.</returns>
+        /// <returns>Le nombre total de biographies d'artistes.</returns>
         public int NombreBiographiesArtistes();
 
         /// <summary>
-        /// Renvoie le nombre d'artistes.
+        /// Renvoie le nombre total d'artistes.
         /// </summary>
         /// <returns>Le nombre total d'artistes.</returns>
         public int NombreArtistes();
@@ -53,11 +60,9 @@ namespace Webzine.Business.Contracts
         Artiste FindArtisteLePlusTitresAlbumDistinct();
 
         /// <summary>
-        /// Retourne le nombre de styles.
+        /// Retourne le nombre total de styles.
         /// </summary>
         /// <returns>Le nombre total de styles.</returns>
         public int NombreStyles();
-
-
     }
 }
