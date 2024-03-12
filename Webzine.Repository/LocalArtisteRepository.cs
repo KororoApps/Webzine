@@ -1,12 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
-using SpotifyAPI.Web;
-using Webzine.Entity;
-using Webzine.Entity.Fixtures;
-using Webzine.Repository.Contracts;
+﻿// <copyright file="LocalArtisteRepository.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Repository
 {
+    using Webzine.Entity;
+    using Webzine.Entity.Fixtures;
+    using Webzine.Repository.Contracts;
+
     /// <summary>
     /// Implémente l'interface IArtisteRepository pour la gestion des artistes en mémoire locale.
     /// </summary>
@@ -22,7 +23,7 @@ namespace Webzine.Repository
             DataFactory.Artistes.Add(artiste);
         }
 
-        /// <inheritdoc />  
+        /// <inheritdoc />
         public void Delete(Artiste artiste)
         {
             DataFactory.Artistes.Remove(artiste);
@@ -33,11 +34,10 @@ namespace Webzine.Repository
         {
             return DataFactory.Artistes
                 .Single(t => t.IdArtiste == idArtiste);
-
         }
 
         /// <inheritdoc />
-        public Artiste FindByName(string nomArtiste)
+        public Artiste? FindByName(string nomArtiste)
         {
             Artiste artiste = DataFactory.Artistes.FirstOrDefault(a => a.Nom == nomArtiste);
 
@@ -69,7 +69,7 @@ namespace Webzine.Repository
         public void Update(Artiste artiste)
         {
             var artisteAEditer = DataFactory.Artistes
-                .First(a => a.IdArtiste  == artiste.IdArtiste);
+                .First(a => a.IdArtiste == artiste.IdArtiste);
 
             if (artisteAEditer != null)
             {
@@ -78,16 +78,13 @@ namespace Webzine.Repository
             }
         }
 
-        /// <summary>
-        /// Renvoie les résultats de la recherche coté artistes.
+        /// <inheritdoc />
         public IEnumerable<Artiste> Search(string mot)
         {
-
             return DataFactory.Artistes
-                .Where(t => t.Nom.ToUpper().Contains(mot.ToUpper()))
+                .Where(t => t.Nom.Contains(mot, StringComparison.CurrentCultureIgnoreCase))
                 .OrderBy(t => t.Nom)
                 .ToList();
-
         }
     }
 }

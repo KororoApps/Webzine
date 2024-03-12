@@ -49,7 +49,7 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public Artiste FindByName(string nomArtiste)
+        public Artiste? FindByName(string nomArtiste)
         {
             return this.context.Artistes.AsNoTracking()
                 .Include(c => c.Titres)
