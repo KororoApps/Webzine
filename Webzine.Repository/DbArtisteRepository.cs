@@ -41,19 +41,11 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public Artiste Find(int idArtiste)
+        public void Update(Artiste artiste)
         {
-            return this.context.Artistes.AsNoTracking()
-                .Include(c => c.Titres)
-                .Single(t => t.IdArtiste == idArtiste);
-        }
+            this.context.Update<Artiste>(artiste);
 
-        /// <inheritdoc />
-        public Artiste? FindByName(string nomArtiste)
-        {
-            return this.context.Artistes.AsNoTracking()
-                .Include(c => c.Titres)
-                .Single(t => t.Nom == nomArtiste);
+            this.context.SaveChanges();
         }
 
         /// <inheritdoc />
@@ -61,6 +53,14 @@ namespace Webzine.Repository
         {
             return this.context.Artistes.AsNoTracking()
                 .Include(c => c.Titres);
+        }
+
+        /// <inheritdoc />
+        public Artiste Find(int idArtiste)
+        {
+            return this.context.Artistes.AsNoTracking()
+                .Include(c => c.Titres)
+                .Single(t => t.IdArtiste == idArtiste);
         }
 
         /// <inheritdoc />
@@ -74,11 +74,11 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public void Update(Artiste artiste)
+        public Artiste? FindByName(string nomArtiste)
         {
-            this.context.Update<Artiste>(artiste);
-
-            this.context.SaveChanges();
+            return this.context.Artistes.AsNoTracking()
+                .Include(c => c.Titres)
+                .Single(t => t.Nom == nomArtiste);
         }
 
         /// <inheritdoc />

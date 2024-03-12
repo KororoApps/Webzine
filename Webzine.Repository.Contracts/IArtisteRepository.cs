@@ -24,11 +24,10 @@ namespace Webzine.Repository.Contracts
         void Delete(Artiste artiste);
 
         /// <summary>
-        /// Renvoie le premier artiste ayant l'identifiant spécifié.
+        /// Met à jour un artiste.
         /// </summary>
-        /// <param name="idArtiste">L'identifiant de l'artiste.</param>
-        /// <returns>L'artiste correspondant à l'identifiant spécifié.</returns>
-        Artiste Find(int idArtiste);
+        /// <param name="artiste">L'artiste à mettre à jour.</param>
+        void Update(Artiste artiste);
 
         /// <summary>
         /// Renvoie tous les artistes.
@@ -37,18 +36,19 @@ namespace Webzine.Repository.Contracts
         IEnumerable<Artiste?> FindAll();
 
         /// <summary>
+        /// Renvoie le premier artiste ayant l'identifiant spécifié.
+        /// </summary>
+        /// <param name="idArtiste">L'identifiant de l'artiste.</param>
+        /// <returns>L'artiste correspondant à l'identifiant spécifié.</returns>
+        Artiste Find(int idArtiste);
+
+        /// <summary>
         /// Renvoie les artistes demandés (pour la pagination) triés selon le nom (du plus récent à l'ancien).
         /// </summary>
         /// <param name="offset">L'indice de départ pour la pagination.</param>
         /// <param name="limit">Le nombre d'éléments à récupérer.</param>
         /// <returns>Une collection d'artistes paginée et triée par nom.</returns>
-        IEnumerable<Artiste?> FindArtistes(int offset, int limit);
-
-        /// <summary>
-        /// Met à jour un artiste.
-        /// </summary>
-        /// <param name="artiste">L'artiste à mettre à jour.</param>
-        void Update(Artiste artiste);
+        IEnumerable<Artiste?> FindArtistes(int offset, int limit);      
 
         /// <summary>
         /// Renvoie le premier artiste ayant le nom spécifié.

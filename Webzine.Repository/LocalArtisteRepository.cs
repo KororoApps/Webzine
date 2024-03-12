@@ -30,29 +30,29 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public Artiste Find(int idArtiste)
+        public void Update(Artiste artiste)
         {
-            return DataFactory.Artistes
-                .Single(t => t.IdArtiste == idArtiste);
-        }
+            var artisteAEditer = DataFactory.Artistes
+                .First(a => a.IdArtiste == artiste.IdArtiste);
 
-        /// <inheritdoc />
-        public Artiste? FindByName(string nomArtiste)
-        {
-            Artiste artiste = DataFactory.Artistes.FirstOrDefault(a => a.Nom == nomArtiste);
-
-            if (artiste != null)
+            if (artisteAEditer != null)
             {
-                artiste.Titres = DataFactory.Titres.Where(t => t.Artiste.Nom == nomArtiste).ToList();
+                artisteAEditer.Nom = artiste.Nom;
+                artisteAEditer.Biographie = artiste.Biographie;
             }
-
-            return artiste;
         }
 
         /// <inheritdoc />
         public IEnumerable<Artiste?> FindAll()
         {
             return DataFactory.Artistes;
+        }
+
+        /// <inheritdoc />
+        public Artiste Find(int idArtiste)
+        {
+            return DataFactory.Artistes
+                .Single(t => t.IdArtiste == idArtiste);
         }
 
         /// <inheritdoc />
@@ -66,16 +66,16 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public void Update(Artiste artiste)
+        public Artiste? FindByName(string nomArtiste)
         {
-            var artisteAEditer = DataFactory.Artistes
-                .First(a => a.IdArtiste == artiste.IdArtiste);
+            Artiste artiste = DataFactory.Artistes.FirstOrDefault(a => a.Nom == nomArtiste);
 
-            if (artisteAEditer != null)
+            if (artiste != null)
             {
-                artisteAEditer.Nom = artiste.Nom;
-                artisteAEditer.Biographie = artiste.Biographie;
+                artiste.Titres = DataFactory.Titres.Where(t => t.Artiste.Nom == nomArtiste).ToList();
             }
+
+            return artiste;
         }
 
         /// <inheritdoc />
