@@ -13,7 +13,6 @@ namespace Webzine.Repository
     /// </summary>
     public class LocalTitreRepository : ITitreRepository
     {
-
         /// <inheritdoc />
         public void Add(Titre titre)
         {
@@ -28,7 +27,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public int Count()
         {
-            throw new NotImplementedException();
+            return DataFactory.Titres.Count;
         }
 
         /// <inheritdoc />
@@ -38,10 +37,36 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
+        public void Update(Titre titre)
+        {
+            var titreAEditer = DataFactory.Titres
+                .FirstOrDefault(s => s.IdTitre == titre.IdTitre);
+
+            if (titreAEditer != null)
+            {
+                titreAEditer.Artiste = titre.Artiste;
+                titreAEditer.Libelle = titre.Libelle;
+                titreAEditer.Album = titre.Album;
+                titreAEditer.Chronique = titre.Chronique;
+                titreAEditer.DateSortie = titre.DateSortie;
+                titreAEditer.Duree = titre.Duree;
+                titreAEditer.UrlJaquette = titre.UrlJaquette;
+                titreAEditer.UrlEcoute = titre.UrlEcoute;
+                titre.Styles = titre.Styles;
+            }
+        }
+
+        /// <inheritdoc />
         public Titre Find(int id)
         {
-            return  DataFactory.Titres
+            return DataFactory.Titres
                 .First(t => t.IdTitre == id);
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Titre> FindAll()
+        {
+            return DataFactory.Titres;
         }
 
         /// <inheritdoc />
@@ -55,19 +80,13 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public IEnumerable<Titre> FindAll()
-        {
-            return DataFactory.Titres;
-        }
-
-        /// <inheritdoc />
         public List<Titre> FindTitresLesPlusLike(int longueurPeriode)
         {
             // Calcule de la date à partir de laquelle les titres doivent être récupérés
             var dateDebutPeriode = DateTime.Now.AddMonths(-longueurPeriode);
 
             return DataFactory.Titres
-                .Where(t => t.DateCreation >= dateDebutPeriode) //Filtrer les titres créés pendant cette période
+                .Where(t => t.DateCreation >= dateDebutPeriode) // Filtrer les titres créés pendant cette période
                 .OrderByDescending(t => t.NbLikes)
                 .Take(3)
                 .ToList();
@@ -118,26 +137,6 @@ namespace Webzine.Repository
                 .Where(t => t.Styles.Any(s => s.Libelle.Equals(libelle)))
                 .OrderByDescending(c => c.Libelle)
                 .ToList();
-        }
-
-        /// <inheritdoc />
-        public void Update(Titre titre)
-        {
-            var titreAEditer = DataFactory.Titres
-                .FirstOrDefault(s => s.IdTitre == titre.IdTitre);
-
-            if (titreAEditer != null)
-            {
-                titreAEditer.Artiste = titre.Artiste;
-                titreAEditer.Libelle = titre.Libelle;
-                titreAEditer.Album = titre.Album;
-                titreAEditer.Chronique = titre.Chronique;
-                titreAEditer.DateSortie = titre.DateSortie;
-                titreAEditer.Duree = titre.Duree;
-                titreAEditer.UrlJaquette = titre.UrlJaquette;
-                titreAEditer.UrlEcoute = titre.UrlEcoute;
-                titre.Styles = titre.Styles;
-            }
         }
     }
 }

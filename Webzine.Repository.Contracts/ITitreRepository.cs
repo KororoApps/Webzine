@@ -1,14 +1,16 @@
-﻿using Webzine.Entity;
+﻿// <copyright file="ITitreRepository.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Repository.Contracts
 {
+    using Webzine.Entity;
 
     /// <summary>
     /// Interface définissant les opérations CRUD pour la gestion des titres.
     /// </summary>
     public interface ITitreRepository
     {
-
         /// <summary>
         /// Ajoute un titre à la base de données.
         /// </summary>
@@ -21,11 +23,23 @@ namespace Webzine.Repository.Contracts
         /// <returns>Le nombre total de titres.</returns>
         int Count();
 
-        //// <summary>
+        /// <summary>
         /// Supprime un titre de la base de données.
         /// </summary>
         /// <param name="titre">Le titre à supprimer.</param>
         void Delete(Titre titre);
+
+        /// <summary>
+        /// Met à jour un titre.
+        /// </summary>
+        /// <param name="titre">Le titre à mettre à jour.</param>
+        void Update(Titre titre);
+
+        /// <summary>
+        /// Retourne tous les titres.
+        /// </summary>
+        /// <returns>Une collection de tous les titres.</returns>
+        IEnumerable<Titre> FindAll();
 
         /// <summary>
         /// Recherche un titre par son ID.
@@ -43,11 +57,10 @@ namespace Webzine.Repository.Contracts
         IEnumerable<Titre> FindTitres(int offset, int limit);
 
         /// <summary>
-        /// Retourne tous les titres.
+        /// Recherche et retourne une liste des titres les plus aimés au cours d'une période spécifiée.
         /// </summary>
-        /// <returns>Une collection de tous les titres.</returns>
-        IEnumerable<Titre> FindAll();
-
+        /// <param name="longueurPeriode">La longueur de la période pour la recherche des titres les plus aimés.</param>
+        /// <returns>Une liste des titres les plus aimés pendant la période spécifiée.</returns>
         List<Titre> FindTitresLesPlusLike(int longueurPeriode);
 
         /// <summary>
@@ -75,11 +88,5 @@ namespace Webzine.Repository.Contracts
         /// <param name="libelle">Le style de musique à rechercher.</param>
         /// <returns>Une collection de titres contenant le style de musique spécifié.</returns>
         IEnumerable<Titre> SearchByStyle(string libelle);
-
-        /// <summary>
-        /// Met à jour un titre.
-        /// </summary>
-        /// <param name="titre">Le titre à mettre à jour.</param>
-        void Update(Titre titre);
     }
 }

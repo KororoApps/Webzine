@@ -45,6 +45,14 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
+        public void Update(Titre titre)
+        {
+            this.context.Update<Titre>(titre);
+
+            this.context.SaveChanges();
+        }
+
+        /// <inheritdoc />
         public Titre Find(int idTitre)
         {
             return this.context.Titres.AsNoTracking()
@@ -52,6 +60,12 @@ namespace Webzine.Repository
                 .Include(t => t.Commentaires)
                 .Include(t => t.Styles)
                 .Single(t => t.IdTitre == idTitre);
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Titre> FindAll()
+        {
+            return this.context.Titres.AsNoTracking();
         }
 
         /// <inheritdoc />
@@ -65,12 +79,6 @@ namespace Webzine.Repository
                 .Skip(offset)
                 .Take(limit)
                 .ToList();
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<Titre> FindAll()
-        {
-            return this.context.Titres.AsNoTracking();
         }
 
         /// <inheritdoc />
@@ -137,14 +145,6 @@ namespace Webzine.Repository
                 .Where(t => t.Styles.Any(s => s.Libelle.Equals(libelle)))
                 .OrderByDescending(c => c.Libelle)
                 .ToList();
-        }
-
-        /// <inheritdoc />
-        public void Update(Titre titre)
-        {
-            this.context.Update<Titre>(titre);
-
-            this.context.SaveChanges();
         }
     }
 }
