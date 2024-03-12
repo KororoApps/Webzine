@@ -29,7 +29,7 @@ namespace Webzine.WebApplication.Shared.ViewModels
         /// <summary>
         /// Obtient ou définit les artistes.
         /// </summary>
-        public IEnumerable<Artiste> Artistes { get; set; }
+        public IEnumerable<Artiste>? Artistes { get; set; }
 
         /// <summary>
         /// Obtient ou définit les commentaires.
@@ -39,10 +39,11 @@ namespace Webzine.WebApplication.Shared.ViewModels
         /// <summary>
         /// Obtient ou définit l'artiste.
         /// </summary>
-        public Artiste Artiste { get; set; }
+        public Artiste? Artiste { get; set; }
 
-        public IEnumerable<Style> StylesIds { get; set; } = [];
-
-        public int IncrementationLikes;
+        /// <summary>
+        /// Obtient ou définit une liste de styles.
+        /// </summary>
+        public IEnumerable<Style>? StylesIds { get; set; } = [];
     }
 }
