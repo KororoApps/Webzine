@@ -5,7 +5,6 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.Business.Contracts;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
@@ -21,6 +20,7 @@ namespace Webzine.WebApplication.Controllers
     /// Initialise une nouvelle instance de la classe <see cref="TitreController"/>.
     /// </remarks>
     /// <param name="titreRepository">Le repository des titres utilisé par le contrôleur.</param>
+    /// <param name="commentaireRepository">Le repository des commentaires utilisé par le contrôleur.</param>
     public class TitreController(ITitreRepository titreRepository, ICommentaireRepository commentaireRepository) : Controller
     {
         private readonly ITitreRepository titreRepository = titreRepository;
@@ -51,6 +51,11 @@ namespace Webzine.WebApplication.Controllers
             return this.View(titreModel);
         }
 
+        /// <summary>
+        /// Méthode d'action responsable de l'ajout d'un "like" à un titre.
+        /// </summary>
+        /// <param name="titre">Le titre auquel ajouter le "like".</param>
+        /// <returns>Redirection vers la vue des détails du titre ou une action spécifiée.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Liker(Titre titre)
@@ -66,7 +71,7 @@ namespace Webzine.WebApplication.Controllers
         /// <summary>
         /// Action permettant d'afficher les titres liés à un style.
         /// </summary>
-        /// /// <param name="id">Libellé du style.</param>
+        /// /// <param name="style">Libellé du style.</param>
         /// <returns>Vue contenant la liste des titres liés au style.</returns>
         public IActionResult Style(string style)
         {
@@ -85,16 +90,16 @@ namespace Webzine.WebApplication.Controllers
         /// Action HTTP POST pour confirmer la création d'un commentaire.
         /// </summary>
         /// <param name="commentaire">L'entité Commentaire à créer.</param>
-        /// <param name="IdTitre">Id du titre lié au commentaire.</param>
+        /// <param name="idTitre">Id du titre lié au commentaire.</param>
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Commenter(Commentaire commentaire, int IdTitre)
+        public IActionResult Commenter(Commentaire commentaire, int idTitre)
         {
             // Génération d'une liste de styles.
-            var commentaires = this.commentaireRepository.FindCommentairesByIdTitre(IdTitre);
+            var commentaires = this.commentaireRepository.FindCommentairesByIdTitre(idTitre);
 
-            var titre = this.titreRepository.Find(IdTitre);
+            var titre = this.titreRepository.Find(idTitre);
 
             // Création du modèle de vue contenant un titre.
             var titreModel = new TitreModel
