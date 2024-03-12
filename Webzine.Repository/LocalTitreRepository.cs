@@ -57,10 +57,10 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public Titre Find(int id)
+        public Titre Find(int idTitre)
         {
             return DataFactory.Titres
-                .First(t => t.IdTitre == id);
+                .First(t => t.IdTitre == idTitre);
         }
 
         /// <inheritdoc />
