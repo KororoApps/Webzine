@@ -54,7 +54,8 @@ namespace Webzine.Repository
         public Artiste FindByName(string nomArtiste)
         {
             return this.context.Artistes
-                .Include(c => c.Titres).AsNoTracking()
+                .Include(c => c.Titres)
+                .AsNoTracking()
                 .Single(t => t.Nom == nomArtiste);
         }
 
