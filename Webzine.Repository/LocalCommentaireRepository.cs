@@ -49,7 +49,7 @@ namespace Webzine.Repository
         public IEnumerable<Commentaire> FindCommentaires(int offset, int limit)
         {
             return DataFactory.Commentaires
-                .OrderBy(t => t.DateCreation)
+                .OrderByDescending(t => t.DateCreation)
                 .Skip(offset)
                 .Take(limit)
                 .ToList();
