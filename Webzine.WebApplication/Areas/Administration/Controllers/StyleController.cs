@@ -14,7 +14,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
     /// </summary>
     /// <remarks>
     /// Ce contrôleur gère l'affichage de la liste des styles, la création, la suppression et l'édition d'un style.
-    /// Il utilise le générateur de fausses données Bogus pour simuler des données.
+    /// Il utilise soit le générateur de fausses données Bogus pour simuler des données, soit des données Spotify en fonction du Seeder sélectionné.
     /// </remarks>
     /// <param name="styleRepository">Référence à la classe responsable de l'accès aux données des styles.</param>
     [Area("Administration")]
