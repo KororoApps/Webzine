@@ -32,23 +32,27 @@ namespace Webzine.Repository
         public Artiste Find(int idArtiste)
         {
             return DataFactory.Artistes
-                .FirstOrDefault(a => a.IdArtiste == idArtiste);
+                .Single(t => t.IdArtiste == idArtiste);
 
         }
 
         /// <inheritdoc />
         public Artiste FindByName(string nomArtiste)
         {
-            return DataFactory.Artistes
-                 .FirstOrDefault(a => a.Nom == nomArtiste);
+            Artiste artiste = DataFactory.Artistes.FirstOrDefault(a => a.Nom == nomArtiste);
 
+            if (artiste != null)
+            {
+                artiste.Titres = DataFactory.Titres.Where(t => t.Artiste.Nom == nomArtiste).ToList();
+            }
+
+            return artiste;
         }
 
         /// <inheritdoc />
         public IEnumerable<Artiste> FindAll()
         {
             return DataFactory.Artistes;
-
         }
 
         /// <inheritdoc />
