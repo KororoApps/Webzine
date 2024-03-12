@@ -57,14 +57,14 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public IEnumerable<Artiste> FindAll()
+        public IEnumerable<Artiste?> FindAll()
         {
             return this.context.Artistes.AsNoTracking()
                 .Include(c => c.Titres);
         }
 
         /// <inheritdoc />
-        public IEnumerable<Artiste> FindArtistes(int offset, int limit)
+        public IEnumerable<Artiste?> FindArtistes(int offset, int limit)
         {
             return this.context.Artistes.AsNoTracking()
                 .OrderBy(t => t.Nom.ToLower())
@@ -82,7 +82,7 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public IEnumerable<Artiste> Search(string mot)
+        public IEnumerable<Artiste?> Search(string mot)
         {
             return this.context.Artistes.AsNoTracking()
                 .Where(t => t.Nom.ToUpper().Contains(mot.ToUpper()))

@@ -50,13 +50,13 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public IEnumerable<Artiste> FindAll()
+        public IEnumerable<Artiste?> FindAll()
         {
             return DataFactory.Artistes;
         }
 
         /// <inheritdoc />
-        public IEnumerable<Artiste> FindArtistes(int offset, int limit)
+        public IEnumerable<Artiste?> FindArtistes(int offset, int limit)
         {
             return DataFactory.Artistes
                 .OrderBy(t => t.Nom.ToLower())
@@ -79,7 +79,7 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public IEnumerable<Artiste> Search(string mot)
+        public IEnumerable<Artiste?> Search(string mot)
         {
             return DataFactory.Artistes
                 .Where(t => t.Nom.Contains(mot, StringComparison.CurrentCultureIgnoreCase))
