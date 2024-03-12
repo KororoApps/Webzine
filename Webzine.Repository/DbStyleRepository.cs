@@ -34,12 +34,11 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public Style Find(int id)
+        public void Update(Style style)
         {
-            return this.context.Styles.AsNoTracking()
-                .Include(s => s.Titres)
-                .Where(s => s.IdStyle == id)
-                .First();
+            this.context.Update<Style>(style);
+
+            this.context.SaveChanges();
         }
 
         /// <inheritdoc />
@@ -49,13 +48,12 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public IEnumerable<Style> FindStyles(int offset, int limit)
+        public Style Find(int id)
         {
             return this.context.Styles.AsNoTracking()
-               .OrderBy(c => c.Libelle.ToLower())
-               .Skip(offset)
-               .Take(limit)
-               .ToList();
+                .Include(s => s.Titres)
+                .Where(s => s.IdStyle == id)
+                .First();
         }
 
         /// <inheritdoc />
@@ -67,11 +65,13 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public void Update(Style style)
+        public IEnumerable<Style> FindStyles(int offset, int limit)
         {
-            this.context.Update<Style>(style);
-
-            this.context.SaveChanges();
+            return this.context.Styles.AsNoTracking()
+               .OrderBy(c => c.Libelle.ToLower())
+               .Skip(offset)
+               .Take(limit)
+               .ToList();
         }
     }
 }

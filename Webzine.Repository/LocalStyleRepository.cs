@@ -30,10 +30,15 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public Style Find(int id)
+        public void Update(Style style)
         {
-            return DataFactory.Styles
-                 .First(t => t.IdStyle == id);
+            var styleAEditer = DataFactory.Styles
+                .First(s => s.IdStyle == style.IdStyle);
+
+            if (styleAEditer != null)
+            {
+                styleAEditer.Libelle = style.Libelle;
+            }
         }
 
         /// <inheritdoc />
@@ -43,13 +48,10 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public IEnumerable<Style> FindStyles(int offset, int limit)
+        public Style Find(int id)
         {
             return DataFactory.Styles
-                .OrderBy(c => c.Libelle.ToLower())
-                .Skip(offset)
-                .Take(limit)
-                .ToList();
+                 .First(t => t.IdStyle == id);
         }
 
         /// <inheritdoc />
@@ -61,15 +63,13 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public void Update(Style style)
+        public IEnumerable<Style> FindStyles(int offset, int limit)
         {
-            var styleAEditer = DataFactory.Styles
-                .First(s => s.IdStyle == style.IdStyle);
-
-            if (styleAEditer != null)
-            {
-                styleAEditer.Libelle = style.Libelle;
-            }
+            return DataFactory.Styles
+                .OrderBy(c => c.Libelle.ToLower())
+                .Skip(offset)
+                .Take(limit)
+                .ToList();
         }
     }
 }
