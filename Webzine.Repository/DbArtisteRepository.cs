@@ -35,8 +35,7 @@ namespace Webzine.Repository
         {
             ArgumentNullException.ThrowIfNull(artiste);
 
-            this.context.Artistes
-                 .Remove(artiste);
+            this.context.Artistes.Remove(artiste);
 
             this.context.SaveChanges();
         }
@@ -44,34 +43,30 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public Artiste Find(int idArtiste)
         {
-            return this.context.Artistes
+            return this.context.Artistes.AsNoTracking()
                 .Include(c => c.Titres)
-                .AsNoTracking()
                 .Single(t => t.IdArtiste == idArtiste);
         }
 
         /// <inheritdoc />
         public Artiste FindByName(string nomArtiste)
         {
-            return this.context.Artistes
+            return this.context.Artistes.AsNoTracking()
                 .Include(c => c.Titres)
-                .AsNoTracking()
                 .Single(t => t.Nom == nomArtiste);
         }
 
         /// <inheritdoc />
         public IEnumerable<Artiste> FindAll()
         {
-            return this.context.Artistes
-                .Include(c => c.Titres)
-                .AsNoTracking();
+            return this.context.Artistes.AsNoTracking()
+                .Include(c => c.Titres);
         }
 
         /// <inheritdoc />
         public IEnumerable<Artiste> FindArtistes(int offset, int limit)
         {
-            return this.context.Artistes
-                .AsNoTracking()
+            return this.context.Artistes.AsNoTracking()
                 .OrderBy(t => t.Nom.ToLower())
                 .Skip(offset)
                 .Take(limit)
@@ -89,10 +84,9 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Artiste> Search(string mot)
         {
-            return this.context.Artistes
+            return this.context.Artistes.AsNoTracking()
                 .Where(t => t.Nom.ToUpper().Contains(mot.ToUpper()))
                 .OrderBy(c => c.Nom)
-                .AsNoTracking()
                 .ToList();
         }
     }

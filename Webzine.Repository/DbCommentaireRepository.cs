@@ -23,37 +23,32 @@ namespace Webzine.Repository
 
             this.context.Add<Commentaire>(commentaire);
 
-            this.context
-                .SaveChanges();
+            this.context.SaveChanges();
         }
 
         /// <inheritdoc />
         public void Delete(Commentaire commentaire)
         {
-            this.context.Commentaires
-                .Remove(commentaire);
+            this.context.Commentaires.Remove(commentaire);
 
-            this.context
-                .SaveChanges();
+            this.context.SaveChanges();
         }
 
         /// <inheritdoc />
         public Commentaire Find(int idCommentaire)
         {
-            return this.context.Commentaires
+            return this.context.Commentaires.AsNoTracking()
                 .Include(c => c.Titre)
                 .ThenInclude(t => t.Artiste)
-                .AsNoTracking()
                 .SingleOrDefault(t => t.IdCommentaire == idCommentaire);
         }
 
         /// <inheritdoc />
         public IEnumerable<Commentaire> FindAll()
         {
-            return this.context.Commentaires
+            return this.context.Commentaires.AsNoTracking()
                 .Include(c => c.Titre)
                 .ThenInclude(t => t.Artiste)
-                .AsNoTracking()
                 .OrderByDescending(t => t.DateCreation)
                 .ToList();
         }
@@ -61,8 +56,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
         {
-            return this.context.Commentaires
-                 .AsNoTracking()
+            return this.context.Commentaires.AsNoTracking()
                  .Where(c => c.Titre != null && c.Titre.IdTitre == id)
                  .OrderByDescending(c => c.DateCreation)
                  .ToList();
@@ -71,10 +65,9 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Commentaire> FindCommentaires(int offset, int limit)
         {
-            return this.context.Commentaires
+            return this.context.Commentaires.AsNoTracking()
                 .Include(c => c.Titre)
                 .ThenInclude(t => t.Artiste)
-                .AsNoTracking()
                 .OrderByDescending(t => t.DateCreation)
                 .Skip(offset)
                 .Take(limit)
