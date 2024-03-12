@@ -14,8 +14,10 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
     /// </summary>
     /// <remarks>
     /// Ce contrôleur gère l'affichage de la liste des commentaires et leur suppression.
-    /// Il utilise le générateur de fausses données Bogus pour simuler des données.
+    /// Il utilise soit le générateur de fausses données Bogus pour simuler des données, soit des données Spotify en fonction du Seeder sélectionné.
     /// </remarks>
+    /// <param name="commentaireRepository">Référence à la classe responsable de l'accès aux données des commentaires.</param>
+    /// <param name="titreRepository">Référence à la classe responsable de l'accès aux données des titres.</param>
     [Area("Administration")]
     public class CommentaireController(ICommentaireRepository commentaireRepository, ITitreRepository titreRepository) : Controller
     {
@@ -23,9 +25,10 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         private readonly ITitreRepository titreRepository = titreRepository;
 
         /// <summary>
-        /// Action pour afficher la liste des commentaires.
+        /// Action résultante permettant l'affichage de la liste des commentaires dans la zone d'administration.
         /// </summary>
-        /// <returns>Vue contenant la liste des commentaires.</returns>
+        /// <param name="numeroPage">Le numéro de la page à afficher.</param>
+        /// <returns>La vue avec la liste des commentaires.</returns>
         public IActionResult Index(int numeroPage)
         {
             var titreToSkip = numeroPage * 10;
