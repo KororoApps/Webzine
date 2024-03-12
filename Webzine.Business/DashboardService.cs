@@ -1,4 +1,8 @@
-﻿namespace Webzine.Business
+﻿// <copyright file="DashboardService.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
+
+namespace Webzine.Business
 {
     using Webzine.Business.Contracts;
     using Webzine.Entity;
