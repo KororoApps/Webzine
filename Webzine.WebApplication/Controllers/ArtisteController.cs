@@ -27,7 +27,6 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Une vue contenant les détails de l'artiste.</returns>
         public IActionResult Index(string nom)
         {
-
             var artisteModel = new ArtisteModel
             {
                 Artiste = this.artisteRepository.FindByName(nom),

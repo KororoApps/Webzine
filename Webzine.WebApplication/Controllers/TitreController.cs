@@ -29,14 +29,14 @@ namespace Webzine.WebApplication.Controllers
         /// <summary>
         /// Action qui affiche la liste des titres.
         /// </summary>
-        /// <param name="id">Identifiant du titre à afficher.</param>
+        /// <param name="idTitre">Identifiant du titre à afficher.</param>
         /// <returns>Vue avec la liste des titres générés.</returns>
-        public IActionResult Index(int id)
+        public IActionResult Index(int idTitre)
         {
             // Génération d'une liste de styles.
-            var commentaires = this.commentaireRepository.FindCommentairesByIdTitre(id);
+            var commentaires = this.commentaireRepository.FindCommentairesByIdTitre(idTitre);
 
-            Titre titre = this.titreRepository.Find(id);
+            Titre titre = this.titreRepository.Find(idTitre);
 
             this.titreRepository.IncrementNbLectures(titre);
 
@@ -110,8 +110,7 @@ namespace Webzine.WebApplication.Controllers
 
             if (!this.ModelState.IsValid)
             {
-                //return this.RedirectToAction(nameof(this.Index), titreModel);
-                return this.View("~/Views/Titre/Index.cshtml", titreModel);
+                return this.RedirectToAction(nameof(this.Index), new { idTitre });
             }
 
             commentaire.DateCreation = DateTime.Now;
@@ -121,8 +120,7 @@ namespace Webzine.WebApplication.Controllers
 
             this.ModelState.Clear();
 
-            //return this.RedirectToAction(nameof(this.Index), titreModel);
-            return this.View("~/Views/Titre/Index.cshtml", titreModel);
+            return this.RedirectToAction(nameof(this.Index), new { idTitre });
         }
     }
 }
