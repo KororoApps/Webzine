@@ -1,27 +1,57 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Webzine.Entity;
+﻿// <copyright file="WebzineDbContext.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.EntitiesContext
 {
-    public partial class WebzineDbContext : DbContext
-    {
-        public WebzineDbContext()
-        {
-        }
-        public WebzineDbContext(DbContextOptions<WebzineDbContext> options) : base(options) { }
+    using Microsoft.EntityFrameworkCore;
+    using Webzine.Entity;
 
+    /// <summary>
+    /// Contexte de la base de données Webzine.
+    /// </summary>
+    /// <remarks>
+    /// Initialise une nouvelle instance de la classe <see cref="WebzineDbContext"/> avec des options spécifiques.
+    /// </remarks>
+    /// <param name="options">Options du contexte.</param>
+    public partial class WebzineDbContext(DbContextOptions<WebzineDbContext> options) : DbContext(options)
+    {
+        /// <summary>
+        /// Obtient ou définit la table des artistes.
+        /// </summary>
         public virtual DbSet<Artiste> Artistes { get; set; }
+
+        /// <summary>
+        /// Obtient ou définit la table des styles.
+        /// </summary>
         public virtual DbSet<Style> Styles { get; set; }
+
+        /// <summary>
+        /// Obtient ou définit la table des commentaires.
+        /// </summary>
         public virtual DbSet<Commentaire> Commentaires { get; set; }
+
+        /// <summary>
+        /// Obtient ou définit la table des titres.
+        /// </summary>
         public virtual DbSet<Titre> Titres { get; set; }
 
+        /// <summary>
+        /// Configurations spécifiques au moment de la configuration.
+        /// </summary>
+        /// <param name="optionsBuilder">Constructeur d'options de DbContext.</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.LogTo(NLog.LogManager.GetCurrentClassLogger().Info, Microsoft.Extensions.Logging.LogLevel.Information);
         }
 
+        /// <summary>
+        /// Configurations spécifiques du modèle.
+        /// </summary>
+        /// <param name="modelBuilder">Constructeur de modèle.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configuration de l'entité Artiste
             modelBuilder.Entity<Artiste>(entity =>
             {
                 entity.ToTable("Artiste");
@@ -33,10 +63,10 @@ namespace Webzine.EntitiesContext
                 entity.Property(a => a.Biographie);
 
                 entity.HasMany(a => a.Titres).WithOne(c => c.Artiste).HasForeignKey(t => t.IdArtiste).IsRequired();
-            }
-            );
+            });
 
-           modelBuilder.Entity<Commentaire>(entity =>
+            // Configuration de l'entité Commentaire
+            modelBuilder.Entity<Commentaire>(entity =>
             {
                 entity.ToTable("Commentaire");
 
@@ -48,9 +78,9 @@ namespace Webzine.EntitiesContext
                 entity.Property(c => c.DateCreation);
 
                 entity.HasOne(c => c.Titre).WithMany(c => c.Commentaires).HasForeignKey(c => c.IdTitre).IsRequired();
-            }
-            );
+            });
 
+            // Configuration de l'entité Style
             modelBuilder.Entity<Style>(entity =>
             {
                 entity.ToTable("Style");
@@ -61,9 +91,9 @@ namespace Webzine.EntitiesContext
                 entity.Property(s => s.Libelle);
 
                 entity.HasMany(s => s.Titres);
-            }
-            );
+            });
 
+            // Configuration de l'entité Titre
             modelBuilder.Entity<Titre>(entity =>
             {
                 entity.ToTable("Titre");
@@ -85,12 +115,15 @@ namespace Webzine.EntitiesContext
                 entity.HasOne(t => t.Artiste).WithMany(a => a.Titres).HasForeignKey(t => t.IdArtiste).IsRequired();
                 entity.HasMany(t => t.Commentaires).WithOne(c => c.Titre).HasForeignKey(c => c.IdTitre).IsRequired();
                 entity.HasMany(t => t.Styles);
-            }
-            );
+            });
 
-            OnModelCreatingPartial(modelBuilder);
+            /// <summary>
+            /// Configurations partielles du modèle.
+            /// </summary>
+            /// <param name="modelBuilder">Constructeur de modèle.</param>
+            this.OnModelCreatingPartial(modelBuilder);
         }
+
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
-
 }

@@ -21,9 +21,9 @@
             </div>
             <div class="col-md-10">
                 <select asp-for="@Model.Titre.Artiste.Nom" asp-items="@(new SelectList(Model.Artistes, "Nom", "Nom"))" class="form-control">
-                    <option value="">Sélectionner un artiste</option>                    
+                    <option value="">Sélectionner un artiste</option>
                 </select>
-                <span asp-validation-for="@Model.Titre.Artiste.Nom" class="text-danger"></span>               
+                <span asp-validation-for="@Model.Titre.Artiste.Nom" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row mb-5">
@@ -58,7 +58,7 @@
                 <label asp-for="@Model.Titre.DateSortie" class="form-label required-label"></label>
             </div>
             <div class="col-md-4">
-                <input asp-for="@Model.Titre.DateSortie" type="date"  class=" form-control">
+                <input asp-for="@Model.Titre.DateSortie" type="date" class=" form-control">
                 <span asp-validation-for="@Model.Titre.DateSortie" class="text-danger"></span>
             </div>
             <div class="col-md-2">
@@ -68,7 +68,7 @@
                 <div class=" input-group">
                     <input asp-for="@Model.Titre.Duree" class="form-control">
                     <span class="input-group-text">secondes</span>
-                    <span asp-validation-for="@Model.Titre.Duree" class="text-danger"></span>    
+                    <span asp-validation-for="@Model.Titre.Duree" class="text-danger"></span>
                 </div>
             </div>
         </div>
@@ -100,13 +100,15 @@
                     {
                         <div class="col-md-4">
                             <div class="form-check align-top">
-                                
+
                                 @if (Model.StylesIds != null)
                                 {
-                                    <input class="form-check-input" type="checkbox" value="@style.IdStyle" name="styleIds" 
+                                    <input class="form-check-input" type="checkbox" value="@style.IdStyle" name="styleIds"
                                     @(Model.StylesIds.Any(s => s.IdStyle == style.IdStyle) ? "checked" : "") />
-                                } else {
-                                    <input class="form-check-input" type="checkbox" value="@style.IdStyle" name="styleIds"/>
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" type="checkbox" value="@style.IdStyle" name="styleIds" />
                                 }
                                 <span asp-validation-for="@style.Libelle" class="text-danger"></span>
                                 <label class="form-check-label" asp-for="@style.Libelle">@style.Libelle</label>

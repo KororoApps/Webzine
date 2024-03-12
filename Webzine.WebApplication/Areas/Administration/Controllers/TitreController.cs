@@ -14,7 +14,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
     /// </summary>
     /// <remarks>
     /// Ce contrôleur gère l'affichage de la liste des titres, la création, la suppression et l'édition d'un titre.
-    /// Il utilise le générateur de fausses données Bogus pour simuler des données.
+    /// Il utilise soit le générateur de fausses données Bogus pour simuler des données, soit des données Spotify en fonction du Seeder sélectionné.
     /// </remarks>
     /// <remarks>
     /// Initialise une nouvelle instance de la classe <see cref="TitreController"/>.
@@ -32,8 +32,8 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <summary>
         /// Affiche la liste des titres.
         /// </summary>
+        /// <param name="numeroPage">Le numéro de la page à afficher.</param>
         /// <returns>Vue avec la liste des titres générés.</returns>
-        /// <param name="numeroPage">Indique le nunméro de page sur lequel nous sommes.</param>
         public IActionResult Index(int numeroPage)
         {
             var titreToSkip = numeroPage * 15;
@@ -54,7 +54,6 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <returns>Vue de suppression d'un titre.</returns>
         public IActionResult Delete(int id)
         {
-
             var titre = this.titreRepository.Find(id);
 
             var titreModel = new TitreModel
@@ -116,7 +115,6 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
 
             if (!this.ModelState.IsValid)
             {
-
                 // Génération d'une liste de styles.
                 var styles = this.styleRepository.FindAll();
 
@@ -175,10 +173,11 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         }
 
         /// <summary>
-        /// Action HTTP POST pour confirmer l'édition d'un titre.
+        /// Action résultante HTTP POST pour la modification d'un titre.
         /// </summary>
-        /// <param name="titre">Le titre à éditer.</param>
-        /// <returns>Redirection vers l'action Index après l'édition.</returns>
+        /// <param name="titre">Le titre à modifier.</param>
+        /// <param name="styleIds">La liste des identifiants des styles associés au titre.</param>
+        /// <returns>La vue de modification du titre ou la redirection vers l'action Index si la modification est réussie.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Titre titre, List<int> styleIds)

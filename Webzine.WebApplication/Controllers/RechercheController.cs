@@ -5,14 +5,14 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.Entity;
-    using Webzine.Entity.Fixtures;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
     /// <summary>
     /// Contrôleur principal gérant les actions liées à la page d'accueil.
     /// </summary>
+    /// <param name="titreRepository">Le repository des titres.</param>
+    /// <param name="artisteRepository">Le repository des artistes.</param>
     public class RechercheController(ITitreRepository titreRepository, IArtisteRepository artisteRepository) : Controller
     {
         private readonly ITitreRepository titreRepository = titreRepository;
@@ -26,13 +26,12 @@ namespace Webzine.WebApplication.Controllers
         [HttpPost]
         public IActionResult Index(string recherche)
         {
-
             // Création du modèle de vue contenant la liste de titres filtrés.
             var titreModel = new GroupeTitreModel
             {
                 Artistes = this.artisteRepository.Search(recherche),
                 Titres = this.titreRepository.Search(recherche),
-                Recherche = recherche
+                Recherche = recherche,
             };
 
             // Retour de la vue avec le modèle de vue contenant les titres filtrés.

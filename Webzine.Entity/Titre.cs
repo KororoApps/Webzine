@@ -1,4 +1,8 @@
-﻿namespace Webzine.Entity
+﻿// <copyright file="Titre.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
+
+namespace Webzine.Entity
 {
     using System.ComponentModel.DataAnnotations;
 
@@ -17,7 +21,6 @@
         /// <summary>
         /// Obtient ou définit l'identifiant de l'artiste associé au titre.
         /// </summary>
-
         public int IdArtiste { get; set; }
 
         /// <summary>
@@ -35,7 +38,6 @@
         /// Obtient ou définit la liste des styles associés au titre.
         /// </summary>
         public List<Style>? Styles { get; set; }
-
 
         /// <summary>
         /// Obtient ou définit le titre du morceau.
@@ -114,6 +116,5 @@
         [MinLength(13, ErrorMessage = "L'URL d'écoute doit faire au minimum 13 caractères.")]
         [MaxLength(250, ErrorMessage = "L'URL d'écoute doit faire au maximum 250 caractères.")]
         public string? UrlEcoute { get; set; }
-
     }
 }

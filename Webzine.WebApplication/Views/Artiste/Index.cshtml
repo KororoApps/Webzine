@@ -38,7 +38,7 @@
                         <tr>
                             <th class="fs-3 colspan=2 border-0">
                                 <div class="text-nowrap">
-                                @titre.Album
+                                    @titre.Album
                                 </div>
                             </th>
                         </tr>
@@ -49,10 +49,10 @@
                     </thead>
 
                     <tbody>
-                            <tr>
+                        <tr>
                             <td class="text-start">@TimeSpan.FromSeconds(double.Parse(titre.Duree)).ToString(@"mm\:ss")</td>
-                                <td class="text-start"><a asp-controller="titre" asp-action="index" asp-route-id="@titre.IdTitre">@titre.Libelle</a></td>
-                            </tr>                        
+                            <td class="text-start"><a asp-controller="titre" asp-action="index" asp-route-id="@titre.IdTitre">@titre.Libelle</a></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

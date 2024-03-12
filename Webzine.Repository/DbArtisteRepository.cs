@@ -1,10 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Webzine.EntitiesContext;
-using Webzine.Entity;
-using Webzine.Repository.Contracts;
+﻿// <copyright file="DbArtisteRepository.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Repository
 {
+    using Microsoft.EntityFrameworkCore;
+    using Webzine.EntitiesContext;
+    using Webzine.Entity;
+    using Webzine.Repository.Contracts;
+
     /// <summary>
     /// Implémente l'interface IArtisteRepository en utilisant une base de données.
     /// </summary>
@@ -14,66 +18,55 @@ namespace Webzine.Repository
     /// <param name="context">Le contexte de base de données.</param>
     public class DbArtisteRepository(WebzineDbContext context) : IArtisteRepository
     {
-        private readonly WebzineDbContext _context = context;
+        private readonly WebzineDbContext context = context;
 
         /// <inheritdoc />
         public void Add(Artiste artiste)
         {
-            if (artiste == null)
-            {
-                throw new ArgumentNullException(nameof(artiste));
-            }
+            ArgumentNullException.ThrowIfNull(artiste);
 
-            _context.Add<Artiste>(artiste);
+            this.context.Add<Artiste>(artiste);
 
-            _context.SaveChanges();
+            this.context.SaveChanges();
         }
 
         /// <inheritdoc />
         public void Delete(Artiste artiste)
         {
-            if (artiste == null)
-            {
-                throw new ArgumentNullException(nameof(artiste));
-            }
+            ArgumentNullException.ThrowIfNull(artiste);
 
-            _context.Artistes
-                 .Remove(artiste);
+            this.context.Artistes.Remove(artiste);
 
-            _context.SaveChanges();
+            this.context.SaveChanges();
+        }
+
+        /// <inheritdoc />
+        public void Update(Artiste artiste)
+        {
+            this.context.Update<Artiste>(artiste);
+
+            this.context.SaveChanges();
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Artiste?> FindAll()
+        {
+            return this.context.Artistes.AsNoTracking()
+                .Include(c => c.Titres);
         }
 
         /// <inheritdoc />
         public Artiste Find(int idArtiste)
         {
-            return _context.Artistes
+            return this.context.Artistes.AsNoTracking()
                 .Include(c => c.Titres)
-                .AsNoTracking()
                 .Single(t => t.IdArtiste == idArtiste);
         }
 
         /// <inheritdoc />
-        public Artiste FindByName(string nomArtiste)
+        public IEnumerable<Artiste?> FindArtistes(int offset, int limit)
         {
-            return _context.Artistes
-                .Include(c => c.Titres).AsNoTracking()
-                .Single(t => t.Nom == nomArtiste);
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<Artiste> FindAll()
-        {
-            return _context.Artistes
-                .Include(c => c.Titres)
-                .AsNoTracking();
-
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<Artiste> FindArtistes(int offset, int limit)
-        {
-            return _context.Artistes
-                .AsNoTracking()  // Ajout de AsNoTracking ici
+            return this.context.Artistes.AsNoTracking()
                 .OrderBy(t => t.Nom.ToLower())
                 .Skip(offset)
                 .Take(limit)
@@ -81,23 +74,20 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public void Update(Artiste artiste)
+        public Artiste? FindByName(string nomArtiste)
         {
-            _context.Update<Artiste>(artiste);
-
-            _context.SaveChanges();
+            return this.context.Artistes.AsNoTracking()
+                .Include(c => c.Titres)
+                .Single(t => t.Nom == nomArtiste);
         }
 
-        /// <summary>
-        /// Renvoie les résultats de la recherche coté artistes.
-        public IEnumerable<Artiste> Search(string mot)
+        /// <inheritdoc />
+        public IEnumerable<Artiste?> Search(string mot)
         {
-            return _context.Artistes
+            return this.context.Artistes.AsNoTracking()
                 .Where(t => t.Nom.ToUpper().Contains(mot.ToUpper()))
                 .OrderBy(c => c.Nom)
-                .AsNoTracking()  // Ajout de AsNoTracking ici
                 .ToList();
-
         }
     }
 }

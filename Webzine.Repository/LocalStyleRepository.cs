@@ -1,9 +1,13 @@
-﻿using Webzine.Entity;
-using Webzine.Entity.Fixtures;
-using Webzine.Repository.Contracts;
+﻿// <copyright file="LocalStyleRepository.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Repository
 {
+    using Webzine.Entity;
+    using Webzine.Entity.Fixtures;
+    using Webzine.Repository.Contracts;
+
     /// <summary>
     /// Implémente l'interface IStyleRepository pour la gestion des styles  en mémoire locale.
     /// </summary>
@@ -22,43 +26,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Style style)
         {
-           
             DataFactory.Styles.Remove(style);
-
-        }
-
-        /// <inheritdoc />
-        public Style Find(int id)
-        {
-            return DataFactory.Styles
-                 .First(t => t.IdStyle == id);
-
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<Style> FindAll()
-        {
-            return DataFactory.Styles;
-
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<Style> FindStyles(int offset, int limit)
-        {
-            return DataFactory.Styles
-                .OrderBy(c => c.Libelle.ToLower())
-                .Skip(offset)
-                .Take(limit)
-                .ToList();
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<Style> FindByIds(List<int> ids)
-        {
-            return DataFactory.Styles
-                .Where(s => ids.Contains(s.IdStyle))
-                .ToList();
-
         }
 
         /// <inheritdoc />
@@ -71,6 +39,37 @@ namespace Webzine.Repository
             {
                 styleAEditer.Libelle = style.Libelle;
             }
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Style> FindAll()
+        {
+            return DataFactory.Styles;
+        }
+
+        /// <inheritdoc />
+        public Style Find(int id)
+        {
+            return DataFactory.Styles
+                 .First(t => t.IdStyle == id);
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Style> FindByIds(List<int> ids)
+        {
+            return DataFactory.Styles
+                .Where(s => ids.Contains(s.IdStyle))
+                .ToList();
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Style> FindStyles(int offset, int limit)
+        {
+            return DataFactory.Styles
+                .OrderBy(c => c.Libelle.ToLower())
+                .Skip(offset)
+                .Take(limit)
+                .ToList();
         }
     }
 }

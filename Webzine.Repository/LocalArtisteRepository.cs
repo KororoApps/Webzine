@@ -1,12 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
-using SpotifyAPI.Web;
-using Webzine.Entity;
-using Webzine.Entity.Fixtures;
-using Webzine.Repository.Contracts;
+﻿// <copyright file="LocalArtisteRepository.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Repository
 {
+    using Webzine.Entity;
+    using Webzine.Entity.Fixtures;
+    using Webzine.Repository.Contracts;
+
     /// <summary>
     /// Implémente l'interface IArtisteRepository pour la gestion des artistes en mémoire locale.
     /// </summary>
@@ -22,37 +23,40 @@ namespace Webzine.Repository
             DataFactory.Artistes.Add(artiste);
         }
 
-        /// <inheritdoc />  
+        /// <inheritdoc />
         public void Delete(Artiste artiste)
         {
             DataFactory.Artistes.Remove(artiste);
         }
 
         /// <inheritdoc />
+        public void Update(Artiste artiste)
+        {
+            var artisteAEditer = DataFactory.Artistes
+                .First(a => a.IdArtiste == artiste.IdArtiste);
+
+            if (artisteAEditer != null)
+            {
+                artisteAEditer.Nom = artiste.Nom;
+                artisteAEditer.Biographie = artiste.Biographie;
+            }
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Artiste?> FindAll()
+        {
+            return DataFactory.Artistes;
+        }
+
+        /// <inheritdoc />
         public Artiste Find(int idArtiste)
         {
             return DataFactory.Artistes
-                .FirstOrDefault(a => a.IdArtiste == idArtiste);
-
+                .Single(t => t.IdArtiste == idArtiste);
         }
 
         /// <inheritdoc />
-        public Artiste FindByName(string nomArtiste)
-        {
-            return DataFactory.Artistes
-                 .FirstOrDefault(a => a.Nom == nomArtiste);
-
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<Artiste> FindAll()
-        {
-            return DataFactory.Artistes;
-
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<Artiste> FindArtistes(int offset, int limit)
+        public IEnumerable<Artiste?> FindArtistes(int offset, int limit)
         {
             return DataFactory.Artistes
                 .OrderBy(t => t.Nom.ToLower())
@@ -62,28 +66,25 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public void Update(Artiste artiste)
+        public Artiste? FindByName(string nomArtiste)
         {
-            var artisteAEditer = DataFactory.Artistes
-                .First(a => a.IdArtiste  == artiste.IdArtiste);
+            Artiste artiste = DataFactory.Artistes.FirstOrDefault(a => a.Nom == nomArtiste);
 
-            if (artisteAEditer != null)
+            if (artiste != null)
             {
-                artisteAEditer.Nom = artiste.Nom;
-                artisteAEditer.Biographie = artiste.Biographie;
+                artiste.Titres = DataFactory.Titres.Where(t => t.Artiste.Nom == nomArtiste).ToList();
             }
+
+            return artiste;
         }
 
-        /// <summary>
-        /// Renvoie les résultats de la recherche coté artistes.
-        public IEnumerable<Artiste> Search(string mot)
+        /// <inheritdoc />
+        public IEnumerable<Artiste?> Search(string mot)
         {
-
             return DataFactory.Artistes
-                .Where(t => t.Nom.ToUpper().Contains(mot.ToUpper()))
+                .Where(t => t.Nom.Contains(mot, StringComparison.CurrentCultureIgnoreCase))
                 .OrderBy(t => t.Nom)
                 .ToList();
-
         }
     }
 }

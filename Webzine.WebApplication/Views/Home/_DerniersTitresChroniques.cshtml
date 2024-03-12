@@ -9,7 +9,7 @@
                 <div class="row g-0 bg-light">
                     <div class="col-sm-3 col-lg-2">
                         <a asp-area="" asp-controller="titre" asp-action="index" asp-route-id="@titre.IdTitre">
-                            <img src="@titre.UrlJaquette" class="card-img-top w-100 h-100 example-card-img-responsive p-3 object-fit-cover" alt="image">                            
+                            <img src="@titre.UrlJaquette" class="card-img-top w-100 h-100 example-card-img-responsive p-3 object-fit-cover" alt="image">
                         </a>
                     </div>
                     <div class="col-sm-9 col-lg-10">
@@ -64,7 +64,6 @@
             &lt;&lt; Titres plus récents
         </a>
     }
-    
     <a class="btn btn-secondary p-2 m-4" asp-area="" asp-controller="home" asp-action="index" asp-route-NumeroPage="@(Model.NumeroPage + 1)">
         Titres plus anciens >>
     </a>

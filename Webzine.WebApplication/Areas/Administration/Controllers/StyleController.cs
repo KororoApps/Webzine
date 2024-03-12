@@ -6,7 +6,6 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
-    using Webzine.Entity.Fixtures;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
 
@@ -15,16 +14,18 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
     /// </summary>
     /// <remarks>
     /// Ce contrôleur gère l'affichage de la liste des styles, la création, la suppression et l'édition d'un style.
-    /// Il utilise le générateur de fausses données Bogus pour simuler des données.
+    /// Il utilise soit le générateur de fausses données Bogus pour simuler des données, soit des données Spotify en fonction du Seeder sélectionné.
     /// </remarks>
+    /// <param name="styleRepository">Référence à la classe responsable de l'accès aux données des styles.</param>
     [Area("Administration")]
     public class StyleController(IStyleRepository styleRepository) : Controller
     {
-        private IStyleRepository styleRepository = styleRepository;
+        private readonly IStyleRepository styleRepository = styleRepository;
 
         /// <summary>
         /// Affiche la liste des styles.
         /// </summary>
+        /// <param name="numeroPage">Le numéro de la page à afficher.</param>
         /// <returns>Vue avec la liste des styles.</returns>
         public IActionResult Index(int numeroPage)
         {
@@ -38,10 +39,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
 
             // Retour de la vue avec le modèle de vue contenant les styles générés.
             return this.View(styleModel);
-
         }
-
-
 
         /// <summary>
         /// Affiche la vue de création d'un nouveau style.
@@ -98,7 +96,6 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(Style style)
         {
-
             this.styleRepository.Delete(style);
 
             return this.RedirectToAction(nameof(this.Index));

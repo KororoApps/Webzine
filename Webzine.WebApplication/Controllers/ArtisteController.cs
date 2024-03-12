@@ -14,16 +14,17 @@ namespace Webzine.WebApplication.Controllers
     /// <remarks>
     /// Ce contrôleur gère l'affichage de la biographie d'un artiste.
     /// Il utilise le générateur de fausses données Bogus pour simuler des données.
+    /// <param name="artisteRepository">Le repository des artistes à injecter.</param>
     /// </remarks>
     public class ArtisteController(IArtisteRepository artisteRepository) : Controller
     {
         private readonly IArtisteRepository artisteRepository = artisteRepository;
 
         /// <summary>
-        /// Action permettant d'afficher les artistes liés à un groupe.
+        /// Méthode d'action responsable de l'affichage des détails d'un artiste.
         /// </summary>
-        /// <param name="id">Identifiant du groupe d'artistes.</param>
-        /// <returns>Vue contenant la liste des artistes liés au groupe.</returns>
+        /// <param name="nom">Le nom de l'artiste à afficher.</param>
+        /// <returns>Une vue contenant les détails de l'artiste.</returns>
         public IActionResult Index(string nom)
         {
 
@@ -35,10 +36,4 @@ namespace Webzine.WebApplication.Controllers
             return this.View(artisteModel);
         }
     }
-
-
-   
 }
-
-
-
