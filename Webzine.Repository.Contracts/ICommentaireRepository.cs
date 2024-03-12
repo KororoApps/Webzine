@@ -1,7 +1,11 @@
-﻿using Webzine.Entity;
+﻿// <copyright file="ICommentaireRepository.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Repository.Contracts
 {
+    using Webzine.Entity;
+
     /// <summary>
     /// Interface définissant les opérations CRUD pour la gestion des commentaires.
     /// </summary>
