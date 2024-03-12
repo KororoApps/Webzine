@@ -188,7 +188,7 @@ if (builder.Configuration.GetSection("Repository").Value == "db")
     else if (builder.Configuration.GetSection("Seeder").Value == "local")
     {
         // Sinon seeder la BDD avec des fausses données
-        SeedDataLocal.Initialize(services, context);
+        SeedDataLocal.Initialize(context);
     }
 }
 
