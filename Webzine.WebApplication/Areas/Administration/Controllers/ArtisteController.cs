@@ -14,27 +14,23 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
     /// </summary>
     /// <remarks>
     /// Ce contrôleur gère l'affichage de la liste des artistes, la création, la suppression et l'édition d'un artiste.
-    /// Il utilise le générateur de fausses données Bogus pour simuler des données.
+    /// Il utilise soit le générateur de fausses données Bogus pour simuler des données, soit des données Spotify en fonction du Seeder sélectionné.
     /// </remarks>
+    /// <remarks>
+    /// Initialise une nouvelle instance de la classe <see cref="ArtisteController"/>.
+    /// </remarks>
+    /// <param name="artisteRepository">Le repository des artistes à injecter.</param>
     [Area("Administration")]
-    public class ArtisteController : Controller
+    public class ArtisteController(IArtisteRepository artisteRepository) : Controller
     {
 
-        private readonly IArtisteRepository artisteRepository;
+        private readonly IArtisteRepository artisteRepository = artisteRepository;
 
         /// <summary>
-        /// Initialise une nouvelle instance de la classe <see cref="ArtisteController"/>.
+        /// Affiche la liste paginée des artistes.
         /// </summary>
-        /// <param name="artisteRepository">Le repository des artistes à injecter.</param>
-        public ArtisteController(IArtisteRepository artisteRepository)
-        {
-            this.artisteRepository = artisteRepository;
-        }
-
-        /// <summary>
-        /// Action pour afficher la liste des artistes.
-        /// </summary>
-        /// <returns>Vue contenant la liste des artistes.</returns>
+        /// <param name="numeroPage">Le numéro de la page à afficher.</param>
+        /// <returns>Une vue contenant la liste paginée des artistes.</returns>
         public IActionResult Index(int numeroPage)
         {
             var titreToSkip = numeroPage * 15;
