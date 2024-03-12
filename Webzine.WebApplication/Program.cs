@@ -13,18 +13,10 @@ using Webzine.WebApplication.Middlewares;
 var builder = WebApplication.CreateBuilder(args);
 
 var seederValue = builder.Configuration.GetSection("Seeder").Value;
+var repositoryValue = builder.Configuration.GetSection("Repository").Value;
 
 // Choix de l'utilisateur : Configure le type de Repository à utiliser en fonction de la configuration.
-if (string.IsNullOrWhiteSpace(seederValue))
-{
-    // Ne pas utiliser de base de données.
-    builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
-    builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
-    builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
-    builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
-    builder.Services.AddScoped<IDashboardService, DashboardService>();
-}
-else if (builder.Configuration.GetSection("Repository").Value == "db")
+if (repositoryValue == "db")
 {
     if (builder.Environment.IsDevelopment())
     {
@@ -48,8 +40,18 @@ else if (builder.Configuration.GetSection("Repository").Value == "db")
     builder.Services.AddScoped<ITitreRepository, DbTitreRepository>();
     builder.Services.AddScoped<IStyleRepository, DbStyleRepository>();
     builder.Services.AddScoped<ICommentaireRepository, DbCommentaireRepository>();
-    builder.Services.AddScoped<IDashboardService, DashboardService>();
 }
+else
+{
+    // Ne pas utiliser de base de données.
+    builder.Services.AddScoped<IArtisteRepository, LocalArtisteRepository>();
+    builder.Services.AddScoped<ITitreRepository, LocalTitreRepository>();
+    builder.Services.AddScoped<IStyleRepository, LocalStyleRepository>();
+    builder.Services.AddScoped<ICommentaireRepository, LocalCommentaireRepository>();
+  
+}
+
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 // Configure les services nécessaires.
 builder.Services.AddControllersWithViews()
@@ -95,49 +97,28 @@ app.UseMiddleware<RequestLoggingMiddleware>();
 
 // Liste des artistes
 app.MapControllerRoute(
-    name: "artistesAvecPage",
-    pattern: "administration/artistes/page/{NumeroPage}",
+    name: "artistes",
+    pattern: "administration/artistes/{id?}",
     defaults: new { area = "Administration", controller = "Artiste", action = "Index" });
-
-app.MapControllerRoute(
-    name: "artistesSansPage",
-    pattern: "administration/artistes/",
-    defaults: new { area = "Administration", controller = "Artiste", action = "Index" });
-
 
 // Liste des titres
 app.MapControllerRoute(
-    name: "titresAvecPage",
-    pattern: "administration/titres/page/{NumeroPage}",
-    defaults: new { area = "Administration", controller = "Titre", action = "Index" });
-
-app.MapControllerRoute(
-    name: "titresSansPage",
-    pattern: "administration/titres/",
+    name: "titres",
+    pattern: "administration/titres/{id?}",
     defaults: new { area = "Administration", controller = "Titre", action = "Index" });
 
 // Liste des styles
 app.MapControllerRoute(
-    name: "stylesAvecPage",
-    pattern: "administration/styles/page/{NumeroPage}",
-    defaults: new { area = "Administration", controller = "Style", action = "Index" });
-
-app.MapControllerRoute(
-    name: "stylesSansPage",
-    pattern: "administration/styles/",
+    name: "styles",
+    pattern: "administration/styles/{id?}",
     defaults: new { area = "Administration", controller = "Style", action = "Index" });
 
 // Routes specifiques de la consultation :
 
 // Liste des commentaires
 app.MapControllerRoute(
-    name: "commentairesAvecPage",
-    pattern: "administration/commentaires/page/{NumeroPage}",
-    defaults: new { area = "Administration", controller = "Commentaire", action = "Index" });
-
-app.MapControllerRoute(
-    name: "commentairesSansPage",
-    pattern: "administration/commentaires/",
+    name: "commentaires",
+    pattern: "administration/commentaires/{id}",
     defaults: new { area = "Administration", controller = "Commentaire", action = "Index" });
 
 // Titres selon le style de musique démandé
@@ -149,7 +130,7 @@ app.MapControllerRoute(
 // Titre par Id
 app.MapControllerRoute(
     name: "titre",
-    pattern: "titre/{idTitre}",
+    pattern: "titre/{Id}",
     defaults: new { controller = "Titre", action = "Index" });
 
 // Formulaire pour ajouter un commentaire au titre
@@ -167,8 +148,9 @@ app.MapControllerRoute(
 // Route pour les pages à l'accueil
 app.MapControllerRoute(
     name: "accueilPage",
-    pattern: "page/{NumeroPage?}",
-    defaults: new { controller = "Home", action = "Index" });
+    pattern: "page/{NumeroPage}",
+    defaults: new { controller = "Home", action = "Index" },
+    constraints: new { page = @"\d+" });
 
 // Définit les routes pour les controllers.
 app.MapControllerRoute(
@@ -179,7 +161,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-if (builder.Configuration.GetSection("Repository").Value == "db")
+if (repositoryValue == "db")
 {
     // Si le choix est d'avoir une Base de donnée, la seeder :
     // Utilise un scope pour gérer les services.
@@ -189,24 +171,21 @@ if (builder.Configuration.GetSection("Repository").Value == "db")
     // Récupère le DbContext du service scope.
     var context = services.GetRequiredService<WebzineDbContext>();
 
-    if (!app.Environment.IsDevelopment())
+    if (app.Environment.IsDevelopment())
     {
-        // Environnement de prod : Pas de supression de la BDD, Création de la BDD
-        context.Database.EnsureCreated();
-    }
-    else if (app.Environment.IsDevelopment())
-    {
-        // Environnement de dev : Suppression de la BDD puis Création de la BDD
+        // Environnement de dev : Suppression de la BDD 
         context.Database.EnsureDeleted();
-        context.Database.EnsureCreated();
     }
+    
+    context.Database.EnsureCreated();
+    
 
-    if (builder.Configuration.GetSection("Seeder").Value == "spotify")
+    if (seederValue == "spotify")
     {
         // Si la configuration "Seeder" n'est pas vide, seeder la BDD avec les données de Spotify
         await SeedDataSpotify.Request(context, builder.Configuration.GetSection("spotify"));
     }
-    else if (builder.Configuration.GetSection("Seeder").Value == "local")
+    else if (seederValue == "local")
     {
         // Sinon seeder la BDD avec des fausses données
         SeedDataLocal.Initialize(context);
