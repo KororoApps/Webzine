@@ -183,7 +183,7 @@ if (builder.Configuration.GetSection("Repository").Value == "db")
     if (builder.Configuration.GetSection("Seeder").Value == "spotify")
     {
         // Si la configuration "Seeder" n'est pas vide, seeder la BDD avec les données de Spotify
-        await SeedDataSpotify.Request(services, context, builder.Configuration.GetSection("spotify"));
+        await SeedDataSpotify.Request(context, builder.Configuration.GetSection("spotify"));
     }
     else if (builder.Configuration.GetSection("Seeder").Value == "local")
     {
