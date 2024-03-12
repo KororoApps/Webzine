@@ -27,14 +27,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Commentaire commentaire)
         {
-                DataFactory.Commentaires.Remove(commentaire);
-        }
-
-        /// <inheritdoc />
-        public Commentaire Find(int id)
-        {
-            return DataFactory.Commentaires
-                .First(t => t.IdCommentaire == id);
+            DataFactory.Commentaires.Remove(commentaire);
         }
 
         /// <inheritdoc />
@@ -46,12 +39,10 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
+        public Commentaire? Find(int id)
         {
             return DataFactory.Commentaires
-                .Where(c => c.Titre != null && c.Titre.IdTitre == id)
-                .OrderBy(c => c.DateCreation)
-                .ToList();
+                .First(t => t.IdCommentaire == id);
         }
 
         /// <inheritdoc />
@@ -61,6 +52,15 @@ namespace Webzine.Repository
                 .OrderBy(t => t.DateCreation)
                 .Skip(offset)
                 .Take(limit)
+                .ToList();
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
+        {
+            return DataFactory.Commentaires
+                .Where(c => c.Titre != null && c.Titre.IdTitre == id)
+                .OrderBy(c => c.DateCreation)
                 .ToList();
         }
     }

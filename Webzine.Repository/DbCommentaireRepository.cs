@@ -35,15 +35,6 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public Commentaire Find(int idCommentaire)
-        {
-            return this.context.Commentaires.AsNoTracking()
-                .Include(c => c.Titre)
-                .ThenInclude(t => t.Artiste)
-                .SingleOrDefault(t => t.IdCommentaire == idCommentaire);
-        }
-
-        /// <inheritdoc />
         public IEnumerable<Commentaire> FindAll()
         {
             return this.context.Commentaires.AsNoTracking()
@@ -54,12 +45,12 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
+        public Commentaire? Find(int idCommentaire)
         {
             return this.context.Commentaires.AsNoTracking()
-                 .Where(c => c.Titre != null && c.Titre.IdTitre == id)
-                 .OrderByDescending(c => c.DateCreation)
-                 .ToList();
+                .Include(c => c.Titre)
+                .ThenInclude(t => t.Artiste)
+                .SingleOrDefault(t => t.IdCommentaire == idCommentaire);
         }
 
         /// <inheritdoc />
@@ -72,6 +63,15 @@ namespace Webzine.Repository
                 .Skip(offset)
                 .Take(limit)
                 .ToList();
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
+        {
+            return this.context.Commentaires.AsNoTracking()
+                 .Where(c => c.Titre != null && c.Titre.IdTitre == id)
+                 .OrderByDescending(c => c.DateCreation)
+                 .ToList();
         }
     }
 }

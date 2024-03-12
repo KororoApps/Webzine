@@ -24,11 +24,17 @@ namespace Webzine.Repository.Contracts
         void Delete(Commentaire commentaire);
 
         /// <summary>
+        /// Renvoie tous les commentaires.
+        /// </summary>
+        /// <returns>Une collection de tous les commentaires.</returns>
+        IEnumerable<Commentaire> FindAll();
+
+        /// <summary>
         /// Renvoie le premier commentaire ayant l'ID spécifié.
         /// </summary>
         /// <param name="idCommentaire">L'ID du commentaire.</param>
         /// <returns>Le commentaire correspondant à l'ID spécifié.</returns>
-        Commentaire Find(int idCommentaire);
+        Commentaire? Find(int idCommentaire);
 
         /// <summary>
         /// Renvoie les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent à l'ancien).
@@ -37,12 +43,6 @@ namespace Webzine.Repository.Contracts
         /// <param name="limit">Le nombre d'éléments à récupérer.</param>
         /// <returns>Une collection de commentaires paginée et triée par date de création.</returns>
         IEnumerable<Commentaire> FindCommentaires(int offset, int limit);
-
-        /// <summary>
-        /// Renvoie tous les commentaires.
-        /// </summary>
-        /// <returns>Une collection de tous les commentaires.</returns>
-        IEnumerable<Commentaire> FindAll();
 
         /// <summary>
         /// Renvoie une liste de commentaires par ordre de création pour un ID de titre spécifique.
