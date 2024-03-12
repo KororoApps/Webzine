@@ -1,9 +1,13 @@
-﻿using Webzine.Entity;
-using Webzine.Entity.Fixtures;
-using Webzine.Repository.Contracts;
+﻿// <copyright file="LocalStyleRepository.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Repository
 {
+    using Webzine.Entity;
+    using Webzine.Entity.Fixtures;
+    using Webzine.Repository.Contracts;
+
     /// <summary>
     /// Implémente l'interface IStyleRepository pour la gestion des styles  en mémoire locale.
     /// </summary>
@@ -22,9 +26,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Style style)
         {
-           
             DataFactory.Styles.Remove(style);
-
         }
 
         /// <inheritdoc />
@@ -32,14 +34,12 @@ namespace Webzine.Repository
         {
             return DataFactory.Styles
                  .First(t => t.IdStyle == id);
-
         }
 
         /// <inheritdoc />
         public IEnumerable<Style> FindAll()
         {
             return DataFactory.Styles;
-
         }
 
         /// <inheritdoc />
@@ -58,7 +58,6 @@ namespace Webzine.Repository
             return DataFactory.Styles
                 .Where(s => ids.Contains(s.IdStyle))
                 .ToList();
-
         }
 
         /// <inheritdoc />
