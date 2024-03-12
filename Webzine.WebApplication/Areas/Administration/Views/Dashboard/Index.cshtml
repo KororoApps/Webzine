@@ -76,7 +76,7 @@
                         <i class="fa-solid fa-compact-disc fa-5x mb-2"></i>
                     </div>
                     <p class="fs-2 text-primary text-capitalize">
-                    @Model.TitrePlusLu.Libelle
+                        @Model.TitrePlusLu.Libelle
                     </p>
                     <p class="text-primary">
                         Titre le plus lu
@@ -85,14 +85,14 @@
             </a>
 
 
-                    @*Nombre de titres.*@
+            @*Nombre de titres.*@
             <a asp-area="administration" asp-controller="titre" asp-action="index" class="container w-75 ">
                 <div class="bg-light mt-4 p-5 text-white text-center">
                     <div class="text-primary">
                         <i class="fa-solid fa-music fa-5x mb-2"></i>
                     </div>
                     <p class="fs-2 text-primary">
-                    @Model.NbTitres
+                        @Model.NbTitres
                     </p>
                     <p class="text-primary">
                         Titres
@@ -103,21 +103,21 @@
     </div>
     <div class="row">
         <div class="d-flex justify-content-around">
-                    @*Nombre de styles de musique.*@
+            @*Nombre de styles de musique.*@
             <a asp-area="administration" asp-controller="style" asp-action="index" class="container w-75 ">
                 <div class="bg-light mt-4 p-5 text-white text-center">
                     <div class="text-primary">
                         <i class="fa-solid fa-tags fa-5x mb-2"></i>
                     </div>
                     <p class="fs-2 text-primary">
-                    @Model.NbStyles
+                        @Model.NbStyles
                     </p>
                     <p class="text-primary">
                         Styles de musique
                     </p>
                 </div>
             </a>
-                    @*Nombre de lectures.*@
+            @*Nombre de lectures.*@
             <div class="bg-light mt-4 p-5 text-white text-center container w-75 ">
                 <div class="text-dark font-size-3">
                     <i class="fa-solid fa-eye fa-5x mb-2"></i>
@@ -129,7 +129,7 @@
                     Lectures
                 </p>
             </div>
-                    @*Nombre de likes.*@
+            @*Nombre de likes.*@
             <div class="bg-light mt-4 p-5 text-white text-center container w-75 ">
                 <div class="text-dark w-5">
                     <i class="fa-solid fa-thumbs-up fa-5x mb-2"></i>
@@ -145,10 +145,10 @@
     </div>
 </div>
 
-                    @functions {
-                        public int GenerateRandomNumber()
-                        {
-                            Random random = new Random();
-                            return random.Next(100, 1001);
-                        }
+@functions {
+    public int GenerateRandomNumber()
+    {
+        Random random = new Random();
+        return random.Next(100, 1001);
+    }
 }
