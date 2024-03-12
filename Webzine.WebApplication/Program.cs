@@ -7,6 +7,7 @@ using Webzine.EntitiesContext.Seeders;
 using Webzine.Repository;
 using Webzine.Repository.Contracts;
 using Webzine.WebApplication.Filters;
+using Webzine.WebApplication.Middlewares;
 
 // Créer un nouveau builder pour l'application web.
 var builder = WebApplication.CreateBuilder(args);

@@ -15,7 +15,8 @@ namespace Webzine.EntitiesContext.Seeders
             // Création de la configuration du client Spotify
             var config = SpotifyClientConfig.CreateDefault();
             // Création de la demande d'octroi de client (Client Credentials Grant)
-            var request = new ClientCredentialsRequest(spotifyConnexion.GetSection("ClientId").Value, spotifyConnexion.GetSection("ClientSecret").Value);
+            var request = new ClientCredentialsRequest(spotifyConnexion.GetSection("ClientId").Value,
+                                                       spotifyConnexion.GetSection("ClientSecret").Value);
             // Obtention du jeton d'accès OAuth en utilisant la demande d'octroi de client
             var response = await new OAuthClient(config).RequestToken(request);
             // Configuration du client Spotify avec le jeton d'accès obtenu
