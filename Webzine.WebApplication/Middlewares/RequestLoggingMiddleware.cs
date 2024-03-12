@@ -2,37 +2,40 @@
 // Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
 // </copyright>
 
-/// <summary>
-/// Middleware responsable de l'enregistrement des informations de requête.
-/// </summary>
-public class RequestLoggingMiddleware
+namespace Webzine.WebApplication.Middlewares
 {
-    private readonly RequestDelegate _next;
-    private readonly ILogger<RequestLoggingMiddleware> _logger;
-
     /// <summary>
-    /// Initialise une nouvelle instance de la classe <see cref="RequestLoggingMiddleware"/>.
+    /// Middleware responsable de l'enregistrement des informations de requête.
     /// </summary>
-    /// <param name="next">La fonction de rappel suivante dans le pipeline de requête.</param>
-    /// <param name="logger">Le journal utilisé pour l'enregistrement des informations.</param>
-    public RequestLoggingMiddleware(RequestDelegate next, ILogger<RequestLoggingMiddleware> logger)
+    public class RequestLoggingMiddleware
     {
-        _next = next ?? throw new ArgumentNullException(nameof(next));
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
+        private readonly RequestDelegate next;
+        private readonly ILogger<RequestLoggingMiddleware> logger;
 
-    /// <summary>
-    /// Méthode d'invocation du middleware.
-    /// </summary>
-    /// <param name="context">Le contexte de la requête HTTP.</param>
-    /// <returns>Une tâche représentant l'exécution du middleware.</returns>
-    public async Task Invoke(HttpContext context)
-    {
-        // Log request information
-        _logger.LogInformation($"Request: {context.Request.Path} {context.Request.QueryString}");
-        _logger.LogInformation("Middleware reached!");
+        /// <summary>
+        /// Initialise une nouvelle instance de la classe <see cref="RequestLoggingMiddleware"/>.
+        /// </summary>
+        /// <param name="next">La fonction de rappel suivante dans le pipeline de requête.</param>
+        /// <param name="logger">Le journal utilisé pour l'enregistrement des informations.</param>
+        public RequestLoggingMiddleware(RequestDelegate next, ILogger<RequestLoggingMiddleware> logger)
+        {
+            this.next = next ?? throw new ArgumentNullException(nameof(next));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
 
-        // Call the next middleware in the pipeline
-        await _next(context);
+        /// <summary>
+        /// Méthode d'invocation du middleware.
+        /// </summary>
+        /// <param name="context">Le contexte de la requête HTTP.</param>
+        /// <returns>Une tâche représentant l'exécution du middleware.</returns>
+        public async Task Invoke(HttpContext context)
+        {
+            // Log request information
+            this.logger.LogInformation($"Request: {context.Request.Path} {context.Request.QueryString}");
+            this.logger.LogInformation("Middleware reached!");
+
+            // Call the next middleware in the pipeline
+            await this.next(context);
+        }
     }
 }
