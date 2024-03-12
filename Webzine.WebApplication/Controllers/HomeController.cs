@@ -5,9 +5,9 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.Shared.ViewModels;
-    using Microsoft.Extensions.Configuration;
 
     /// <summary>
     /// Contrôleur principal gérant les actions liées à la page d'accueil.
