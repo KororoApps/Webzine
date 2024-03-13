@@ -9,7 +9,7 @@
             @foreach (var titre in Model.TitresPopulaires)
             {
                 <div class="col-12 col-sm-12 col-md-4 mt-5">
-                    <a asp-area="" asp-controller="titre" asp-action="index" asp-route-id="@titre.IdTitre">
+                    <a asp-area="" asp-controller="titre" asp-action="index" asp-route-idTitre="@titre.IdTitre">
                         <div class="card">
                             <div class="ratio ratio-1x1">
                                 <img src="@titre.UrlJaquette" class="card-img-top w-100 h-100 object-fit-cover" alt="image">
