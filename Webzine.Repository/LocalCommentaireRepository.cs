@@ -66,7 +66,7 @@ namespace Webzine.Repository
         {
             return DataFactory.Commentaires
                 .Where(c => c.Titre != null && c.Titre.IdTitre == id)
-                .OrderBy(c => c.DateCreation)
+                .OrderByDescending(c => c.DateCreation)
                 .ToList();
         }
     }
