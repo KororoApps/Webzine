@@ -7,14 +7,14 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
-    /// Contrôleur API responsable de fournir des informations sur la version de l'application.
+    /// Controller API responsable de fournir des informations sur la version de l'application.
     /// </summary>
     public class ApiController : Controller
     {
         /// <summary>
         /// Obtient les informations sur la version de l'application.
         /// </summary>
-        /// <returns>Les informations sur la version de l'application.</returns>
+        /// <returns>Retourne les informations sur la version de l'application.</returns>
         public IActionResult Version()
         {
             var versionInfo = new

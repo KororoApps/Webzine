@@ -18,9 +18,9 @@ namespace Webzine.Repository.Contracts
         void Add(Commentaire commentaire);
 
         /// <summary>
-        /// Ajoute un commentaire.
+        /// Supprime un commentaire.
         /// </summary>
-        /// <param name="commentaire">Le commentaire à ajouter.</param>
+        /// <param name="commentaire">Le commentaire à supprimmer.</param>
         void Delete(Commentaire commentaire);
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Webzine.Repository.Contracts
         Commentaire? Find(int idCommentaire);
 
         /// <summary>
-        /// Renvoie les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent à l'ancien).
+        /// Renvoie les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent au plus ancien).
         /// </summary>
         /// <param name="offset">L'indice de départ pour la pagination.</param>
         /// <param name="limit">Le nombre d'éléments à récupérer.</param>

@@ -9,7 +9,7 @@ namespace Webzine.WebApplication.Controllers
     using Webzine.WebApplication.ViewModels;
 
     /// <summary>
-    /// Contrôleur principal gérant les actions liées à la page d'accueil.
+    /// Controller principal gérant les actions liées à la page d'accueil.
     /// </summary>
     /// <param name="titreRepository">Le repository des titres.</param>
     /// <param name="artisteRepository">Le repository des artistes.</param>

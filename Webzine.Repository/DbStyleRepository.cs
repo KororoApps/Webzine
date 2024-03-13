@@ -10,11 +10,11 @@ namespace Webzine.Repository
     using Webzine.Repository.Contracts;
 
     /// <summary>
-    /// Implémente l'interface IStyleRepository pour la gestion des styles en utilisant une base de données.
+    /// Implémente l'interface IStyleRepository pour la gestion des styles en utilisant une base de donnée.
     /// </summary>
     public class DbStyleRepository(WebzineDbContext context) : IStyleRepository
     {
-        // Contexte de base de données pour accéder aux données
+        // Contexte de base de donnée pour accéder aux données
         private readonly WebzineDbContext context = context;
 
         /// <inheritdoc />

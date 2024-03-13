@@ -10,12 +10,12 @@ namespace Webzine.Repository
     using Webzine.Repository.Contracts;
 
     /// <summary>
-    /// Implémente l'interface ITitreRepository pour les opérations liées à la gestion des titres dans la base de données.
+    /// Implémente l'interface ITitreRepository pour les opérations liées à la gestion des titres dans la base de donnée.
     /// </summary>
     /// <remarks>
     /// Initialise une nouvelle instance de la classe DbTitreRepository.
     /// </remarks>
-    /// <param name="context">Le contexte de base de données.</param>
+    /// <param name="context">Le context de base de donnée.</param>
     public class DbTitreRepository(WebzineDbContext context) : ITitreRepository
     {
         private readonly WebzineDbContext context = context;
@@ -99,7 +99,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void IncrementNbLectures(Titre titre)
         {
-            // Charger le titre depuis la base de données avec suivi des modifications
+            // Charger le titre depuis la base de donnée avec suivi des modifications
             Titre existingTitre = this.context.Titres.Find(titre.IdTitre);
 
             if (existingTitre != null)
@@ -113,7 +113,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void IncrementNbLikes(Titre titre)
         {
-            // Charger le titre depuis la base de données avec suivi des modifications
+            // Charger le titre depuis la base de donnée avec suivi des modifications
             Titre existingTitre = this.context.Titres.Find(titre.IdTitre);
 
             if (existingTitre != null)

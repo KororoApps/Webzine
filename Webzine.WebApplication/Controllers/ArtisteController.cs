@@ -9,10 +9,10 @@ namespace Webzine.WebApplication.Controllers
     using Webzine.WebApplication.ViewModels;
 
     /// <summary>
-    /// Contrôleur responsable de la gestion des artistes.
+    /// Controller responsable de la gestion des artistes.
     /// </summary>
     /// <remarks>
-    /// Ce contrôleur gère l'affichage de la biographie d'un artiste.
+    /// Ce controller gère l'affichage de la biographie d'un artiste.
     /// Il utilise le générateur de fausses données Bogus pour simuler des données.
     /// <param name="artisteRepository">Le repository des artistes à injecter.</param>
     /// </remarks>

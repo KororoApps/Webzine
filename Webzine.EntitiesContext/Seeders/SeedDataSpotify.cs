@@ -11,16 +11,16 @@ namespace Webzine.EntitiesContext.Seeders
     using static SpotifyAPI.Web.SearchRequest;
 
     /// <summary>
-    /// Classe statique pour le seeding des données Spotify dans la base de données.
+    /// Classe statique pour le seeding des données Spotify dans la base de donnée.
     /// </summary>
     public static class SeedDataSpotify
     {
         /// <summary>
-        /// Méthode pour effectuer une requête Spotify et remplir la base de données.
+        /// Méthode pour effectuer une requête Spotify et remplir la base de donnée.
         /// </summary>
-        /// <param name="context">Contexte de la base de données.</param>
+        /// <param name="context">Context de la base de donnée.</param>
         /// <param name="spotifyConnexion">Configuration Spotify.</param>
-        /// <returns>Tâche asynchrone.</returns>
+        /// <returns>retourne une tâche asynchrone.</returns>
         public static async Task Request(WebzineDbContext context, IConfigurationSection spotifyConnexion)
         {
             // Création de la configuration du client Spotify
@@ -75,7 +75,7 @@ namespace Webzine.EntitiesContext.Seeders
                             List<Style> listeStyles = [];
 
                             // Pour chaque genre de l'artiste...
-                            foreach (var genreArtiste in artiste.Genres.Take(3)) // Limiter le nombre de styles à 3 par artiste
+                            foreach (var genreArtiste in artiste.Genres.Take(3)) // Prendre uniquement les trois premiers styles de l'artiste
                             {
                                 // Recherche du style correspondant dans la liste des styles déjà existants
                                 var styleArtiste = stylesContext.SingleOrDefault(s => s.Libelle == genreArtiste);

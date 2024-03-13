@@ -16,7 +16,7 @@ namespace Webzine.WebApplication.Middlewares
         /// Initialise une nouvelle instance de la classe <see cref="RequestLoggingMiddleware"/>.
         /// </summary>
         /// <param name="next">La fonction de rappel suivante dans le pipeline de requête.</param>
-        /// <param name="logger">Le journal utilisé pour l'enregistrement des informations.</param>
+        /// <param name="logger">Le logger utilisé pour l'enregistrement des informations.</param>
         public RequestLoggingMiddleware(RequestDelegate next, ILogger<RequestLoggingMiddleware> logger)
         {
             this.next = next ?? throw new ArgumentNullException(nameof(next));

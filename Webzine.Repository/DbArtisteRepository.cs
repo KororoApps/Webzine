@@ -10,12 +10,12 @@ namespace Webzine.Repository
     using Webzine.Repository.Contracts;
 
     /// <summary>
-    /// Implémente l'interface IArtisteRepository en utilisant une base de données.
+    /// Implémente l'interface IArtisteRepository en utilisant une base de donnée.
     /// </summary>
     /// <remarks>
     /// Initialise une nouvelle instance de la classe DbArtisteRepository.
     /// </remarks>
-    /// <param name="context">Le contexte de base de données.</param>
+    /// <param name="context">Le contexte de base de donnée.</param>
     public class DbArtisteRepository(WebzineDbContext context) : IArtisteRepository
     {
         private readonly WebzineDbContext context = context;

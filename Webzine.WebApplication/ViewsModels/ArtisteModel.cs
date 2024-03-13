@@ -22,7 +22,7 @@ namespace Webzine.WebApplication.ViewModels
         public IEnumerable<Artiste> Artistes { get; set; } = new List<Artiste>();
 
         /// <summary>
-        /// Obtient ou définit un le numéro de la page.
+        /// Obtient ou définit le numéro de la page.
         /// </summary>
         public int NumeroPage { get; set; } = 0;
     }

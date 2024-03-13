@@ -67,12 +67,12 @@ namespace Webzine.WebApplication.ViewModels
         public string? Libelle { get; set; }
 
         /// <summary>
-        /// Obtient ou définit un le numéro de la page.
+        /// Obtient ou définit le numéro de la page.
         /// </summary>
         public int NumeroPage { get; set; } = 0;
 
         /// <summary>
-        /// Obtient ou définit un la longueur de la chronique en page d'accueil.
+        /// Obtient ou définit la longueur de la chronique en page d'accueil.
         /// </summary>
         public int MaxDescriptionTitre { get; set; }
     }

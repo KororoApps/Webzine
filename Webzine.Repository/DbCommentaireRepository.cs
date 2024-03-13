@@ -10,7 +10,7 @@ namespace Webzine.Repository
     using Webzine.Repository.Contracts;
 
     /// <summary>
-    /// Implémente l'interface ICommentaireRepository en utilisant une base de données.
+    /// Implémente l'interface ICommentaireRepository en utilisant une base de donnée.
     /// </summary>
     public class DbCommentaireRepository(WebzineDbContext context) : ICommentaireRepository
     {
