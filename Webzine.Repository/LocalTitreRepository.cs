@@ -33,7 +33,13 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Titre titre)
         {
-            DataFactory.Titres.Remove(titre);
+            var titreASupprimer = DataFactory.Titres
+                .FirstOrDefault(s => s.IdTitre == titre.IdTitre);
+
+            if (titreASupprimer != null)
+            {
+                DataFactory.Titres.Remove(titreASupprimer);
+            }
         }
 
         /// <inheritdoc />

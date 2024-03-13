@@ -73,7 +73,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(Titre titre)
         {
-            this.titreRepository.Delete(this.titreRepository.Find(titre.IdTitre));
+            this.titreRepository.Delete(titre);
             return this.RedirectToAction(nameof(this.Index));
         }
 
