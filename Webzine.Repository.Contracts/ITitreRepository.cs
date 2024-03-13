@@ -39,14 +39,14 @@ namespace Webzine.Repository.Contracts
         /// Retourne tous les titres.
         /// </summary>
         /// <returns>Une collection de tous les titres.</returns>
-        IEnumerable<Titre> FindAll();
+        IEnumerable<Titre?> FindAll();
 
         /// <summary>
         /// Recherche un titre par son ID.
         /// </summary>
         /// <param name="idTitre">L'ID du titre.</param>
         /// <returns>Le titre correspondant à l'ID spécifié.</returns>
-        Titre Find(int idTitre);
+        Titre? Find(int idTitre);
 
         /// <summary>
         /// Retourne les titres demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
@@ -54,14 +54,14 @@ namespace Webzine.Repository.Contracts
         /// <param name="offset">L'indice de départ pour la pagination.</param>
         /// <param name="limit">Le nombre d'éléments à récupérer.</param>
         /// <returns>Une collection de titres paginée et triée par date de création.</returns>
-        IEnumerable<Titre> FindTitres(int offset, int limit);
+        IEnumerable<Titre?> FindTitres(int offset, int limit);
 
         /// <summary>
         /// Recherche et retourne une liste des titres les plus aimés au cours d'une période spécifiée.
         /// </summary>
         /// <param name="longueurPeriode">La longueur de la période pour la recherche des titres les plus aimés.</param>
         /// <returns>Une liste des titres les plus aimés pendant la période spécifiée.</returns>
-        List<Titre> FindTitresLesPlusLike(int longueurPeriode);
+        List<Titre?> FindTitresLesPlusLike(int longueurPeriode);
 
         /// <summary>
         /// Incrémente le nombre de lectures d'un titre.
@@ -80,13 +80,13 @@ namespace Webzine.Repository.Contracts
         /// </summary>
         /// <param name="mot">Le mot clé à rechercher.</param>
         /// <returns>Une liste de titres contenant le mot spécifié.</returns>
-        IEnumerable<Titre> Search(string mot);
+        IEnumerable<Titre?> Search(string mot);
 
         /// <summary>
         /// Recherche de manière insensible à la casse les titres contenant le style de musique cherché.
         /// </summary>
         /// <param name="libelle">Le style de musique à rechercher.</param>
         /// <returns>Une collection de titres contenant le style de musique spécifié.</returns>
-        IEnumerable<Titre> SearchByStyle(string libelle);
+        IEnumerable<Titre?> SearchByStyle(string libelle);
     }
 }

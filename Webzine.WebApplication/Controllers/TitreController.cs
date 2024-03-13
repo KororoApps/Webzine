@@ -38,6 +38,11 @@ namespace Webzine.WebApplication.Controllers
 
             Titre titre = this.titreRepository.Find(idTitre);
 
+            if (titre == null)
+            {
+                return new StatusCodeResult(404);
+            }
+
             this.titreRepository.IncrementNbLectures(titre);
 
             // Création du modèle de vue contenant un titre.
