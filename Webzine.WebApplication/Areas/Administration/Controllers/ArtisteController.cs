@@ -67,7 +67,6 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <param name="artiste">L'artiste à supprimer.</param>
         /// <returns>Redirection vers l'action Index après la suppression.</returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Delete(Artiste artiste)
         {
             this.artisteRepository.Delete(artiste);
@@ -90,7 +89,6 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <param name="artiste">L'artiste à ajouter.</param>
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Create(Artiste artiste)
         {
             if (!this.ModelState.IsValid)
@@ -126,7 +124,6 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <param name="artiste">L'artiste à éditer.</param>
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Edit([Bind("Nom", "Biographie")] Artiste artiste)
         {
             if (!this.ModelState.IsValid)

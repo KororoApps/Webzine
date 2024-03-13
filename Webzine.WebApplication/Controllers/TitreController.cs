@@ -62,7 +62,6 @@ namespace Webzine.WebApplication.Controllers
         /// <param name="titre">Le titre auquel ajouter le "like".</param>
         /// <returns>Redirection vers la vue des détails du titre ou une action spécifiée.</returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Liker(Titre titre)
         {
 
@@ -98,7 +97,6 @@ namespace Webzine.WebApplication.Controllers
         /// <param name="idTitre">Id du titre lié au commentaire.</param>
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Commenter(Commentaire commentaire, int idTitre)
         {
             // Génération d'une liste de styles.
@@ -107,15 +105,17 @@ namespace Webzine.WebApplication.Controllers
             var titre = this.titreRepository.Find(idTitre);
 
             // Création du modèle de vue contenant un titre.
-            var titreModel = new TitreModel
+            /*var titreModel = new TitreModel
             {
                 Titre = titre,
                 Commentaires = commentaires,
-            };
+            };*/
 
             if (!this.ModelState.IsValid)
             {
-                return this.RedirectToAction(nameof(this.Index), new { idTitre });
+                // Traitement en cas de modèle non valide
+                return this.View();
+                //return this.RedirectToAction(nameof(this.Index), new { idTitre });
             }
 
             commentaire.DateCreation = DateTime.Now;
