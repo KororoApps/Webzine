@@ -100,28 +100,49 @@ app.UseStatusCodePagesWithReExecute("/StatusCode/Error{0}");
 
 // Liste des artistes
 app.MapControllerRoute(
-    name: "artistes",
-    pattern: "administration/artistes/{id?}",
+    name: "artistesAvecPage",
+    pattern: "administration/artistes/page/{NumeroPage}",
     defaults: new { area = "Administration", controller = "Artiste", action = "Index" });
+
+app.MapControllerRoute(
+    name: "artistesSansPage",
+    pattern: "administration/artistes/",
+    defaults: new { area = "Administration", controller = "Artiste", action = "Index" });
+
 
 // Liste des titres
 app.MapControllerRoute(
-    name: "titres",
-    pattern: "administration/titres/{id?}",
+    name: "titresAvecPage",
+    pattern: "administration/titres/page/{NumeroPage}",
+    defaults: new { area = "Administration", controller = "Titre", action = "Index" });
+
+app.MapControllerRoute(
+    name: "titresSansPage",
+    pattern: "administration/titres/",
     defaults: new { area = "Administration", controller = "Titre", action = "Index" });
 
 // Liste des styles
 app.MapControllerRoute(
-    name: "styles",
-    pattern: "administration/styles/{id?}",
+    name: "stylesAvecPage",
+    pattern: "administration/styles/page/{NumeroPage}",
+    defaults: new { area = "Administration", controller = "Style", action = "Index" });
+
+app.MapControllerRoute(
+    name: "stylesSansPage",
+    pattern: "administration/styles/",
     defaults: new { area = "Administration", controller = "Style", action = "Index" });
 
 // Routes specifiques de la consultation :
 
 // Liste des commentaires
 app.MapControllerRoute(
-    name: "commentaires",
-    pattern: "administration/commentaires/{id}",
+    name: "commentairesAvecPage",
+    pattern: "administration/commentaires/page/{NumeroPage}",
+    defaults: new { area = "Administration", controller = "Commentaire", action = "Index" });
+
+app.MapControllerRoute(
+    name: "commentairesSansPage",
+    pattern: "administration/commentaires/",
     defaults: new { area = "Administration", controller = "Commentaire", action = "Index" });
 
 // Titres selon le style de musique démandé
@@ -133,7 +154,7 @@ app.MapControllerRoute(
 // Titre par Id
 app.MapControllerRoute(
     name: "titre",
-    pattern: "titre/{Id}",
+    pattern: "titre/{idTitre}",
     defaults: new { controller = "Titre", action = "Index" });
 
 // Formulaire pour ajouter un commentaire au titre
@@ -151,9 +172,8 @@ app.MapControllerRoute(
 // Route pour les pages à l'accueil
 app.MapControllerRoute(
     name: "accueilPage",
-    pattern: "page/{NumeroPage}",
-    defaults: new { controller = "Home", action = "Index" },
-    constraints: new { page = @"\d+" });
+    pattern: "page/{NumeroPage?}",
+    defaults: new { controller = "Home", action = "Index" });
 
 // Définit les routes pour les controllers.
 app.MapControllerRoute(
@@ -163,7 +183,6 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 
 
 if (repositoryValue == "db")
