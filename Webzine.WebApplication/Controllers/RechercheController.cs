@@ -27,7 +27,7 @@ namespace Webzine.WebApplication.Controllers
         public IActionResult Index(string recherche)
         {
             // Création du modèle de vue contenant la liste de titres filtrés.
-            var titreModel = new TitreModel
+            var rechercheModel = new RechercheModel
             {
                 Artistes = this.artisteRepository.Search(recherche),
                 Titres = this.titreRepository.Search(recherche),
@@ -35,7 +35,7 @@ namespace Webzine.WebApplication.Controllers
             };
 
             // Retour de la vue avec le modèle de vue contenant les titres filtrés.
-            return this.View(titreModel);
+            return this.View(rechercheModel);
         }
     }
 }

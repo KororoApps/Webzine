@@ -62,11 +62,6 @@ namespace Webzine.WebApplication.ViewModels
         public IEnumerable<Titre> ParutionChroniqueTitre { get; set; } = new List<Titre>();
 
         /// <summary>
-        /// Obtient ou définit le terme de recherche saisi dans le formulaire.
-        /// </summary>
-        public string? Recherche { get; set; }
-
-        /// <summary>
         /// Obtient ou définit un style dans le groupe.
         /// </summary>
         public string? Libelle { get; set; }
