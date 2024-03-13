@@ -23,7 +23,7 @@ Nous retrouvons ces configurations au moment du lancement de l'application:
 
 ## 7.3 Repository Local ou distant
 
-Il est également possible de définir où le repository doit aller chercher ses données.
+Il est également possible de définir où les repositories doivent aller chercher leurs données.
 Il est possible de récupérer les données via une base de données locale ou distante.
 Pour cela il suffit de définir le paramètre dans le fichier "<b>appsettings.json</b>"
 

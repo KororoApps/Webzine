@@ -6,15 +6,15 @@ Chaque jour, à la fin de la journée de travail, nous avons pris le temps de me
 
 ## 4.2. Daily meetings
 
-Chaque matin, nous avons organisé des réunions rapides, ne dépassant pas une dizaine de minutes. 
+Chaque matin, nous avons organisé des réunions rapides, en essayant de ne pas dépasser une dizaine de minutes. 
 
 Durant ces sessions, tous les membres du groupe ont eu l'opportunité de partager leurs accomplissements de la veille, leurs objectifs pour la journée en cours, ainsi que les difficultés rencontrées. 
 
-Cette communication quotidienne a renforcé la cohésion d'équipe et a été cruciale pour anticiper et résoudre rapidement les éventuels obstacles.
+Cette communication quotidienne a renforcé la cohésion de l'équipe et a été cruciale pour anticiper et résoudre rapidement les éventuels obstacles.
 
 ## 4.3 Travail en commun
 
-Lors de certaines tâches les parties Dev et Ops se sont réunies afin de s'entraider dans la production ou la mise en place de certains outils. Par exemple lors de la mise en place des pipelines de déploiement automatiques.
+Lors de certaines tâches les parties Dev et Ops se sont réunies afin de s'entraider dans la production ou/et la mise en place de certains outils. Par exemple, lors de la mise en place des pipelines de déploiement automatiques.
 
 ## 4.3.1 Pipelines
 
@@ -27,8 +27,8 @@ Voici la liste des commandes nécessaires à la création de l'artefact:
   <img src="images/Commandes_pipeline.png" alt="Schema" width="85%">
 </p>
 
-- <b><u>trigger:</u></b> Branche qui déclanchera l'activation de la pipeline lors d'un changement.
-- <b><u>pool:</u></b> Agent à appeler pour executer la pipeline.
+- <b><u>trigger:</u></b> Branche qui déclenchera l'activation de la pipeline lors d'un changement.
+- <b><u>pool:</u></b> Agent à appeler pour exécuter la pipeline.
 - <b><u>steps:</u></b> Liste des différentes étapes à effectuer lors du lancement de la pipeline.
 
 ## 4.4 Tableau de bord Azure DevOps
@@ -57,7 +57,7 @@ Certains widgets incluent :
 Lors de nos réunions quotidiennes, le tableau de bord Azure DevOps est consulté en temps réel pour discuter des progrès, des obstacles éventuels, et pour définir les priorités du jour.
 Cette pratique renforce la transparence et assure une meilleure coordination entre les équipes Dev et Ops.
 
-## 4.4.3 Personnabilité et évolutivité
+## 4.4.3 Personnalisabilité et évolutivité
 
 Le tableau de bord est conçu de manière à être personnalisable en fonction des besoins spécifiques de l'équipe.
 Des ajustements réguliers sont effectués pour garantir la pertinence des informations affichées et pour répondre aux évolutions du projet.
@@ -70,27 +70,27 @@ Afin de nous assurer de la motivation de tous les membres de l'équipe et pour p
 
 Ces réunions permettent à chacun d'exprimer honnêtement ses ressentis sur le projet et l'équipe en y indiquant son niveau de motivation et son implication ressentie dans le projet.
 
-En plus de tout cela ces réunions nous permettend d'améliorer continuellement la façon de faire et l'accompagnemet des membres du groupe en fonction de leurs besoins.
+En plus de tout cela ces réunions nous permettent d'améliorer continuellement la façon de faire et l'accompagnement des membres du groupe en fonction de leurs besoins.
 
 ![Meteo](Images/Météo_d'équipe.png)
 
-## 4.4.5 Taleau classique
+## 4.4.5 Tableau classique
 
 Suite à des remarques au sein du groupe sur le fait que nous ne nous tenions pas assez au courant de l'avancée et du contenu des réalisations du coté DEV ou OPS,
 nous avons decidé de mettre en place une phase d'explpication des avancements de chacun sur un tableau blanc.
 
-Dans ce tableau nous retrouvons ce qui a été fait par chaque partie avec un explication lors que nécessaire, ainsi que ce qu'il reste à faire,
-en détaillant ce qui concerne une partie de l'équipe et ce qui peut-être fait en commun.
+Dans ce tableau nous retrouvons ce qui a été fait par chaque partie avec une explication lorsque nécessaire, ainsi que ce qu'il reste à faire,
+en détaillant ce qui concerne une partie de l'équipe et ce qui peut être fait en commun.
 
 | OPS														|     DEV												 |     A faire						   |    Travail en commun    |
 |-----------------------------------------------------------|:------------------------------------------------------:|:-----------------------------------:|:-----------------------:|
-| Métriques Zabbix finies 2/3								|           BDD seedée avec les données Spotify			 |		  Script de restauration  	   |           [ ]           |
-| Grafana accessible depuis réseau externe					|        Remise en forme des routes						 |		         Firewall  	           |           [ ]           |
-| Dashboards Grafana terminés								|    Corrections des jalons précédents presque finis     |		        Pagination  	       |           [ ]           |
-| Remontées de logs sur les serveurs						|    Mise en place des logs								 |		        Middleware  	       |           [ ]           |
-| AppArmor terminé (Cloisonement et sécurisation des infra)	|    Couche de services (vide pour le moment)			 |		 Compléter couche services     |           [ ]           |
-| Script de backup terminé									|    Filtres											 |		  Tester environnements  	   |           [x]           |
-| Docsify en cours											|														 |		  Compléter documentation  	   |           [x]           |
+| Métriques Zabbix finies 2/3								| BDD seedée avec les données Spotify           		 | Script de restauration		       |[ ]                      |
+| Grafana accessible depuis réseau externe					| Remise en forme des routes        					 | Firewall		           	           |[ ]                      |
+| Dashboards Grafana terminés								| Corrections des jalons précédents presque finis        | Pagination		          	       |[ ]                      |
+| Remontées de logs sur les serveurs						| Mise en place des logs    							 | Middleware		          	       |[ ]                      |
+| AppArmor terminé (Cloisonement et sécurisation des infra)	| Couche de services (vide pour le moment)    			 | Compléter couche services		   |[ ]                      |
+| Script de backup terminé									| Filtres    											 | Tester environnements		       |[x]                      |
+| Docsify en cours											|														  |Compléter documentation		       |[x]                      |
 | Protection de Nginx (blocage accès pas l'extérieur)		|														 |									   |                         |
 | Rédaction de la documentation								|														 |									   |                         |
 

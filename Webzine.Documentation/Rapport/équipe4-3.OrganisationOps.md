@@ -4,9 +4,9 @@ Les ops ont commencé à mettre en place les différents serveurs nécessaires a
 
 * Le serveur Web de l'application,
 
-* Le SRV-Front, serveur NGinx permettant la redirection pour faire fonctionner l'applicatoin,
+* Le SRV-Front, serveur NGinx permettant la redirection pour faire fonctionner l'application,
 
-* Le SRV-ZABBIX-FRONT pour supperviser les serveur
+* Le SRV-ZABBIX-FRONT pour superviser les serveur
 
 ![Logo](images/Flux_reseau.png)
 
