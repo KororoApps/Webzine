@@ -127,7 +127,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Artiste artiste)
+        public IActionResult Edit([Bind("Nom", "Biographie")] Artiste artiste)
         {
             if (!this.ModelState.IsValid)
             {

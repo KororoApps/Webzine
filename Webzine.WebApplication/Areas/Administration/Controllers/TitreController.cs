@@ -180,7 +180,9 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <returns>La vue de modification du titre ou la redirection vers l'action Index si la modification est réussie.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Titre titre, List<int> styleIds)
+        public IActionResult Edit(
+            [Bind("IdArtiste", "Artiste", "Commentaires", "Styles", "Libelle", "Duree", "DateSortie","DateCreation", "Album", "Chronique", "UrlJaquette", "UrlEcoute")]
+            Titre titre, List<int> styleIds)
         {
             // Styles sélectionnés pour le titre
             IEnumerable<Style> stylesById = this.styleRepository.FindByIds(styleIds);
