@@ -125,7 +125,6 @@ namespace Webzine.WebApplication.Controllers
             {
                 // Traitement en cas de modèle non valide
                 return this.View(titreModel);
-                //return this.RedirectToAction(nameof(this.Index), new { idTitre });
             }
 
             commentaire.DateCreation = DateTime.Now;

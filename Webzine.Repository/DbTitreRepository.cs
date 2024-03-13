@@ -25,13 +25,6 @@ namespace Webzine.Repository
         {
             titre.DateCreation = DateTime.Now;
 
-            this.context.Attach(titre.Artiste).State = EntityState.Modified;
-
-            foreach (var style in titre.Styles)
-            {
-                this.context.Attach(style).State = EntityState.Modified;
-            }
-
             this.context.Add<Titre>(titre);
 
             this.context.SaveChanges();
@@ -62,7 +55,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public Titre? Find(int idTitre)
         {
-            return this.context.Titres.AsNoTracking()
+            return this.context.Titres
                 .Include(t => t.Artiste)
                 .Include(t => t.Commentaires)
                 .Include(t => t.Styles)
@@ -72,13 +65,13 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Titre?> FindAll()
         {
-            return this.context.Titres.AsNoTracking();
+            return this.context.Titres;
         }
 
         /// <inheritdoc />
         public IEnumerable<Titre?> FindTitres(int offset, int limit)
         {
-            return this.context.Titres.AsNoTracking()
+            return this.context.Titres
                 .Include(t => t.Artiste)
                 .Include(t => t.Styles)
                 .Include(t => t.Commentaires)
@@ -94,7 +87,7 @@ namespace Webzine.Repository
             // Calcul de la date à partir de laquelle les titres doivent être récupérés
             var dateDebutPeriode = DateTime.UtcNow.AddMonths(-longueurPeriode);
 
-            return this.context.Titres.AsNoTracking()
+            return this.context.Titres
                 .Include(t => t.Artiste)
                 .Include(t => t.Styles)
                 .Where(t => t.DateCreation >= dateDebutPeriode) // Filtrer les titres créés pendant cette période
@@ -113,8 +106,6 @@ namespace Webzine.Repository
             {
                 existingTitre.NbLectures++;
 
-                // Attacher et mettre à jour
-                this.context.Attach(existingTitre).State = EntityState.Modified;
                 this.context.SaveChanges();
             }
         }
@@ -129,8 +120,6 @@ namespace Webzine.Repository
             {
                 existingTitre.NbLikes++;
 
-                // Attacher et mettre à jour
-                this.context.Attach(existingTitre).State = EntityState.Modified;
                 this.context.SaveChanges();
             }
         }
@@ -138,7 +127,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Titre?> Search(string mot)
         {
-            return this.context.Titres.AsNoTracking()
+            return this.context.Titres
                 .Include(t => t.Artiste)
                 .Where(t => t.Libelle.ToUpper().Contains(mot.ToUpper()))
                 .OrderBy(c => c.Libelle)
@@ -147,7 +136,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Titre?> SearchByStyle(string libelle)
         {
-            return this.context.Titres.AsNoTracking()
+            return this.context.Titres
                 .Include(t => t.Artiste)
                 .Where(t => t.Styles.Any(s => s.Libelle.Equals(libelle)))
                 .OrderByDescending(c => c.Libelle)

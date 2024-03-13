@@ -183,6 +183,8 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
             [Bind("IdTitre", "IdArtiste", "Artiste", "Commentaires", "Styles", "Libelle", "Duree", "DateSortie","DateCreation", "Album", "Chronique", "UrlJaquette", "UrlEcoute", "NbLikes", "NbLectures")]
             Titre titre, List<int> styleIds)
         {
+            Titre titreAEditer = this.titreRepository.Find(titre.IdTitre);
+
             // Styles sélectionnés pour le titre
             IEnumerable<Style> stylesById = this.styleRepository.FindByIds(styleIds);
 
@@ -209,10 +211,17 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
 
             Artiste artiste = this.artisteRepository.FindByName(titre.Artiste.Nom);
 
-            titre.Styles = stylesById.ToList();
-            titre.Artiste = artiste;
+            titreAEditer.Styles = stylesById.ToList();
+            titreAEditer.Artiste = artiste;
+            titreAEditer.Libelle = titre.Libelle;
+            titreAEditer.Album = titre.Album;
+            titreAEditer.Chronique = titre.Chronique;
+            titreAEditer.DateSortie = titre.DateSortie;
+            titreAEditer.Duree = titre.Duree;
+            titreAEditer.UrlJaquette = titre.UrlJaquette;
+            titreAEditer.UrlEcoute = titre.UrlEcoute;
 
-            this.titreRepository.Update(titre);
+            this.titreRepository.Update(titreAEditer);
 
             return this.RedirectToAction(nameof(this.Index));
         }
