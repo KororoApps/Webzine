@@ -6,7 +6,7 @@ namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Repository.Contracts;
-    using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
     /// Contrôleur principal gérant les actions liées à la page d'accueil.
@@ -27,7 +27,7 @@ namespace Webzine.WebApplication.Controllers
         public IActionResult Index(string recherche)
         {
             // Création du modèle de vue contenant la liste de titres filtrés.
-            var titreModel = new GroupeTitreModel
+            var titreModel = new TitreModel
             {
                 Artistes = this.artisteRepository.Search(recherche),
                 Titres = this.titreRepository.Search(recherche),

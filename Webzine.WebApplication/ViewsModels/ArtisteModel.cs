@@ -1,16 +1,21 @@
-﻿// <copyright file="GroupeArtisteModel.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+﻿// <copyright file="ArtisteModel.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
 // Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
 // </copyright>
 
-namespace Webzine.WebApplication.Shared.ViewModels
+namespace Webzine.WebApplication.ViewModels
 {
     using Webzine.Entity;
 
     /// <summary>
-    /// Modèle de vue pour un groupe d'artistes.
+    /// Modèle de vue pour un artiste.
     /// </summary>
-    public class GroupeArtisteModel
+    public class ArtisteModel
     {
+        /// <summary>
+        /// Obtient ou définit l'artiste.
+        /// </summary>
+        public Artiste Artiste { get; set; } = null!;
+
         /// <summary>
         /// Obtient ou définit un groupe de d'artistes.
         /// </summary>

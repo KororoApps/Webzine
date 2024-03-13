@@ -1,16 +1,21 @@
-﻿// <copyright file="GroupeCommentaireModel.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+﻿// <copyright file="CommentaireModel.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
 // Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
 // </copyright>
 
-namespace Webzine.WebApplication.Shared.ViewModels
+namespace Webzine.WebApplication.ViewModels
 {
     using Webzine.Entity;
 
     /// <summary>
-    /// Modèle de vue pour un groupe de commentaires.
+    /// Modèle de vue pour un commentaire.
     /// </summary>
-    public class GroupeCommentaireModel
+    public class CommentaireModel
     {
+        /// <summary>
+        /// Obtient ou définit le titre.
+        /// </summary>
+        public Commentaire Commentaire { get; set; } = null!;
+
         /// <summary>
         /// Obtient ou définit la liste des commentaires associés au groupe.
         /// </summary>

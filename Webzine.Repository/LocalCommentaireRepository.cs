@@ -17,7 +17,7 @@ namespace Webzine.Repository
         public void Add(Commentaire commentaire)
         {
             // Génère un nouvel identifiant
-            commentaire.IdCommentaire = DataFactory.Commentaires.Count + 1;
+            commentaire.IdCommentaire = DataFactory.Commentaires.Count + 2;
             commentaire.IdTitre = commentaire.Titre.IdTitre;
 
             // Ajoute le nouveau commentaire à la liste

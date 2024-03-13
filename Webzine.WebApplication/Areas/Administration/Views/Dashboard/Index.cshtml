@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.DashboardModel
+﻿@model Webzine.WebApplication.ViewModels.DashboardModel
 
 
 <h1>Tableau de bord</h1>
@@ -70,7 +70,7 @@
                 </div>
             </a>
             @*Titre le plus lu.*@
-            <a asp-area="=" asp-controller="titre" asp-action="index" asp-route-id="@Model.TitrePlusLu.IdTitre" class="container w-75">
+            <a asp-area="=" asp-controller="titre" asp-action="index" asp-route-idTitre="@Model.TitrePlusLu.IdTitre" class="container w-75">
                 <div class="bg-light mt-4 p-5 text-white text-center">
                     <div class="text-primary">
                         <i class="fa-solid fa-compact-disc fa-5x mb-2"></i>

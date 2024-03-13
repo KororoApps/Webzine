@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
+﻿@model Webzine.WebApplication.ViewModels.TitreModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -32,7 +32,7 @@ else
     <p>Aucun artiste.</p>
 }
 
-@if (Model.Titres.Any())
+@if (Model.Titres.Any() || Model.Artistes.Any())
 {
     <p class="fs-2 mt-4">Titres</p>
     foreach (var titre in Model.Titres)

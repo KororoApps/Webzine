@@ -15,7 +15,7 @@ namespace Webzine.Business.Contracts
         /// Renvoie le titre le plus lu.
         /// </summary>
         /// <returns>Le titre le plus lu.</returns>
-        Titre FindTitreLePlusLu();
+        Titre? FindTitreLePlusLu();
 
         /// <summary>
         /// Renvoie le nombre total de titres.
@@ -51,13 +51,13 @@ namespace Webzine.Business.Contracts
         /// Renvoie l'artiste le plus chroniqué.
         /// </summary>
         /// <returns>L'artiste le plus chroniqué.</returns>
-        Artiste FindArtisteLePlusChronique();
+        Artiste? FindArtisteLePlusChronique();
 
         /// <summary>
         /// Renvoie l'artiste ayant le plus de titres provenant d'albums distincts.
         /// </summary>
         /// <returns>L'artiste avec le plus de titres d'albums distincts.</returns>
-        Artiste FindArtisteLePlusTitresAlbumDistinct();
+        Artiste? FindArtisteLePlusTitresAlbumDistinct();
 
         /// <summary>
         /// Retourne le nombre total de styles.

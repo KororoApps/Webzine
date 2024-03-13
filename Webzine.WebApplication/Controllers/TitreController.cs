@@ -7,7 +7,7 @@ namespace Webzine.WebApplication.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
-    using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des titres.
@@ -81,7 +81,7 @@ namespace Webzine.WebApplication.Controllers
         public IActionResult Style(string style)
         {
             // Création du modèle de vue contenant un titre.
-            var titreModel = new GroupeTitreModel
+            var titreModel = new TitreModel
             {
                 Titres = this.titreRepository.SearchByStyle(style),
                 Libelle = style,

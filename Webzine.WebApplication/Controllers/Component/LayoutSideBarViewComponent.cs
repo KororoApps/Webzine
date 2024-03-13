@@ -6,7 +6,7 @@ namespace Webzine.WebApplication.Controllers.Component
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Repository.Contracts;
-    using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
     /// Initialise une nouvelle instance de la classe <see cref="LayoutSideBarViewComponent"/>.
@@ -25,7 +25,7 @@ namespace Webzine.WebApplication.Controllers.Component
             var styles = this.styleRepository.FindAll();
 
             // Création du modèle de vue contenant la liste de Titres.
-            var styleModel = new GroupeStyleModel
+            var styleModel = new StyleModel
             {
                 Styles = styles,
             };

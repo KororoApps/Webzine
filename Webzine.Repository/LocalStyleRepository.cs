@@ -17,7 +17,7 @@ namespace Webzine.Repository
         public void Add(Style style)
         {
             // Génère un nouvel identifiant
-            style.IdStyle = DataFactory.Styles.Count + 1;
+            style.IdStyle = DataFactory.Styles.Count + 2;
 
             // Ajoute le nouveau style à la liste
             DataFactory.Styles.Add(style);

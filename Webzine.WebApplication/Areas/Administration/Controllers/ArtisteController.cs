@@ -7,7 +7,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
-    using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des opérations liées aux artistes dans la zone d'administration.
@@ -35,7 +35,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         {
             var titreToSkip = numeroPage * 15;
 
-            var artisteModel = new GroupeArtisteModel
+            var artisteModel = new ArtisteModel
             {
                 Artistes = this.artisteRepository.FindArtistes(titreToSkip, 15),
                 NumeroPage = numeroPage,

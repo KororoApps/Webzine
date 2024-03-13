@@ -7,7 +7,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
-    using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des opérations liées aux titres dans la zone d'administration.
@@ -38,7 +38,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         {
             var titreToSkip = numeroPage * 15;
 
-            var titreModel = new GroupeTitreModel
+            var titreModel = new TitreModel
             {
                 Titres = this.titreRepository.FindTitres(titreToSkip, 15),
                 NumeroPage = numeroPage,
