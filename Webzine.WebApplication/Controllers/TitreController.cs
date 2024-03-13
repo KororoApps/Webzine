@@ -91,6 +91,16 @@ namespace Webzine.WebApplication.Controllers
         }
 
         /// <summary>
+        /// Action pour afficher la vue de création d'un artiste.
+        /// </summary>
+        /// <returns>Vue de création d'un artiste.</returns>
+        /// /// <param name="titre">Titre lié au commentaire.</param>
+        public IActionResult Commenter(Titre titre)
+        {
+            return this.RedirectToAction(nameof(this.Index), new { idTitre = titre.IdTitre });
+        }
+
+        /// <summary>
         /// Action HTTP POST pour confirmer la création d'un commentaire.
         /// </summary>
         /// <param name="commentaire">L'entité Commentaire à créer.</param>
@@ -105,16 +115,16 @@ namespace Webzine.WebApplication.Controllers
             var titre = this.titreRepository.Find(idTitre);
 
             // Création du modèle de vue contenant un titre.
-            /*var titreModel = new TitreModel
+            var titreModel = new TitreModel
             {
                 Titre = titre,
                 Commentaires = commentaires,
-            };*/
+            };
 
             if (!this.ModelState.IsValid)
             {
                 // Traitement en cas de modèle non valide
-                return this.View();
+                return this.View(titreModel);
                 //return this.RedirectToAction(nameof(this.Index), new { idTitre });
             }
 

@@ -23,7 +23,6 @@ namespace Webzine.Entity
         /// Obtient ou définit le nom de l'auteur du commentaire.
         /// </summary>
         [Required(ErrorMessage = "Votre prénom ou pseudonyme est obligatoire.")]
-        [ReadOnly(true)]
         [Display(Name = "Nom")]
         [MinLength(2, ErrorMessage = "Votre prénom/pseudonyme doit faire au minimum 2 caractères.")]
         [MaxLength(30, ErrorMessage = "Votre prénom/pseudonyme doit faire au minimum 2 caractères.")]
@@ -33,7 +32,6 @@ namespace Webzine.Entity
         /// Obtient ou définit le contenu du commentaire.
         /// </summary>
         [Required(ErrorMessage = "Votre commentaire est obligatoire.")]
-        [ReadOnly(true)]
         [Display(Name = "Commentaire")]
         [MaxLength(1000, ErrorMessage = "La longueur maximale d'un commentaire est de 1000 caractères.")]
         [MinLength(10, ErrorMessage = "La longueur minimale d'un commentaire est de 10 caractères.")]
@@ -43,7 +41,6 @@ namespace Webzine.Entity
         /// Obtient ou définit la date de création du commentaire.
         /// </summary>
         [Required]
-        [ReadOnly(true)]
         [Display(Name = "Date de création")]
         public DateTime DateCreation { get; set; }
 
