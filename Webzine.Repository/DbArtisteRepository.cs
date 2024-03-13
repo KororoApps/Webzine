@@ -52,7 +52,8 @@ namespace Webzine.Repository
         public IEnumerable<Artiste?> FindAll()
         {
             return this.context.Artistes.AsNoTracking()
-                .Include(c => c.Titres);
+                .Include(c => c.Titres)
+                .AsNoTracking();
         }
 
         /// <inheritdoc />
@@ -85,6 +86,7 @@ namespace Webzine.Repository
         public IEnumerable<Artiste?> Search(string mot)
         {
             return this.context.Artistes.AsNoTracking()
+                .Include(c => c.Titres)
                 .Where(t => t.Nom.ToUpper().Contains(mot.ToUpper()))
                 .OrderBy(c => c.Nom)
                 .ToList();

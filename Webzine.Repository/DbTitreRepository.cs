@@ -25,6 +25,13 @@ namespace Webzine.Repository
         {
             titre.DateCreation = DateTime.Now;
 
+            this.context.Attach(titre.Artiste).State = EntityState.Modified;
+
+            foreach (var style in titre.Styles)
+            {
+                this.context.Attach(style).State = EntityState.Modified;
+            }
+
             this.context.Add<Titre>(titre);
 
             this.context.SaveChanges();

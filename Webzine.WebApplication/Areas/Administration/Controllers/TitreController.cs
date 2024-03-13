@@ -107,7 +107,6 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <param name="styleIds">L'identifiant du/des style(s) à créer au titre.</param>
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Create(Titre titre, List<int> styleIds)
         {
             // Styles sélectionnés pour le titre
