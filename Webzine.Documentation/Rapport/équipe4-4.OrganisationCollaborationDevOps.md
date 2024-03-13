@@ -64,8 +64,34 @@ Des ajustements réguliers sont effectués pour garantir la pertinence des infor
 
 Cette intégration d'Azure DevOps dans notre processus quotidien a considérablement amélioré la communication et la collaboration au sein de l'équipe, renforçant ainsi l'efficacité globale du projet.
 
+## 4.4.4 Météo d'équipe
 
+Afin de nous assurer de la motivation de tous les membres de l'équipe et pour prévenir les baisses de motivations ou encore les problèmes psychologiques par rapport à ce projet nous avons mis en place des réunions météo d'équipe.
 
+Ces réunions permettent à chacun d'exprimer honnêtement ses ressentis sur le projet et l'équipe en y indiquant son niveau de motivation et son implication ressentie dans le projet.
 
+En plus de tout cela ces réunions nous permettend d'améliorer continuellement la façon de faire et l'accompagnemet des membres du groupe en fonction de leurs besoins.
 
+![Meteo](Images/Météo_d'équipe.png)
 
+## 4.4.5 Taleau classique
+
+Suite à des remarques au sein du groupe sur le fait que nous ne nous tenions pas assez au courant de l'avancée et du contenu des réalisations du coté DEV ou OPS,
+nous avons decidé de mettre en place une phase d'explpication des avancements de chacun sur un tableau blanc.
+
+Dans ce tableau nous retrouvons ce qui a été fait par chaque partie avec un explication lors que nécessaire, ainsi que ce qu'il reste à faire,
+en détaillant ce qui concerne une partie de l'équipe et ce qui peut-être fait en commun.
+
+| OPS														|     DEV												 |     A faire						   |    Travail en commun    |
+|-----------------------------------------------------------|:------------------------------------------------------:|:-----------------------------------:|:-----------------------:|
+| Métriques Zabbix finies 2/3								|           BDD seedée avec les données Spotify			 |		  Script de restauration  	   |           [ ]           |
+| Grafana accessible depuis réseau externe					|        Remise en forme des routes						 |		         Firewall  	           |           [ ]           |
+| Dashboards Grafana terminés								|    Corrections des jalons précédents presque finis     |		        Pagination  	       |           [ ]           |
+| Remontées de logs sur les serveurs						|    Mise en place des logs								 |		        Middleware  	       |           [ ]           |
+| AppArmor terminé (Cloisonement et sécurisation des infra)	|    Couche de services (vide pour le moment)			 |		 Compléter couche services     |           [ ]           |
+| Script de backup terminé									|    Filtres											 |		  Tester environnements  	   |           [x]           |
+| Docsify en cours											|														 |		  Compléter documentation  	   |           [x]           |
+| Protection de Nginx (blocage accès pas l'extérieur)		|														 |									   |                         |
+| Rédaction de la documentation								|														 |									   |                         |
+
+<center>Tableau datant du 08/03/2024</center>
