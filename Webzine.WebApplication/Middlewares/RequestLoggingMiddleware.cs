@@ -31,8 +31,8 @@ namespace Webzine.WebApplication.Middlewares
         public async Task Invoke(HttpContext context)
         {
             // Log request information
-            this.logger.LogInformation($"Request: {context.Request.Path} {context.Request.QueryString}");
-            this.logger.LogInformation("Middleware reached!");
+            this.logger.LogInformation($"Path from middleware : {context.Request.Path}");
+            this.logger.LogDebug($"Query from middleware : {context.Request.QueryString}");
 
             // Call the next middleware in the pipeline
             await this.next(context);
