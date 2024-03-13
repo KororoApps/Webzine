@@ -52,8 +52,7 @@ namespace Webzine.Repository
         public IEnumerable<Artiste?> FindAll()
         {
             return this.context.Artistes
-                .Include(c => c.Titres)
-                ;
+                .Include(c => c.Titres);
         }
 
         /// <inheritdoc />
@@ -67,7 +66,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Artiste?> FindArtistes(int offset, int limit)
         {
-            return this.context.Artistes
+            return this.context.Artistes.AsNoTracking()
                 .OrderBy(t => t.Nom.ToLower())
                 .Skip(offset)
                 .Take(limit)
@@ -86,8 +85,8 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Artiste?> Search(string mot)
         {
-            return this.context.Artistes
-                .Include(c => c.Titres)
+            return this.context.Artistes.AsNoTracking()
+                .Include(c => c.Titres).AsNoTracking()
                 .Where(t => t.Nom.ToUpper().Contains(mot.ToUpper()))
                 .OrderBy(c => c.Nom)
                 .ToList();

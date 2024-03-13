@@ -65,16 +65,16 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Titre?> FindAll()
         {
-            return this.context.Titres;
+            return this.context.Titres.AsNoTracking();
         }
 
         /// <inheritdoc />
         public IEnumerable<Titre?> FindTitres(int offset, int limit)
         {
-            return this.context.Titres
-                .Include(t => t.Artiste)
-                .Include(t => t.Styles)
-                .Include(t => t.Commentaires)
+            return this.context.Titres.AsNoTracking()
+                .Include(t => t.Artiste).AsNoTracking()
+                .Include(t => t.Styles).AsNoTracking()
+                .Include(t => t.Commentaires).AsNoTracking()
                 .OrderByDescending(t => t.DateCreation)
                 .Skip(offset)
                 .Take(limit)
@@ -87,9 +87,9 @@ namespace Webzine.Repository
             // Calcul de la date à partir de laquelle les titres doivent être récupérés
             var dateDebutPeriode = DateTime.UtcNow.AddMonths(-longueurPeriode);
 
-            return this.context.Titres
-                .Include(t => t.Artiste)
-                .Include(t => t.Styles)
+            return this.context.Titres.AsNoTracking()
+                .Include(t => t.Artiste).AsNoTracking()
+                .Include(t => t.Styles).AsNoTracking()
                 .Where(t => t.DateCreation >= dateDebutPeriode) // Filtrer les titres créés pendant cette période
                 .OrderByDescending(t => t.NbLikes)
                 .Take(3)
@@ -127,8 +127,8 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Titre?> Search(string mot)
         {
-            return this.context.Titres
-                .Include(t => t.Artiste)
+            return this.context.Titres.AsNoTracking()
+                .Include(t => t.Artiste).AsNoTracking()
                 .Where(t => t.Libelle.ToUpper().Contains(mot.ToUpper()))
                 .OrderBy(c => c.Libelle)
                 .ToList();        }
@@ -136,8 +136,8 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Titre?> SearchByStyle(string libelle)
         {
-            return this.context.Titres
-                .Include(t => t.Artiste)
+            return this.context.Titres.AsNoTracking()
+                .Include(t => t.Artiste).AsNoTracking()
                 .Where(t => t.Styles.Any(s => s.Libelle.Equals(libelle)))
                 .OrderByDescending(c => c.Libelle)
                 .ToList();

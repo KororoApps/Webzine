@@ -33,7 +33,7 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index(int idTitre)
         {
-            // Génération d'une liste de styles.
+            // Génération d'une liste de commentaires.
             var commentaires = this.commentaireRepository.FindCommentairesByIdTitre(idTitre);
 
             Titre titre = this.titreRepository.Find(idTitre);

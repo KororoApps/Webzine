@@ -56,9 +56,9 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Commentaire> FindCommentaires(int offset, int limit)
         {
-            return this.context.Commentaires
+            return this.context.Commentaires.AsNoTracking()
                 .Include(c => c.Titre)
-                .ThenInclude(t => t.Artiste)
+                .ThenInclude(t => t.Artiste).AsNoTracking()
                 .OrderByDescending(t => t.DateCreation)
                 .Skip(offset)
                 .Take(limit)
