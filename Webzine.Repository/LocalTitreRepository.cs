@@ -57,10 +57,10 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public Titre Find(int idTitre)
+        public Titre? Find(int idTitre)
         {
             return DataFactory.Titres
-                .First(t => t.IdTitre == idTitre);
+                .SingleOrDefault(t => t.IdTitre == idTitre);
         }
 
         /// <inheritdoc />
@@ -70,7 +70,7 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public IEnumerable<Titre> FindTitres(int offset, int limit)
+        public IEnumerable<Titre?> FindTitres(int offset, int limit)
         {
             return DataFactory.Titres
                 .OrderByDescending(t => t.DateCreation)
@@ -80,7 +80,7 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public List<Titre> FindTitresLesPlusLike(int longueurPeriode)
+        public List<Titre?> FindTitresLesPlusLike(int longueurPeriode)
         {
             // Calcule de la date à partir de laquelle les titres doivent être récupérés
             var dateDebutPeriode = DateTime.Now.AddMonths(-longueurPeriode);
@@ -111,7 +111,7 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public IEnumerable<Titre> Search(string mot)
+        public IEnumerable<Titre?> Search(string mot)
         {
             List<Titre> titres = DataFactory.Titres;
 
@@ -131,7 +131,7 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public IEnumerable<Titre> SearchByStyle(string libelle)
+        public IEnumerable<Titre?> SearchByStyle(string libelle)
         {
             return DataFactory.Titres
                 .Where(t => t.Styles.Any(s => s.Libelle.Equals(libelle)))

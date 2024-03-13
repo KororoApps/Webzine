@@ -53,23 +53,23 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public Titre Find(int idTitre)
+        public Titre? Find(int idTitre)
         {
             return this.context.Titres.AsNoTracking()
                 .Include(t => t.Artiste)
                 .Include(t => t.Commentaires)
                 .Include(t => t.Styles)
-                .Single(t => t.IdTitre == idTitre);
+                .SingleOrDefault(t => t.IdTitre == idTitre);
         }
 
         /// <inheritdoc />
-        public IEnumerable<Titre> FindAll()
+        public IEnumerable<Titre?> FindAll()
         {
             return this.context.Titres.AsNoTracking();
         }
 
         /// <inheritdoc />
-        public IEnumerable<Titre> FindTitres(int offset, int limit)
+        public IEnumerable<Titre?> FindTitres(int offset, int limit)
         {
             return this.context.Titres.AsNoTracking()
                 .Include(t => t.Artiste)
@@ -82,7 +82,7 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public List<Titre> FindTitresLesPlusLike(int longueurPeriode)
+        public List<Titre?> FindTitresLesPlusLike(int longueurPeriode)
         {
             // Calcul de la date à partir de laquelle les titres doivent être récupérés
             var dateDebutPeriode = DateTime.UtcNow.AddMonths(-longueurPeriode);
@@ -129,7 +129,7 @@ namespace Webzine.Repository
         }
 
         /// <inheritdoc />
-        public IEnumerable<Titre> Search(string mot)
+        public IEnumerable<Titre?> Search(string mot)
         {
             return this.context.Titres.AsNoTracking()
                 .Include(t => t.Artiste)
@@ -138,7 +138,7 @@ namespace Webzine.Repository
                 .ToList();        }
 
         /// <inheritdoc />
-        public IEnumerable<Titre> SearchByStyle(string libelle)
+        public IEnumerable<Titre?> SearchByStyle(string libelle)
         {
             return this.context.Titres.AsNoTracking()
                 .Include(t => t.Artiste)

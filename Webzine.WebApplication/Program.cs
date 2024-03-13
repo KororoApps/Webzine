@@ -91,6 +91,9 @@ app.UseRouting();
 // Utilise le middleware personnalisé pour la journalisation des requêtes entrantes.
 app.UseMiddleware<RequestLoggingMiddleware>();
 
+// Générer une page 404
+app.UseStatusCodePagesWithReExecute("/StatusCode/Error{0}");
+
 // Mise en forme des routes
 
 // Routes specifiques de l'administration :
@@ -160,6 +163,8 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
 if (repositoryValue == "db")
 {
