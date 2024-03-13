@@ -181,7 +181,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(
-            [Bind("IdTitre", "IdArtiste", "Artiste", "Commentaires", "Styles", "Libelle", "Duree", "DateSortie","DateCreation", "Album", "Chronique", "UrlJaquette", "UrlEcoute")]
+            [Bind("IdTitre", "IdArtiste", "Artiste", "Commentaires", "Styles", "Libelle", "Duree", "DateSortie","DateCreation", "Album", "Chronique", "UrlJaquette", "UrlEcoute", "NbLikes", "NbLectures")]
             Titre titre, List<int> styleIds)
         {
             // Styles sélectionnés pour le titre
