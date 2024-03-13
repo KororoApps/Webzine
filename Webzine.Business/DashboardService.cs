@@ -37,8 +37,8 @@ namespace Webzine.Business
         public Artiste? FindArtisteLePlusTitresAlbumDistinct()
         {
             return this.artisteRepository.FindAll()
-                .Where(a => a.Titres != null && a.Titres.Count != 0)
-                .OrderByDescending(a => a.Titres?.Count)
+                .Where(a => a.Titres != null && a.Titres.Any())
+                .OrderByDescending(a => a.Titres.Select(t => t.Album).Distinct().Count())
                 .FirstOrDefault();
         }
 
