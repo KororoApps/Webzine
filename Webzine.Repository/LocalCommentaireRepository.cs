@@ -27,7 +27,13 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Commentaire commentaire)
         {
-            DataFactory.Commentaires.Remove(commentaire);
+            var commentaireASupprimer = DataFactory.Commentaires
+                .First(c => c.IdCommentaire  == commentaire.IdCommentaire);
+
+            if (commentaireASupprimer != null)
+            {
+                DataFactory.Commentaires.Remove(commentaireASupprimer);
+            }
         }
 
         /// <inheritdoc />

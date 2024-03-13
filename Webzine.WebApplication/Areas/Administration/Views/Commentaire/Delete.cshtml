@@ -23,7 +23,8 @@
         </p>
 
         @* Formulaire pour soumettre la demande de suppression *@
-        <form method="post" asp-action="DeleteConfirmed" asp-controller="commentaire" asp-route-id="@Model.Commentaire.IdCommentaire">
+        <form method="post" asp-action="Delete" asp-controller="commentaire" asp-route-id="@Model.Commentaire.IdCommentaire">
+            <input type="hidden" asp-for="@Model.Commentaire.IdCommentaire" />
             @* Utilisez un champ anti-forgery pour protéger le formulaire *@
             @Html.AntiForgeryToken()
 
