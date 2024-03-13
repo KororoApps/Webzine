@@ -118,7 +118,7 @@
             </div>
             <div class="col-md-10">
                 @Model.Titre.NbLectures
-                <input type="input" asp-for="@Model.Titre.NbLectures" class="form-control">
+                <input type="hidden" asp-for="@Model.Titre.NbLectures" class="form-control">
                 <span asp-validation-for="@Model.Titre.NbLectures" class="text-danger"></span>
             </div>
         </div>
@@ -128,7 +128,7 @@
             </div>
             <div class="col-md-10">
                 @Model.Titre.NbLikes
-                <input type="input" asp-for="@Model.Titre.NbLikes" class="form-control">
+                <input type="hidden" asp-for="@Model.Titre.NbLikes" class="form-control">
                 <span asp-validation-for="@Model.Titre.NbLikes" class="text-danger"></span>
             </div>
         </div>
