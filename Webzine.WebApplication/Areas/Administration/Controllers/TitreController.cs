@@ -7,7 +7,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
-    using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des opérations liées aux titres dans la zone d'administration.
@@ -38,7 +38,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         {
             var titreToSkip = numeroPage * 15;
 
-            var titreModel = new GroupeTitreModel
+            var titreModel = new TitreModel
             {
                 Titres = this.titreRepository.FindTitres(titreToSkip, 15),
                 NumeroPage = numeroPage,
@@ -73,7 +73,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(Titre titre)
         {
-            this.titreRepository.Delete(this.titreRepository.Find(titre.IdTitre));
+            this.titreRepository.Delete(titre);
             return this.RedirectToAction(nameof(this.Index));
         }
 
@@ -107,7 +107,6 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <param name="styleIds">L'identifiant du/des style(s) à créer au titre.</param>
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Create(Titre titre, List<int> styleIds)
         {
             // Styles sélectionnés pour le titre
@@ -180,8 +179,12 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <returns>La vue de modification du titre ou la redirection vers l'action Index si la modification est réussie.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Titre titre, List<int> styleIds)
+        public IActionResult Edit(
+            [Bind("IdTitre", "IdArtiste", "Artiste", "Commentaires", "Styles", "Libelle", "Duree", "DateSortie","DateCreation", "Album", "Chronique", "UrlJaquette", "UrlEcoute", "NbLikes", "NbLectures")]
+            Titre titre, List<int> styleIds)
         {
+            Titre titreAEditer = this.titreRepository.Find(titre.IdTitre);
+
             // Styles sélectionnés pour le titre
             IEnumerable<Style> stylesById = this.styleRepository.FindByIds(styleIds);
 
@@ -208,10 +211,17 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
 
             Artiste artiste = this.artisteRepository.FindByName(titre.Artiste.Nom);
 
-            titre.Styles = stylesById.ToList();
-            titre.Artiste = artiste;
+            titreAEditer.Styles = stylesById.ToList();
+            titreAEditer.Artiste = artiste;
+            titreAEditer.Libelle = titre.Libelle;
+            titreAEditer.Album = titre.Album;
+            titreAEditer.Chronique = titre.Chronique;
+            titreAEditer.DateSortie = titre.DateSortie;
+            titreAEditer.Duree = titre.Duree;
+            titreAEditer.UrlJaquette = titre.UrlJaquette;
+            titreAEditer.UrlEcoute = titre.UrlEcoute;
 
-            this.titreRepository.Update(titre);
+            this.titreRepository.Update(titreAEditer);
 
             return this.RedirectToAction(nameof(this.Index));
         }

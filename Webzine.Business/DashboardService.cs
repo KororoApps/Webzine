@@ -25,29 +25,29 @@ namespace Webzine.Business
         private readonly IArtisteRepository artisteRepository = artisteRepository;
 
         /// <inheritdoc />
-        public Artiste FindArtisteLePlusChronique()
+        public Artiste? FindArtisteLePlusChronique()
         {
             return this.artisteRepository.FindAll()
                 .Where(a => a.Titres != null && a.Titres.Count != 0)
                 .OrderByDescending(a => a.Titres?.Sum(t => t.Chronique != null ? 1 : 0))
-                .First();
+                .FirstOrDefault();
         }
 
         /// <inheritdoc />
-        public Artiste FindArtisteLePlusTitresAlbumDistinct()
+        public Artiste? FindArtisteLePlusTitresAlbumDistinct()
         {
             return this.artisteRepository.FindAll()
-                .Where(a => a.Titres != null && a.Titres.Count != 0)
-                .OrderByDescending(a => a.Titres?.Count)
-                .First();
+                .Where(a => a.Titres != null && a.Titres.Any())
+                .OrderByDescending(a => a.Titres.Select(t => t.Album).Distinct().Count())
+                .FirstOrDefault();
         }
 
         /// <inheritdoc />
-        public Titre FindTitreLePlusLu()
+        public Titre? FindTitreLePlusLu()
         {
             return this.titreRepository.FindAll()
                 .OrderByDescending(t => t.NbLectures)
-                .First();
+                .FirstOrDefault();
         }
 
         /// <inheritdoc />

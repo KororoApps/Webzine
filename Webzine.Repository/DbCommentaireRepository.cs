@@ -37,7 +37,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Commentaire> FindAll()
         {
-            return this.context.Commentaires.AsNoTracking()
+            return this.context.Commentaires
                 .Include(c => c.Titre)
                 .ThenInclude(t => t.Artiste)
                 .OrderByDescending(t => t.DateCreation)
@@ -47,7 +47,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public Commentaire? Find(int idCommentaire)
         {
-            return this.context.Commentaires.AsNoTracking()
+            return this.context.Commentaires
                 .Include(c => c.Titre)
                 .ThenInclude(t => t.Artiste)
                 .SingleOrDefault(t => t.IdCommentaire == idCommentaire);
@@ -58,7 +58,7 @@ namespace Webzine.Repository
         {
             return this.context.Commentaires.AsNoTracking()
                 .Include(c => c.Titre)
-                .ThenInclude(t => t.Artiste)
+                .ThenInclude(t => t.Artiste).AsNoTracking()
                 .OrderByDescending(t => t.DateCreation)
                 .Skip(offset)
                 .Take(limit)
@@ -68,7 +68,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
         {
-            return this.context.Commentaires.AsNoTracking()
+            return this.context.Commentaires
                  .Where(c => c.Titre != null && c.Titre.IdTitre == id)
                  .OrderByDescending(c => c.DateCreation)
                  .ToList();

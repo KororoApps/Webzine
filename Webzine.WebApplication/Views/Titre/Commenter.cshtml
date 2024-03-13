@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.TitreModel
+﻿@model Webzine.WebApplication.ViewModels.TitreModel
 
 <div class="mt-5">
     <h3>Donne ton avis sur le titre</h3>
@@ -11,7 +11,7 @@
                     <label asp-for="@Model.Commentaire.Auteur" class="form-label required-label"></label>
                 </div>
                 <div class="col-md-10">
-                    <input asp-for="@Model.Commentaire.Auteur" class="form-control" id="nameInput" placeholder="Votre nom (exemple : Emmanuel)" required>
+                    <input asp-for="@Model.Commentaire.Auteur" class="form-control" id="nameInput" placeholder="Votre nom (exemple : Emmanuel)">
                     <span asp-validation-for="@Model.Commentaire.Auteur" class="text-danger"></span>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                         <label asp-for="@Model.Commentaire.Contenu" class="form-label required-label"></label>
                     </div>
                     <div class="col-md-10">
-                        <textarea asp-for="@Model.Commentaire.Contenu" placeholder="Votre commentaire..." class="form-control custom-textarea" id="commentsInput" required></textarea>
+                        <textarea asp-for="@Model.Commentaire.Contenu" placeholder="Votre commentaire..." class="form-control custom-textarea" id="commentsInput"></textarea>
                         <span asp-validation-for="@Model.Commentaire.Contenu" class=" text-danger"></span>
                     </div>
                 </div>

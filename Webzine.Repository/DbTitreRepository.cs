@@ -55,7 +55,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public Titre? Find(int idTitre)
         {
-            return this.context.Titres.AsNoTracking()
+            return this.context.Titres
                 .Include(t => t.Artiste)
                 .Include(t => t.Commentaires)
                 .Include(t => t.Styles)
@@ -72,9 +72,9 @@ namespace Webzine.Repository
         public IEnumerable<Titre?> FindTitres(int offset, int limit)
         {
             return this.context.Titres.AsNoTracking()
-                .Include(t => t.Artiste)
-                .Include(t => t.Styles)
-                .Include(t => t.Commentaires)
+                .Include(t => t.Artiste).AsNoTracking()
+                .Include(t => t.Styles).AsNoTracking()
+                .Include(t => t.Commentaires).AsNoTracking()
                 .OrderByDescending(t => t.DateCreation)
                 .Skip(offset)
                 .Take(limit)
@@ -88,8 +88,8 @@ namespace Webzine.Repository
             var dateDebutPeriode = DateTime.UtcNow.AddMonths(-longueurPeriode);
 
             return this.context.Titres.AsNoTracking()
-                .Include(t => t.Artiste)
-                .Include(t => t.Styles)
+                .Include(t => t.Artiste).AsNoTracking()
+                .Include(t => t.Styles).AsNoTracking()
                 .Where(t => t.DateCreation >= dateDebutPeriode) // Filtrer les titres créés pendant cette période
                 .OrderByDescending(t => t.NbLikes)
                 .Take(3)
@@ -106,8 +106,6 @@ namespace Webzine.Repository
             {
                 existingTitre.NbLectures++;
 
-                // Attacher et mettre à jour
-                this.context.Attach(existingTitre).State = EntityState.Modified;
                 this.context.SaveChanges();
             }
         }
@@ -122,8 +120,6 @@ namespace Webzine.Repository
             {
                 existingTitre.NbLikes++;
 
-                // Attacher et mettre à jour
-                this.context.Attach(existingTitre).State = EntityState.Modified;
                 this.context.SaveChanges();
             }
         }
@@ -132,7 +128,7 @@ namespace Webzine.Repository
         public IEnumerable<Titre?> Search(string mot)
         {
             return this.context.Titres.AsNoTracking()
-                .Include(t => t.Artiste)
+                .Include(t => t.Artiste).AsNoTracking()
                 .Where(t => t.Libelle.ToUpper().Contains(mot.ToUpper()))
                 .OrderBy(c => c.Libelle)
                 .ToList();        }
@@ -141,7 +137,7 @@ namespace Webzine.Repository
         public IEnumerable<Titre?> SearchByStyle(string libelle)
         {
             return this.context.Titres.AsNoTracking()
-                .Include(t => t.Artiste)
+                .Include(t => t.Artiste).AsNoTracking()
                 .Where(t => t.Styles.Any(s => s.Libelle.Equals(libelle)))
                 .OrderByDescending(c => c.Libelle)
                 .ToList();

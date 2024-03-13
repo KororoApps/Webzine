@@ -7,7 +7,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
-    using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des opérations liées aux styles dans la zone d'administration.
@@ -32,7 +32,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
             var titreToSkip = numeroPage * 15;
 
             // Création du modèle de vue contenant la liste de Styles.
-            var styleModel = new GroupeStyleModel
+            var styleModel = new StyleModel
             {
                 Styles = this.styleRepository.FindStyles(titreToSkip, 15),
             };
@@ -125,7 +125,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Style style)
+        public IActionResult Edit([Bind("IdStyle", "Libelle")] Style style)
         {
             if (!this.ModelState.IsValid)
             {

@@ -7,7 +7,7 @@ namespace Webzine.WebApplication.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
-    using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des titres.
@@ -33,7 +33,7 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue avec la liste des titres générés.</returns>
         public IActionResult Index(int idTitre)
         {
-            // Génération d'une liste de styles.
+            // Génération d'une liste de commentaires.
             var commentaires = this.commentaireRepository.FindCommentairesByIdTitre(idTitre);
 
             Titre titre = this.titreRepository.Find(idTitre);
@@ -62,7 +62,6 @@ namespace Webzine.WebApplication.Controllers
         /// <param name="titre">Le titre auquel ajouter le "like".</param>
         /// <returns>Redirection vers la vue des détails du titre ou une action spécifiée.</returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Liker(Titre titre)
         {
 
@@ -70,7 +69,7 @@ namespace Webzine.WebApplication.Controllers
             this.titreRepository.IncrementNbLikes(titre);
 
             // Redirigez ou retournez à la vue selon vos besoins
-            return this.RedirectToAction(nameof(this.Index), new { id = titre.IdTitre });
+            return this.RedirectToAction(nameof(this.Index), new { idTitre = titre.IdTitre });
         }
 
         /// <summary>
@@ -81,7 +80,7 @@ namespace Webzine.WebApplication.Controllers
         public IActionResult Style(string style)
         {
             // Création du modèle de vue contenant un titre.
-            var titreModel = new GroupeTitreModel
+            var titreModel = new TitreModel
             {
                 Titres = this.titreRepository.SearchByStyle(style),
                 Libelle = style,
@@ -92,13 +91,22 @@ namespace Webzine.WebApplication.Controllers
         }
 
         /// <summary>
+        /// Action pour afficher la vue de création d'un artiste.
+        /// </summary>
+        /// <returns>Vue de création d'un artiste.</returns>
+        /// /// <param name="titre">Titre lié au commentaire.</param>
+        public IActionResult Commenter(Titre titre)
+        {
+            return this.RedirectToAction(nameof(this.Index), new { idTitre = titre.IdTitre });
+        }
+
+        /// <summary>
         /// Action HTTP POST pour confirmer la création d'un commentaire.
         /// </summary>
         /// <param name="commentaire">L'entité Commentaire à créer.</param>
         /// <param name="idTitre">Id du titre lié au commentaire.</param>
         /// <returns>Redirection vers l'action Index après la création.</returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Commenter(Commentaire commentaire, int idTitre)
         {
             // Génération d'une liste de styles.
@@ -115,7 +123,8 @@ namespace Webzine.WebApplication.Controllers
 
             if (!this.ModelState.IsValid)
             {
-                return this.RedirectToAction(nameof(this.Index), new { idTitre });
+                // Traitement en cas de modèle non valide
+                return this.View(titreModel);
             }
 
             commentaire.DateCreation = DateTime.Now;

@@ -17,7 +17,7 @@ namespace Webzine.Repository
         public void Add(Commentaire commentaire)
         {
             // Génère un nouvel identifiant
-            commentaire.IdCommentaire = DataFactory.Commentaires.Count + 1;
+            commentaire.IdCommentaire = DataFactory.Commentaires.Count + 2;
             commentaire.IdTitre = commentaire.Titre.IdTitre;
 
             // Ajoute le nouveau commentaire à la liste
@@ -27,7 +27,13 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Commentaire commentaire)
         {
-            DataFactory.Commentaires.Remove(commentaire);
+            var commentaireASupprimer = DataFactory.Commentaires
+                .First(c => c.IdCommentaire  == commentaire.IdCommentaire);
+
+            if (commentaireASupprimer != null)
+            {
+                DataFactory.Commentaires.Remove(commentaireASupprimer);
+            }
         }
 
         /// <inheritdoc />
@@ -60,7 +66,7 @@ namespace Webzine.Repository
         {
             return DataFactory.Commentaires
                 .Where(c => c.Titre != null && c.Titre.IdTitre == id)
-                .OrderBy(c => c.DateCreation)
+                .OrderByDescending(c => c.DateCreation)
                 .ToList();
         }
     }

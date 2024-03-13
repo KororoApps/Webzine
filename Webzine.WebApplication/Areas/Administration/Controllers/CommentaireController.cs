@@ -5,8 +5,9 @@
 namespace Webzine.WebApplication.Areas.Administration.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Webzine.Entity;
     using Webzine.Repository.Contracts;
-    using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des opérations liées aux commentaires dans la zone d'administration.
@@ -32,7 +33,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         {
             var titreToSkip = numeroPage * 10;
 
-            var commentaireModel = new GroupeCommentaireModel
+            var commentaireModel = new CommentaireModel
             {
                 Commentaires = this.commentaireRepository.FindCommentaires(titreToSkip, 10),
                 NumeroPage = numeroPage,
@@ -65,9 +66,9 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <returns>Redirection vers l'action Index après la suppression.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult Delete(Commentaire commentaire)
         {
-            this.commentaireRepository.Delete(this.commentaireRepository.Find(id));
+            this.commentaireRepository.Delete(commentaire);
             return this.RedirectToAction(nameof(this.Index));
         }
     }

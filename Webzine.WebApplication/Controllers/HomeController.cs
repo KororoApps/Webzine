@@ -7,7 +7,7 @@ namespace Webzine.WebApplication.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Webzine.Repository.Contracts;
-    using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
     /// Contrôleur principal gérant les actions liées à la page d'accueil.
@@ -34,7 +34,7 @@ namespace Webzine.WebApplication.Controllers
 
             var titreToSkip = numeroPage * int.Parse(this.configuration["NbDernierTitreChronique"]);
             // Création du modèle de vue contenant la liste des titres.
-            GroupeTitreModel groupeTitreModel = new()
+            TitreModel TitreModel = new()
             {
                 ParutionChroniqueTitre = this.titreRepository.FindTitres(titreToSkip, int.Parse(this.configuration["NbDernierTitreChronique"])),
                 TitresPopulaires = this.titreRepository.FindTitresLesPlusLike(int.Parse(this.configuration["NbMoisDernierTitrePopulaire"])),
@@ -43,7 +43,7 @@ namespace Webzine.WebApplication.Controllers
             };
 
             // Retour de la vue avec le modèle de vue contenant les détails des titres.
-            return this.View(groupeTitreModel);
+            return this.View(TitreModel);
         }
     }
 }

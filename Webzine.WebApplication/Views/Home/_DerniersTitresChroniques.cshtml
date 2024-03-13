@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
+﻿@model Webzine.WebApplication.ViewModels.TitreModel
 
 @*Affiche 3 titres*@
 @foreach (var titre in Model.ParutionChroniqueTitre)
@@ -32,7 +32,7 @@
                             @*Lire la suite, Date de l'article, Styles*@
                             <p class="card-text">@titre.Chronique.Substring(0, Math.Min(Model.MaxDescriptionTitre, titre.Chronique.Length))...</p>
                             <div class="d-flex">
-                                <a class="btn btn-primary btn-sm mb-2 mb-sm-0 me-sm-2 mb-sm-0 me-sm-2" asp-area="" asp-controller="titre" asp-action="index" asp-route-id="@titre.IdTitre">
+                                <a class="btn btn-primary btn-sm mb-2 mb-sm-0 me-sm-2 mb-sm-0 me-sm-2" asp-area="" asp-controller="titre" asp-action="index" asp-route-idTitre="@titre.IdTitre">
                                     Lire la suite
                                 </a>
                                 <p class="mb-0">

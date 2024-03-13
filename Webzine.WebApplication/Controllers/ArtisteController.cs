@@ -6,7 +6,7 @@ namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Repository.Contracts;
-    using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
     /// Contrôleur responsable de la gestion des artistes.

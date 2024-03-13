@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.TitreModel
+﻿@model Webzine.WebApplication.ViewModels.TitreModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -80,7 +80,7 @@
     </div>
 
     @*Formulaire pour émettre un commentaire.*@
-    <partial name="~/Views/Titre/_CreateCommentaireVuePartielle.cshtml" />
+    <partial name="~/Views/Titre/Commenter.cshtml" />
 
     @*Détails des commentaires.*@
     <div class="mt-5">

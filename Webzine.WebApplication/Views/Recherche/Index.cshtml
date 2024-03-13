@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
+﻿@model Webzine.WebApplication.ViewModels.RechercheModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -22,7 +22,7 @@
     {
         <div class="d-inline">
             <i class="fa-solid fa-user"></i>
-            <a asp-area="" asp-controller="artiste" asp-action="index" asp-route-id="@artiste.IdArtiste">@artiste.Nom</a>
+            <a asp-area="" asp-controller="artiste" asp-action="index" asp-route-nom="@artiste.Nom">@artiste.Nom</a>
         </div>
     }
 }
@@ -42,13 +42,32 @@ else
                 <img src="@titre.UrlJaquette" alt="Image" class="img-fluid custom-shape w-100 h-100 object-fit-cover">
             </div>
             <div class="col-md-6 mt-1">
-                <a asp-area="" asp-controller="titre" asp-action="index" asp-route-id="@titre.IdTitre">@titre.Artiste.Nom - @titre.Album - @titre.Libelle</a>
+                <a asp-area="" asp-controller="titre" asp-action="index" asp-route-idTitre="@titre.IdTitre">@titre.Artiste.Nom - @titre.Album - @titre.Libelle</a>
                 <p>Durée : @TimeSpan.FromSeconds(double.Parse(titre.Duree)).ToString(@"mm\:ss")</p>
             </div>
         </div>
     }
 }
-else
+@if (Model.Artistes.Any())
+{
+    <p class="fs-2 mt-4">Titres</p>
+    foreach (var artiste in Model.Artistes)
+    {
+        foreach (var titre in artiste.Titres)
+        {
+            <div class="row mb-3">
+                <div class="col-md-1">
+                <img src="@titre.UrlJaquette" alt="Image" class="img-fluid custom-shape w-100 h-100 object-fit-cover">
+            </div>
+            <div class="col-md-6 mt-1">
+                <a asp-area="" asp-controller="titre" asp-action="index" asp-route-idTitre="@titre.IdTitre">@artiste.Nom - @titre.Album - @titre.Libelle</a>
+                <p>Durée : @TimeSpan.FromSeconds(double.Parse(titre.Duree)).ToString(@"mm\:ss")</p>
+            </div>
+        </div>
+        }
+    }
+}
+@if (!Model.Artistes.Any() && !Model.Titres.Any())
 {
     <p class="fs-2">Titres</p>
     <p>Aucun titre.</p>

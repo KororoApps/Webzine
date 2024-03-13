@@ -2,7 +2,7 @@
 // Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
 // </copyright>
 
-namespace Webzine.WebApplication.Shared.ViewModels
+namespace Webzine.WebApplication.ViewModels
 {
     using Webzine.Entity;
 
@@ -15,5 +15,15 @@ namespace Webzine.WebApplication.Shared.ViewModels
         /// Obtient ou définit le style.
         /// </summary>
         public Style Style { get; set; } = null!;
+
+        /// <summary>
+        /// Obtient ou définit une collection de styles.
+        /// </summary>
+        public IEnumerable<Style> Styles { get; set; } = new List<Style>();
+
+        /// <summary>
+        /// Obtient ou définit un le numéro de la page.
+        /// </summary>
+        public int NumeroPage { get; set; } = 0;
     }
 }

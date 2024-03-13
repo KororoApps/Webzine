@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.ArtisteModel
+﻿@model Webzine.WebApplication.ViewModels.ArtisteModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -17,7 +17,7 @@
 
         @* Formulaire pour soumettre la demande de suppression *@
         <form method="post" asp-action="delete" asp-controller="artiste">
-            <input type="hidden" asp-for="Artiste.IdArtiste" />
+            <input type="hidden" asp-for="@Model.Artiste.IdArtiste" />
 
             <button type="submit" class="btn btn-danger mb-5">
                 Supprimer

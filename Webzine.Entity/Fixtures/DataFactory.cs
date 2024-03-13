@@ -24,6 +24,7 @@ namespace Webzine.Entity.Fixtures
             GenerateFakeStyles();
             GenerateFakeTitres();
             GenerateFakeCommentaires();
+            AssociateTitresWithArtistes();
         }
 
         /// <summary>
@@ -132,6 +133,27 @@ namespace Webzine.Entity.Fixtures
             }
 
             return char.ToUpper(input[0]) + input[1..];
+        }
+
+        /// <summary>
+        /// Associe les titres aux artistes en fonction de l'ID de l'artiste.
+        /// </summary>
+        public static void AssociateTitresWithArtistes()
+        {
+            foreach (var titre in Titres)
+            {
+                var artiste = Artistes.FirstOrDefault(a => a.IdArtiste == titre.Artiste.IdArtiste);
+
+                if (artiste != null)
+                {
+                    if (artiste.Titres == null)
+                    {
+                        artiste.Titres = new List<Titre>();
+                    }
+
+                    artiste.Titres.Add(titre);
+                }
+            }
         }
     }
 }

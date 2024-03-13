@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.ArtisteModel
+﻿@model Webzine.WebApplication.ViewModels.ArtisteModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -51,7 +51,7 @@
                     <tbody>
                         <tr>
                             <td class="text-start">@TimeSpan.FromSeconds(double.Parse(titre.Duree)).ToString(@"mm\:ss")</td>
-                            <td class="text-start"><a asp-controller="titre" asp-action="index" asp-route-id="@titre.IdTitre">@titre.Libelle</a></td>
+                            <td class="text-start"><a asp-controller="titre" asp-action="index" asp-route-idTitre="@titre.IdTitre">@titre.Libelle</a></td>
                         </tr>
                     </tbody>
                 </table>
