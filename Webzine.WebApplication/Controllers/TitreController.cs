@@ -70,7 +70,7 @@ namespace Webzine.WebApplication.Controllers
             this.titreRepository.IncrementNbLikes(titre);
 
             // Redirigez ou retournez à la vue selon vos besoins
-            return this.RedirectToAction(nameof(this.Index), new { id = titre.IdTitre });
+            return this.RedirectToAction(nameof(this.Index), new { idTitre = titre.IdTitre });
         }
 
         /// <summary>
