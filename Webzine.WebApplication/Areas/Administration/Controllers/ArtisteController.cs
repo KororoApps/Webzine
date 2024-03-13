@@ -124,7 +124,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <param name="artiste">L'artiste à éditer.</param>
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
-        public IActionResult Edit([Bind("Nom", "Biographie")] Artiste artiste)
+        public IActionResult Edit([Bind("IdArtiste", "Nom", "Biographie")] Artiste artiste)
         {
             if (!this.ModelState.IsValid)
             {

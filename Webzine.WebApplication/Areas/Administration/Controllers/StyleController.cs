@@ -125,7 +125,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <returns>Redirection vers l'action Index après l'édition.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Libelle")] Style style)
+        public IActionResult Edit([Bind("IdStyle", "Libelle")] Style style)
         {
             if (!this.ModelState.IsValid)
             {
