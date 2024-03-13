@@ -35,3 +35,23 @@ La complexité grandissante des objectifs ainsi que la deadline plus courte que 
 
 Dans l'ensemble, le deuxième jalon a été un chapitre intense mais fructueux de notre parcours.
 Les leçons apprises et les compétences acquises au cours de cette phase seront des atouts précieux pour les étapes futures du projet, et témoignent de la résilience et de l'engagement de l'équipe envers la réussite du projet.
+
+
+# **6.1.3 Conclusion - Jalon 3**
+
+En conclusion du troisième jalon de notre projet, notre équipe a accompli une série d'objectifs ambitieux, marquant ainsi une étape significative dans l'évolution de notre application.
+Ce jalon était axé sur l'enrichissement et la sécurisation de l'architecture, ainsi que sur l'intégration de fonctionnalités cruciales pour la robustesse et la performance de notre système.
+
+L'ajout de la couche de développement 'Services' a renforcé la modularité de notre application, permettant une gestion plus efficace des différentes fonctionnalités.
+Les filtres d'autorisation et de gestion des exceptions apportent une couche de sécurité essentielle, garantissant un contrôle précis sur les actions effectuées dans l'application.
+
+L'intégration d'un middleware pour sécuriser les requêtes HTTP renforce la fiabilité de notre système, répondant ainsi aux exigences de sécurité.
+La récupération des données depuis Spotify, via différentes méthodes, ouvre de nouvelles perspectives pour l'enrichissement de notre base de données, offrant une expérience utilisateur plus dynamique et personnalisée.
+
+L'ajout de fonctionnalités de logs pour tracer les actions des utilisateurs constitue un outil précieux pour la compréhension et le suivi des activités au sein de l'application.
+La possibilité de passer d'un environnement à l'autre, combinée à la configuration minutieuse de Zabbix pour la supervision des métriques fonctionnelles et de Grafana pour les dashboards, renforce notre capacité à garantir la performance et la disponibilité de notre application.
+
+En parallèle, la finalisation de la configuration de AppArmor et la mise en place de scripts de backup et de restauration des données renforcent notre approche de la gestion des risques et de la continuité d'activité.
+
+Malgré la complexité croissante des tâches, notre équipe a démontré une fois de plus sa capacité à relever les défis avec résilience et collaboration.
+Les leçons apprises et les succès de ce jalon constituent un fondement solide pour les étapes à venir, témoignant de notre engagement continu envers l'excellence dans la réalisation de notre projet.
