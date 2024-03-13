@@ -26,7 +26,13 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Artiste artiste)
         {
-            DataFactory.Artistes.Remove(artiste);
+            var artisteASupprimer = DataFactory.Artistes
+                .First(a => a.IdArtiste == artiste.IdArtiste);
+
+            if (artisteASupprimer != null)
+            {
+                DataFactory.Artistes.Remove(artisteASupprimer);
+            }
         }
 
         /// <inheritdoc />
