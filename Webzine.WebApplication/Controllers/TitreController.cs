@@ -78,12 +78,18 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Vue contenant la liste des titres liés au style.</returns>
         public IActionResult Style(string style)
         {
-            // Création du modèle de vue contenant un titre.
+            IEnumerable<Titre> titres = this.titreRepository.SearchByStyle(style);
+
             var titreModel = new TitreModel
             {
-                Titres = this.titreRepository.SearchByStyle(style),
+                Titres = titres,
                 Libelle = style,
             };
+
+            if (titres.Count() == 0)
+            {
+                return new StatusCodeResult(404);
+            }
 
             // Retour de la vue avec le modèle de vue contenant les titres générés en fonction des styles.
             return this.View(titreModel);

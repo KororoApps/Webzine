@@ -27,7 +27,7 @@ namespace Webzine.Repository
         public void Delete(Artiste artiste)
         {
             var artisteASupprimer = DataFactory.Artistes
-                .First(a => a.IdArtiste == artiste.IdArtiste);
+                .SingleOrDefault(a => a.IdArtiste == artiste.IdArtiste);
 
             if (artisteASupprimer != null)
             {
@@ -39,7 +39,7 @@ namespace Webzine.Repository
         public void Update(Artiste artiste)
         {
             var artisteAEditer = DataFactory.Artistes
-                .First(a => a.IdArtiste == artiste.IdArtiste);
+                .SingleOrDefault(a => a.IdArtiste == artiste.IdArtiste);
 
             if (artisteAEditer != null)
             {
@@ -58,7 +58,7 @@ namespace Webzine.Repository
         public Artiste Find(int idArtiste)
         {
             return DataFactory.Artistes
-                .Single(t => t.IdArtiste == idArtiste);
+                .SingleOrDefault(t => t.IdArtiste == idArtiste);
         }
 
         /// <inheritdoc />
@@ -87,10 +87,33 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Artiste?> Search(string mot)
         {
-            return DataFactory.Artistes
-                .Where(t => t.Nom.Contains(mot, StringComparison.CurrentCultureIgnoreCase))
-                .OrderBy(t => t.Nom)
-                .ToList();
+            if (string.IsNullOrWhiteSpace(mot))
+            {
+                return DataFactory.Artistes
+                    .OrderBy(t => t.Nom)
+                    .Select(t => new Artiste
+                    {
+                        IdArtiste = t.IdArtiste,
+                        Nom = t.Nom,
+                        // Charger les titres associés à cet artiste
+                        Titres = DataFactory.Titres.Where(a => a.IdArtiste == t.IdArtiste).ToList()
+                    })
+                    .ToList();
+            }
+            else
+            {
+                return DataFactory.Artistes
+                        .Where(t => t.Nom.Contains(mot, StringComparison.CurrentCultureIgnoreCase))
+                        .OrderBy(t => t.Nom)
+                        .Select(t => new Artiste
+                        {
+                            IdArtiste = t.IdArtiste,
+                            Nom = t.Nom,
+                            // Charger les titres associés à cet artiste
+                            Titres = DataFactory.Titres.Where(a => a.IdArtiste == t.IdArtiste).ToList()
+                        })
+                        .ToList();
+            }
         }
     }
 }

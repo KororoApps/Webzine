@@ -56,6 +56,11 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         {
             var titre = this.titreRepository.Find(id);
 
+            if (titre == null)
+            {
+                return new StatusCodeResult(404);
+            }
+
             var titreModel = new TitreModel
             {
                 Titre = titre,
@@ -151,6 +156,11 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         public IActionResult Edit(int id)
         {
             var titre = this.titreRepository.Find(id);
+
+            if (titre == null)
+            {
+                return new StatusCodeResult(404);
+            }
 
             // Génération d'une liste de styles.
             var styles = this.styleRepository.FindAll();

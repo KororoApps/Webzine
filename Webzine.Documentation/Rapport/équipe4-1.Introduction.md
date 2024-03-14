@@ -15,23 +15,33 @@ Les technologies sélectionnées pour la réalisation de ce projet sont spécifi
 
 ### 1.1.1. Côté DEV
 
-Utilisation de C# et ASP.NET Core 8.0 pour la mise en place robuste et efficace du backend de l'application.
+ - **C#** et **ASP.NET Core 8.0**, pour la mise en place robuste et efficace du backend de l'application;
+ - **Bootstrap**, pour élaborer le CSS;
+ - **FontAwesome** pour récupérer des icônes;
+ - **SQLite**, pour la base de données dans l'environnement de développement;
+ - **PostGgreSQL**, pour la base de données dans l'environnement de production.
 
 ### 1.1.2. Côté OPS
 
-Supervision des serveurs assurée par Zabbix, assurant ainsi une gestion proactive de l'infrastructure et une réponse rapide aux éventuels problèmes de performance.
+- **Zabbix**, pour réaliser la supervision des serveurs ainsi qu'une gestion proactive de l'infrastructure et une réponse rapide aux éventuels problèmes de performance;
+- **Nginx** pour le frontend;
+- **Grafana**, pour obtenir des dashboards et graphiques;
+- **Loki**, pour collecter les logs;
+- **Fail2ban**, pour la protection contre les brutes-forces.
 
 ## 1.2. L'équipe
 
-Notre équipe de projet est composée de 4 développeurs :
+### 1.2.1. Présentation
 
-- Elodie Sponton
+Notre équipe de projet est composée de 4 développeurs :
 
 - Dylann-Nick Etou
 
 - Antoine Couvert
 
 - Lucas Fernandez
+  
+- Elodie Sponton
 
 et 3 opérateurs réseaux :
 
@@ -41,7 +51,12 @@ et 3 opérateurs réseaux :
 
 - Romain Vidotto
 
-Notre équipe est sous la responsabilité de M.Sassignol, désigné chef de projet.
+
+### 1.2.2. Chef de projet
+
+L'équipe est sous la responsabilité de M.Sassignol, chef de projet.
+
+</br>
 
 La suite du rapport détaille l’organisation au sein de l’équipe qu’il s’agisse de la partie DEV ou OPS. </br>
 Il passera en revue la cohésion que nous avons mis en place afin de nous tenir informés des réalisations de chacun avant de revenir sur les problèmes rencontrés tout au long de ce projet.
@@ -49,7 +64,7 @@ Il passera en revue la cohésion que nous avons mis en place afin de nous tenir 
 # **2. STRUCTURE DU PROJET** ##
 
 
-## 1.1. Architecture MVC
+## 2.1. Architecture MVC
 
 Le développement de ce projet suit une approche "en couches", une méthode qui implique l'ajout progressif de couches distinctes pour assurer une structure organisée.
 
@@ -57,5 +72,6 @@ Dans notre cas, nous avons introduit les couches Repository et Context. Cela a p
 
 ![Schema](images/Structure_du_Projet.png)
 
-Le fichier context permet de définir la configuration de la base de données ainsi que la définition des entitées qu'elle doit contenir.
-Le context facilite les migrations de base de données permettant de changer le schéma de la base de données avec les évolutions de l'application.
+Le fichier context permet de définir la configuration de la base de données ainsi que la définition des entitées qu'elle doit contenir.</br>
+
+Le Context facilite les migrations de base de données permettant de changer le schéma de la base de données avec les évolutions de l'application.

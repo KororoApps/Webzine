@@ -19,7 +19,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Add(Commentaire commentaire)
         {
-            commentaire.DateCreation = DateTime.Now;
+            commentaire.DateCreation = DateTime.Now.ToUniversalTime();
 
             this.context.Add<Commentaire>(commentaire);
 

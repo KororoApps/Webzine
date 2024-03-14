@@ -23,8 +23,6 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Add(Artiste artiste)
         {
-            ArgumentNullException.ThrowIfNull(artiste);
-
             this.context.Add<Artiste>(artiste);
 
             this.context.SaveChanges();
@@ -33,8 +31,6 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Artiste artiste)
         {
-            ArgumentNullException.ThrowIfNull(artiste);
-
             this.context.Artistes.Remove(artiste);
 
             this.context.SaveChanges();
@@ -60,7 +56,7 @@ namespace Webzine.Repository
         {
             return this.context.Artistes
                 .Include(c => c.Titres)
-                .Single(t => t.IdArtiste == idArtiste);
+                .SingleOrDefault(t => t.IdArtiste == idArtiste);
         }
 
         /// <inheritdoc />
@@ -79,17 +75,29 @@ namespace Webzine.Repository
             return this.context.Artistes
                 .Include(c => c.Titres)
 
-                .Single(t => t.Nom == nomArtiste);
+                .FirstOrDefault(t => t.Nom == nomArtiste);
         }
 
         /// <inheritdoc />
         public IEnumerable<Artiste?> Search(string mot)
         {
-            return this.context.Artistes.AsNoTracking()
-                .Include(c => c.Titres).AsNoTracking()
-                .Where(t => t.Nom.ToUpper().Contains(mot.ToUpper()))
-                .OrderBy(c => c.Nom)
-                .ToList();
+            if (string.IsNullOrWhiteSpace(mot))
+            {
+                return this.context.Artistes
+                    .AsNoTracking()
+                    .Include(c => c.Titres)
+                    .OrderBy(c => c.Nom)
+                    .ToList();
+            }
+            else
+            {
+                return this.context.Artistes
+                    .AsNoTracking()
+                    .Include(c => c.Titres)
+                    .Where(t => t.Nom.ToUpper().Contains(mot.ToUpper()))
+                    .OrderBy(c => c.Nom)
+                    .ToList();
+            }
         }
     }
 }

@@ -53,6 +53,11 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         {
             var artiste = this.artisteRepository.Find(id);
 
+            if (artiste == null)
+            {
+                return new StatusCodeResult(404);
+            }
+
             var artisteModel = new ArtisteModel
             {
                 Artiste = artiste,
@@ -69,6 +74,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult Delete(Artiste artiste)
         {
+
             this.artisteRepository.Delete(artiste);
 
             return this.RedirectToAction(nameof(this.Index));
@@ -109,6 +115,11 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         public IActionResult Edit(int id)
         {
             var artiste = this.artisteRepository.Find(id);
+
+            if (artiste == null)
+            {
+                return new StatusCodeResult(404);
+            }
 
             var artisteModel = new ArtisteModel
             {

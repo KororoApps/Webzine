@@ -1,6 +1,6 @@
 # **3. ORGANISATION DES OPS** ##
 
-Les ops ont commencé à mettre en place les différents serveurs nécessaires au projet : 
+Les ops ont notamment mis en place les différents serveurs nécessaires au projet : 
 
 * Le serveur Web de l'application,
 
@@ -10,3 +10,4 @@ Les ops ont commencé à mettre en place les différents serveurs nécessaires a
 
 ![Logo](images/Flux_reseau.png)
 
+Vous pouvez retrouver plus d'informations et de détails dans leur propre documentation.

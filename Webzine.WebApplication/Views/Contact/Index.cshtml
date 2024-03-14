@@ -6,6 +6,11 @@
     @await Component.InvokeAsync("LayoutSideBar")
 }
 
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["title"] = "Contact";
+}
+
 @*Affichage du nom de la page.*@
 @{
     ViewData["titrePage"] = "Contact";
@@ -13,9 +18,9 @@
 
 <adress>
     C.U.C.D.B - DIIAGE
-    </br>
+    <br>
     69 Avenue Aristide Briand
-    </br>
+    <br>
     21000 Dijon
 </adress>
 
@@ -27,83 +32,83 @@
 
 <div class="container">
     @*Site internet.*@
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4 col-xl-4">
-            <a href="https://diiage.cucdb.fr/" class="container w-75 ">
-                <div class="p-5 bg-light border-secondary text-white text-center">
+    <div class="row align-items-stretch">
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <a href="https://diiage.cucdb.fr/" class="container w-75 ">
                     <div class="text-primary">
                         <i class="fa-solid fa-link fa-2x"></i>
                     </div>
                     <p class="text-primary fs-5">
                         Site officiel du DIIAGE
                     </p>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
         @*Page facebook.*@
-        <div class="col-md-6 col-lg-4 col-xl-4">
-            <a href="https://www.facebook.com/diiage/" class="container w-75 ">
-                <div class="p-5 bg-light text-white text-center">
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <a href="https://www.facebook.com/diiage/" class="container w-75 ">
                     <div class="text-primary">
                         <i class="fa-brands fa-facebook fa-2x"></i>
                     </div>
                     <p class="text-primary fs-5">
                         Facebook
                     </p>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
         @*Page instagram.*@
-        <div class="col-md-6 col-lg-4 col-xl-4">
-            <a href="https://www.instagram.com/diiage.cucdb/?hl=en" class="container w-75 ">
-                <div class="p-5 bg-light text-white text-center">
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <a href="https://www.instagram.com/diiage.cucdb/?hl=en" class="container w-75 ">
                     <div class="text-primary">
                         <i class="fa-brands fa-instagram fa-2x"></i>
                     </div>
                     <p class="text-primary fs-5">
                         Instagram
                     </p>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
         @*Page Linkedin.*@
-        <div class="col-md-6 col-lg-4 col-xl-4">
-            <a href="https://fr.linkedin.com/company/diiage" class="container w-75 ">
-                <div class="p-5 bg-light text-white text-center">
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <a href="https://fr.linkedin.com/company/diiage" class="container w-75 ">
                     <div class="text-primary">
                         <i class="fa-brands fa-linkedin fa-2x"></i>
                     </div>
                     <p class="text-primary fs-5">
                         LinkedIn
                     </p>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
         @*Google maps.*@
-        <div class="col-md-6 col-lg-4 col-xl-4">
-            <a href="https://www.google.com/maps/place/C.U.C.D.B.+Centre+Universitaire+Catholique+De+Bourgogne/@@47.3348851,5.0514213,17z/data=!3m1!4b1!4m6!3m5!1s0x47f29dfee14743ed:0x7d1348ede68455cb!8m2!3d47.3348851!4d5.0540016!16s%2Fg%2F1td04cy3?entry=ttu" class="container w-75 ">
-                <div class="p-5 bg-light text-white text-center">
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <a href="https://www.google.com/maps/place/C.U.C.D.B.+Centre+Universitaire+Catholique+De+Bourgogne/@@47.3348851,5.0514213,17z/data=!3m1!4b1!4m6!3m5!1s0x47f29dfee14743ed:0x7d1348ede68455cb!8m2!3d47.3348851!4d5.0540016!16s%2Fg%2F1td04cy3?entry=ttu" class="container w-75 ">
                     <div class="text-primary">
                         <i class="fa-solid fa-map fa-2x"></i>
                     </div>
                     <p class="text-primary fs-5">
                         Google Maps
                     </p>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
         @*Page Twitter.*@
-        <div class="col-md-6 col-lg-4 col-xl-4">
-            <a href="https://twitter.com/DiiageCucdb" class="container w-75 ">
-                <div class="p-5 bg-light text-white text-center">
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <a href="https://twitter.com/DiiageCucdb" class="container w-75 ">
                     <div class="text-primary">
                         <i class="fa-brands fa-twitter fa-2x"></i>
                     </div>
                     <p class="text-primary fs-5">
                         Twitter
                     </p>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     </div>
 </div>

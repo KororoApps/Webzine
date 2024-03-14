@@ -9,49 +9,45 @@ Nous avons mis en place des méthodes rigoureuses d'organisation, notamment l'ut
 
 Les réunions quotidiennes ont renforcé la cohésion d'équipe, permettant à chaque membre de partager ses avancées, objectifs, et de surmonter les éventuels obstacles ensemble.
 
-Bien que nous ayons rencontré des défis, notre collaboration proactive et l'esprit d'entraide ont été déterminants pour surmonter ces obstacles. 
-
-Les sessions de code review et les réunions régulières ont créé un environnement propice à l'apprentissage mutuel et au partage d'expertise.
-
-Au-delà des lignes de code et des fonctionnalités implémentées, ce projet nous a apporté une expérience enrichissante sur la coordination d'équipes, la résolution de problèmes en groupe, et le développement d'une application web robuste. 
-
-Ces apprentissages constituent des atouts précieux pour nos futures collaborations et projets. 
-
 En somme, le succès de ce projet ne se mesure pas seulement aux fonctionnalités déployées, mais aussi à la croissance individuelle et collective que nous avons réalisée au cours de ce parcours.
 
 
-# **6.1. Conclusion - Jalon 2**
+# **6.2. Conclusion - Jalon 2**
 
 Les objectifs de ce deuxième jalon étaient non plus de générer des fausses données lors du démarrage de l'application mais de créer une base de données et de récupérer les données de cette dernière,
 et d'installer l'automatisation de la publication de l'application.
 
 Pour ce faire nous avons mis en place un développement par couches en ajoutant une couche repository et une couche context entre nos controllers et notre base de données.
-Dans un second temps nous avons préparé et configuré des pipelines afin d'assurer l'automatisation de la publication de l'application
-
-Nous avons mis tout au long de ce jalon un point d'honneur à développer le travail d'équipe au sein des équipes Dev et Ops et à créer une vraie cohésion DevOps.
-Pour atteindre ce but nous avons mis en place des outils de suivi et nous sommes efforcés d'entretenir la communication sur les avancées de chacun tout au long de la semaine et même en dehors des heures de travail habituelles.
-
-La complexité grandissante des objectifs ainsi que la deadline plus courte que le jalon 1 nous ont poussés dans nos retranchements mais nous ont aussi permis de développer une vraie entraide où chacun faisait attention à l'avancement et aux difficultés rencontrées par les autres.
+Dans un second temps nous avons préparé et configuré des pipelines afin d'assurer l'automatisation de la publication de l'application.
 
 Dans l'ensemble, le deuxième jalon a été un chapitre intense mais fructueux de notre parcours.
-Les leçons apprises et les compétences acquises au cours de cette phase seront des atouts précieux pour les étapes futures du projet, et témoignent de la résilience et de l'engagement de l'équipe envers la réussite du projet.
 
-
-# **6.1.3 Conclusion - Jalon 3**
+# **6.3. Conclusion - Jalon 3**
 
 En conclusion du troisième jalon de notre projet, notre équipe a accompli une série d'objectifs ambitieux, marquant ainsi une étape significative dans l'évolution de notre application.
-Ce jalon était axé sur l'enrichissement et la sécurisation de l'architecture, ainsi que sur l'intégration de fonctionnalités cruciales pour la robustesse et la performance de notre système.
 
-L'ajout de la couche de développement 'Services' a renforcé la modularité de notre application, permettant une gestion plus efficace des différentes fonctionnalités.
-Les filtres d'autorisation et de gestion des exceptions apportent une couche de sécurité essentielle, garantissant un contrôle précis sur les actions effectuées dans l'application.
-
-L'intégration d'un middleware aide à la gestion des logs et au débuggage de notre application, permettant une meilleure gestion des erreurs et une réponse rapide en cas d'utilisation non prévue de l'application par un utilisateur curieux et créatif.
 La récupération des données depuis Spotify, via différentes méthodes, ouvre de nouvelles perspectives pour l'enrichissement de notre base de données, offrant une expérience utilisateur plus dynamique et personnalisée.
 
 L'ajout de fonctionnalités de logs pour tracer les actions des utilisateurs constitue un outil précieux pour la compréhension et le suivi des activités au sein de l'application.
-La possibilité de passer d'un environnement à l'autre, combinée à la configuration minutieuse de Zabbix pour la supervision des métriques fonctionnelles et de Grafana pour les dashboards, renforce notre capacité à garantir la performance et la disponibilité de notre application.
-
-En parallèle, la finalisation de la configuration d'AppArmor et la mise en place de scripts de backup et de restauration des données renforcent notre approche de la gestion des risques et de la continuité d'activité.
 
 Malgré la complexité croissante des tâches, notre équipe a démontré une fois de plus sa capacité à relever les défis avec résilience et collaboration.
-Les leçons apprises et les succès de ce jalon constituent un fondement solide pour les étapes à venir, témoignant de notre engagement continu envers l'excellence dans la réalisation de notre projet.
+
+# **6.4. Conclusion générale**
+
+Notre parcours à travers les trois jalons de ce projet a été une véritable aventure, marquée par des défis, des réussites et une croissance collective. Voici les principaux enseignements que nous retenons de cette expérience :
+
+## 6.1. Réflexions Générales
+
+Dès le premier jalon, nous avons fait face à des défis techniques et organisationnels, mais notre engagement et notre esprit d'entraide nous ont permis de les surmonter avec succès. Au-delà des fonctionnalités implémentées, ce projet nous a offert une occasion précieuse d'apprentissage et de développement personnel et professionnel.
+
+## 6.2. Consolidation et Automatisation
+
+Le deuxième jalon a été une étape charnière dans notre projet, malgré les pressions temporelles et la complexité croissante des objectifs, nous avons relevé le défi avec résilience et détermination, renforçant ainsi notre cohésion d'équipe et nos compétences techniques.
+
+## 6.3. Évolution et Maturité
+
+Le troisième jalon a été le point culminant de notre projet. Nous avons enrichi notre application avec de nouvelles fonctionnalités, renforcé sa sécurité et sa performance, et consolidé nos processus de supervision et de sauvegarde. 
+
+</br>
+
+En conclusion, ce projet a été bien plus qu'une simple aventure technique : c'était une expérience humaine enrichissante, où le travail d'équipe, la résilience et l'apprentissage continu ont été les clés de notre succès. Nous sommes fiers du chemin parcouru et confiants dans notre capacité à relever de nouveaux défis à l'avenir.

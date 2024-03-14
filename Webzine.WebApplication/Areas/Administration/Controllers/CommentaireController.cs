@@ -49,10 +49,16 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <returns>Vue de suppression d'un commentaire.</returns>
         public IActionResult Delete(int id)
         {
-            // Création du modèle de vue contenant un commentaire.
+            Commentaire commentaire = this.commentaireRepository.Find(id);
+
+            if (commentaire == null)
+            {
+                return new StatusCodeResult(404);
+            }
+
             var commentaireModel = new CommentaireModel
             {
-                Commentaire = this.commentaireRepository.Find(id),
+                Commentaire = commentaire,
             };
 
             // Retour de la vue avec le modèle de vue contenant le commentaire généré.
@@ -69,6 +75,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         public IActionResult Delete(Commentaire commentaire)
         {
             this.commentaireRepository.Delete(commentaire);
+
             return this.RedirectToAction(nameof(this.Index));
         }
     }

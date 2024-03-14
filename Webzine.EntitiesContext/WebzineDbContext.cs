@@ -56,9 +56,15 @@ namespace Webzine.EntitiesContext
             {
                 entity.ToTable("Artiste");
 
-                entity.HasIndex(a => a.IdArtiste, "IX_artiste_artiste_id").IsUnique();
+                // Définir la clé primaire
+                entity.HasKey(a => a.IdArtiste);
 
-                entity.Property(a => a.IdArtiste);
+                // Définir l'index unique
+                entity.HasIndex(a => a.IdArtiste).IsUnique().HasName("IX_artiste_artiste_id");
+
+                // Configuration de l'incrémentation automatique de l'ID
+                entity.Property(a => a.IdArtiste).UseIdentityColumn();
+
                 entity.Property(a => a.Nom);
                 entity.Property(a => a.Biographie);
 
@@ -72,7 +78,9 @@ namespace Webzine.EntitiesContext
 
                 entity.HasIndex(c => c.IdCommentaire, "IX_commentaire_commentaire_id").IsUnique();
 
-                entity.Property(c => c.IdCommentaire);
+                // Configuration de l'incrémentation automatique de l'ID
+                entity.Property(a => a.IdCommentaire).UseIdentityColumn();
+
                 entity.Property(c => c.Auteur);
                 entity.Property(c => c.Contenu);
                 entity.Property(c => c.DateCreation);
@@ -87,7 +95,9 @@ namespace Webzine.EntitiesContext
 
                 entity.HasIndex(s => s.IdStyle, "IX_style_style_id").IsUnique();
 
-                entity.Property(s => s.IdStyle);
+                // Configuration de l'incrémentation automatique de l'ID
+                entity.Property(a => a.IdStyle).UseIdentityColumn();
+
                 entity.Property(s => s.Libelle);
 
                 entity.HasMany(s => s.Titres);
@@ -100,7 +110,9 @@ namespace Webzine.EntitiesContext
 
                 entity.HasIndex(t => t.IdTitre, "IX_titre_titre_id").IsUnique();
 
-                entity.Property(t => t.IdTitre);
+                // Configuration de l'incrémentation automatique de l'ID
+                entity.Property(a => a.IdTitre).UseIdentityColumn();
+
                 entity.Property(t => t.Libelle);
                 entity.Property(t => t.Duree);
                 entity.Property(t => t.DateSortie);

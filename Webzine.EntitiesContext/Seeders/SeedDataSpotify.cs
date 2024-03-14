@@ -47,7 +47,7 @@ namespace Webzine.EntitiesContext.Seeders
             // Initialisation d'une liste pour stocker les noms d'artistes récupérés de Spotify
             List<string> artistesRecuperesSpotify = [];
 
-            // Obtenir 6 genre de la liste des genres recommandés
+            // Obtenir 6 genres de la liste des genres recommandés
             var genres = (await spotify.Browse.GetRecommendationGenres()).Genres.OrderBy(genre => Guid.NewGuid()).Take(6).ToList();
 
             // Pour chaque genre dans la liste des genres recommandés...
@@ -59,8 +59,8 @@ namespace Webzine.EntitiesContext.Seeders
                 // Recherche des artistes liés au genre actuel
                 SearchResponse artistesSearchResponse = await spotify.Search.Item(new SearchRequest(Types.Artist, "genre:" + genre)
                 {
-                    // Limiter le nombre de résultats à 3 artistes par genre
-                    Limit = 3,
+                    // Limiter le nombre de résultats à 20 artistes par genre
+                    Limit = 20,
                 });
 
                 if (artistesSearchResponse.Artists.Items != null)
@@ -152,7 +152,7 @@ namespace Webzine.EntitiesContext.Seeders
                                         Artiste = newArtiste,
                                         Duree = (titre.DurationMs / 1000).ToString(),
                                         Album = titre.Album.Name,
-                                        Chronique = faker.Lorem.Paragraph(),
+                                        Chronique = faker.Lorem.Paragraph(40),
                                         UrlJaquette = titre.Album.Images.First().Url,
                                         UrlEcoute = titre.PreviewUrl,
                                         Styles = listeStyles,

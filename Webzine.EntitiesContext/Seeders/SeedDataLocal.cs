@@ -18,6 +18,11 @@ namespace Webzine.EntitiesContext.Seeders
         /// <param name="context">Contexte de la base de données à initialiser.</param>
         public static void Initialize(WebzineDbContext context)
         {
+            DataFactory.Artistes.ForEach(artiste => { artiste.IdArtiste = 0; });
+            DataFactory.Commentaires.ForEach(commentaire => { commentaire.IdCommentaire = 0; });
+            DataFactory.Styles.ForEach(style => { style.IdStyle = 0; });
+            DataFactory.Titres.ForEach(titre => { titre.IdTitre = 0; });
+
             // Désactive le suivi des changements pour améliorer les performances lors du seeding.
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 

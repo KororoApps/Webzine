@@ -1,2 +1,12 @@
-﻿
-<p>Coucou</p>
+﻿@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["title"] = "Erreur 404";
+}
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="text-center">
+        <h1 class="display-1">Erreur 404</h1>
+        <p class="lead">Désolé, la page que vous recherchez est introuvable.</p>
+        <a href="/" class="btn btn-primary">Revenir à l'accueil</a>
+    </div>
+</div>
