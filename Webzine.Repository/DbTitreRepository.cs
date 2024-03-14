@@ -23,7 +23,8 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Add(Titre titre)
         {
-            titre.DateCreation = DateTime.Now;
+            titre.DateCreation = DateTime.Now.ToUniversalTime();
+            titre.DateSortie = titre.DateSortie.ToUniversalTime();
 
             this.context.Add<Titre>(titre);
 
@@ -47,6 +48,9 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Update(Titre titre)
         {
+            titre.DateCreation = titre.DateCreation.ToUniversalTime();
+            titre.DateSortie = titre.DateSortie.ToUniversalTime();
+
             this.context.Update<Titre>(titre);
 
             this.context.SaveChanges();

@@ -23,8 +23,6 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Add(Artiste artiste)
         {
-            ArgumentNullException.ThrowIfNull(artiste);
-
             this.context.Add<Artiste>(artiste);
 
             this.context.SaveChanges();
@@ -33,8 +31,6 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void Delete(Artiste artiste)
         {
-            ArgumentNullException.ThrowIfNull(artiste);
-
             this.context.Artistes.Remove(artiste);
 
             this.context.SaveChanges();

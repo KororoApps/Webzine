@@ -119,11 +119,24 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Titre?> Search(string mot)
         {
-            List<Titre> titres = DataFactory.Titres;
+            List<Titre> titres = DataFactory.Titres.ToList(); // Charger tous les titres en mémoire
+
+            List<Artiste> artistes = DataFactory.Artistes.ToList(); // Charger tous les artistes en mémoire
 
             if (string.IsNullOrWhiteSpace(mot))
             {
-                return titres.OrderBy(t => t.Libelle).ToList();
+                var results = titres
+                   .OrderBy(t => t.Libelle)
+                   .Select(t => new
+                   {
+                       Titre = t,
+                       Artiste = artistes.FirstOrDefault(a => a.IdArtiste == t.Artiste.IdArtiste),
+                   })
+                   .ToList();
+
+                var orderedTitres = results.Select(r => r.Titre);
+
+                return orderedTitres.ToList();
             }
             else
             {
@@ -133,7 +146,7 @@ namespace Webzine.Repository
                     .Select(t => new
                     {
                         Titre = t,
-                        Artiste = DataFactory.Artistes.FirstOrDefault(a => a.IdArtiste == t.Artiste.IdArtiste),
+                        Artiste = artistes.FirstOrDefault(a => a.IdArtiste == t.Artiste.IdArtiste),
                     })
                     .ToList();
 

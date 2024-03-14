@@ -89,14 +89,30 @@ namespace Webzine.Repository
         {
             if (string.IsNullOrWhiteSpace(mot))
             {
-                return DataFactory.Artistes.OrderBy(t => t.Nom).ToList();
+                return DataFactory.Artistes
+                    .OrderBy(t => t.Nom)
+                    .Select(t => new Artiste
+                    {
+                        IdArtiste = t.IdArtiste,
+                        Nom = t.Nom,
+                        // Charger les titres associés à cet artiste
+                        Titres = DataFactory.Titres.Where(a => a.IdArtiste == t.IdArtiste).ToList()
+                    })
+                    .ToList();
             }
             else
             {
                 return DataFactory.Artistes
-                    .Where(t => t.Nom.Contains(mot, StringComparison.CurrentCultureIgnoreCase))
-                    .OrderBy(t => t.Nom)
-                    .ToList();
+                        .Where(t => t.Nom.Contains(mot, StringComparison.CurrentCultureIgnoreCase))
+                        .OrderBy(t => t.Nom)
+                        .Select(t => new Artiste
+                        {
+                            IdArtiste = t.IdArtiste,
+                            Nom = t.Nom,
+                            // Charger les titres associés à cet artiste
+                            Titres = DataFactory.Titres.Where(a => a.IdArtiste == t.IdArtiste).ToList()
+                        })
+                        .ToList();
             }
         }
     }

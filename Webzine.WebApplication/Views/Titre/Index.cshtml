@@ -50,10 +50,10 @@
                 </div>
                 <div class="col-md-2">
                     <div class="d-inline-flex">
-                        <a class="btn btn-outline-primary">
-                            <i class="fa-solid fa-thumbs-up icone"></i>
-                            like
-                        </a>
+                        <form method="post" asp-controller="titre" asp-action="liker" asp-route-id="@Model.Titre.IdTitre">
+                            <input type="hidden" asp-for="@Model.Titre.IdTitre" />
+                            <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-thumbs-up icone"></i>like</button>
+                        </form>                        
                     </div>
                     <div class="d-inline-flex">
                         <a asp-area="administration" asp-controller="titre" asp-action="edit" asp-route-id="@Model.Titre.IdTitre">
