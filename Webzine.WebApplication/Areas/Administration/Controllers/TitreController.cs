@@ -10,7 +10,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
     using Webzine.WebApplication.ViewModels;
 
     /// <summary>
-    /// Contrôleur responsable de la gestion des opérations liées aux titres dans la zone d'administration.
+    /// Controller responsable de la gestion des opérations liées aux titres dans la zone d'administration.
     /// </summary>
     /// <remarks>
     /// Ce contrôleur gère l'affichage de la liste des titres, la création, la suppression et l'édition d'un titre.
@@ -19,9 +19,9 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
     /// <remarks>
     /// Initialise une nouvelle instance de la classe <see cref="TitreController"/>.
     /// </remarks>
-    /// <param name="titreRepository">Le repository des titres utilisé par le contrôleur.</param>
-    /// <param name="styleRepository">Le repository des styles utilisé par le contrôleur.</param>
-    /// <param name="artisteRepository">Le repository des artistes utilisé par le contrôleur.</param>
+    /// <param name="titreRepository">Le repository des titres utilisé par le controller.</param>
+    /// <param name="styleRepository">Le repository des styles utilisé par le controller.</param>
+    /// <param name="artisteRepository">Le repository des artistes utilisé par le controller.</param>
     [Area("Administration")]
     public class TitreController(ITitreRepository titreRepository, IStyleRepository styleRepository, IArtisteRepository artisteRepository) : Controller
     {
@@ -33,7 +33,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// Affiche la liste des titres.
         /// </summary>
         /// <param name="numeroPage">Le numéro de la page à afficher.</param>
-        /// <returns>Vue avec la liste des titres générés.</returns>
+        /// <returns>Retourne la vue avec la liste des titres générés.</returns>
         public IActionResult Index(int numeroPage)
         {
             var titreToSkip = numeroPage * 15;
@@ -51,7 +51,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// Affiche la vue de suppression d'un titre.
         /// </summary>
         /// <param name="id">L'identifiant du titre à trouver.</param>
-        /// <returns>Vue de suppression d'un titre.</returns>
+        /// <returns>Retourne la vue de suppression d'un titre.</returns>
         public IActionResult Delete(int id)
         {
             var titre = this.titreRepository.Find(id);
@@ -80,7 +80,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <summary>
         /// Affiche la vue de création d'un nouveau titre.
         /// </summary>
-        /// <returns>Vue de création d'un nouveau titre.</returns>
+        /// <returns>Retourne la vue de création d'un nouveau titre.</returns>
         public IActionResult Create()
         {
             // Génération d'une liste de styles.
@@ -147,7 +147,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// Affiche la vue d'édition d'un titre.
         /// </summary>
         /// <param name="id">L'identifiant du titre à éditer.</param>
-        /// <returns>Vue d'édition d'un titre.</returns>
+        /// <returns>Retourne la vue d'édition d'un titre.</returns>
         public IActionResult Edit(int id)
         {
             var titre = this.titreRepository.Find(id);

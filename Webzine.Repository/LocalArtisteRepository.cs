@@ -19,7 +19,7 @@ namespace Webzine.Repository
             // Génère un nouvel identifiant.
             artiste.IdArtiste = DataFactory.Artistes.Count + 2;
 
-            // Ajoute le nouveal artiste à la liste
+            // Ajoute le nouvel artiste à la liste
             DataFactory.Artistes.Add(artiste);
         }
 

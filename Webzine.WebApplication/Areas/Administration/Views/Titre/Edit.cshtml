@@ -11,7 +11,7 @@
 }
 <hr />
 
-@*Formulaire d'édition' de la page.*@
+@*Formulaire d'édition de la page.*@
 <form method="post" asp-area="administration" asp-action="edit" asp-controller="titre" class="d-flex">
     <input type="hidden" asp-for="@Model.Titre.IdTitre" />
     <div class="container">
@@ -146,7 +146,7 @@
             </div>
         </div>
 
-        @*Bouton de retour à l'Administrationitration des titres.*@
+        @*Bouton de retour à l'Administration des titres.*@
         <a class=" fw-normal" asp-area="administration" asp-controller="titre" asp-action="index">
             Retour à l'administration des titres
         </a>

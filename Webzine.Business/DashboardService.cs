@@ -9,7 +9,7 @@ namespace Webzine.Business
     using Webzine.Repository.Contracts;
 
     /// <summary>
-    /// Implémentation de l'interface IDashboardService pour la récupération d'informations liées au tableau de bord.
+    /// Implémentation de DashboardService pour la récupération d'informations liées au tableau de bord.
     /// </summary>
     /// <remarks>
     /// Initialise une nouvelle instance de la classe <see cref="DashboardService"/>.

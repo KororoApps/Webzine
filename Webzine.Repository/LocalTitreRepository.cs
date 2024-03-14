@@ -88,7 +88,7 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public List<Titre?> FindTitresLesPlusLike(int longueurPeriode)
         {
-            // Calcule de la date à partir de laquelle les titres doivent être récupérés
+            // Calcul de la date à partir de laquelle les titres doivent être récupérés
             var dateDebutPeriode = DateTime.Now.AddMonths(-longueurPeriode);
 
             return DataFactory.Titres

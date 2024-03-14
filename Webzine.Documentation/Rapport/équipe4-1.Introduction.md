@@ -6,7 +6,7 @@ L'objectif principal de ce webzine est de présenter des chroniques détaillées
 Les fonctionnalités clés de l'application incluent la possibilité pour les utilisateurs de consulter les chroniques rédigées par les créateurs des pages, de laisser des avis, et aussi de créer leurs propres pages de revue. </br>
 Ce concept favorise une interaction dynamique entre les amateurs de musique et les contributeurs, créant ainsi une communauté engagée autour de la passion musicale.
 
-Outre la réalisation des objectifs fonctionnels, ce projet vise à renforcer la cohésion entre les équipes de développement (Devs) et les opérations (OPS). </br> 
+Outre la réalisation des objectifs fonctionnels, ce projet vise à renforcer la cohésion entre les équipes de développement (Devs) et réseau (OPS). </br> 
 La collaboration étroite entre ces deux domaines est essentielle pour garantir le bon fonctionnement, la performance et la maintenance de l'application web.
 
 ## 1.1. Technologies utilisées
@@ -33,7 +33,7 @@ Notre équipe de projet est composée de 4 développeurs :
 
 - Lucas Fernandez
 
-et 3 adminitrateurs réseaux :
+et 3 opérateurs réseaux :
 
 - Jean-Emilien Viard
 

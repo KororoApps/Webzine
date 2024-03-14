@@ -19,7 +19,7 @@ namespace Webzine.WebApplication.Controllers.Component
         /// <summary>
         /// Méthode invoquée lors de l'exécution du composant de vue.
         /// </summary>
-        /// <returns>Une tâche asynchrone représentant l'opération.</returns>
+        /// <returns>Renvoie une tâche asynchrone représentant l'opération.</returns>
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var styles = this.styleRepository.FindAll();

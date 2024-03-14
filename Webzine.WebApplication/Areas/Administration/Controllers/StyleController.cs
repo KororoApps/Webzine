@@ -74,7 +74,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// Affiche la vue de suppression d'un style.
         /// </summary>
         /// <param name="id">L'identifiant du style à supprimer.</param>
-        /// <returns>Vue de suppression d'un style.</returns>
+        /// <returns>Retourne la vue de suppression d'un style.</returns>
         public IActionResult Delete(int id)
         {
             // Création du modèle de vue contenant le style à supprimer.
@@ -105,7 +105,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// Affiche la vue d'édition d'un style.
         /// </summary>
         /// /// <param name="id">L'identifiant du style à éditer.</param>
-        /// <returns>Vue d'édition d'un style.</returns>
+        /// <returns>Retourne la vue d'édition d'un style.</returns>
         public IActionResult Edit(int id)
         {
             // Création du modèle de vue contenant le style à éditer.

@@ -10,17 +10,16 @@ namespace Webzine.WebApplication.Controllers
     using Webzine.WebApplication.ViewModels;
 
     /// <summary>
-    /// Contrôleur responsable de la gestion des titres.
+    /// Controller responsable de la gestion des titres.
     /// </summary>
     /// <remarks>
-    /// Ce contrôleur gère l'affichage de la chronique d'un titre.
-    /// Il utilise le générateur de fausses données Bogus pour simuler des données.
+    /// Ce controller gère l'affichage de la chronique d'un titre.
     /// </remarks>
     /// <remarks>
     /// Initialise une nouvelle instance de la classe <see cref="TitreController"/>.
     /// </remarks>
-    /// <param name="titreRepository">Le repository des titres utilisé par le contrôleur.</param>
-    /// <param name="commentaireRepository">Le repository des commentaires utilisé par le contrôleur.</param>
+    /// <param name="titreRepository">Le repository des titres utilisé par le controller.</param>
+    /// <param name="commentaireRepository">Le repository des commentaires utilisé par le controller.</param>
     public class TitreController(ITitreRepository titreRepository, ICommentaireRepository commentaireRepository) : Controller
     {
         private readonly ITitreRepository titreRepository = titreRepository;
@@ -30,7 +29,7 @@ namespace Webzine.WebApplication.Controllers
         /// Action qui affiche la liste des titres.
         /// </summary>
         /// <param name="idTitre">Identifiant du titre à afficher.</param>
-        /// <returns>Vue avec la liste des titres générés.</returns>
+        /// <returns>Retourne la vue avec la liste des titres générés.</returns>
         public IActionResult Index(int idTitre)
         {
             // Génération d'une liste de commentaires.

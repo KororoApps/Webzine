@@ -30,7 +30,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// Affiche la liste paginée des artistes.
         /// </summary>
         /// <param name="numeroPage">Le numéro de la page à afficher.</param>
-        /// <returns>Une vue contenant la liste paginée des artistes.</returns>
+        /// <returns>Retourne une vue contenant la liste paginée des artistes.</returns>
         public IActionResult Index(int numeroPage)
         {
             var titreToSkip = numeroPage * 15;
@@ -48,7 +48,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// Action pour afficher la vue de suppression d'un artiste.
         /// </summary>
         /// <param name="id">L'identifiant de l'artiste à supprimer.</param>
-        /// <returns>Vue de suppression d'un artiste.</returns>
+        /// <returns>Retourne la vue de suppression d'un artiste.</returns>
         public IActionResult Delete(int id)
         {
             var artiste = this.artisteRepository.Find(id);
@@ -77,7 +77,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <summary>
         /// Action pour afficher la vue de création d'un artiste.
         /// </summary>
-        /// <returns>Vue de création d'un artiste.</returns>
+        /// <returns>Retourne la vue de création d'un artiste.</returns>
         public IActionResult Create()
         {
             return this.View();
@@ -105,7 +105,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// Action pour afficher la vue d'édition d'un artiste.
         /// </summary>
         /// <param name="id">L'identifiant de l'artiste à éditer.</param>
-        /// <returns>Vue d'édition d'un artiste.</returns>
+        /// <returns>Retourne la vue d'édition d'un artiste.</returns>
         public IActionResult Edit(int id)
         {
             var artiste = this.artisteRepository.Find(id);

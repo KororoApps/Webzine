@@ -24,7 +24,7 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <summary>
         /// Affiche le dashboard avec des données.
         /// </summary>
-        /// <returns>Vue du dashboard.</returns>
+        /// <returns>Retourne la vue du dashboard.</returns>
         public IActionResult Index()
         {
             var model = new DashboardModel

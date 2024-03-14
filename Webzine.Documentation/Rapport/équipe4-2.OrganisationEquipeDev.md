@@ -20,7 +20,7 @@ Une fois établie, il nous a permis d'identifier les entités à créer pour not
 
 ![Logo](images/Camembert.png)
 
-Vous pouvez retrouver nos [Comptes Rendus d'Activité](https://groupesbtest.sharepoint.com/:x:/s/DIIAGE2026DI1P4/EY5e9Z9cSJlNhY6EC677OKkBNBYJHpZv8_6OMtE7qLdtiQ?e=SJ8cjc&wdOrigin=TEAMS-MAGLEV.teams_ns.rwc&wdExp=TEAMS-TREATMENT&wdhostclicktime=1708886671961&web=1) pour un détail précis du travail effectué
+Vous pouvez retrouver nos [Comptes Rendus d'Activité](https://groupesbtest.sharepoint.com/:x:/s/DIIAGE2026DI1P4/EY5e9Z9cSJlNhY6EC677OKkBNBYJHpZv8_6OMtE7qLdtiQ?e=SJ8cjc&wdOrigin=TEAMS-MAGLEV.teams_ns.rwc&wdExp=TEAMS-TREATMENT&wdhostclicktime=1708886671961&web=1) pour un détail précis du travail effectué.
 
 ### 2.2.2. Lucas FERNANDEZ
 | TÂCHES												| TEMPS PASSE |
@@ -51,19 +51,19 @@ Vous pouvez retrouver nos [Comptes Rendus d'Activité](https://groupesbtest.shar
 | Création de la page Contact et de ses données																	|     3h15    |
 | Test de l'application et listing des bugs et des points ne correspondant pas exactement à la demande client   |     2h30    |
 | Création des fausses données pour l'entité Style																|     4h00    | 
-|  Création de l'entité Style																					|     1h00    |
+| Création de l'entité Style																					|     1h00    |
 
 | JALON 2																										| TEMPS PASSE |
 |---------------------------------------------------------------------------------------------------------------|:-----------:|
-|  Mise en place du Webzine.EntitiesContext																				|     3h00    |
-|  Complétion des controllers et correction des bugs																					|     2h30    |
-|  Correction de bugs																				|     4h00    |
+| Mise en place du Webzine.EntitiesContext																		|     3h00    |
+| Complétion des controllers et correction des bugs																|     2h30    |
+| Correction de bugs																							|     4h00    |
 
 | JALON 3																										| TEMPS PASSE |
 |---------------------------------------------------------------------------------------------------------------|:-----------:|
-|  Review de la documentaion |     1h30    |
-|  Logs et Filtres																					|     5h00    |
-|  Début de la couche Service																				|     4h00    |
+| Review de la documentaion																						|     1h30    |
+| Logs et Filtres																								|     5h00    |
+| Début de la couche Service																					|     4h00    |
 
 ### 2.2.5. Elodie SPONTON
 
@@ -77,7 +77,7 @@ Vous pouvez retrouver nos [Comptes Rendus d'Activité](https://groupesbtest.shar
 | Création de la page Titre																		|    6h00     |
 | Création de la page Recherche																	|    0h30     | 
 | Création de la page API Version																|    0h10     |
-| Création des pages administration (CRUD) des commentaires										|             2h00 |
+| Création des pages administration (CRUD) des commentaires										|    2h00     |
 | Création des pages administration (CRUD)  des titres											|    8h00     |
 | Création des pages administration (CRUD)  des styles											|    3h00     | 
 | Création des pages administration (CRUD)  des commentaires									|    2h30     |
@@ -88,29 +88,29 @@ Vous pouvez retrouver nos [Comptes Rendus d'Activité](https://groupesbtest.shar
 
 </br>
 
-| TÂCHES JALON 2																						| TEMPS PASSE |
-|-----------------------------------------------------------------------------------------------|:-----------:|
-| Corrections Jalon 1												|    7h00     |
-| Création de la BDD avec SQLite et la seeder avec les fausses données										|    4h00     |
-| Mise en place des Repositories pour les Titres									|    3h00     |
-| Ajout de certaines fonctionnalités qui n'étaient pas présentes dans l'application ou qui fonctionnaient mal										|    12h00     |
-| Entité Style : Mise en place de la validation du formulaire de création d'un style										|    1h15     |
-| Entité Artiste : Mise en place de la validation du formulaire de création d'un artiste 										|    0h15     |
-| Entité Commentaire : Mise en place de la validation du formulaire de création d'un commentaire 									|    1h30     |
-| Entité Titre : Mise en place de la validation du formulaire de création d'un titre 			|    1h00     |
-| Entité Style : Mise en place de la validation du formulaire de l'édition d'un style 			|    00h45     |
-| Correction de la création de la BDD		|    1h00     |
+| TÂCHES JALON 2																								| TEMPS PASSE |
+|---------------------------------------------------------------------------------------------------------------|:-----------:|
+| Corrections Jalon 1																							|    7h00     |
+| Création de la BDD avec SQLite et la seeder avec les fausses données											|    4h00     |
+| Mise en place des Repositories pour les Titres																|    3h00     |
+| Ajout de certaines fonctionnalités qui n'étaient pas présentes dans l'application ou qui fonctionnaient mal	|    12h00    |
+| Entité Style : Mise en place de la validation du formulaire de création d'un style							|    1h15     |
+| Entité Artiste : Mise en place de la validation du formulaire de création d'un artiste 						|    0h15     |
+| Entité Commentaire : Mise en place de la validation du formulaire de création d'un commentaire 				|    1h30     |
+| Entité Titre : Mise en place de la validation du formulaire de création d'un titre 							|    1h00     |
+| Entité Style : Mise en place de la validation du formulaire de l'édition d'un style 							|    00h45    |
+| Correction de la création de la BDD																			|    1h00     |
 
 </br>
 
-| TÂCHES JALON 3																						| TEMPS PASSE |
-|-----------------------------------------------------------------------------------------------|:-----------:|
-| Seeder la BDD avec les données de Spotify												|    19h00     |
-| Pagination des pages Accueil, Liste des titres, Listes des commentaires et Liste des artistes										|    4h30     |
+| TÂCHES JALON 3																					| TEMPS PASSE |
+|---------------------------------------------------------------------------------------------------|:-----------:|
+| Seeder la BDD avec les données de Spotify															|    19h00    |
+| Pagination des pages Accueil, Liste des titres, Listes des commentaires et Liste des artistes		|    4h30     |
 
 ## 2.2. Fonctionnement de l'équipe
 
-Nous avons commencé en nous répartissant les tâches équitablement dans l'équipe puis avons décidé, pour faire avancer le projet au maximum, que dès que l'un de nous terminait sa tâche il travaillait sur une nouvelle en informant les autres membres de l'équipe au préalable.
+Nous avons commencé en nous répartissant les tâches équitablement dans l'équipe puis avons décidé, pour faire avancer le projet au maximum, que dès que l'un de nous terminait sa tâche il travaillerait sur une nouvelle en informant les autres membres de l'équipe au préalable.
 
 ## 2.3. Intéraction entres les membres
 
@@ -130,7 +130,7 @@ Une fois tous les codes fusionnés sur la branche principale, nous avons réité
 
 ## 2.3.3. Comptes rendus d'activité et Daily meeting
 
-Tout comme pour la collaboration dev/ops, la mise à jour régulière de nos CRA et les daily meeting tous les matins nous ont permis de connaître régulièrement l'avancée individuel de chacun et par conséquent de l'application en général.
+Tout comme pour la collaboration dev/ops, la mise à jour régulière de nos CRA et les daily meetings tous les matins nous ont permis de connaître régulièrement l'avancée individuel de chacun et par conséquent de l'application en général.
 
 ## 2.3.4. Discussions Teams
 

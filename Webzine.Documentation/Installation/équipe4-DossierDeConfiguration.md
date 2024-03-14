@@ -24,6 +24,8 @@ Ouvrir un terminal en clickant sur le chemin du fichier en haut et en tapant "cm
 
 dotnet .\Webzine.WebApplication.dll
 
+notez que faire copier/coller avec Ctrl + C/V ne marche pas sur un terminal et que vous devrez taper au clavier
+
 L'application va se lancer.
 
 

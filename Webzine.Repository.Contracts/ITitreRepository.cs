@@ -49,7 +49,7 @@ namespace Webzine.Repository.Contracts
         Titre? Find(int idTitre);
 
         /// <summary>
-        /// Retourne les titres demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
+        /// Retourne les titres demandés (pour la pagination) triés selon la date de création (du plus récent au plus ancien).
         /// </summary>
         /// <param name="offset">L'indice de départ pour la pagination.</param>
         /// <param name="limit">Le nombre d'éléments à récupérer.</param>
@@ -59,8 +59,8 @@ namespace Webzine.Repository.Contracts
         /// <summary>
         /// Recherche et retourne une liste des titres les plus aimés au cours d'une période spécifiée.
         /// </summary>
-        /// <param name="longueurPeriode">La longueur de la période pour la recherche des titres les plus aimés.</param>
-        /// <returns>Une liste des titres les plus aimés pendant la période spécifiée.</returns>
+        /// <param name="longueurPeriode">La longueur de la période pour la recherche des titres les plus likés.</param>
+        /// <returns>Une liste des titres les plus likés pendant la période spécifiée.</returns>
         List<Titre?> FindTitresLesPlusLike(int longueurPeriode);
 
         /// <summary>
