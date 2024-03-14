@@ -77,10 +77,16 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <returns>Retourne la vue de suppression d'un style.</returns>
         public IActionResult Delete(int id)
         {
-            // Création du modèle de vue contenant le style à supprimer.
+            Style style = this.styleRepository.Find(id);
+
+            if (style == null)
+            {
+                return new StatusCodeResult(404);
+            }
+
             var styleModel = new StyleModel
             {
-                Style = this.styleRepository.Find(id),
+                Style = style,
             };
 
             // Retour de la vue avec le modèle de vue contenant le style généré.
@@ -108,10 +114,16 @@ namespace Webzine.WebApplication.Areas.Administration.Controllers
         /// <returns>Retourne la vue d'édition d'un style.</returns>
         public IActionResult Edit(int id)
         {
-            // Création du modèle de vue contenant le style à éditer.
+            Style style = this.styleRepository.Find(id);
+
+            if (style == null)
+            {
+                return new StatusCodeResult(404);
+            }
+
             var styleModel = new StyleModel
             {
-                Style = this.styleRepository.Find(id),
+                Style = style
             };
 
             // Retour de la vue avec le modèle de vue contenant le style généré.

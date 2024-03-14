@@ -27,7 +27,7 @@ namespace Webzine.Repository
         public void Delete(Style style)
         {
             var styleASupprimer = DataFactory.Styles
-                .First(s => s.IdStyle == style.IdStyle);
+                .SingleOrDefault(s => s.IdStyle == style.IdStyle);
 
             if (styleASupprimer != null)
             {
@@ -39,7 +39,7 @@ namespace Webzine.Repository
         public void Update(Style style)
         {
             var styleAEditer = DataFactory.Styles
-                .First(s => s.IdStyle == style.IdStyle);
+                .SingleOrDefault(s => s.IdStyle == style.IdStyle);
 
             if (styleAEditer != null)
             {
@@ -57,7 +57,7 @@ namespace Webzine.Repository
         public Style Find(int id)
         {
             return DataFactory.Styles
-                 .First(t => t.IdStyle == id);
+                 .SingleOrDefault(t => t.IdStyle == id);
         }
 
         /// <inheritdoc />

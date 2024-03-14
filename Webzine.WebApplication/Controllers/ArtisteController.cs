@@ -5,6 +5,7 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Webzine.Entity;
     using Webzine.Repository.Contracts;
     using Webzine.WebApplication.ViewModels;
 
@@ -27,10 +28,18 @@ namespace Webzine.WebApplication.Controllers
         /// <returns>Une vue contenant les détails de l'artiste.</returns>
         public IActionResult Index(string nom)
         {
+            Artiste artiste = this.artisteRepository.FindByName(nom);
+
+            if (artiste == null)
+            {
+                return new StatusCodeResult(404);
+            }
+
             var artisteModel = new ArtisteModel
             {
-                Artiste = this.artisteRepository.FindByName(nom),
+                Artiste = artiste,
             };
+
 
             return this.View(artisteModel);
         }

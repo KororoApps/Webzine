@@ -10,7 +10,6 @@
             @foreach (var style in Model.Styles)
             {
                 <li><a asp-area="" asp-controller="titre" asp-action="style" asp-route-style="@style.Libelle" class="dropdown-item text-primary">@style.Libelle</a></li>
-
             }
         </ul>
     </div>

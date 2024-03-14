@@ -55,7 +55,7 @@ namespace Webzine.Repository
                 .Include(s => s.Titres)
                 .AsNoTracking()
                 .Where(s => s.IdStyle == id)
-                .First();
+                .SingleOrDefault();
         }
 
         /// <inheritdoc />

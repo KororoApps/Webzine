@@ -28,7 +28,7 @@ namespace Webzine.Repository
         public void Delete(Commentaire commentaire)
         {
             var commentaireASupprimer = DataFactory.Commentaires
-                .First(c => c.IdCommentaire  == commentaire.IdCommentaire);
+                .SingleOrDefault(c => c.IdCommentaire  == commentaire.IdCommentaire);
 
             if (commentaireASupprimer != null)
             {
@@ -48,7 +48,7 @@ namespace Webzine.Repository
         public Commentaire? Find(int id)
         {
             return DataFactory.Commentaires
-                .First(t => t.IdCommentaire == id);
+                .SingleOrDefault(t => t.IdCommentaire == id);
         }
 
         /// <inheritdoc />
