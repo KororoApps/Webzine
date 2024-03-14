@@ -1,4 +1,6 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
+﻿@model Webzine.WebApplication.ViewModels.TitreModel
+
+<h1>Derniers titres chroniqués</h1>
 
 @*Affiche 3 titres*@
 @foreach (var titre in Model.ParutionChroniqueTitre)
@@ -7,16 +9,18 @@
         <div class="row">
             <div class="card border-0 p-4">
                 <div class="row g-0 bg-light">
-                    <div class="col-sm-3 col-lg-2">
-                        <a asp-area="" asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">
-                            <img src="@titre.UrlJaquette" class="card-img-top w-100 h-100 example-card-img-responsive p-3 object-fit-cover" alt="image">                            
+                    <div class="col-sm-12 col-lg-2">
+                        <a asp-area="" asp-controller="titre" asp-action="index" asp-route-id="@titre.IdTitre">
+                            <div class="ratio ratio-1x1">
+                                <img src="@titre.UrlJaquette" class="card-img-top w-100 h-100 example-card-img-responsive p-3 object-fit-cover" alt="image">
+                            </div>
                         </a>
                     </div>
                     <div class="col-sm-9 col-lg-10">
                         <div class="card-body">
                             <h4 class="card-title">
                                 <span>
-                                    <a asp-area="" asp-controller="Artiste" asp-action="" asp-route-id="@titre.Artiste.IdArtiste">
+                                    <a asp-area="" asp-controller="artiste" asp-action="index" asp-route-nom="@titre.Artiste.Nom">
                                         @titre.Artiste.Nom
                                     </a>
                                 </span>
@@ -24,15 +28,15 @@
                                     -
                                 </span>
                                 <span>
-                                    <a asp-area="" asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">
+                                    <a asp-area="" asp-controller="titre" asp-action="index" asp-route-idTitre="@titre.IdTitre">
                                         @titre.Libelle
                                     </a>
                                 </span>
                             </h4>
                             @*Lire la suite, Date de l'article, Styles*@
-                            <p class="card-text">@titre.Chronique.Substring(0, Math.Min(200, titre.Chronique.Length))...</p>
+                            <p class="card-text">@titre.Chronique.Substring(0, Math.Min(Model.MaxDescriptionTitre, titre.Chronique.Length))...</p>
                             <div class="d-flex">
-                                <a class="btn btn-primary btn-sm mb-2 mb-sm-0 me-sm-2 mb-sm-0 me-sm-2" asp-area="" asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">
+                                <a class="btn btn-primary btn-sm mb-2 mb-sm-0 me-sm-2 mb-sm-0 me-sm-2" asp-area="" asp-controller="titre" asp-action="index" asp-route-idTitre="@titre.IdTitre">
                                     Lire la suite
                                 </a>
                                 <p class="mb-0">
@@ -44,7 +48,7 @@
 
                                     @foreach (var style in titre.Styles)
                                     {
-                                        <a asp-area="" asp-controller="Titre" asp-action="Style" asp-route-id="@style.Libelle">
+                                        <a asp-area="" asp-controller="titre" asp-action="style" asp-route-style="@style.Libelle">
                                             @style.Libelle
                                         </a>
                                     }
@@ -58,5 +62,13 @@
     </div>
 }
 <div class="d-flex  justify-content-end">
-    <a class="btn btn-secondary p-2 m-4" asp-area="" asp-controller="Home" asp-action="">Titres plus anciens >></a>
+    @if (Model.NumeroPage > 0)
+    {
+        <a class="btn btn-secondary p-2 m-4" asp-area="" asp-controller="home" asp-action="index" asp-route-NumeroPage="@(Model.NumeroPage - 1)">
+            &lt;&lt; Titres plus récents
+        </a>
+    }
+    <a class="btn btn-secondary p-2 m-4" asp-area="" asp-controller="home" asp-action="index" asp-route-NumeroPage="@(Model.NumeroPage + 1)">
+        Titres plus anciens >>
+    </a>
 </div>

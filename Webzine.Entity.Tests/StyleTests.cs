@@ -1,4 +1,8 @@
-﻿namespace Webzine.Entity.Tests
+﻿// <copyright file="StyleTests.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Webzine.Entity.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

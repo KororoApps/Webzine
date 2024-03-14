@@ -1,13 +1,12 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.GroupeTitreModel
+﻿@model Webzine.WebApplication.ViewModels.TitreModel
 
+@*Configuration dynamique du nom de l'onglet.*@
 @{
     ViewData["title"] = "Accueil";
 }
 @section Sidebar {
     @await Component.InvokeAsync("LayoutSideBar")
 }
-
-<h1>Derniers titres chroniqués</h1>
 
 <partial name="_DerniersTitresChroniques.cshtml" />
 

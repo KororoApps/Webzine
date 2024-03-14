@@ -7,30 +7,39 @@ namespace Webzine.WebApplication.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Webzine.Entity;
     using Webzine.Repository.Contracts;
-    using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
-    /// Contrôleur responsable de la gestion des artistes.
+    /// Controller responsable de la gestion des artistes.
     /// </summary>
     /// <remarks>
-    /// Ce contrôleur gère l'affichage de la biographie d'un artiste.
+    /// Ce controller gère l'affichage de la biographie d'un artiste.
     /// Il utilise le générateur de fausses données Bogus pour simuler des données.
+    /// <param name="artisteRepository">Le repository des artistes à injecter.</param>
     /// </remarks>
     public class ArtisteController(IArtisteRepository artisteRepository) : Controller
     {
         private readonly IArtisteRepository artisteRepository = artisteRepository;
 
         /// <summary>
-        /// Action permettant d'afficher les artistes liés à un groupe.
+        /// Méthode d'action responsable de l'affichage des détails d'un artiste.
         /// </summary>
-        /// <param name="id">Identifiant du groupe d'artistes.</param>
-        /// <returns>Vue contenant la liste des artistes liés au groupe.</returns>
-        public IActionResult Index(int id)
+        /// <param name="nom">Le nom de l'artiste à afficher.</param>
+        /// <returns>Une vue contenant les détails de l'artiste.</returns>
+        public IActionResult Index(string nom)
         {
+            Artiste artiste = this.artisteRepository.FindByName(nom);
+
+            if (artiste == null)
+            {
+                return new StatusCodeResult(404);
+            }
+
             var artisteModel = new ArtisteModel
             {
-                Artiste = this.artisteRepository.Find(id),
+                Artiste = artiste,
             };
+
 
             return this.View(artisteModel);
         }

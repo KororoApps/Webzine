@@ -1,40 +1,67 @@
-﻿using Webzine.Entity;
+﻿// <copyright file="IArtisteRepository.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Repository.Contracts
 {
+    using Webzine.Entity;
+
     /// <summary>
     /// Interface définissant les opérations CRUD pour la gestion des artistes.
     /// </summary>
     public interface IArtisteRepository
     {
-        // Ajoute un artiste.
+        /// <summary>
+        /// Ajoute un artiste.
+        /// </summary>
+        /// <param name="artiste">L'artiste à ajouter.</param>
         void Add(Artiste artiste);
 
-        // Supprime un artiste.
+        /// <summary>
+        /// Supprime un artiste.
+        /// </summary>
+        /// <param name="artiste">L'artiste à supprimer.</param>
         void Delete(Artiste artiste);
 
-        // Renvoie le premier artiste ayant l'identifiant spécifié.
-        Artiste Find(int idArtiste);
-
-        // Renvoie tous les artistes.
-        IEnumerable<Artiste> FindAll();
-
-        // Renvoie les artistes demandés (pour la pagination) triés selon le nom (du plus récent à l'ancien).
-        IEnumerable<Artiste> FindArtistes(int offset, int limit);
-
-        // Met à jour un artiste.
+        /// <summary>
+        /// Met à jour un artiste.
+        /// </summary>
+        /// <param name="artiste">L'artiste à mettre à jour.</param>
         void Update(Artiste artiste);
 
-        // Renvoie l'artiste le plus chroniqué.
-        Artiste FindArtisteLePlusChronique();
+        /// <summary>
+        /// Renvoie tous les artistes.
+        /// </summary>
+        /// <returns>Une collection d'artistes.</returns>
+        IEnumerable<Artiste?> FindAll();
 
-        // Renvoie l'artiste ayant le plus de titres provenant d'albums distincts.
-        Artiste FindArtisteLePlusTitresAlbumDistinct();
+        /// <summary>
+        /// Renvoie le premier artiste ayant l'identifiant spécifié.
+        /// </summary>
+        /// <param name="idArtiste">L'identifiant de l'artiste.</param>
+        /// <returns>L'artiste correspondant à l'identifiant spécifié.</returns>
+        Artiste Find(int idArtiste);
 
-        // Renvoie le nombre de biographies d'artistes.
-        public int NombreBioArtistes();
+        /// <summary>
+        /// Renvoie les artistes demandés (pour la pagination) triés selon le nom (du plus récent à l'ancien).
+        /// </summary>
+        /// <param name="offset">L'indice de départ pour la pagination.</param>
+        /// <param name="limit">Le nombre d'éléments à récupérer.</param>
+        /// <returns>Une collection d'artistes paginée et triée par nom.</returns>
+        IEnumerable<Artiste?> FindArtistes(int offset, int limit);      
 
-        // Renvoie le nombre d'artistes.
-        public int NombreArtistes();
+        /// <summary>
+        /// Renvoie le premier artiste ayant le nom spécifié.
+        /// </summary>
+        /// <param name="nomArtiste">Le nom de l'artiste à rechercher.</param>
+        /// <returns>L'artiste correspondant au nom spécifié.</returns>
+        Artiste? FindByName(string nomArtiste);
+
+        /// <summary>
+        /// Recherche des artistes correspondant à un mot-clé.
+        /// </summary>
+        /// <param name="mot">Le mot-clé à utiliser pour la recherche.</param>
+        /// <returns>Une collection d'artistes correspondant à la recherche.</returns>
+        IEnumerable<Artiste?> Search(string mot);
     }
 }

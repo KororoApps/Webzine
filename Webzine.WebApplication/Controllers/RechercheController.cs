@@ -5,15 +5,19 @@
 namespace Webzine.WebApplication.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Webzine.Entity;
-    using Webzine.Entity.Fixtures;
-    using Webzine.WebApplication.Shared.ViewModels;
+    using Webzine.Repository.Contracts;
+    using Webzine.WebApplication.ViewModels;
 
     /// <summary>
-    /// Contrôleur principal gérant les actions liées à la page d'accueil.
+    /// Controller principal gérant les actions liées à la page d'accueil.
     /// </summary>
-    public class RechercheController : Controller
+    /// <param name="titreRepository">Le repository des titres.</param>
+    /// <param name="artisteRepository">Le repository des artistes.</param>
+    public class RechercheController(ITitreRepository titreRepository, IArtisteRepository artisteRepository) : Controller
     {
+        private readonly ITitreRepository titreRepository = titreRepository;
+        private readonly IArtisteRepository artisteRepository = artisteRepository;
+
         /// <summary>
         /// Affiche la page d'accueil avec des données générées aléatoirement.
         /// </summary>
@@ -22,32 +26,16 @@ namespace Webzine.WebApplication.Controllers
         [HttpPost]
         public IActionResult Index(string recherche)
         {
-            // Génération d'une liste de titres.
-            List<Titre> titres = DataFactory.Titres;
-
-            // Génération d'une liste d'artistes.
-            List<Artiste> artistes = DataFactory.Artistes;
-
-            // Filtrage des titres en fonction de la recherche.
-            List<Titre> titresFiltres = titres
-                .Where(t => t.Libelle.ToLower().Contains(recherche.ToLower()))
-                .ToList();
-
-            // Filtrage des artistes en fonction de la recherche.
-            List<Artiste> artisteFiltres = artistes
-                .Where(a => a.Nom.ToLower().Contains(recherche.ToLower()))
-                .ToList();
-
             // Création du modèle de vue contenant la liste de titres filtrés.
-            var titreModel = new GroupeTitreModel
+            var rechercheModel = new RechercheModel
             {
-                Artistes = artisteFiltres,
-                Titres = titresFiltres,
-                Recherche = recherche
+                Artistes = this.artisteRepository.Search(recherche),
+                Titres = this.titreRepository.Search(recherche),
+                Recherche = recherche,
             };
 
             // Retour de la vue avec le modèle de vue contenant les titres filtrés.
-            return this.View(titreModel);
+            return this.View(rechercheModel);
         }
     }
 }

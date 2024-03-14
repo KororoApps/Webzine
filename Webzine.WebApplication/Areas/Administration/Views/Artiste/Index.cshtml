@@ -1,0 +1,63 @@
+﻿@model Webzine.WebApplication.ViewModels.ArtisteModel
+
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["title"] = "Liste des artistes";
+}
+
+@*Affichage du nom de la page.*@
+@{
+    ViewData["titrePage"] = "Artistes";
+}
+<hr />
+
+<div class="container">
+
+    @*Création du bouton "Ajouter un nouvel artiste".*@
+    <a asp-area="administration" asp-controller="artiste" asp-action="create" class="btn btn-primary mb-4">
+        <i class="fa-solid fa-plus button"></i>
+        Ajouter un nouvel artiste
+    </a>
+
+    @*Afficher la liste des artistes.*@
+    <table class="table table-striped table-bordered">
+
+        <thead>
+            <tr class="table-secondary custom-no-border">
+                <th scope="col">Nom de l'artiste</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var artiste in Model.Artistes)
+            {
+                <tr>
+                    <td>@artiste.Nom</td>
+                    <td class="text-center">
+                        <div class="d-flex justify-content-center">
+                            <a asp-area="administration" asp-controller="artiste" asp-action="edit" asp-route-id="@artiste.IdArtiste">
+                                <i class="fa-solid fa-edit text-primary p-1 icone"></i>
+                            </a>
+                            <a asp-area="administration" asp-controller="artiste" asp-action="delete" asp-route-id="@artiste.IdArtiste">
+                                <i class="fa-solid fa-trash text-primary p-1 icone"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="d-flex  justify-content-end">
+    @if (Model.NumeroPage > 0)
+    {
+        <a class="btn btn-secondary p-2 m-4" asp-area="administration" asp-controller="artiste" asp-action="index" asp-route-NumeroPage="@(Model.NumeroPage - 1)">
+            &lt;&lt; Artistes plus récents
+        </a>
+    }
+
+    <a class="btn btn-secondary p-2 m-4" asp-area="administration" asp-controller="artiste" asp-action="index" asp-route-NumeroPage="@(Model.NumeroPage + 1)">
+        Artistes plus anciens >>
+    </a>
+</div>

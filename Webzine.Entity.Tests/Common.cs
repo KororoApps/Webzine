@@ -1,4 +1,8 @@
-﻿namespace Webzine.Entity.Tests
+﻿// <copyright file="Common.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Webzine.Entity.Tests
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -6,15 +10,15 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// Méthodes utilitaires permettant de tester les entités. 
+    /// Méthodes utilitaires permettant de tester les entités.
     /// </summary>
     public static class Common
     {
         /// <summary>
         /// Vérifie que l'entité possède bien la propriété passée en paramètre.
         /// </summary>
-        /// <param name="typeObjet">type de l'entité</param>
-        /// <param name="nomPropriete">nom de la propriété de l'entité</param>
+        /// <param name="typeObjet">type de l'entité.</param>
+        /// <param name="nomPropriete">nom de la propriété de l'entité.</param>
         public static void HasProperty(Type typeObjet, string nomPropriete)
         {
             var property = typeObjet.GetProperty(nomPropriete);
@@ -24,9 +28,9 @@
         /// <summary>
         /// Vérifie que l'attribut de l'entité a l'annotation [Display(Name = "xxx")] avec la valeur attendue.
         /// </summary>
-        /// <param name="typeObjet">type de l'entité</param>
-        /// <param name="nomPropriete">nom de la propriété de l'entité</param>
-        /// <param name="chaineAttendue">valeur attendue pour l'affichage de cette propriété</param>
+        /// <param name="typeObjet">type de l'entité.</param>
+        /// <param name="nomPropriete">nom de la propriété de l'entité.</param>
+        /// <param name="chaineAttendue">valeur attendue pour l'affichage de cette propriété.</param>
         public static void AttributDisplay(Type typeObjet, string nomPropriete, string chaineAttendue)
         {
             var property = typeObjet.GetProperty(nomPropriete);
@@ -38,9 +42,9 @@
         /// <summary>
         /// Vérifie que l'attribut de l'entité a l'annotation [MinLength(xx)] avec la longueur attendue.
         /// </summary>
-        /// <param name="typeObjet">type de l'entité</param>
-        /// <param name="nomPropriete">nom de la propriété de l'entité</param>
-        /// <param name="max">longueur maximum</param>
+        /// <param name="typeObjet">type de l'entité.</param>
+        /// <param name="nomPropriete">nom de la propriété de l'entité.</param>
+        /// <param name="max">longueur maximum.</param>
         public static void AttributLongueurMax(Type typeObjet, string nomPropriete, int max)
         {
             var property = typeObjet.GetProperty(nomPropriete);
@@ -52,9 +56,9 @@
         /// <summary>
         /// Vérifie que l'attribut de l'entité a l'annotation [MinLength(xx)] avec la longueur attendue.
         /// </summary>
-        /// <param name="typeObjet">type de l'entité</param>
-        /// <param name="nomPropriete">nom de la propriété de l'entité</param>
-        /// <param name="min">longueur minimum</param>
+        /// <param name="typeObjet">type de l'entité.</param>
+        /// <param name="nomPropriete">nom de la propriété de l'entité.</param>
+        /// <param name="min">longueur minimum.</param>
         public static void AttributLongueurMin(Type typeObjet, string nomPropriete, int min)
         {
             var property = typeObjet.GetProperty(nomPropriete);
@@ -66,8 +70,8 @@
         /// <summary>
         /// Vérifie que l'attribut de l'entité a l'annotation [Required].
         /// </summary>
-        /// <param name="typeObjet">type de l'entité</param>
-        /// <param name="nomPropriete">nom de la propriété de l'entité</param>
+        /// <param name="typeObjet">type de l'entité.</param>
+        /// <param name="nomPropriete">nom de la propriété de l'entité.</param>
         public static void AttributRequis(Type typeObjet, string nomPropriete)
         {
             var property = typeObjet.GetProperty(nomPropriete);
@@ -78,8 +82,8 @@
         /// <summary>
         /// Vérifie que l'attribut de l'entité n'a pas l'annotation [Url].
         /// </summary>
-        /// <param name="typeObjet">type de l'entité</param>
-        /// <param name="nomPropriete">nom de la propriété de l'entité</param>
+        /// <param name="typeObjet">type de l'entité.</param>
+        /// <param name="nomPropriete">nom de la propriété de l'entité.</param>
         public static void AttributHasNotUrlValidation(Type typeObjet, string nomPropriete)
         {
             var property = typeObjet.GetProperty(nomPropriete);

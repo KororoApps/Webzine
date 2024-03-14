@@ -1,0 +1,39 @@
+﻿@model Webzine.WebApplication.ViewModels.StyleModel
+
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["Title"] = "Créer un style";
+}
+
+@*Affichage du nom de la page.*@
+@{
+    ViewData["titrePage"] = "Créer un style";
+}
+<hr />
+
+@*Formulaire d'ajout d'un style.*@
+<form method="post" asp-action="create" asp-controller="style" class="col-6 d-flex">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-auto">
+                <label asp-for="@Model.Style.Libelle" class="form-label required-label"></label>
+            </div>
+            <div class="col">
+                <input asp-for="@Model.Style.Libelle" class="form-control">
+                <span asp-validation-for="@Model.Style.Libelle" class="text-danger"></span>
+            </div>
+
+            @*Bouton d'ajout du style.*@
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">
+                    Créer
+                </button>
+            </div>
+        </div>
+
+        @*Bouton de retour à l'Administration des styles.*@
+        <a class=" fw-normal" asp-area="administration" asp-controller="style" asp-action="index">
+            Retour à l'administration des styles
+        </a>
+    </div>
+</form>

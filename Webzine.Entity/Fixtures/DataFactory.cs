@@ -24,25 +24,26 @@ namespace Webzine.Entity.Fixtures
             GenerateFakeStyles();
             GenerateFakeTitres();
             GenerateFakeCommentaires();
+            AssociateTitresWithArtistes();
         }
 
         /// <summary>
-        /// Obtient ou définit liste d'artistes fictifs.
+        /// Obtient ou définit une liste d'artistes fictifs.
         /// </summary>
         public static List<Artiste> Artistes { get; set; }
 
         /// <summary>
-        /// Obtient ou définit liste de styles fictifs.
+        /// Obtient ou définit une liste de styles fictifs.
         /// </summary>
         public static List<Style> Styles { get; set; }
 
         /// <summary>
-        /// Obtient ou définit liste de titres fictifs.
+        /// Obtient ou définit une liste de titres fictifs.
         /// </summary>
         public static List<Titre> Titres { get; set; }
 
         /// <summary>
-        /// Obtient ou définit liste de commentaires fictifs.
+        /// Obtient ou définit une liste de commentaires fictifs.
         /// </summary>
         public static List<Commentaire> Commentaires { get; set; }
 
@@ -122,8 +123,8 @@ namespace Webzine.Entity.Fixtures
         /// <summary>
         /// Met la première lettre d'une chaîne de caractères en majuscule.
         /// </summary>
-        /// <param name="input">La chaîne de caractères en entrée.</param>
-        /// <returns>La chaîne de caractères en entrée avec la première lettre en majuscule.</returns>
+        /// <param name="input">La chaîne de caractères</param>
+        /// <returns>La chaîne de caractères avec la première lettre en majuscule.</returns>
         public static string CapitalizeFirstLetter(this string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -132,6 +133,27 @@ namespace Webzine.Entity.Fixtures
             }
 
             return char.ToUpper(input[0]) + input[1..];
+        }
+
+        /// <summary>
+        /// Associe les titres aux artistes en fonction de l'ID de l'artiste.
+        /// </summary>
+        public static void AssociateTitresWithArtistes()
+        {
+            foreach (var titre in Titres)
+            {
+                var artiste = Artistes.FirstOrDefault(a => a.IdArtiste == titre.Artiste.IdArtiste);
+
+                if (artiste != null)
+                {
+                    if (artiste.Titres == null)
+                    {
+                        artiste.Titres = new List<Titre>();
+                    }
+
+                    artiste.Titres.Add(titre);
+                }
+            }
         }
     }
 }

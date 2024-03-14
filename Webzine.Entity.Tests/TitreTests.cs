@@ -1,4 +1,8 @@
-﻿namespace Webzine.Entity.Tests
+﻿// <copyright file="TitreTests.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Webzine.Entity.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -88,6 +92,9 @@
             Common.AttributLongueurMax(typeof(Titre), nameof(Titre.Libelle), 200);
         }
 
+        /// <summary>
+        /// Vérifie que la propriété Chronique existe.
+        /// </summary>
         [TestMethod]
         public void TitreHasChronique()
         {
@@ -95,7 +102,7 @@
         }
 
         /// <summary>
-        /// Vérifie que la propriété Chronique existe.
+        /// Vérifie que l'attribut Requis pour la propriété Chronique est correct.
         /// </summary>
         [TestMethod]
         public void TitreHasChroniqueRequis()
@@ -104,7 +111,7 @@
         }
 
         /// <summary>
-        /// Vérifie que l'attribut Requis pour la propriété Chronique est correct.
+        /// Vérifie que l'attribut LongueurMin pour la propriété Chronique est correct.
         /// </summary>
         [TestMethod]
         public void TitreHasChroniqueTailleMin10()

@@ -1,94 +1,73 @@
-﻿using Webzine.Entity;
-using Webzine.Entity.Fixtures;
-using Webzine.Repository.Contracts;
+﻿// <copyright file="LocalCommentaireRepository.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Repository
 {
+    using Webzine.Entity;
+    using Webzine.Entity.Fixtures;
+    using Webzine.Repository.Contracts;
+
+    /// <summary>
+    /// Implémente l'interface ICommentaireRepository pour la gestion des commentaires en mémoire locale.
+    /// </summary>
     public class LocalCommentaireRepository : ICommentaireRepository
     {
-
-        /// <summary>
-        /// Ajoute un Commentaire.
-        /// </summary>
-        /// <param name="commentaire"></param>
+        /// <inheritdoc />
         public void Add(Commentaire commentaire)
         {
             // Génère un nouvel identifiant
-            commentaire.IdCommentaire = DataFactory.Commentaires.Count + 1;
+            commentaire.IdCommentaire = DataFactory.Commentaires.Count + 2;
+            commentaire.IdTitre = commentaire.Titre.IdTitre;
 
             // Ajoute le nouveau commentaire à la liste
             DataFactory.Commentaires.Add(commentaire);
         }
 
-        /// <summary>
-        /// Supprimme un commentaire.
-        /// </summary>
-        /// <param name="commentaire"></param>
+        /// <inheritdoc />
         public void Delete(Commentaire commentaire)
         {
-            // Recherche le commentaire dans la liste
             var commentaireASupprimer = DataFactory.Commentaires
-                .FirstOrDefault(t => t.IdCommentaire == commentaire.IdCommentaire);
+                .SingleOrDefault(c => c.IdCommentaire  == commentaire.IdCommentaire);
 
-            // Supprime le commentaire s'il existe
             if (commentaireASupprimer != null)
             {
-                DataFactory.Commentaires
-                    .Remove(commentaireASupprimer);
+                DataFactory.Commentaires.Remove(commentaireASupprimer);
             }
         }
 
-        /// <summary>
-        /// Renvoie le premier commentaire ayant l'id mise en paramètre.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Commentaire Find(int id)
-        {
-            var commentaire = DataFactory.Commentaires
-                .FirstOrDefault(t => t.IdCommentaire == id);
-
-            return commentaire;
-        }
-
-        /// <summary>
-        /// Renvoie une liste de commentaire par ordre de creation.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Commentaire> FindAll()
         {
-            List<Commentaire> commentaires = DataFactory.Commentaires;
-
-            var orderedCommentaires = commentaires
+            return DataFactory.Commentaires
                 .OrderByDescending(c => c.DateCreation)
                 .ToList();
-
-            return orderedCommentaires;
         }
 
-        /// <summary>
-        /// Renvoie une liste de commentaire par ordre de creation.
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
+        /// <inheritdoc />
+        public Commentaire? Find(int id)
         {
-            List<Commentaire> commentaires = DataFactory.Commentaires;
-
-            var orderedCommentaires = commentaires
-                .Where(c => c.Titre != null && c.Titre.IdTitre == id)
-                .OrderBy(c => c.DateCreation)
-                .ToList();
-
-            return orderedCommentaires;
+            return DataFactory.Commentaires
+                .SingleOrDefault(t => t.IdCommentaire == id);
         }
 
-        /// <summary>
-        /// Retourne les commentaires demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IEnumerable<Commentaire> FindCommentaires(int offset, int limit)
         {
-            throw new NotImplementedException();
+            return DataFactory.Commentaires
+                .OrderByDescending(t => t.DateCreation)
+                .Skip(offset)
+                .Take(limit)
+                .ToList();
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Commentaire> FindCommentairesByIdTitre(int id)
+        {
+            return DataFactory.Commentaires
+                .Where(c => c.Titre != null && c.Titre.IdTitre == id)
+                .OrderByDescending(c => c.DateCreation)
+                .ToList();
         }
     }
 }

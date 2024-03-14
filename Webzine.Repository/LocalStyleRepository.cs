@@ -1,107 +1,81 @@
-﻿using Webzine.Entity;
-using Webzine.Entity.Fixtures;
-using Webzine.Repository.Contracts;
+﻿// <copyright file="LocalStyleRepository.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Repository
 {
+    using Webzine.Entity;
+    using Webzine.Entity.Fixtures;
+    using Webzine.Repository.Contracts;
+
     /// <summary>
     /// Implémente l'interface IStyleRepository pour la gestion des styles  en mémoire locale.
     /// </summary>
     public class LocalStyleRepository : IStyleRepository
     {
-        /// <summary>
-        /// Ajoute un style.
-        /// </summary>
-        /// <param name="style">Le style à ajouter.</param>
+        /// <inheritdoc />
         public void Add(Style style)
         {
             // Génère un nouvel identifiant
-            style.IdStyle = DataFactory.Styles.Count + 1;
+            style.IdStyle = DataFactory.Styles.Count + 2;
 
             // Ajoute le nouveau style à la liste
             DataFactory.Styles.Add(style);
         }
 
-        /// <summary>
-        /// Supprime un style.
-        /// </summary>
-        /// <param name="style">Le style à supprimer.</param>
+        /// <inheritdoc />
         public void Delete(Style style)
         {
-           
             var styleASupprimer = DataFactory.Styles
-                .FirstOrDefault(t => t.IdStyle == style.IdStyle);
+                .SingleOrDefault(s => s.IdStyle == style.IdStyle);
 
-          
             if (styleASupprimer != null)
             {
-                DataFactory.Styles
-                    .Remove(styleASupprimer);
+                DataFactory.Styles.Remove(styleASupprimer);
             }
         }
 
-        /// <summary>
-        /// Trouve un style par son identifiant.
-        /// </summary>
-        /// <param name="id">L'identifiant du style.</param>
-        /// <returns>Le style correspondant à l'identifiant.</returns>
-        public Style Find(int id)
-        {
-            var style = DataFactory.Styles
-                 .FirstOrDefault(t => t.IdStyle == id);
-
-            return style;
-        }
-
-        /// <summary>
-        /// Trouve tous les styles.
-        /// </summary>
-        /// <returns>Une liste de tous les styles.</returns>
-        public IEnumerable<Style> FindAll()
-        {
-            List<Style> styles = DataFactory.Styles ;
-
-            var orderedStyle = styles
-                .OrderByDescending(c => c.Libelle)
-                .ToList();
-
-            return orderedStyle;
-        }
-
-        /// <summary>
-        /// Trouve les styles par leurs ids.
-        /// </summary>
-        /// <returns>Une liste de tous les styles.</returns>
-        public IEnumerable<Style> FindByIds(List<int> ids)
-        {
-            List<Style> styles = DataFactory.Styles;
-
-            var filteredStyles = styles
-                .Where(s => ids.Contains(s.IdStyle))
-                .ToList();
-
-            return filteredStyles;
-        }
-
-        /// <summary>
-        /// Met à jour un style.
-        /// </summary>
-        /// <param name="style">Le style à mettre à jour.</param>
+        /// <inheritdoc />
         public void Update(Style style)
         {
-            throw new NotImplementedException();
+            var styleAEditer = DataFactory.Styles
+                .SingleOrDefault(s => s.IdStyle == style.IdStyle);
+
+            if (styleAEditer != null)
+            {
+                styleAEditer.Libelle = style.Libelle;
+            }
         }
 
-        /// <summary>
-        /// Retourne le nombre de styles.
-        /// </summary>
-        /// <returns>Le nombre total de styles.</returns>
-        public int NombreStyles()
+        /// <inheritdoc />
+        public IEnumerable<Style> FindAll()
         {
-            var nombreStyle = DataFactory.Styles
-                .Count;
+            return DataFactory.Styles;
+        }
 
-            return nombreStyle;
+        /// <inheritdoc />
+        public Style Find(int id)
+        {
+            return DataFactory.Styles
+                 .SingleOrDefault(t => t.IdStyle == id);
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Style> FindByIds(List<int> ids)
+        {
+            return DataFactory.Styles
+                .Where(s => ids.Contains(s.IdStyle))
+                .ToList();
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Style> FindStyles(int offset, int limit)
+        {
+            return DataFactory.Styles
+                .OrderBy(c => c.Libelle.ToLower())
+                .Skip(offset)
+                .Take(limit)
+                .ToList();
         }
     }
 }

@@ -1,115 +1,80 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Webzine.EntitiesContext;
-using Webzine.Entity;
-using Webzine.Repository.Contracts;
+﻿// <copyright file="DbStyleRepository.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Repository
 {
+    using Microsoft.EntityFrameworkCore;
+    using Webzine.EntitiesContext;
+    using Webzine.Entity;
+    using Webzine.Repository.Contracts;
+
     /// <summary>
-    /// Implémente l'interface IStyleRepository pour la gestion des styles en utilisant une base de données.
+    /// Implémente l'interface IStyleRepository pour la gestion des styles en utilisant une base de donnée.
     /// </summary>
     public class DbStyleRepository(WebzineDbContext context) : IStyleRepository
     {
-        // Contexte de base de données pour accéder aux données
-        private readonly WebzineDbContext _context = context;
+        // Contexte de base de donnée pour accéder aux données
+        private readonly WebzineDbContext context = context;
 
-        /// <summary>
-        /// Ajoute un style.
-        /// </summary>
-        /// <param name="style">Le style à ajouter.</param>
+        /// <inheritdoc />
         public void Add(Style style)
         {
-            if (style == null)
-            {
-                throw new ArgumentNullException(nameof(style));
-            }
+            this.context.Add<Style>(style);
 
-            _context.Add<Style>(style);
-
-            _context.SaveChanges();
+            this.context.SaveChanges();
         }
 
-        /// <summary>
-        /// Supprime un style.
-        /// </summary>
-        /// <param name="style">Le style à supprimer.</param>
+        /// <inheritdoc />
         public void Delete(Style style)
         {
+            this.context.Styles.Remove(style);
 
-            if (style == null)
-            {
-                throw new ArgumentNullException(nameof(style));
-            }
-            else
-            {
-                _context.Styles
-                     .Remove(style);
-
-                _context.SaveChanges();
-            }          
+            this.context.SaveChanges();
         }
 
-        /// <summary>
-        /// Trouve un style par son identifiant.
-        /// </summary>
-        /// <param name="id">L'identifiant du style.</param>
-        /// <returns>Le style correspondant à l'identifiant.</returns>
-        public Style Find(int id)
-        {
-             var  style = _context.Styles
-                 .Include(s => s.Titres)
-                 .Where(s => s.IdStyle == id)
-                 .First();
-                
-            return style;
-
-        }
-
-        /// <summary>
-        /// Trouve tous les styles.
-        /// </summary>
-        /// <returns>Une liste de tous les styles.</returns>
-        public IEnumerable<Style> FindAll()
-        {
-            var  styles = _context.Styles
-                .OrderBy(c => c.Libelle.ToLower())
-                .ToList();
-
-            return styles;
-        }
-
-        /// <summary>
-        /// Trouve les styles par leurs ids.
-        /// </summary>
-        /// <returns>Une liste de tous les styles.</returns>
-        public IEnumerable<Style> FindByIds(List<int> ids)
-        {
-            var filteredStyles = _context.Styles
-                .Where(s => ids.Contains(s.IdStyle))
-                .ToList();
-
-            return filteredStyles;
-        }
-
-        /// <summary>
-        /// Met à jour un style.
-        /// </summary>
-        /// <param name="style">Le style à mettre à jour.</param>
+        /// <inheritdoc />
         public void Update(Style style)
         {
-            throw new NotImplementedException();
+            this.context.Update<Style>(style);
+
+            this.context.SaveChanges();
         }
 
-        /// <summary>
-        /// Retourne le nombre de styles.
-        /// </summary>
-        /// <returns>Le nombre total de styles.</returns>
-        public int NombreStyles()
+        /// <inheritdoc />
+        public IEnumerable<Style> FindAll()
         {
-            var nombreStyle = _context.Styles
-                .Count();
+            return this.context.Styles
+                .AsNoTracking();
+        }
 
-            return nombreStyle;
+        /// <inheritdoc />
+        public Style Find(int id)
+        {
+            return this.context.Styles
+                .Include(s => s.Titres)
+                .AsNoTracking()
+                .Where(s => s.IdStyle == id)
+                .SingleOrDefault();
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Style> FindByIds(List<int> ids)
+        {
+            return this.context.Styles
+                .Where(s => ids.Contains(s.IdStyle))
+                .ToList();
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Style> FindStyles(int offset, int limit)
+        {
+            return this.context.Styles
+               .AsNoTracking()
+               .OrderBy(c => c.Libelle.ToLower())
+               .Skip(offset)
+               .Take(limit)
+               .ToList();
         }
     }
 }

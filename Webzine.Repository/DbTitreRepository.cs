@@ -1,261 +1,162 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Webzine.EntitiesContext;
-using Webzine.Entity;
-using Webzine.Repository.Contracts;
+﻿// <copyright file="DbTitreRepository.cs" company="Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton">
+// Copyright (c) Equipe 4 - Andgel Sassignol, Romain Vidotto, Jean-Emilien Viard, Lucas Fernandez, Dylann-Nick Etou Mbon, Antoine Couvert, Elodie Sponton. All rights reserved.
+// </copyright>
 
 namespace Webzine.Repository
 {
+    using Microsoft.EntityFrameworkCore;
+    using Webzine.EntitiesContext;
+    using Webzine.Entity;
+    using Webzine.Repository.Contracts;
 
     /// <summary>
-    /// Implémente l'interface ITitreRepository pour les opérations liées à la gestion des titres dans la base de données.
+    /// Implémente l'interface ITitreRepository pour les opérations liées à la gestion des titres dans la base de donnée.
     /// </summary>
     /// <remarks>
     /// Initialise une nouvelle instance de la classe DbTitreRepository.
     /// </remarks>
-    /// <param name="context">Le contexte de base de données.</param>
+    /// <param name="context">Le context de base de donnée.</param>
     public class DbTitreRepository(WebzineDbContext context) : ITitreRepository
     {
-        private readonly WebzineDbContext _context = context;
+        private readonly WebzineDbContext context = context;
 
-        /// <summary>
-        /// Ajoute un Titre.
-        /// </summary>
-        /// <param name="titre"></param>
+        /// <inheritdoc />
         public void Add(Titre titre)
         {
-            if (titre == null)
-            {
-                throw new ArgumentNullException(nameof(titre));
-            }
+            titre.DateCreation = DateTime.Now.ToUniversalTime();
+            titre.DateSortie = titre.DateSortie.ToUniversalTime();
 
-            titre.DateCreation = DateTime.Now;
+            this.context.Add<Titre>(titre);
 
-            _context.Add<Titre>(titre);
-
-            _context
-                .SaveChanges();
+            this.context.SaveChanges();
         }
 
-        /// <summary>
-        /// Compte le nombre de titre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public int Count()
         {
-            var NombreTitres = _context.Titres
-                .Count();
-
-            return NombreTitres;
+            return this.context.Titres.Count();
         }
 
-        /// <summary>
-        /// Supprimme un Titre.
-        /// </summary>
-        /// <param name="titre"></param>
+        /// <inheritdoc />
         public void Delete(Titre titre)
         {
-            if (titre == null)
-            {
-                throw new ArgumentNullException(nameof(titre));
-            }
+            this.context.Titres.Remove(titre);
 
-            try
-            {
-                _context.Titres
-                    .Remove(titre);
-
-                _context
-                    .SaveChanges();
-
-            } catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            this.context.SaveChanges();
         }
 
-        /// <summary>
-        ///Renvoie le premier Titre ayant l'id mise en paramètre.
-        /// </summary>
-        /// <param name="idTitre"></param>
-        /// <returns></returns>
-        public Titre Find(int idTitre)
+        /// <inheritdoc />
+        public void Update(Titre titre)
         {
-            var titre = _context.Titres
+            titre.DateCreation = titre.DateCreation.ToUniversalTime();
+            titre.DateSortie = titre.DateSortie.ToUniversalTime();
+
+            this.context.Update<Titre>(titre);
+
+            this.context.SaveChanges();
+        }
+
+        /// <inheritdoc />
+        public Titre? Find(int idTitre)
+        {
+            return this.context.Titres
                 .Include(t => t.Artiste)
                 .Include(t => t.Commentaires)
                 .Include(t => t.Styles)
                 .SingleOrDefault(t => t.IdTitre == idTitre);
-
-            if (titre == null)
-            {
-                //Exception si on ne trouve pas d'artiste correspondant
-                throw new ArgumentNullException();
-            }
-
-            return titre;
         }
 
-        /// <summary>
-        /// Retourne les titres demandés (pour la pagination) triés selon la date de création (du plus récent à ancien).
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Titre> FindTitres(int offset, int limit)
+        /// <inheritdoc />
+        public IEnumerable<Titre?> FindAll()
         {
-            throw new NotImplementedException();
+            return this.context.Titres.AsNoTracking()
+                .Include(t => t.Artiste).AsNoTracking();
         }
 
-        /// <summary>
-        /// Renvoie tous les Titres.
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Titre> FindAll()
+        /// <inheritdoc />
+        public IEnumerable<Titre?> FindTitres(int offset, int limit)
         {
-            var allTitres = _context.Titres
-                .Include(t => t.Artiste)
-                .Include(t => t.Commentaires)
-                .Include(t => t.Styles)
+            return this.context.Titres.AsNoTracking()
+                .Include(t => t.Artiste).AsNoTracking()
+                .Include(t => t.Styles).AsNoTracking()
+                .Include(t => t.Commentaires).AsNoTracking()
                 .OrderByDescending(t => t.DateCreation)
+                .Skip(offset)
+                .Take(limit)
                 .ToList();
-
-            return allTitres;
         }
 
-        /// <summary>
-        /// Renvoie tous le titre le plus lu.
-        /// </summary>
-        /// <returns></returns>
-        public Titre FindTitreLePlusLu()
+        /// <inheritdoc />
+        public List<Titre?> FindTitresLesPlusLike(int longueurPeriode)
         {
-            var titre = _context.Titres
-                .OrderByDescending(t => t.NbLectures)
-                .FirstOrDefault();
+            // Calcul de la date à partir de laquelle les titres doivent être récupérés
+            var dateDebutPeriode = DateTime.UtcNow.AddMonths(-longueurPeriode);
 
-            if (titre == null)
-            {
-                //Exception si on ne trouve pas d'artiste correspondant
-                throw new ArgumentNullException();
-            }
-
-            return titre;
-        }
-
-        /// <summary>
-        /// Renvoie les titres du plus liké au moins liké  et en retourne un certain nombre.
-        /// </summary>
-        /// <returns></returns>
-        public List<Titre> FindTitresLesPlusLike()
-        {
-            var titres = _context.Titres
+            return this.context.Titres.AsNoTracking()
+                .Include(t => t.Artiste).AsNoTracking()
+                .Include(t => t.Styles).AsNoTracking()
+                .Where(t => t.DateCreation >= dateDebutPeriode) // Filtrer les titres créés pendant cette période
                 .OrderByDescending(t => t.NbLikes)
                 .Take(3)
                 .ToList();
-
-            return titres;
         }
 
-        /// <summary>
-        /// Renvoie la liste des titres du plus récent au plus ancien chroniqué et en retourne un certain nombre.
-        /// </summary>
-        /// <returns></returns>
-        public List<Titre> ParutionChroniqueTitres()
-        {
-            var titres = _context.Titres
-                .OrderByDescending(t => t.DateCreation)
-                .Take(3)
-                .ToList();
-
-            return titres;
-        }
-
-        /// <summary>
-        /// Renvoie le nombre de titres.
-        /// </summary>
-        /// <returns></returns>
-        public int NombreTitres()
-        {
-            var nombreTitres = _context.Titres
-                .Count();
-
-            return nombreTitres;
-        }
-
-        /// <summary>
-        /// Renvoie le nombre de likes totals.
-        /// </summary>
-        /// <returns></returns>
-        public int NombreLikes()
-        {
-            var nombreLikes = _context.Titres
-                .Sum(t => t.NbLikes);
-
-            return nombreLikes;
-        }
-
-        /// <summary>
-        /// Renvoie le nombre de lectures totales.
-        /// </summary>
-        /// <returns></returns>
-        public int NombreLectures()
-        {
-            var nombreLectures = _context.Titres
-                .Sum(t => t.NbLectures);
-
-            return nombreLectures;
-        }
-
-        /// <summary>
-        /// Incrémente le nombre de lecture d'un titre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public void IncrementNbLectures(Titre titre)
         {
-            throw new NotImplementedException();
+            Titre existingTitre = this.context.Titres.Find(titre.IdTitre);
+
+            if (existingTitre != null)
+            {
+                existingTitre.NbLectures++;
+
+                this.context.SaveChanges();
+            }
         }
 
-        /// <summary>
-        /// Incrémente le nombre de like d'un titre.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         public void IncrementNbLikes(Titre titre)
         {
-            throw new NotImplementedException();
+            Titre existingTitre = this.context.Titres.Find(titre.IdTitre);
+
+            if (existingTitre != null)
+            {
+                existingTitre.NbLikes++;
+
+                this.context.SaveChanges();
+            }
         }
 
-        /// <summary>
-        /// Recherche de manière insensible à la casse les titres contenant le mot recherché.
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Titre> Search(string mot)
+        /// <inheritdoc />
+        public IEnumerable<Titre?> Search(string mot)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(mot))
+            {
+                return this.context.Titres
+                    .AsNoTracking()
+                    .Include(t => t.Artiste)
+                    .OrderBy(c => c.Libelle)
+                    .ToList();
+            }
+            else
+            {
+                return this.context.Titres
+                    .AsNoTracking()
+                    .Include(t => t.Artiste)
+                    .Where(t => t.Libelle.ToUpper().Contains(mot.ToUpper()))
+                    .OrderBy(c => c.Libelle)
+                    .ToList();
+            }
         }
 
-        /// <summary>
-        /// Recherche de manière insensible à la casse les titres contenant le style de musique cherchée.
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Titre> SearchByStyle(string libelle)
+        /// <inheritdoc />
+        public IEnumerable<Titre?> SearchByStyle(string libelle)
         {
-
-            List<Titre> titres = _context.Titres
-                .Include(t => t.Artiste)
+            return this.context.Titres.AsNoTracking()
+                .Include(t => t.Artiste).AsNoTracking()
                 .Where(t => t.Styles.Any(s => s.Libelle.Equals(libelle)))
                 .OrderByDescending(c => c.Libelle)
                 .ToList();
-
-            if (titres == null)
-            {
-                //Exception si on ne trouve pas d'artiste correspondant
-                throw new ArgumentNullException();
-            }
-
-            return titres;
-        }
-
-        /// <summary>
-        /// Met à jour un titre.
-        /// </summary>
-        /// <returns></returns>
-        public void Update(Titre titre)
-        {
-            throw new NotImplementedException();
         }
     }
 }

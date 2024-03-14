@@ -1,6 +1,4 @@
-﻿ @using Bogus
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 
@@ -20,7 +18,7 @@
     @*Appel du header.*@
     <partial name="_HeaderVuePartielle.cshtml" />
 
-    <div class="container footer mt-5 pt-5">
+    <div class="container mt-5 mb-5 pb-5 pt-5 flex_grow-1 body">
 
         @*Afficher le titre de la page.*@
         <div class="row">
@@ -35,13 +33,12 @@
                 @RenderSection("Sidebar", required: false)
             </div>
         </div>
-
-        @*Appel du footer.*@
-        <partial name="_FooterVuePartielle.cshtml" />
-
-        <script src="~/lib/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
     </div>
 
+    @*Appel du footer.*@
+    <partial name="_FooterVuePartielle.cshtml" />
+
+    <script src="~/lib/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 

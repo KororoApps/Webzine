@@ -1,0 +1,156 @@
+﻿@model Webzine.WebApplication.ViewModels.DashboardModel
+
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["title"] = "Dashboard";
+}
+
+<h1>Tableau de bord</h1>
+<hr>
+
+<div class="container">
+    <div class="row align-items-stretch">
+        @*Nombre d'artistes.*@
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <a asp-area="administration" asp-controller="artiste" asp-action="index">
+                    <div class="text-primary ">
+                        <i class="fa-solid fa-users fa-5x mb-2"></i>
+                    </div>
+                    <p class="fs-2 text-primary">
+                        @Model.NbArtistes
+                    </p>
+                    <p class="text-primary">
+                        Artistes
+                    </p>
+                </a>
+            </div>
+        </div>
+        @*Artiste le plus chroniqué.*@
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <a asp-area="" asp-controller="artiste" asp-action="index" asp-route-nom="@Model.ArtistePlusChronique.Nom">
+                    <div class="text-primary">
+                        <i class="fa-solid fa-user fa-5x mb-2"></i>
+                    </div>
+                    <p class="fs-2 text-primary">
+                        @Model.ArtistePlusChronique.Nom
+                    </p>
+                    <p class="text-primary">
+                        Artiste le plus chroniqué
+                    </p>
+                </a>
+            </div>
+        </div>
+        @*Artiste avec le plus de titres.*@
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <a asp-area="" asp-controller="artiste" asp-action="index" asp-route-nom="@Model.ArtistePlusDeTitres.Nom">
+                    <div class="text-primary">
+                        <i class="fa-solid fa-trophy fa-5x mb-2"></i>
+                    </div>
+                    <p class="fs-2 text-primary">
+                        @Model.ArtistePlusDeTitres.Nom
+                    </p>
+                    <p class="text-primary">
+                        Artiste avec le plus de titres provenant d'albums distincts
+                    </p>
+                </a>
+            </div>
+        </div>
+        @*Nombre de briographies d'artistes.*@
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <a asp-area="administration" asp-controller="artiste" asp-action="index">
+                    <div class="text-primary">
+                        <i class="fa-solid fa-book fa-5x mb-2"></i>
+                    </div>
+                    <p class="fs-2 text-primary">
+                        @Model.NbBioArtiste
+                    </p>
+                    <p class="text-primary pb-5">
+                        Biographies d'artistes
+                    </p>
+                </a>
+            </div>
+        </div>
+        @*Titre le plus lu.*@
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <a asp-area="=" asp-controller="titre" asp-action="index" asp-route-idTitre="@Model.TitrePlusLu.IdTitre">
+                    <div class="text-primary">
+                        <i class="fa-solid fa-compact-disc fa-5x mb-2"></i>
+                    </div>
+                    <p class="fs-2 text-primary text-capitalize">
+                        @Model.TitrePlusLu.Artiste.Nom - @Model.TitrePlusLu.Album - @Model.TitrePlusLu.Libelle
+                    </p>
+                    <p class="text-primary">
+                        Titre le plus lu
+                    </p>
+                </a>
+            </div>
+        </div>
+        @*Nombre de titres.*@
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <a asp-area="administration" asp-controller="titre" asp-action="index">
+                    <div class="text-primary">
+                        <i class="fa-solid fa-music fa-5x mb-2"></i>
+                    </div>
+                    <p class="fs-2 text-primary">
+                        @Model.NbTitres
+                    </p>
+                    <p class="text-primary pb-5">
+                        Titres
+                    </p>
+                </a>
+            </div>
+        </div>
+        @*Nombre de styles de musique.*@
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <a asp-area="administration" asp-controller="style" asp-action="index">
+                    <div class="text-primary">
+                        <i class="fa-solid fa-tags fa-5x mb-2"></i>
+                    </div>
+                    <p class="fs-2 text-primary">
+                        @Model.NbStyles
+                    </p>
+                    <p class="text-primary">
+                        Styles de musique
+                    </p>
+                </a>
+            </div>
+        </div>
+        @*Nombre de lectures.*@
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <div class="text-dark font-size-3">
+                    <i class="fa-solid fa-eye fa-5x mb-2"></i>
+                </div>
+                <p class="fs-2 text-dark">
+                    @Model.NbLectures
+                </p>
+                <p class="text-dark">
+                    Lectures
+                </p>
+            </div>
+        </div>
+        @*Nombre de likes.*@
+        <div class="col-md-4 col-sm-6 col-xs-12 mt-3">
+            <div class="container h-100 bg-light p-5 text-white text-center ">
+                <div class="text-dark font-size-3">
+                    <i class="fa-solid fa-thumbs-up fa-5x mb-2"></i>
+                </div>
+                <p class="fs-2 text-dark">
+                    @Model.NbLikes
+                </p>
+                <p class="text-dark">
+                    Likes
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+

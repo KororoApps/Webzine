@@ -1,4 +1,4 @@
-﻿@model Webzine.WebApplication.Shared.ViewModels.ArtisteModel
+﻿@model Webzine.WebApplication.ViewModels.ArtisteModel
 
 @*Configuration dynamique du nom de l'onglet.*@
 @{
@@ -31,17 +31,12 @@
 
             <div class="col-md-10 mb-5">
 
+                <h3>@titre.Album</h3>
+
                 @*Afficher la liste des Titres.*@
                 <table class="table">
 
                     <thead>
-                        <tr>
-                            <th class="fs-3 colspan=2 border-0">
-                                <div class="text-nowrap">
-                                @titre.Album
-                                </div>
-                            </th>
-                        </tr>
                         <tr>
                             <th class="text-start w-25">Durée</th>
                             <th class="text-start">Titre</th>
@@ -49,10 +44,10 @@
                     </thead>
 
                     <tbody>
-                            <tr>
+                        <tr>
                             <td class="text-start">@TimeSpan.FromSeconds(double.Parse(titre.Duree)).ToString(@"mm\:ss")</td>
-                                <td class="text-start"><a asp-controller="Titre" asp-action="" asp-route-id="@titre.IdTitre">@titre.Libelle</a></td>
-                            </tr>                        
+                            <td class="text-start"><a asp-controller="titre" asp-action="index" asp-route-idTitre="@titre.IdTitre">@titre.Libelle</a></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
