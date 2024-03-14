@@ -6,6 +6,11 @@
     @await Component.InvokeAsync("LayoutSideBar")
 }
 
+@*Configuration dynamique du nom de l'onglet.*@
+@{
+    ViewData["title"] = "Contact";
+}
+
 @*Affichage du nom de la page.*@
 @{
     ViewData["titrePage"] = "Contact";
