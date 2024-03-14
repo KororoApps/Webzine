@@ -100,7 +100,6 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void IncrementNbLectures(Titre titre)
         {
-            // Charger le titre depuis la base de donnée avec suivi des modifications
             Titre existingTitre = this.context.Titres.Find(titre.IdTitre);
 
             if (existingTitre != null)
@@ -114,7 +113,6 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public void IncrementNbLikes(Titre titre)
         {
-            // Charger le titre depuis la base de donnée avec suivi des modifications
             Titre existingTitre = this.context.Titres.Find(titre.IdTitre);
 
             if (existingTitre != null)
@@ -128,11 +126,24 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Titre?> Search(string mot)
         {
-            return this.context.Titres.AsNoTracking()
-                .Include(t => t.Artiste).AsNoTracking()
-                .Where(t => t.Libelle.ToUpper().Contains(mot.ToUpper()))
-                .OrderBy(c => c.Libelle)
-                .ToList();        }
+            if (string.IsNullOrWhiteSpace(mot))
+            {
+                return this.context.Titres
+                    .AsNoTracking()
+                    .Include(t => t.Artiste)
+                    .OrderBy(c => c.Libelle)
+                    .ToList();
+            }
+            else
+            {
+                return this.context.Titres
+                    .AsNoTracking()
+                    .Include(t => t.Artiste)
+                    .Where(t => t.Libelle.ToUpper().Contains(mot.ToUpper()))
+                    .OrderBy(c => c.Libelle)
+                    .ToList();
+            }
+        }
 
         /// <inheritdoc />
         public IEnumerable<Titre?> SearchByStyle(string libelle)

@@ -34,7 +34,7 @@ namespace Webzine.Repository
         public void Delete(Titre titre)
         {
             var titreASupprimer = DataFactory.Titres
-                .FirstOrDefault(s => s.IdTitre == titre.IdTitre);
+                .SingleOrDefault(s => s.IdTitre == titre.IdTitre);
 
             if (titreASupprimer != null)
             {
@@ -46,7 +46,7 @@ namespace Webzine.Repository
         public void Update(Titre titre)
         {
             var titreAEditer = DataFactory.Titres
-                .FirstOrDefault(s => s.IdTitre == titre.IdTitre);
+                .SingleOrDefault(s => s.IdTitre == titre.IdTitre);
 
             if (titreAEditer != null)
             {
@@ -102,7 +102,7 @@ namespace Webzine.Repository
         public void IncrementNbLectures(Titre titre)
         {
             Titre existingTitre = DataFactory.Titres
-                .First(t => t.IdTitre == titre.IdTitre);
+                .FirstOrDefault(t => t.IdTitre == titre.IdTitre);
 
             existingTitre.NbLectures++;
         }
@@ -111,7 +111,7 @@ namespace Webzine.Repository
         public void IncrementNbLikes(Titre titre)
         {
             Titre existingTitre = DataFactory.Titres
-                .First(t => t.IdTitre == titre.IdTitre);
+                .FirstOrDefault(t => t.IdTitre == titre.IdTitre);
 
             existingTitre.NbLikes++;
         }
@@ -121,19 +121,26 @@ namespace Webzine.Repository
         {
             List<Titre> titres = DataFactory.Titres;
 
-            var results = titres
-                .Where(t => t.Libelle.ToUpper().Contains(mot.ToUpper()))
-                .OrderBy(t => t.Libelle)
-                .Select(t => new
-                {
-                    Titre = t,
-                    Artiste = DataFactory.Artistes.FirstOrDefault(a => a.IdArtiste == t.Artiste.IdArtiste),
-                })
-                .ToList();
+            if (string.IsNullOrWhiteSpace(mot))
+            {
+                return titres.OrderBy(t => t.Libelle).ToList();
+            }
+            else
+            {
+                var results = titres
+                    .Where(t => t.Libelle.ToUpper().Contains(mot.ToUpper()))
+                    .OrderBy(t => t.Libelle)
+                    .Select(t => new
+                    {
+                        Titre = t,
+                        Artiste = DataFactory.Artistes.FirstOrDefault(a => a.IdArtiste == t.Artiste.IdArtiste),
+                    })
+                    .ToList();
 
-            var orderedTitres = results.Select(r => r.Titre);
+                var orderedTitres = results.Select(r => r.Titre);
 
-            return orderedTitres;
+                return orderedTitres.ToList();
+            }
         }
 
         /// <inheritdoc />
