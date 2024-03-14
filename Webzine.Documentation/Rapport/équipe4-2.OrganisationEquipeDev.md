@@ -14,6 +14,8 @@ Une fois établie, il nous a permis d'identifier les entités à créer pour not
 |Création du projet sur Visual Studio avec installation des nuggets nécessaires |     1h00    |
 | Répartition de la création des fausses données								|     0h15    |
 
+</br>
+
 ## 2.1. Répartition des tâches
 
 ### 2.2.1. Répartition au sein de l'équipe 
@@ -64,6 +66,7 @@ Vous pouvez retrouver nos [Comptes Rendus d'Activité](https://groupesbtest.shar
 | Review de la documentaion																						|     1h30    |
 | Logs et Filtres																								|     5h00    |
 | Début de la couche Service																					|     4h00    |
+| Code Review																				|     5h00    |
 
 ### 2.2.5. Elodie SPONTON
 
@@ -107,6 +110,17 @@ Vous pouvez retrouver nos [Comptes Rendus d'Activité](https://groupesbtest.shar
 |---------------------------------------------------------------------------------------------------|:-----------:|
 | Seeder la BDD avec les données de Spotify															|    19h00    |
 | Pagination des pages Accueil, Liste des titres, Listes des commentaires et Liste des artistes		|    4h30     |
+| Implémenter l'incrémentation des vues		|    1h00     |
+| Implémenter l'incrémentation des likes		|    00h30     |
+| Mise en place du DashboardService		|    1h00     |
+| Mise en place de tests pour le DashboardService		|    4h00     |
+| Correction des routes		|    7h30     |
+| Création et mide en place d'un middleware	|    1h30     |
+| Mise en place dans le Program.cs de conditions pour être sur SQLite dans l'environnement de dev et en PostgreSQL en environnement de prod	|    4h00     |
+| Code review |    17h00     |
+| Mise en place des pages 404 |    2h30     |
+| Correction du responsive design |    4h00     |
+| Test de toute l'application et correction des bugs |    3h00     |
 
 ## 2.2. Fonctionnement de l'équipe
 
@@ -120,7 +134,26 @@ L'organisation des tâches et des fichiers a été réalisée à travers AzureDe
 
 Nous avons construit ensemble le squelette de l'application, en mettant en commun nos points de vue et méthodes. 
 
+Notre Azure DevOps fonctionne ainsi :
+
+- Un **Epic** représente un **Jalon**,
+- Une **User Story (US)** représente un ensemble de fonctionnalités attendues par un utilisateur, par le client ou par un développeur,
+- Les **tâches** représentent ce qui doit être réalisé pour accomplir l'US.
+
+Vous trouverez ci-dessous un extrait de notre Azure DevOps :
+![Logo](images/Extrait_Azure.png)
+
+Nous avons également mis en place un Dashboard afin de voir la répartition des tâches dans l'équipe :
+![Logo](images/Extrait_Azure_Dashboard.png)
+
+</br>
+
+Si l'accès vous est autorisé, vous pouvez retrouver notre [Compte Azure](https://dev.azure.com/Diiage2026Andgel/WebZine/_backlogs/backlog/WebZine%20Team/Epics) pour un détail précis du travail effectué.
+
+
 Une fois cela accompli, nous nous sommes répartis les Users Stories, en débutant par les plus cruciales pour assurer une progression rapide.
+
+Nous avons établis ensemble que l'ordre de priorité s'échelone de 1 pour les tâches/US à réaliser en priorité à 4 pour les tâches/US moins cruciales.
 
 ## 2.3.2. Code review
 
@@ -128,12 +161,13 @@ Après l'achèvement de chaque tâche individuelle, nous avons organisé des ses
 
 Une fois tous les codes fusionnés sur la branche principale, nous avons réitéré le processus en nous répartissant de nouvelles tâches pour maintenir un flux de travail continu.
 
-## 2.3.3. Comptes rendus d'activité et Daily meeting
 
-Tout comme pour la collaboration dev/ops, la mise à jour régulière de nos CRA et les daily meetings tous les matins nous ont permis de connaître régulièrement l'avancée individuel de chacun et par conséquent de l'application en général.
-
-## 2.3.4. Discussions Teams
+## 2.3.3. Discussions Teams
 
 En dehors des périodes d'école, il nous est difficile de nous rendre disponible aux mêmes moments.
 
 Nous avons utilisé les conversations Teams de notre Equipe pour se faire part de notre avancée et demander des calls si nécessaire.
+
+Vous trouverez ci-dessous un extrait d'une de nos conversions pour finir le Jalon 1 :
+![Logo](images/Extrait_DiscussionTeams.png)
+
