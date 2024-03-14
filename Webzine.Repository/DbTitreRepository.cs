@@ -65,7 +65,8 @@ namespace Webzine.Repository
         /// <inheritdoc />
         public IEnumerable<Titre?> FindAll()
         {
-            return this.context.Titres.AsNoTracking();
+            return this.context.Titres.AsNoTracking()
+                .Include(t => t.Artiste).AsNoTracking();
         }
 
         /// <inheritdoc />
