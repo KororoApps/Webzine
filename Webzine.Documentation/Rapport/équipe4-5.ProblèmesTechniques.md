@@ -72,6 +72,26 @@ Nous tâcherons de réaliser bien plus méthodiquement des code reviews afin de 
 
 ## 5.6. Améliorations techniques possibles
 
+### 5.6.1. Configuration de l'application
+
 Une des améliorations techniques notables serait d'ajouter un fichier de configuration, global pour l'application, qui soit plus facile à comprendre pour le client que la modification du fichier appSettings.
 
-Ainsi, il n'y aurait également pas de rique que le client puisse modifier le code par erreur.
+Ainsi, il n'y aurait également pas de risques que le client puisse modifier le code par erreur.
+
+De même, changer le format JSON du fichier de configuration pour un autre format qui accepte les commentaires serait idéal afin de rendre ce fichier le plus maintenable et lisible possible.
+
+### 5.6.2. Incrémentation du nombre de vues
+
+Cliquer sur un like, met à jour la page de la chronique d'un titre et par conséquent incrémente le ombre de vue pour le titre en cours.
+
+L'idéal serait que l'application garde temporairement en mémoire l'utilisateur qui a vu la page afin de ne pas incrémenter ce nombre à chaque rechargement de page, y compris lors du like.
+
+### 5.6.3. Alléger les requêtes SQL
+
+Actuellement, les requêtes SQL récupèrent trop de données liées.
+
+Il faut veiller à ne récupérer que les informations nécessaires à l'affichage de la page afin de limiter l'immpact des requêtes SQL sur les performances de l'application.
+
+### 5.6.4. Répondre au Single Responsability Principal
+
+Pour chaque formulaire, l'idéal aurait été d'avoir un viewModel associé afin qu'ils aient une responsabilité unique et répondre ainsi au critère S de SOLID.
